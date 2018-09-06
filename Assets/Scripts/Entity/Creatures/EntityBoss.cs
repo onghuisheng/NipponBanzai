@@ -17,7 +17,7 @@ public class EntityBoss : EntityEnemy {
         else
         {
             F_death_timer += Time.deltaTime;
-            //GetAnimator().SetBool("DeadTrigger", true);
+            An_animator.SetBool("DeadTrigger", true);
 
             if (F_death_timer > 5.0f)
             {
@@ -58,6 +58,8 @@ public class EntityBoss : EntityEnemy {
 
     void Init()
     {
+        ClearAITask();
+
         St_stats.S_name = "Perstilence";
         St_stats.F_max_health = 50.0f;
         St_stats.F_health = St_stats.F_max_health;
@@ -75,7 +77,9 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-
-
+        RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 3));
+        //RegisterAITask(new AIRoam(3, this, 5.0f));
+        //RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20.0f));
+        //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
     }
 }
