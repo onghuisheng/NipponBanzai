@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityLivingBase : Entity
 {
-    public struct Stats
+    public class Stats
     {
         float
             f_health,
@@ -135,7 +135,8 @@ public abstract class EntityLivingBase : Entity
     private float
         f_hit_timer,
         f_regen_timer,
-        f_death_timer;
+        f_death_timer,
+        f_AI_task_change_timer;
 
     private Animator
         an_animator;
@@ -145,6 +146,12 @@ public abstract class EntityLivingBase : Entity
 
     private string
         s_last_hit;
+
+    private Dictionary<string, SortedDictionary<int, List<AIBase>>>
+       dic_AI_list;
+
+    private Dictionary<string, AIBase>
+       dic_running_AI_list;
 
     #region Getter/Setter
     public bool B_isHit
@@ -251,6 +258,19 @@ public abstract class EntityLivingBase : Entity
         }
     }
 
+    public float F_AI_task_change_timer
+    {
+        get
+        {
+            return f_AI_task_change_timer;
+        }
+
+        set
+        {
+            f_AI_task_change_timer = value;
+        }
+    }
+
     protected Animator An_animator
     {
         get
@@ -280,13 +300,92 @@ public abstract class EntityLivingBase : Entity
 
     protected override void Start ()
     {
+        dic_AI_list = new Dictionary<string, SortedDictionary<int, List<AIBase>>>();
+        dic_running_AI_list = new Dictionary<string, AIBase>();
+        F_death_timer = 0.0f;
+        F_AI_task_change_timer = 0.0f;
+
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
 	}
-	
-	protected override void Update ()
+
+    protected override void Update ()
     {
+        F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
+
+        if (dic_AI_list.Count > 0)
+        {
+            //   if (f_AI_task_change_timer > 1.0f)
+            //   {
+            foreach (var dic1 in dic_AI_list)
+            {
+                foreach (var dic2 in dic1.Value)
+                {
+                    bool done = false;
+                    foreach (AIBase ai in dic2.Value)
+                    {
+                        if (dic_running_AI_list.ContainsKey(ai.GetID()) && dic_running_AI_list[ai.GetID()] != null)
+                        {
+                            if (!dic_running_AI_list[ai.GetID()].ShouldContinueAI())
+                            {
+                                dic_running_AI_list[ai.GetID()].EndAI();
+                                dic_running_AI_list[ai.GetID()] = null;
+                            }
+
+                            if (dic_running_AI_list[ai.GetID()] == null || (dic_running_AI_list[ai.GetID()].GetPriority() > ai.GetPriority() && dic_running_AI_list[ai.GetID()].GetIsInteruptable()))
+                            {
+                                if (ai.ShouldContinueAI())
+                                {
+                                    if (dic_running_AI_list[ai.GetID()] != null)
+                                        dic_running_AI_list[ai.GetID()].EndAI();
+
+                                    dic_running_AI_list[ai.GetID()] = ai;
+                                    dic_running_AI_list[ai.GetID()].StartAI();
+
+                                    done = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ai.ShouldContinueAI())
+                            {
+                                if (!dic_running_AI_list.ContainsKey(ai.GetID()))
+                                    dic_running_AI_list.Add(ai.GetID(), ai);
+                                else
+                                    dic_running_AI_list[ai.GetID()] = ai;
+
+                                dic_running_AI_list[ai.GetID()].StartAI();
+
+                                done = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (done)
+                        break;
+                }
+            }
+
+            f_AI_task_change_timer = 0.0f;
+            //  }
+        }
+
+        if (dic_running_AI_list.Count > 0)
+        {
+            foreach (var dic in dic_running_AI_list)
+            {
+                if (dic.Value != null)
+                {
+                    dic.Value.RunAI();
+                    //   Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
+                    //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
+                }
+            }
+        }
 
 
         if (!IsDead())
@@ -330,6 +429,29 @@ public abstract class EntityLivingBase : Entity
     {
         F_hit_timer = _timer;
         B_isHit = true;
+    }
+
+    public void RegisterAITask(AIBase _ai)
+    {
+        if (dic_AI_list == null)
+            dic_AI_list = new Dictionary<string, SortedDictionary<int, List<AIBase>>>();
+
+        if (!dic_AI_list.ContainsKey(_ai.GetID()))
+        {
+            dic_AI_list.Add(_ai.GetID(), new SortedDictionary<int, List<AIBase>>());
+        }
+
+        if (!dic_AI_list[_ai.GetID()].ContainsKey(_ai.GetPriority()))
+        {
+            dic_AI_list[_ai.GetID()].Add(_ai.GetPriority(), new List<AIBase>());
+        }
+
+        dic_AI_list[_ai.GetID()][_ai.GetPriority()].Add(_ai);
+    }
+
+    public void ClearAITask()
+    {
+        dic_AI_list.Clear();
     }
 
     public virtual void OnAttack() {}
