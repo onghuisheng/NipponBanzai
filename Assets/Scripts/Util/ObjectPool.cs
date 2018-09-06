@@ -98,12 +98,7 @@ public class ObjectPool : Singleton<ObjectPool>
         full_list.Add(list);
 
         list = new List<GameObject>();
-        GameObject []temp = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach(GameObject go in temp)
-        {
-            list.Add(go);
-        }
+        list.Add(go_player_instance);
 
         full_list.Add(list);
 
