@@ -14,27 +14,27 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update() {}
 
-    protected Vector3 GetPosition()
+    public Vector3 GetPosition()
     {
         return gameObject.transform.position;
     }
 
-    protected void SetPosition(Vector3 _input)
+    public void SetPosition(Vector3 _input)
     {
         gameObject.transform.position.Set(_input.x, _input.y, _input.z);
     }
 
-    protected Vector3 GetSize()
+    public Vector3 GetSize()
     {
         return gameObject.transform.localScale;
     }
 
-    protected void SetSize(Vector3 _input)
+    public void SetSize(Vector3 _input)
     {
         gameObject.transform.localScale.Set(_input.x, _input.y, _input.z);
     }
 
-    protected Vector3 GetVelocity()
+    public Vector3 GetVelocity()
     {
         if (rb_rigidbody != null)
         {
@@ -47,7 +47,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    protected void SetVelocity(Vector3 _input)
+    public void SetVelocity(Vector3 _input)
     {
         if (rb_rigidbody != null)
         {
