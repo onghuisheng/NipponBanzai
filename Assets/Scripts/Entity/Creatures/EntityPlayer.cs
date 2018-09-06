@@ -57,7 +57,14 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
 
-        St_stats.F_speed = 5;
+        Stats temp_stats = new Stats();
+
+
+        temp_stats.F_speed = 5;
+        temp_stats.F_health = 5;
+
+        St_stats = temp_stats;
+
     }
 
     private void IdleCheckFunction()
