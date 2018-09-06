@@ -21,7 +21,7 @@ public abstract class Entity : MonoBehaviour
 
     public void SetPosition(Vector3 _input)
     {
-        gameObject.transform.position.Set(_input.x, _input.y, _input.z);
+        gameObject.transform.position = _input;
     }
 
     public Vector3 GetSize()
@@ -31,7 +31,7 @@ public abstract class Entity : MonoBehaviour
 
     public void SetSize(Vector3 _input)
     {
-        gameObject.transform.localScale.Set(_input.x, _input.y, _input.z);
+        gameObject.transform.localScale = _input;
     }
 
     public Vector3 GetVelocity()
@@ -51,7 +51,7 @@ public abstract class Entity : MonoBehaviour
     {
         if (rb_rigidbody != null)
         {
-            rb_rigidbody.velocity.Set(_input.x, _input.y, _input.z);
+            rb_rigidbody.velocity = _input;
         }
 
         Debug.Log("RigidBody Not Found In This Object: " + gameObject.name);

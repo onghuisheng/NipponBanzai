@@ -25,7 +25,7 @@ public class HitboxTrigger : EntityTrigger {
         SetCollisionSize();
 
         if (f_timer > 0)
-            --f_timer;
+            f_timer -= Time.deltaTime;
         else
             gameObject.SetActive(false);
         

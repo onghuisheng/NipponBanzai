@@ -125,7 +125,7 @@ public abstract class EntityLivingBase : Entity
     }
 
     private Stats
-        st_stats;
+        st_stats = new Stats();
 
     private bool
        b_isHit,
