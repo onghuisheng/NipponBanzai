@@ -8,10 +8,12 @@ public class ObjectPool : Singleton<ObjectPool>
     public GameObject[] entity_list;
     public GameObject hitbox;
     public GameObject item_pickup;
+    public GameObject go_player;
 
     private List<GameObject> entity_pool_list = new List<GameObject>();
     private List<GameObject> hitbox_pool_list = new List<GameObject>();
     private List<GameObject> item_pool_list = new List<GameObject>();
+    private GameObject go_player_instance;
 
     //SETTING UP THE SPAWNER
     private void Start()
@@ -49,6 +51,12 @@ public class ObjectPool : Singleton<ObjectPool>
 
             obj.transform.parent = gameObject.transform;
 
+        }
+
+        if(go_player_instance == null)
+        {
+            go_player_instance = Instantiate(go_player);
+            go_player_instance.SetActive(false);
         }
     }
 
@@ -100,6 +108,18 @@ public class ObjectPool : Singleton<ObjectPool>
         full_list.Add(list);
 
         return full_list;
+    }
+
+    public GameObject GetEntityPlayer()
+    {
+        if (!go_player_instance.activeSelf)
+            go_player_instance.SetActive(true);
+
+        go_player_instance.GetComponent<EntityPlayer>().SetPosition(new Vector3(0, 1, 0));
+
+        go_player_instance.GetComponent<CharacterMovement>().go_camera = GameObject.Find("Main Camera");
+
+        return go_player_instance;
     }
 
     //RETURNS TRUE IF ALL ENTITES ARE DEAD

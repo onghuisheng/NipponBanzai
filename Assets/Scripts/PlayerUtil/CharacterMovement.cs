@@ -14,7 +14,7 @@ public class CharacterMovement : MonoBehaviour
         Component_Player;
 
     [SerializeField]
-    private GameObject
+    public GameObject
         go_camera;
 
     void Awake()

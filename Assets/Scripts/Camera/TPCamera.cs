@@ -6,7 +6,7 @@ public class TPCamera : MonoBehaviour
 {
 
     /*--------------------------------------------------- INITIALIZATION ---------------------------------------------------*/
-    public GameObject go_target;   //Current camera's target
+    private GameObject go_target;   //Current camera's target
 
     [SerializeField]
     private float
@@ -24,6 +24,8 @@ public class TPCamera : MonoBehaviour
 
     private void Start()
     {
+        go_target = ObjectPool.GetInstance().GetEntityPlayer();
+
         v3_target_position = go_target.transform.position;  //Setting the target position to a Vector3 variable
 
         transform.position = new Vector3(
@@ -33,6 +35,7 @@ public class TPCamera : MonoBehaviour
 
         f_Xrestrict = 100;
         f_Xdown_restrict = 130;
+       
     }
     /*---------------------------------------------------------------------------------------------------------------------*/
 
