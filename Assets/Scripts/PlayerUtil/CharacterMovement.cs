@@ -44,31 +44,31 @@ public class CharacterMovement : MonoBehaviour
             }
             else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING)
             {
-                v3_player_last_position = transform.position;   //Saving the Camera's last position into a Vector3 variable              
+                v3_player_last_position = transform.position;   //Saving the Camera's last position into a Vector3 variable                             
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                }
 
                 if (Input.GetKey(KeyCode.W))
                 {
                     //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
-                    v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.GetPosition().y, go_camera.transform.forward.z).normalized;
+                    v3_player_new_dir += new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
                 }
                 else if (Input.GetKey(KeyCode.S))
                 {
-                    v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.GetPosition().y, go_camera.transform.forward.z).normalized;
-                }
-
-                if (Input.GetKey(KeyCode.A))
-                {
-                    v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.GetPosition().y, go_camera.transform.right.z).normalized;
-                }
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.GetPosition().y, go_camera.transform.right.z).normalized;
+                    v3_player_new_dir += -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
                 }
 
                 Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
                 Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, Time.deltaTime * 5);
 
-                Component_Player.Rb_rigidbody.MovePosition(Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2);
+                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2);
                 Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
 
                 Vector3 temp = (transform.position - v3_player_last_position).normalized;

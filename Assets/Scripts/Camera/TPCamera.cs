@@ -19,7 +19,8 @@ public class TPCamera : MonoBehaviour
 
     [SerializeField]
     private float
-        f_Xrestrict;
+        f_Xrestrict,
+        f_Xdown_restrict;
 
     private void Start()
     {
@@ -29,6 +30,9 @@ public class TPCamera : MonoBehaviour
               v3_target_position.x - (((go_target.transform.forward).normalized).x * 7),
               v3_target_position.y + 10,
               v3_target_position.z - (((go_target.transform.forward).normalized).z * 7));
+
+        f_Xrestrict = 100;
+        f_Xdown_restrict = 130;
     }
     /*---------------------------------------------------------------------------------------------------------------------*/
 
@@ -45,9 +49,9 @@ public class TPCamera : MonoBehaviour
         Vector3 camToCube = -cubeTOCam;
         camToCube.y = transform.position.y;
 
-       // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
+        // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
 
-        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict)
+        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict || Input.GetAxis("Mouse Y") < 0 && Vector3.Angle(cubeTOCam, camToCube) < f_Xdown_restrict)
             transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
 
         //{
@@ -78,5 +82,5 @@ public class TPCamera : MonoBehaviour
             v3_target_position = go_target.transform.position; //Moving the target as well as to ensure proper rotation
         }
     }
-        /*----------------------------------------------------------------------------------------------------------------------*/
-    }
+    /*----------------------------------------------------------------------------------------------------------------------*/
+}
