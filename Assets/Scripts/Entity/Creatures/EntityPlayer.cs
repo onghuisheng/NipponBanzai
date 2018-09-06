@@ -60,7 +60,7 @@ public class EntityPlayer : EntityLivingBase
         Stats temp_stats = new Stats();
 
 
-        temp_stats.F_speed = 5;
+        temp_stats.F_speed = 20;
         temp_stats.F_health = 5;
 
         St_stats = temp_stats;
@@ -105,7 +105,7 @@ public class EntityPlayer : EntityLivingBase
 
     private void DodgeCheckFunction()
     {
-       
+        player_state = State.IDLE;
     }
 
     private void AttackCheckFunction()
@@ -121,16 +121,18 @@ public class EntityPlayer : EntityLivingBase
             if (i_combo > 3)
                 i_combo = 1;
         }
+
+        player_state = State.IDLE;
     }
 
     private void SummoningCheckFunction()
     {
-       
+        player_state = State.IDLE;
     }
 
     private void DeadCheckFunction()
     {
-     
+        player_state = State.IDLE;
     }
 
     public State GetPlayerState()

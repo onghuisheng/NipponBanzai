@@ -84,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
                 Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
                 Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, Time.deltaTime * 5);
 
-                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2);
+                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
                 Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
 
                 Vector3 temp = (transform.position - v3_player_last_position).normalized;
