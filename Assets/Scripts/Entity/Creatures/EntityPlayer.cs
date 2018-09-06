@@ -13,4 +13,14 @@ public class EntityPlayer : EntityLivingBase
     {
         base.Update();
 	}
+
+    public override void OnAttack()
+    {
+
+    }
+
+    public override void OnAttacked(DamageSource _dmgsrc)
+    {
+
+    }
 }

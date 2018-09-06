@@ -133,8 +133,8 @@ public abstract class EntityLivingBase : Entity
        b_isDodging;
 
     private float
-        f_hitTimer,
-        f_regenTimer,
+        f_hit_timer,
+        f_regen_timer,
         f_death_timer;
 
     private Animator
@@ -209,29 +209,29 @@ public abstract class EntityLivingBase : Entity
         }
     }
 
-    public float F_hitTimer
+    public float F_hit_timer
     {
         get
         {
-            return f_hitTimer;
+            return f_hit_timer;
         }
 
         set
         {
-            f_hitTimer = value;
+            f_hit_timer = value;
         }
     }
 
-    public float F_regenTimer
+    public float F_regen_timer
     {
         get
         {
-            return f_regenTimer;
+            return f_regen_timer;
         }
 
         set
         {
-            f_regenTimer = value;
+            f_regen_timer = value;
         }
     }
 
@@ -269,14 +269,14 @@ public abstract class EntityLivingBase : Entity
 	
 	protected override void Update ()
     {
-        F_regenTimer += Time.deltaTime;
+        F_regen_timer += Time.deltaTime;
 
 
         if (!IsDead())
         {
-            if (F_regenTimer > 2.0f)
+            if (F_regen_timer > 2.0f)
             {
-                F_regenTimer = 0.0f;
+                F_regen_timer = 0.0f;
 
                 st_stats.F_health += 1;
             }
@@ -284,10 +284,10 @@ public abstract class EntityLivingBase : Entity
 
         if (B_isHit)
         {
-            F_regenTimer = 0;
-            F_hitTimer -= Time.deltaTime;
+            F_regen_timer = 0;
+            F_hit_timer -= Time.deltaTime;
 
-            if (F_hitTimer <= 0)
+            if (F_hit_timer <= 0)
                 B_isHit = false;
         }
     }
@@ -311,7 +311,7 @@ public abstract class EntityLivingBase : Entity
 
     public void ResetOnHit(float _timer = 0.5f)
     {
-        F_hitTimer = _timer;
+        F_hit_timer = _timer;
         B_isHit = true;
     }
 
