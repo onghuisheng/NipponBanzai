@@ -17,6 +17,9 @@ public class CharacterMovement : MonoBehaviour
     public GameObject
         go_camera;
 
+    private bool
+        b_moving;
+
     void Awake()
     {
         Component_Player = gameObject.GetComponent<EntityPlayer>();
@@ -36,58 +39,81 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log("STATE: " + Component_Player.GetPlayerState());
 
         if (Component_Player != null && Component_Player.Rb_rigidbody != null)
-        {          
-            if(Component_Player.GetPlayerState() == EntityPlayer.State.IDLE)
+        {
+            if (Component_Player.GetPlayerState() == EntityPlayer.State.IDLE)
             {
-                if(v3_player_last_position != transform.position)
-                    v3_player_last_position = transform.position;   //Saving the Camera's last position into a Vector3 variable              
+                if (v3_player_last_position != transform.position)
+                    v3_player_last_position = transform.position;   //Saving the Player's last position into a Vector3 variable     
+
+                b_moving = false;
             }
             else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING)
             {
-                v3_player_last_position = transform.position;   //Saving the Camera's last position into a Vector3 variable                             
+                v3_player_last_position = transform.position;   //Saving the Player's last position into a Vector3 variable                             
 
-                if (Input.GetKey(KeyCode.A))
+                switch (Component_Player.GetPlayerTargetState())
                 {
-                    v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                    case EntityPlayer.TARGET_STATE.AIMING:
+                        {
+
+                        }
+                        break;
+
+                    case EntityPlayer.TARGET_STATE.NOT_AIMING:
+                        {
+                            if (Input.GetKey(KeyCode.A))
+                            {
+                                v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                            }
+                            else if (Input.GetKey(KeyCode.D))
+                            {
+                                v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                            }
+
+                            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+                            {
+                                if (Input.GetKey(KeyCode.W))
+                                {
+                                    //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
+                                    v3_player_new_dir += new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                }
+                                else if (Input.GetKey(KeyCode.S))
+                                {
+                                    v3_player_new_dir += -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                }
+                            }
+                            else
+                            {
+                                if (Input.GetKey(KeyCode.W))
+                                {
+                                    //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
+                                    v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                }
+                                else if (Input.GetKey(KeyCode.S))
+                                {
+                                    v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                }
+                            }
+
+
+                            Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
+                            Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, 0.3f);
+
+                            if (!b_moving && Vector3.Angle(gameObject.transform.forward, v3_player_new_dir) < 25)
+                                b_moving = true;
+
+                            if (b_moving)
+                                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
+
+                            Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
+
+                            Vector3 temp = (transform.position - v3_player_last_position).normalized;
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
-                }
-
-                if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
-                {
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
-                        v3_player_new_dir += new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    }
-                    else if (Input.GetKey(KeyCode.S))
-                    {
-                        v3_player_new_dir += -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    }
-                }
-                else
-                {
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
-                        v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    }
-                    else if (Input.GetKey(KeyCode.S))
-                    {
-                        v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    }
-                }
-
-
-                Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
-                Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, Time.deltaTime * 5);
-
-                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
-                Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
-
-                Vector3 temp = (transform.position - v3_player_last_position).normalized;
             }
             //else if(Component_Player.GetPlayerState() == EntityPlayer.State.DODGE)
             //{

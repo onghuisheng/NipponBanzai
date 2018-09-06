@@ -140,6 +140,11 @@ public class EntityPlayer : EntityLivingBase
         return player_state;
     }
 
+    public TARGET_STATE GetPlayerTargetState()
+    {
+        return player_target_state;
+    }
+
     public DIRECTION GetPlayerDir()
     {
         return player_dir;

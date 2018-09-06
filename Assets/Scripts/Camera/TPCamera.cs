@@ -30,13 +30,15 @@ public class TPCamera : MonoBehaviour
         v3_target_position = go_target.transform.position;  //Setting the target position to a Vector3 variable
 
         transform.position = new Vector3(
-              v3_target_position.x - (((go_target.transform.forward).normalized).x * 7),
+              v3_target_position.x - (((go_target.transform.forward).normalized).x * 9),
               v3_target_position.y + 10,
-              v3_target_position.z - (((go_target.transform.forward).normalized).z * 7));
+              v3_target_position.z - (((go_target.transform.forward).normalized).z * 9));
 
         f_Xrestrict = 100;
-        f_Xdown_restrict = 130;
-       
+        f_Xdown_restrict = 80;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     /*---------------------------------------------------------------------------------------------------------------------*/
 
@@ -55,7 +57,8 @@ public class TPCamera : MonoBehaviour
 
         // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
 
-        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict || Input.GetAxis("Mouse Y") < 0 && Vector3.Angle(cubeTOCam, camToCube) < f_Xdown_restrict)
+        if (Input.GetAxis("Mouse Y") < 0 && Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict + f_Xdown_restrict && gameObject.transform.position.y < v3_target_position.y || 
+            Input.GetAxis("Mouse Y") > 0 && Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict)
             transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
 
         //{
