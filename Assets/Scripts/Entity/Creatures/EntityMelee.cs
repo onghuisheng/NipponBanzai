@@ -5,7 +5,7 @@ using UnityEngine;
 public class EntityMelee : EntityEnemy
 {
 
-    private void Awake()
+    private void Start()
     {
         ClearAITask();
 
@@ -19,8 +19,8 @@ public class EntityMelee : EntityEnemy
         B_isHit = false;
 
         // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
-        RegisterAITask(new AIRoam(3, this, 5.0f));
+        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 100.0f));
+        //RegisterAITask(new AIRoam(3, this, 5.0f));
 
         //if (an_animator = GetComponentInChildren<Animator>())
         //{
@@ -37,11 +37,14 @@ public class EntityMelee : EntityEnemy
     protected override void Update()
     {
         if (!IsDead())
+        {
             base.Update();
+
+        }
         else
         {
             F_death_timer += Time.deltaTime;
-            an_animator.SetBool("DeadTrigger", true);
+            An_animator.SetBool("DeadTrigger", true);
 
             if (F_death_timer > 5.0f)
             {
@@ -86,10 +89,10 @@ public class EntityMelee : EntityEnemy
         B_isHit = false;
 
         // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
-        RegisterAITask(new AIRoam(3, this, 5.0f));
+        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 100.0f));
+        // RegisterAITask(new AIRoam(3, this, 5.0f));
 
-        if (an_animator = GetComponentInChildren<Animator>())
+        if (An_animator = GetComponentInChildren<Animator>())
         {
         }
         else

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIAttackMelee : AIBase
 {
@@ -87,20 +88,24 @@ public class AIAttackMelee : AIBase
         ent_main.B_isAttacking = true;
         //ent_main.GetAnimator().SetBool("PunchTrigger", true);
         //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
+
         return true;
     }
 
     public override bool RunAI()
     {
+
         if (ent_target != null)
         {
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
             //{
             //    b_has_attacked = true;
             //    ent_main.OnAttack();
-            //}
+            //} 
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
+            ent_main.GetComponent<NavMeshAgent>().destination = ent_target.transform.position;
+
         }
 
         return true;

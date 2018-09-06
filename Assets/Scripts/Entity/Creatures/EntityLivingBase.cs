@@ -298,10 +298,14 @@ public abstract class EntityLivingBase : Entity
     }
     #endregion
 
-    protected override void Start ()
+    private void Awake()
     {
         dic_AI_list = new Dictionary<string, SortedDictionary<int, List<AIBase>>>();
         dic_running_AI_list = new Dictionary<string, AIBase>();
+    }
+
+    protected override void Start ()
+    {     
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
 
@@ -316,6 +320,7 @@ public abstract class EntityLivingBase : Entity
 
         if (dic_AI_list.Count > 0)
         {
+
             //   if (f_AI_task_change_timer > 1.0f)
             //   {
             foreach (var dic1 in dic_AI_list)
@@ -376,13 +381,15 @@ public abstract class EntityLivingBase : Entity
 
         if (dic_running_AI_list.Count > 0)
         {
+           // Debug.Log("Running available AI AI");
+
             foreach (var dic in dic_running_AI_list)
             {
                 if (dic.Value != null)
                 {
                     dic.Value.RunAI();
-                    //   Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
-                    //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
+                //Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
+                //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
                 }
             }
         }
