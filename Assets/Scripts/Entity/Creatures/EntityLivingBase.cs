@@ -140,6 +140,9 @@ public abstract class EntityLivingBase : Entity
     private Animator
         an_animator;
 
+    private Rigidbody
+        rb_rigidbody;
+
     private string
         s_last_hit;
 
@@ -260,11 +263,25 @@ public abstract class EntityLivingBase : Entity
             an_animator = value;
         }
     }
+
+    public Rigidbody Rb_rigidbody
+    {
+        get
+        {
+            return rb_rigidbody;
+        }
+
+        set
+        {
+            rb_rigidbody = value;
+        }
+    }
     #endregion
 
     protected override void Start ()
     {
-        An_animator = GetComponent<Animator>(); 
+        An_animator = GetComponent<Animator>();
+        Rb_rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	protected override void Update ()
