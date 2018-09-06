@@ -160,6 +160,10 @@ public class EntityPlayer : EntityLivingBase
         {
             player_target_state = TARGET_STATE.NOT_AIMING;
         }
+
+        m_checkfuntions[player_state]();
+
+        Debug.Log(player_state);
     }
 
     public override void OnAttack()
