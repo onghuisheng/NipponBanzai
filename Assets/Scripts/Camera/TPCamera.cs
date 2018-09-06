@@ -39,14 +39,13 @@ public class TPCamera : MonoBehaviour
         transform.LookAt(v3_target_position);
 
         transform.RotateAround(v3_target_position, transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
-
         transform.RotateAround(v3_target_position, transform.right, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
 
         Vector3 cubeTOCam = transform.position - v3_target_position;
         Vector3 camToCube = -cubeTOCam;
         camToCube.y = transform.position.y;
 
-        Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
+       // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
 
         if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict)
             transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
