@@ -33,7 +33,62 @@ public class AIChase : AIBase
 
     public override bool ShouldContinueAI()
     {
-        throw new NotImplementedException();
+        if (ent_target == null)
+        {
+            foreach (var list in ObjectPool.GetInstance().GetAllEntity())
+            {
+                foreach (GameObject l_go in list)
+                {
+                    if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
+                    {
+                        if (!l_go.GetComponent<EntityLivingBase>().IsDead())
+                        {
+                            if (ent_target == null)
+                            {
+                                if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
+                                {
+                                    ent_target = l_go.GetComponent<EntityLivingBase>();
+                                }
+                            }
+                            else
+                            {
+                                if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
+                                {
+                                    ent_target = l_go.GetComponent<EntityLivingBase>();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (ent_target != null && ent_target.IsDead())
+        {
+            ent_target = null;
+        }
+
+        if (ent_target == null)
+        {
+            return false;
+        }
+
+        if ((ent_main.GetPosition().x > ent_target.GetPosition().x - 1 && ent_main.GetPosition().x < ent_target.GetPosition().x + 1 && ent_main.GetPosition().z > ent_target.GetPosition().z - 1 && ent_main.GetPosition().z < ent_target.GetPosition().z + 1)
+            || !(ent_main.GetPosition().x > ent_target.GetPosition().x - f_range && ent_main.GetPosition().x < ent_target.GetPosition().x + f_range && ent_main.GetPosition().z > ent_target.GetPosition().z - f_range && ent_main.GetPosition().z < ent_target.GetPosition().z + f_range)
+            || ent_main.B_isAttacking)
+        {
+            EndAI();
+            return false;
+        }
+
+        //ent_main.GetAnimator().SetBool("Walk Forward", true);
+        //ent_main.GetAnimator().speed = ent_main.F_speed;
+
+        return true;
     }
 
     public override bool RunAI()
@@ -53,6 +108,7 @@ public class AIChase : AIBase
 
     public override bool EndAI()
     {
-        throw new NotImplementedException();
+        StartAI();
+        return true;
     }
 }
