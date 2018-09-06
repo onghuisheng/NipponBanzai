@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EntityEnemy : EntityLivingBase {
 
+    protected Animator an_animator;
+
     protected override void Start()
     {
         base.Start();
@@ -13,4 +15,9 @@ public class EntityEnemy : EntityLivingBase {
     {
         base.Update();
     }
+
+    public virtual void HardReset()
+    {
+    }
+
 }

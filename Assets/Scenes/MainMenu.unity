@@ -417,7 +417,7 @@ Prefab:
     - target: {fileID: 114406905072534958, guid: b7935fff6ffdea04eb240c21401d513c,
         type: 2}
       propertyPath: i_melee_spawn_count
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114406905072534958, guid: b7935fff6ffdea04eb240c21401d513c,
         type: 2}

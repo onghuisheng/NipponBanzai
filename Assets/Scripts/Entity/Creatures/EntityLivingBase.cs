@@ -148,7 +148,7 @@ public abstract class EntityLivingBase : Entity
         s_last_hit;
 
     private Dictionary<string, SortedDictionary<int, List<AIBase>>>
-       dic_AI_list;
+       dic_AI_list = new Dictionary<string, SortedDictionary<int, List<AIBase>>>();
 
     private Dictionary<string, AIBase>
        dic_running_AI_list;

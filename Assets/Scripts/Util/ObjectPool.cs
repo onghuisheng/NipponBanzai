@@ -16,8 +16,10 @@ public class ObjectPool : Singleton<ObjectPool>
     private GameObject go_player_instance;
 
     //SETTING UP THE SPAWNER
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         for (int entity_list_count = 0; entity_list_count < entity_list.Length; ++entity_list_count)
         {
             for (int i = 0; i < 10; ++i)
