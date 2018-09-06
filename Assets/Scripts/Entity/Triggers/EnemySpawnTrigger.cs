@@ -29,8 +29,12 @@ public class EnemySpawnTrigger : EntityTrigger
 
     List<EntityLivingBase> lst_enemy_collection = new List<EntityLivingBase>();
 
+    GameObject go_player;
+
     protected override void Start()
     {
+        go_player = GameObject.FindWithTag("Player");
+
         if (m_spawning_type == SpawningType.OnStart)
             SpawnEnemies();
     }
@@ -43,11 +47,11 @@ public class EnemySpawnTrigger : EntityTrigger
             bool allDead = true;
             foreach (var enemy in lst_enemy_collection)
             {
-                if (!enemy.IsDead() && enemy.gameObject.activeSelf)
+                if (!enemy.IsDead() || enemy.gameObject.activeSelf)
                 {
                     allDead = false;
                     break;
-                }   
+                }
             }
 
             // Respawn if all enemy died
@@ -59,10 +63,12 @@ public class EnemySpawnTrigger : EntityTrigger
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
+        {
             foreach (var enemy in lst_enemy_collection)
             {
-                enemy.St_stats.F_health = 0;
+                enemy.gameObject.SetActive(false);
             }
+        }
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -93,7 +99,7 @@ public class EnemySpawnTrigger : EntityTrigger
         for (int i = 0; i < i_melee_spawn_count; i++)
         {
             var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(0).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox());
+            enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
 
             yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
@@ -101,20 +107,22 @@ public class EnemySpawnTrigger : EntityTrigger
         for (int i = 0; i < i_ranged_spawn_count; i++)
         {
             var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(1).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox());
+            enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
+
             yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
         }
         for (int i = 0; i < i_miniboss_spawn_count; i++)
         {
             var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(2).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox());
+            enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
+
             yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
         }
     }
 
-    Vector3 RandomInsideBox()
+    Vector3 RandomInsideBox(EntityLivingBase enemy)
     {
         BoxCollider collider = GetComponent<BoxCollider>();
         Vector3 value = new Vector3(
@@ -122,7 +130,31 @@ public class EnemySpawnTrigger : EntityTrigger
             transform.position.y,
             Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
-        return value;
+
+        if (CheckForCollision(enemy, value))
+        {
+            return RandomInsideBox(enemy);
+        }
+        else
+        {
+            return value;
+        }
+    }
+
+    // Checks if we're going to collide with anything while spawning
+    bool CheckForCollision(EntityLivingBase enemy, Vector3 destination)
+    {
+        foreach (var cat in lst_enemy_collection)
+        {
+            Bounds enemyColliderBounds = enemy.GetComponent<Collider>().bounds;
+            enemyColliderBounds.center = destination;
+            if (cat.GetComponent<Collider>().bounds.Intersects(enemyColliderBounds))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

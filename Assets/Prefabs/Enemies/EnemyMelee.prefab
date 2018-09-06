@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23617065329129038}
   - component: {fileID: 65024574961204298}
   - component: {fileID: 54338845752821060}
-  - component: {fileID: 114978332413812516}
   - component: {fileID: 114375421622374900}
   m_Layer: 0
   m_Name: EnemyMelee
@@ -123,16 +122,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7774e68164aba4846bd9763a4865c395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114978332413812516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1202847839768624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590d9fe0422ec3b418b7e832c693388e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
