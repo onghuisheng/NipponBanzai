@@ -1,0 +1,179 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ObjectPool : Singleton<ObjectPool>
+{
+
+    public GameObject[] entity_list;
+    public GameObject hitbox;
+    public GameObject item_pickup;
+
+    private List<GameObject> entity_pool_list = new List<GameObject>();
+    private List<GameObject> hitbox_pool_list = new List<GameObject>();
+    private List<GameObject> item_pool_list = new List<GameObject>();
+
+    //SETTING UP THE SPAWNER
+    private void Start()
+    {
+        for (int entity_list_count = 0; entity_list_count < entity_list.Length; ++entity_list_count)
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                GameObject obj = Instantiate(entity_list[entity_list_count]);
+                obj.SetActive(false);
+                entity_pool_list.Add(obj);
+
+                obj.transform.parent = gameObject.transform;
+            }
+        }
+
+
+        for (int i = 0; i < 10; ++i)
+        {
+            GameObject obj = Instantiate(hitbox);
+
+            obj.SetActive(false);
+            hitbox_pool_list.Add(obj);
+
+            obj.transform.parent = gameObject.transform;
+
+        }
+
+        for (int i = 0; i < 10; ++i)
+        {
+            GameObject obj = Instantiate(item_pickup);
+
+            obj.SetActive(false);
+            item_pool_list.Add(obj);
+
+            obj.transform.parent = gameObject.transform;
+
+        }
+    }
+
+    //RESETS ALL ENEMY
+    public void ResetSpawnerManager()
+    {
+        List<List<GameObject>> list = GetAllEntity();
+
+        foreach (List<GameObject> i in list)
+        {
+            foreach (GameObject obj in i)
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
+
+    //RETURNS SIZE OF ENTITY TYPES
+    public int GetSizeOfEntity()
+    {
+        return entity_list.Length;
+    }
+
+    //RETURNS ALL ACTIVE ENTITES
+    public List<List<GameObject>> GetAllEntity()
+    {
+        List<List<GameObject>> full_list = new List<List<GameObject>>();
+        List<GameObject> list = new List<GameObject>();
+
+        //MINIONS
+        foreach (GameObject i in entity_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
+        list = new List<GameObject>();
+        GameObject []temp = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach(GameObject go in temp)
+        {
+            list.Add(go);
+        }
+
+        full_list.Add(list);
+
+        return full_list;
+    }
+
+    //RETURNS TRUE IF ALL ENTITES ARE DEAD
+    public bool IsAllEntityDead()
+    {
+        foreach (GameObject i in entity_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetEntityObjectFromPool(int type)
+    {
+        foreach (GameObject entity_obj in entity_pool_list)
+        {
+            if (!entity_obj.activeSelf && entity_obj.CompareTag(entity_list[type].tag))
+            {
+                entity_obj.SetActive(true);
+                return entity_obj;
+            }
+        }
+
+        GameObject obj = Instantiate(entity_list[type]);
+        obj.SetActive(false);
+        entity_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetEntityObjectFromPool(type);
+    }
+
+    //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetHitboxObjectFromPool()
+    {
+        foreach (GameObject hitbox_obj in hitbox_pool_list)
+        {
+            if (!hitbox_obj.activeSelf)
+            {
+                hitbox_obj.SetActive(true);
+                return hitbox_obj;
+            }
+        }
+
+        GameObject obj = Instantiate(hitbox);
+
+        obj.SetActive(false);
+        hitbox_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetHitboxObjectFromPool();
+    }
+
+    //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetItemObjectFromPool()
+    {
+        foreach (GameObject item_obj in item_pool_list)
+        {
+            if (!item_obj.activeSelf)
+            {
+                item_obj.SetActive(true);
+                return item_obj;
+            }
+        }
+
+        GameObject obj = Instantiate(item_pickup);
+
+        obj.SetActive(false);
+        item_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetItemObjectFromPool();
+    }
+}

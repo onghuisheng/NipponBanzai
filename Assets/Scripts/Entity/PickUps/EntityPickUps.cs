@@ -53,4 +53,16 @@ public class EntityPickUps : Entity
             }
         }
     }
+
+    protected override void Update()
+    {
+        if (f_lifetime > 0)
+            f_lifetime -= Time.deltaTime;
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
+
+    }
 }
