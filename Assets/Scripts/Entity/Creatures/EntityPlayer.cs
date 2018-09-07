@@ -60,7 +60,7 @@ public class EntityPlayer : EntityLivingBase
         Stats temp_stats = new Stats();
 
 
-        temp_stats.F_speed = 20;
+        temp_stats.F_speed = 10;
         temp_stats.F_health = 5;
 
         St_stats = temp_stats;

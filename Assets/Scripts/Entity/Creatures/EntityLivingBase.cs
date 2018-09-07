@@ -234,8 +234,9 @@ public abstract class EntityLivingBase : Entity
         dic_running_AI_list = new Dictionary<string, AIBase>();
     }
 
-    protected override void Start()
+    protected override void Start ()
     {
+        base.Start();
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
 

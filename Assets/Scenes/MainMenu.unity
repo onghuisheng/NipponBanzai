@@ -145,6 +145,8 @@ MonoBehaviour:
   - {fileID: 1332987433276612, guid: bf5a6a3b23cdd73448c29a92dce2fa1f, type: 2}
   - {fileID: 1026265300416302, guid: 850438d30a647624e9c1031f16196db1, type: 2}
   - {fileID: 1581450924121206, guid: ae01656ae4d70f8408c9cf1fb90480f7, type: 2}
+  projectile_list: []
+  enviroment_list: []
   hitbox: {fileID: 1253757125116546, guid: a8703823e42953c459851755b9710ca9, type: 2}
   item_pickup: {fileID: 1792999001062160, guid: 48f0de838d82f2648b65fd55a516a385,
     type: 2}
@@ -381,9 +383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c887a00b6c513704d8c35fe6a50bbd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  f_zoomed: 0
+  f_zoomed_dist: 0
+  f_speed_of_zooming: 0
+  f_up_distance: 0
   f_speed_of_rotation: 4
   f_Xrestrict: 100
-  f_Xdown_restrict: 0
 --- !u!1 &1384094826
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +400,7 @@ GameObject:
   - component: {fileID: 1384094829}
   - component: {fileID: 1384094828}
   - component: {fileID: 1384094827}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
