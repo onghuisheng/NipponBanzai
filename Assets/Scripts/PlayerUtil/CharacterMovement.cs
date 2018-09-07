@@ -13,8 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private EntityPlayer
         Component_Player;
 
-    [SerializeField]
-    public GameObject
+    private GameObject
         go_camera;
 
     private bool
@@ -27,7 +26,11 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-        v3_player_last_position = transform.position;   //Saving the player's last position into a Vector3 variable    
+        v3_player_last_position = transform.position;   //Saving the player's last position into a Vector3 variable  
+        go_camera = null;
+
+        if (go_camera == null)
+            go_camera = GameObject.Find("Main Camera");
     }
 
     /*---------------------------------------------------------------------------------------------------------------------*/
@@ -55,6 +58,33 @@ public class CharacterMovement : MonoBehaviour
                 {
                     case EntityPlayer.TARGET_STATE.AIMING:
                         {
+                            v3_player_new_dir = new Vector3(go_camera.transform.forward.x * 5, Component_Player.transform.forward.y, go_camera.transform.forward.z * 5).normalized;
+
+                            Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
+                            Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, 0.3f);
+
+                            Vector3 new_pos = Component_Player.Rb_rigidbody.transform.position;
+
+                            if (Input.GetKey(KeyCode.W))
+                            {
+                                new_pos += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                            }
+                            else if (Input.GetKey(KeyCode.S))
+                            {
+                                new_pos -= Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                            }
+
+                            if (Input.GetKey(KeyCode.A))
+                            {
+                                new_pos -= Time.deltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                            }
+                            else if (Input.GetKey(KeyCode.D))
+                            {
+                                new_pos += Time.deltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                            }
+
+                            Component_Player.Rb_rigidbody.MovePosition(new_pos);
+                            Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
 
                         }
                         break;
@@ -106,8 +136,6 @@ public class CharacterMovement : MonoBehaviour
                                 Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
 
                             Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
-
-                            Vector3 temp = (transform.position - v3_player_last_position).normalized;
                         }
                         break;
 

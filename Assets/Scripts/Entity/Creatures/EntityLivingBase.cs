@@ -289,12 +289,12 @@ public abstract class EntityLivingBase : Entity
     }
 
     protected override void Start ()
-    {     
+    {
+        base.Start();
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
 
         An_animator = GetComponent<Animator>();
-        Rb_rigidbody = GetComponent<Rigidbody>();
 	}
 
     protected override void Update ()

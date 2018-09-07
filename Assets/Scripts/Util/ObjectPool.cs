@@ -114,9 +114,6 @@ public class ObjectPool : Singleton<ObjectPool>
             go_player_instance.SetActive(true);
 
             go_player_instance.GetComponent<EntityPlayer>().SetPosition(new Vector3(0, 1, 0));
-
-            go_player_instance.GetComponent<CharacterMovement>().go_camera = GameObject.Find("Main Camera");
-
         }
         return go_player_instance;
     }

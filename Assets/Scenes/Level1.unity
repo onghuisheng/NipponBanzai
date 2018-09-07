@@ -206,9 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c887a00b6c513704d8c35fe6a50bbd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  f_zoomed: 0
+  f_zoomed_dist: 0
+  f_speed_of_zooming: 0
+  f_up_distance: 0
   f_speed_of_rotation: 4
   f_Xrestrict: 100
-  f_Xdown_restrict: 0
 --- !u!1 &1101992117
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +334,7 @@ GameObject:
   - component: {fileID: 1161030535}
   - component: {fileID: 1161030534}
   - component: {fileID: 1161030533}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
