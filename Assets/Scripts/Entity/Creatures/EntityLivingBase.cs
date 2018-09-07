@@ -11,113 +11,89 @@ public abstract class EntityLivingBase : Entity
             f_max_health,
             f_defence,
             f_damage,
-            f_speed, 
-            f_mass, 
+            f_speed,
+            f_mass,
             f_knockback_resistance;
 
         string
             s_name;
         #region Getter/Setter
-        public float F_health
-        {
-            get
-            {
+        public float F_health {
+            get {
                 return f_health;
             }
 
-            set
-            {
+            set {
                 f_health = value;
             }
         }
 
-        public float F_max_health
-        {
-            get
-            {
+        public float F_max_health {
+            get {
                 return f_max_health;
             }
 
-            set
-            {
+            set {
                 f_max_health = value;
             }
         }
 
-        public float F_defence
-        {
-            get
-            {
+        public float F_defence {
+            get {
                 return f_defence;
             }
 
-            set
-            {
+            set {
                 f_defence = value;
             }
         }
 
-        public float F_damage
-        {
-            get
-            {
+        public float F_damage {
+            get {
                 return f_damage;
             }
 
-            set
-            {
+            set {
                 f_damage = value;
             }
         }
 
-        public float F_speed
-        {
-            get
-            {
+        public float F_speed {
+            get {
                 return f_speed;
             }
 
-            set
-            {
+            set {
                 f_speed = value;
             }
         }
 
-        public float F_mass
-        {
-            get
-            {
+        public float F_mass {
+            get {
                 return f_mass;
             }
 
-            set
-            {
+            set {
                 f_mass = value;
             }
         }
 
-        public float F_knockback_resistance
-        {
-            get
-            {
+        public float F_knockback_resistance {
+            get {
                 return f_knockback_resistance;
             }
 
-            set
-            {
+            set {
                 f_knockback_resistance = value;
             }
         }
 
-        public string S_name
-        {
-            get
-            {
+        public string S_name {
+            get {
                 return s_name;
             }
 
-            set
-            {
+            set {
                 s_name = value;
             }
         }
@@ -151,132 +127,102 @@ public abstract class EntityLivingBase : Entity
        dic_running_AI_list;
 
     #region Getter/Setter
-    public bool B_isHit
-    {
-        get
-        {
+    public bool B_isHit {
+        get {
             return b_isHit;
         }
 
-        set
-        {
+        set {
             b_isHit = value;
         }
     }
 
-    public bool B_isAttacking
-    {
-        get
-        {
+    public bool B_isAttacking {
+        get {
             return b_isAttacking;
         }
 
-        set
-        {
+        set {
             b_isAttacking = value;
         }
     }
 
-    public bool B_isDodging
-    {
-        get
-        {
+    public bool B_isDodging {
+        get {
             return b_isDodging;
         }
 
-        set
-        {
+        set {
             b_isDodging = value;
         }
     }
 
-    public string S_last_hit
-    {
-        get
-        {
+    public string S_last_hit {
+        get {
             return s_last_hit;
         }
 
-        set
-        {
+        set {
             s_last_hit = value;
         }
     }
 
-    public Stats St_stats
-    {
-        get
-        {
+    public Stats St_stats {
+        get {
             return st_stats;
         }
 
-        set
-        {
+        set {
             st_stats = value;
         }
     }
 
-    public float F_hit_timer
-    {
-        get
-        {
+    public float F_hit_timer {
+        get {
             return f_hit_timer;
         }
 
-        set
-        {
+        set {
             f_hit_timer = value;
         }
     }
 
-    public float F_regen_timer
-    {
-        get
-        {
+    public float F_regen_timer {
+        get {
             return f_regen_timer;
         }
 
-        set
-        {
+        set {
             f_regen_timer = value;
         }
     }
 
-    public float F_death_timer
-    {
-        get
-        {
+    public float F_death_timer {
+        get {
             return f_death_timer;
         }
 
-        set
-        {
+        set {
             f_death_timer = value;
         }
     }
 
-    public float F_AI_task_change_timer
-    {
-        get
-        {
+    public float F_AI_task_change_timer {
+        get {
             return f_AI_task_change_timer;
         }
 
-        set
-        {
+        set {
             f_AI_task_change_timer = value;
         }
     }
 
-    protected Animator An_animator
-    {
-        get
-        {
+    public Animator An_animator {
+        get {
             return an_animator;
         }
 
-        set
-        {
+        set {
             an_animator = value;
         }
     }
@@ -288,16 +234,16 @@ public abstract class EntityLivingBase : Entity
         dic_running_AI_list = new Dictionary<string, AIBase>();
     }
 
-    protected override void Start ()
-    {     
+    protected override void Start()
+    {
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
 
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
-	}
+    }
 
-    protected override void Update ()
+    protected override void Update()
     {
         F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
@@ -365,15 +311,15 @@ public abstract class EntityLivingBase : Entity
 
         if (dic_running_AI_list.Count > 0)
         {
-           // Debug.Log("Running available AI AI");
+            // Debug.Log("Running available AI AI");
 
             foreach (var dic in dic_running_AI_list)
             {
                 if (dic.Value != null)
                 {
                     dic.Value.RunAI();
-                //Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
-                //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
+                    //Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
+                    //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
                 }
             }
         }
@@ -440,12 +386,31 @@ public abstract class EntityLivingBase : Entity
         dic_AI_list[_ai.GetID()][_ai.GetPriority()].Add(_ai);
     }
 
+    public void EndAndClearAITask()
+    {
+        foreach (var dic1 in dic_AI_list)
+        {
+            foreach (var dic2 in dic1.Value)
+            {
+                foreach (AIBase ai in dic2.Value)
+                {
+                    if (dic_running_AI_list.ContainsKey(ai.GetID()) && dic_running_AI_list[ai.GetID()] != null)
+                    {
+                        dic_running_AI_list[ai.GetID()].EndAI();
+                    }
+                }
+            }
+        }
+
+        dic_AI_list.Clear();
+    }
+
     public void ClearAITask()
     {
         dic_AI_list.Clear();
     }
 
-    public virtual void OnAttack() {}
+    public virtual void OnAttack() { }
 
-    public virtual void OnAttacked(DamageSource _dmgsrc) {}
+    public virtual void OnAttacked(DamageSource _dmgsrc) { }
 }

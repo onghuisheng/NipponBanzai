@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: bb5694b4f757e7949bc849ec52f88b63
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: chest_joint
+    100002: crystal01_ctrl
+    100004: crystal01_joint
+    100006: crystal02_ctrl
+    100008: crystal02_joint
+    100010: elbow_L_joint
+    100012: elbow_R_joint
+    100014: global_ctrl
+    100016: hand_L_ctrl
+    100018: hand_L_joint
+    100020: hand_R_ctrl
+    100022: hand_R_joint
+    100024: head_ctrl
+    100026: head_joint
+    100028: headTop_joint
+    100030: main_ctrl
+    100032: neck_ctrl
+    100034: neck_joint
+    100036: pelvis_joint
+    100038: shoulder_L_joint
+    100040: shoulder_R_joint
+    100042: slime
+    100044: //RootNode
+    100046: tail_ctrl
+    100048: tail_joint
+    100050: tailTip_joint
+    400000: chest_joint
+    400002: crystal01_ctrl
+    400004: crystal01_joint
+    400006: crystal02_ctrl
+    400008: crystal02_joint
+    400010: elbow_L_joint
+    400012: elbow_R_joint
+    400014: global_ctrl
+    400016: hand_L_ctrl
+    400018: hand_L_joint
+    400020: hand_R_ctrl
+    400022: hand_R_joint
+    400024: head_ctrl
+    400026: head_joint
+    400028: headTop_joint
+    400030: main_ctrl
+    400032: neck_ctrl
+    400034: neck_joint
+    400036: pelvis_joint
+    400038: shoulder_L_joint
+    400040: shoulder_R_joint
+    400042: slime
+    400044: //RootNode
+    400046: tail_ctrl
+    400048: tail_joint
+    400050: tailTip_joint
+    2100000: lambert1
+    4300000: slime
+    7400000: Walk
+    9500000: //RootNode
+    13700000: slime
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Walk
+      firstFrame: 5
+      lastFrame: 54
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

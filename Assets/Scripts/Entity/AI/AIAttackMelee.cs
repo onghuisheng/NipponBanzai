@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.AI;
 
 public class AIAttackMelee : AIBase
@@ -69,11 +70,20 @@ public class AIAttackMelee : AIBase
         //    ent_main.OnAttack();
         //} 
 
-        //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
+        ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y);
 
+        var animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
+        if (animatorState.IsName("Attack"))
+        {
+            b_has_attacked = false;
+        }
 
-        Debug.Log("Enemy melee");
+        if (!animatorState.IsName("Attack") && !b_has_attacked)
+        {
+            ent_main.An_animator.SetTrigger("Attack");
+            b_has_attacked = true;
+        }
 
         return true;
     }
@@ -85,8 +95,6 @@ public class AIAttackMelee : AIBase
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
-
-        StartAI();
         return true;
     }
 }

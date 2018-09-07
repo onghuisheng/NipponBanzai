@@ -47,7 +47,7 @@ public class EnemySpawnTrigger : EntityTrigger
             bool allDead = true;
             foreach (var enemy in lst_enemy_collection)
             {
-                if (!enemy.IsDead() || enemy.gameObject.activeSelf)
+                if (!enemy.IsDead() && enemy.gameObject.activeSelf)
                 {
                     allDead = false;
                     break;
@@ -66,7 +66,9 @@ public class EnemySpawnTrigger : EntityTrigger
         {
             foreach (var enemy in lst_enemy_collection)
             {
-                enemy.gameObject.SetActive(false);
+                DamageSource dmgSrc = new DamageSource();
+                dmgSrc.SetUpDamageSource("God", "God", "God", 100);
+                enemy.OnAttacked(dmgSrc);
             }
         }
     }

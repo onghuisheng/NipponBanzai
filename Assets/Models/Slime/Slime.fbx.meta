@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: ef7b292c2a80093489d1ad8ca84a641a
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: chest_joint
+    100002: crystal01_ctrl
+    100004: crystal01_joint
+    100006: crystal02_ctrl
+    100008: crystal02_joint
+    100010: elbow_L_joint
+    100012: elbow_R_joint
+    100014: global_ctrl
+    100016: hand_L_ctrl
+    100018: hand_L_joint
+    100020: hand_R_ctrl
+    100022: hand_R_joint
+    100024: head_ctrl
+    100026: head_joint
+    100028: headTop_joint
+    100030: main_ctrl
+    100032: neck_ctrl
+    100034: neck_joint
+    100036: pelvis_joint
+    100038: shoulder_L_joint
+    100040: shoulder_R_joint
+    100042: slime
+    100044: //RootNode
+    100046: tail_ctrl
+    100048: tail_joint
+    100050: tailTip_joint
+    400000: chest_joint
+    400002: crystal01_ctrl
+    400004: crystal01_joint
+    400006: crystal02_ctrl
+    400008: crystal02_joint
+    400010: elbow_L_joint
+    400012: elbow_R_joint
+    400014: global_ctrl
+    400016: hand_L_ctrl
+    400018: hand_L_joint
+    400020: hand_R_ctrl
+    400022: hand_R_joint
+    400024: head_ctrl
+    400026: head_joint
+    400028: headTop_joint
+    400030: main_ctrl
+    400032: neck_ctrl
+    400034: neck_joint
+    400036: pelvis_joint
+    400038: shoulder_L_joint
+    400040: shoulder_R_joint
+    400042: slime
+    400044: //RootNode
+    400046: tail_ctrl
+    400048: tail_joint
+    400050: tailTip_joint
+    2100000: StingrayPBS1
+    4300000: slime
+    9500000: //RootNode
+    13700000: slime
+  externalObjects:
+  - first:
+      type: UnityEngine:Cubemap
+      assembly: UnityEngine.CoreModule
+      name: diffuse_cube
+    second: {fileID: 8900000, guid: fa2313ebe81e76a499e724fa3892e29b, type: 3}
+  - first:
+      type: UnityEngine:Cubemap
+      assembly: UnityEngine.CoreModule
+      name: specular_cube
+    second: {fileID: 8900000, guid: 2d61999d3d54b3d48a9827f2c61aaa97, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS1
+    second: {fileID: 2100000, guid: 4f02a55bc42e13a499de9c896efe9d34, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: slime_colour
+    second: {fileID: 2800000, guid: df0530aeec543a946bf4e34b1c6e8ee1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: slime_metalic
+    second: {fileID: 2800000, guid: ed0aa3470f7f43240a77425405efb14d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: slime_normals
+    second: {fileID: 2800000, guid: 8e58ac8531fe464458693be1b14a71c1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: slime_occlusion
+    second: {fileID: 2800000, guid: 1c5a3cc1b8902f346a3de4e15478fdaa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: slime_roughness
+    second: {fileID: 2800000, guid: 038e7e7cdc8edae46b5dae47a4b7f0fb, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

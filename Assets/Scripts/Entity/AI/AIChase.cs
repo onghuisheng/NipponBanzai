@@ -39,9 +39,6 @@ public class AIChase : AIBase
         ent_target = null;
         b_is_chasing = false;
 
-        if (ep_player == null)
-            ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
-
         return true;
     }
 
@@ -61,9 +58,10 @@ public class AIChase : AIBase
         // Chase player if within aggro range and if theres nothing blocking it
         if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_aggro_range)
         {
+            Debug.Log((ep_player.transform.position - ent_main.transform.position).magnitude);
             RaycastHit hitInfo;
 
-            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+            int ignoreEnemiesMask = (1 << LayerMask.NameToLayer("Enemies"));
 
             // Cast a ray towards the player, ignoring all objects in the Enemies layer
             if (!b_is_chasing && Physics.Raycast(ent_main.transform.position, (ep_player.transform.position - ent_main.transform.position), out hitInfo, f_aggro_range, ignoreEnemiesMask))
@@ -80,7 +78,7 @@ public class AIChase : AIBase
             }
             else
             {
-                b_is_chasing = true; 
+                b_is_chasing = true;
                 return true;
             }
         }
@@ -106,12 +104,14 @@ public class AIChase : AIBase
     public override bool RunAI()
     {
         nma_agent.destination = ep_player.transform.position;
+        ent_main.An_animator.SetBool("Moving", true);
         return true;
     }
 
     public override bool EndAI()
     {
         nma_agent.SetDestination(nma_agent.transform.position);
+        ent_main.An_animator.SetBool("Moving", false);
         StartAI();
         return true;
     }

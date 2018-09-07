@@ -20,19 +20,13 @@ public class EntityMelee : EntityEnemy
 
         B_isHit = false;
 
+        An_animator.Rebind();
         // RegisterAITask(new AIIdle(2, this));
         RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 9999));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 10, 9999));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 
-        //if (an_animator = GetComponentInChildren<Animator>())
-        //{
-        //}
-        //else
-        //{
-        //    Debug.LogError("ERROR: There is no animator for character.");
-        //    Destroy(this);
-        //}
+        GetComponent<Collider>().isTrigger = false;
 
         St_stats.S_name = "MeleeDude";
     }
@@ -46,14 +40,20 @@ public class EntityMelee : EntityEnemy
         else
         {
             F_death_timer += Time.deltaTime;
-            An_animator.SetBool("DeadTrigger", true);
+
+            if (!An_animator.GetBool("Dead"))
+            {
+                EndAndClearAITask();
+                An_animator.SetBool("Dead", true);
+                GetComponent<Collider>().isTrigger = true;
+            }
 
             if (F_death_timer > 5.0f)
             {
                 gameObject.SetActive(false);
 
-                GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
-                go.GetComponent<EntityPickUps>().SetPosition(GetPosition());
+                // GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
+                // go.GetComponent<EntityPickUps>().SetPosition(GetPosition());
             }
         }
     }
@@ -81,29 +81,14 @@ public class EntityMelee : EntityEnemy
 
     public override void HardReset()
     {
-        St_stats.F_max_health = 50;
-        St_stats.F_health = St_stats.F_max_health;
-        St_stats.F_speed = 0.5f;
-        St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 2.0f;
-        St_stats.F_mass = 2.0f;
+        Start();
+    }
 
-        B_isHit = false;
+    public override void OnAttacked(DamageSource _dmgsrc)
+    {
+        base.OnAttacked(_dmgsrc);
 
-        // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 100.0f));
-        // RegisterAITask(new AIRoam(3, this, 5.0f));
-
-        if (An_animator = GetComponentInChildren<Animator>())
-        {
-        }
-        else
-        {
-            Debug.LogError("ERROR: There is no animator for character.");
-            Destroy(this);
-        }
-
-        St_stats.S_name = "MeleeDude";
+        St_stats.F_health -= _dmgsrc.GetDamage();
     }
 
 }
