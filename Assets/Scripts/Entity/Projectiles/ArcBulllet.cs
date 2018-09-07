@@ -54,12 +54,11 @@ public class ArcBulllet : EntityProjectiles {
             //Disable the marker that is tracking the player.
             if (go_marker && go_marker.activeInHierarchy)
             {
-                Debug.Log("BB MARKER");
                 go_marker.SetActive(false);
                 go_marker = null;
 
 
-                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEntityObjectFromPool(5).GetComponent<Crystal>();
+                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(0).GetComponent<Crystal>();
                 spawnedCrystal.SetUpObjectWLifeTime(50, gameObject.transform.position, new Vector3(3, 3, 3));
 
                 gameObject.SetActive(false);
