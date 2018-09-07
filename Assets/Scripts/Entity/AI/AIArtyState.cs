@@ -21,8 +21,10 @@ public class AIArtyState : AIBase {
         b_has_attacked;
 
     private GameObject
-        go_targetCircle,
-        go_crystal;
+        go_targetCircle;
+
+    private ArcBulllet
+        ab_bullet;
 
     public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _shotInterval)
     {
@@ -38,7 +40,6 @@ public class AIArtyState : AIBase {
         i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
 
         f_aimTimer = 0;
-
 
         b_has_attacked = false;
     }
@@ -147,35 +148,36 @@ public class AIArtyState : AIBase {
     void AimTarget()
     {
         //Loads up the gameobject to be use for this shot.
-        if (!go_targetCircle || !go_targetCircle.activeSelf) 
+        if (!b_has_attacked) 
         {
+            b_has_attacked = true;
             go_targetCircle = ObjectPool.GetInstance().GetEntityObjectFromPool(4);
-            go_crystal = ObjectPool.GetInstance().GetEntityObjectFromPool(3);
+            ab_bullet = ObjectPool.GetInstance().GetEntityObjectFromPool(3).GetComponent<ArcBulllet>();
         }
 
-        if (f_aimTimer > 3)
+        if (f_aimTimer < f_shotInterval)
         {
-            Fire();
+            //Lerp the Position for the targetCirce to the player.
+            f_aimTimer += Time.deltaTime;
+            Vector3 currentPos = Vector3.Lerp(ent_main.transform.position, ent_target.transform.position, f_aimTimer);
+            currentPos.y = 0.5f;
+            go_targetCircle.transform.position = currentPos;
         }
         else
         {
-            //Set Position for the targetCirce to the player.
-            f_aimTimer += Time.deltaTime;
-            go_targetCircle.transform.position = new Vector3(ent_target.transform.position.x, 0.5f, ent_target.transform.position.z);
-            Debug.Log("AIMING:" + f_aimTimer);
+            Fire();
         }
     }
 
     void Fire()
     {
         //Temp Spawn of rock to the position of the circle
-        if (go_crystal)
+        if (ab_bullet)
         {
+            b_has_attacked = false;
             Debug.Log("FIRE");
-            go_crystal.transform.position = ent_target.transform.position;
-            go_targetCircle.SetActive(false);
+            ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2,2,2), go_targetCircle);
             f_aimTimer = 0;
-
         }
     }
 }
