@@ -8,7 +8,7 @@ public class ArcBulllet : EntityProjectiles {
         v3_endPos;
 
     private float
-        f_life,
+        f_lifeElapse,
         f_height,
         f_incrementor;
 
@@ -22,7 +22,7 @@ public class ArcBulllet : EntityProjectiles {
         f_height = _height;
         v3_startPos = _start;
         v3_endPos = _end;
-        f_life = 0;
+        f_lifeElapse = 0;
         f_incrementor = 0;
 
         go_marker = _marker;
@@ -35,12 +35,12 @@ public class ArcBulllet : EntityProjectiles {
 
     // Update is called once per frame
     protected override void Update () {
-        f_life += Time.deltaTime;
+        //f_lifeElapse += Time.deltaTime;
 
-        if (f_life > F_lifetime)
-        {
-            gameObject.SetActive(false);
-        }
+        //if (f_lifeElapse > F_lifetime)
+        //{
+        //    gameObject.SetActive(false);
+        //}
         //Arcs the bullet.
         if (transform.position != v3_endPos)
         {
@@ -57,6 +57,12 @@ public class ArcBulllet : EntityProjectiles {
                 Debug.Log("BB MARKER");
                 go_marker.SetActive(false);
                 go_marker = null;
+
+
+                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEntityObjectFromPool(5).GetComponent<Crystal>();
+                spawnedCrystal.SetUpObjectWLifeTime(50, gameObject.transform.position, new Vector3(3, 3, 3));
+
+                gameObject.SetActive(false);
             }
         }
     }

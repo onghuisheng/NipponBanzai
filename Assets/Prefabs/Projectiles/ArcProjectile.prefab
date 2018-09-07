@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135658323739931260}
   - component: {fileID: 114033120907355190}
   m_Layer: 0
-  m_Name: Crystal
+  m_Name: ArcProjectile
   m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
