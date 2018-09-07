@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIChase : AIBase
 {
@@ -12,76 +13,87 @@ public class AIChase : AIBase
         type_target;
 
     private float
-        f_range;
+        f_aggro_range, f_aggro_break_range;
 
-    public AIChase(int _priority, EntityLivingBase _entity, System.Type _type, float _range)
+    private EntityPlayer ep_player;
+
+    private NavMeshAgent nma_agent;
+
+    private bool b_is_chasing;
+
+    public AIChase(int _priority, EntityLivingBase _entity, System.Type _type, float _aggroRange, float _aggroBreakRange)
     {
-        f_range = _range;
+        f_aggro_range = _aggroRange;
+        f_aggro_break_range = _aggroBreakRange;
         i_priority = _priority;
         ent_main = _entity;
         type_target = _type;
         s_ID = "Movement";
         s_display_name = "Chase Target - " + type_target;
         b_is_interruptable = true;
+        b_is_chasing = false;
     }
 
     public override bool StartAI()
     {
         ent_target = null;
+        b_is_chasing = false;
+
+        if (ep_player == null)
+            ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
+
         return true;
     }
 
     public override bool ShouldContinueAI()
     {
-        if (ent_target == null)
+
+        if (ep_player == null)
         {
-            foreach (var list in ObjectPool.GetInstance().GetAllEntity())
+            ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
+            nma_agent = ent_main.GetComponent<NavMeshAgent>();
+            nma_agent.speed = ent_main.GetStats().F_speed;
+        }
+
+        if (ent_main.B_isAttacking)
+            return false;
+
+        // Chase player if within aggro range and if theres nothing blocking it
+        if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_aggro_range)
+        {
+            RaycastHit hitInfo;
+
+            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+
+            // Cast a ray towards the player, ignoring all objects in the Enemies layer
+            if (!b_is_chasing && Physics.Raycast(ent_main.transform.position, (ep_player.transform.position - ent_main.transform.position), out hitInfo, f_aggro_range, ignoreEnemiesMask))
             {
-                foreach (GameObject l_go in list)
+                if (hitInfo.collider.tag != "Player")
                 {
-                    if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
-                    {
-                        if (!l_go.GetComponent<EntityLivingBase>().IsDead())
-                        {
-                            if (ent_target == null)
-                            {
-                                if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
-                            }
-                            else
-                            {
-                                if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    return false;
                 }
+                else
+                {
+                    b_is_chasing = true;
+                    return true;
+                }
+            }
+            else
+            {
+                b_is_chasing = true; 
+                return true;
             }
         }
 
-        if (ent_target != null && ent_target.IsDead())
+        // Break if player got out of aggro range
+        if ((ep_player.transform.position - ent_main.transform.position).magnitude >= f_aggro_break_range)
         {
-            ent_target = null;
-        }
-
-        if (ent_target == null)
-        {
+            EndAI();
             return false;
         }
 
-        if ((ent_main.GetPosition().x > ent_target.GetPosition().x - 1 && ent_main.GetPosition().x < ent_target.GetPosition().x + 1 && ent_main.GetPosition().z > ent_target.GetPosition().z - 1 && ent_main.GetPosition().z < ent_target.GetPosition().z + 1)
-            || !(ent_main.GetPosition().x > ent_target.GetPosition().x - f_range && ent_main.GetPosition().x < ent_target.GetPosition().x + f_range && ent_main.GetPosition().z > ent_target.GetPosition().z - f_range && ent_main.GetPosition().z < ent_target.GetPosition().z + f_range)
-            || ent_main.B_isAttacking)
+        if (ep_player.IsDead())
         {
-            EndAI();
             return false;
         }
 
@@ -93,21 +105,13 @@ public class AIChase : AIBase
 
     public override bool RunAI()
     {
-        if (ent_target != null)
-        {
-            v3_target_position = new Vector3(ent_target.GetPosition().x,
-                ent_main.GetPosition().y,
-                ent_target.GetPosition().z);
-
-            //ent_main.MoveTowardsPosition(v3_target_position);
-            //ent_main.RotateTowardsTargetPosition(v3_target_position);
-        }
-
+        nma_agent.destination = ep_player.transform.position;
         return true;
     }
 
     public override bool EndAI()
     {
+        nma_agent.SetDestination(nma_agent.transform.position);
         StartAI();
         return true;
     }
