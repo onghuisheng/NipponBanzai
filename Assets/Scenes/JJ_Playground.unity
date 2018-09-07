@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -404,9 +404,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c887a00b6c513704d8c35fe6a50bbd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  f_zoomed: 0
+  f_zoomed_dist: 0
+  f_speed_of_zooming: 0
+  f_up_distance: 0
   f_speed_of_rotation: 4
   f_Xrestrict: 100
-  f_Xdown_restrict: 0
 --- !u!1 &1671090053
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_destroyOnLoad: 0
   entity_list:
-  - {fileID: 1202847839768624, guid: bf5a6a3b23cdd73448c29a92dce2fa1f, type: 2}
+  - {fileID: 1332987433276612, guid: bf5a6a3b23cdd73448c29a92dce2fa1f, type: 2}
   - {fileID: 1026265300416302, guid: 850438d30a647624e9c1031f16196db1, type: 2}
   - {fileID: 1581450924121206, guid: ae01656ae4d70f8408c9cf1fb90480f7, type: 2}
   projectile_list:
