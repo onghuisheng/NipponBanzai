@@ -56,4 +56,17 @@ public abstract class Entity : MonoBehaviour
 
         Debug.Log("RigidBody Not Found In This Object: " + gameObject.name);
     }
+
+    public Rigidbody Rb_rigidbody
+    {
+        get
+        {
+            return rb_rigidbody;
+        }
+
+        set
+        {
+            rb_rigidbody = value;
+        }
+    }
 }

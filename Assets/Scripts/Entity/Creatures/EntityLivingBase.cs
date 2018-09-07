@@ -141,9 +141,6 @@ public abstract class EntityLivingBase : Entity
     private Animator
         an_animator;
 
-    private Rigidbody
-        rb_rigidbody;
-
     private string
         s_last_hit;
 
@@ -281,19 +278,6 @@ public abstract class EntityLivingBase : Entity
         set
         {
             an_animator = value;
-        }
-    }
-
-    public Rigidbody Rb_rigidbody
-    {
-        get
-        {
-            return rb_rigidbody;
-        }
-
-        set
-        {
-            rb_rigidbody = value;
         }
     }
     #endregion

@@ -21,7 +21,8 @@ public class AIArtyState : AIBase {
         b_has_attacked;
 
     private GameObject
-        go_targetCircle;
+        go_targetCircle,
+        go_crystal;
 
     public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _shotInterval)
     {
@@ -134,7 +135,6 @@ public class AIArtyState : AIBase {
             if (i_shotToFire > 0)
             {
                 AimTarget();
-
             }
 
 
@@ -146,9 +146,11 @@ public class AIArtyState : AIBase {
 
     void AimTarget()
     {
-        if (!go_targetCircle)
+        //Loads up the gameobject to be use for this shot.
+        if (!go_targetCircle || !go_targetCircle.activeSelf) 
         {
             go_targetCircle = ObjectPool.GetInstance().GetEntityObjectFromPool(4);
+            go_crystal = ObjectPool.GetInstance().GetEntityObjectFromPool(3);
         }
 
         if (f_aimTimer > 3)
@@ -157,15 +159,23 @@ public class AIArtyState : AIBase {
         }
         else
         {
+            //Set Position for the targetCirce to the player.
             f_aimTimer += Time.deltaTime;
-            go_targetCircle.transform.position = ent_target.transform.position;
+            go_targetCircle.transform.position = new Vector3(ent_target.transform.position.x, 0.5f, ent_target.transform.position.z);
             Debug.Log("AIMING:" + f_aimTimer);
         }
     }
 
     void Fire()
     {
-        Debug.Log("FIRE");
-        //f_aimTimer = 0;
+        //Temp Spawn of rock to the position of the circle
+        if (go_crystal)
+        {
+            Debug.Log("FIRE");
+            go_crystal.transform.position = ent_target.transform.position;
+            go_targetCircle.SetActive(false);
+            f_aimTimer = 0;
+
+        }
     }
 }
