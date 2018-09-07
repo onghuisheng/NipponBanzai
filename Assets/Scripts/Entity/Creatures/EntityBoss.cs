@@ -17,13 +17,13 @@ public class EntityBoss : EntityEnemy {
         else
         {
             F_death_timer += Time.deltaTime;
-            An_animator.SetBool("DeadTrigger", true);
+            //An_animator.SetBool("DeadTrigger", true);
 
             if (F_death_timer > 5.0f)
             {
                 gameObject.SetActive(false);
 
-                GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
+                //GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
                 //go.GetComponent<EntityPickUp>().SetPosition(GetPosition());
 
                 //TODO: Spawn Soul For Player TO Collect
@@ -77,7 +77,8 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 3));
+        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 3));
+        RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
         //RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20.0f));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));

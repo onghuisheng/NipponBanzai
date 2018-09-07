@@ -6,13 +6,18 @@ public class ObjectPool : Singleton<ObjectPool>
 {
 
     public GameObject[] entity_list;
+    public GameObject[] projectile_list;
+    public GameObject[] enviroment_list;
+
     public GameObject hitbox;
     public GameObject item_pickup;
     public GameObject go_player;
 
     private List<GameObject> entity_pool_list = new List<GameObject>();
+    private List<GameObject> projectile_pool_list = new List<GameObject>();
     private List<GameObject> hitbox_pool_list = new List<GameObject>();
     private List<GameObject> item_pool_list = new List<GameObject>();
+    private List<GameObject> enviroment_pool_list = new List<GameObject>();
     private GameObject go_player_instance;
 
     //SETTING UP THE SPAWNER
@@ -27,6 +32,30 @@ public class ObjectPool : Singleton<ObjectPool>
                 GameObject obj = Instantiate(entity_list[entity_list_count]);
                 obj.SetActive(false);
                 entity_pool_list.Add(obj);
+
+                obj.transform.parent = gameObject.transform;
+            }
+        }
+
+        for (int projectile_list_count = 0; projectile_list_count < projectile_list.Length; ++projectile_list_count)
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                GameObject obj = Instantiate(projectile_list[projectile_list_count]);
+                obj.SetActive(false);
+                projectile_pool_list.Add(obj);
+
+                obj.transform.parent = gameObject.transform;
+            }
+        }
+
+        for (int enviroment_list_count = 0; enviroment_list_count < enviroment_list.Length; ++enviroment_list_count)
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                GameObject obj = Instantiate(enviroment_list[enviroment_list_count]);
+                obj.SetActive(false);
+                enviroment_pool_list.Add(obj);
 
                 obj.transform.parent = gameObject.transform;
             }
@@ -150,6 +179,47 @@ public class ObjectPool : Singleton<ObjectPool>
 
         return GetEntityObjectFromPool(type);
     }
+
+    //RETURNS ENVIROMENT OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetEnviromentObjectFromPool(int type)
+    {
+        foreach (GameObject enviroment_obj in enviroment_pool_list)
+        {
+            if (!enviroment_obj.activeSelf && enviroment_obj.CompareTag(enviroment_list[type].tag))
+            {
+                enviroment_obj.SetActive(true);
+                return enviroment_obj;
+            }
+        }
+
+        GameObject obj = Instantiate(enviroment_list[type]);
+        obj.SetActive(false);
+        enviroment_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetEnviromentObjectFromPool(type);
+    }
+
+    //RETURNS PROJECTILE OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetProjectileObjectFromPool(int type)
+    {
+        foreach (GameObject projectile_obj in projectile_pool_list)
+        {
+            if (!projectile_obj.activeSelf && projectile_obj.CompareTag(projectile_list[type].tag))
+            {
+                projectile_obj.SetActive(true);
+                return projectile_obj;
+            }
+        }
+
+        GameObject obj = Instantiate(projectile_list[type]);
+        obj.SetActive(false);
+        projectile_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetProjectileObjectFromPool(type);
+    }
+
 
     //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
     public GameObject GetHitboxObjectFromPool()

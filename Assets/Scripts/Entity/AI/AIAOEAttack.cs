@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIArtyState : AIBase {
+public class AIAOEAttack : AIBase {
 
     private float
         f_range,
-        f_stateTimer,
-        f_maxStateTimer,
-        f_shotInterval,
+        f_aoeRange,
+        f_suctionTimer,
+        f_suctionLifeSpan,
+        f_force,
+        f_upwardForce,
         f_stateCooldownTimer,
-        f_aimTimer;
-
-    private int
-        i_shotToFire;
+        f_gravitiyConstant;
 
     private System.Type
         type_target;
@@ -21,36 +20,29 @@ public class AIArtyState : AIBase {
     private bool
         b_has_attacked;
 
-    private GameObject
-        go_targetCircle;
 
-    private ArcBulllet
-        ab_bullet;
-
-    public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _shotInterval)
+    public AIAOEAttack(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _suctionTime)
     {
         i_priority = _priority;
         ent_main = _entity;
         s_ID = "Combat";
-        s_display_name = "Arty Attack";
+        s_display_name = "AOE Attack";
         b_is_interruptable = false;
         f_range = _range;
         type_target = _type;
-        f_maxStateTimer = _stateTime;
-        f_shotInterval = _shotInterval;
-        i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
+        f_suctionLifeSpan = _suctionTime;
+        f_suctionTimer = 0;
 
-        f_aimTimer = 0;
-        f_stateCooldownTimer = 0;
-
+        f_aoeRange = 20;
+        f_force = 5000f;
+        f_upwardForce = 0.0f;
+        f_gravitiyConstant = 9.8f;
+        f_stateCooldownTimer = 0.0f;
         b_has_attacked = false;
     }
 
     public override bool StartAI()
     {
-        f_stateTimer = 0;
-        f_aimTimer = 0;
-
         ent_target = null;
         return true;
     }
@@ -58,7 +50,7 @@ public class AIArtyState : AIBase {
     public override bool EndAI()
     {
         //ent_main.B_isAttacking = false;
-
+        //b_has_attacked = false;
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
@@ -70,22 +62,20 @@ public class AIArtyState : AIBase {
 
     public override bool ShouldContinueAI()
     {
-        if(f_stateCooldownTimer < 12)
+        if (f_stateCooldownTimer < 12)
         {
             f_stateCooldownTimer += Time.deltaTime;
             return false;
         }
 
         // Breaking point for the arty state.
-        if (f_stateTimer > f_maxStateTimer && i_shotToFire < 1)
+        if (b_has_attacked)
         {
-            i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
             f_stateCooldownTimer = 0;
             b_has_attacked = false;
+            f_suctionTimer = 0;
             return false;
         }
-
-        f_stateTimer += Time.deltaTime;
 
         if (ent_target == null)
         {
@@ -139,7 +129,6 @@ public class AIArtyState : AIBase {
 
     public override bool RunAI()
     {
-        Debug.Log("RUNNING");
         if (ent_target != null)
         {
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
@@ -147,11 +136,24 @@ public class AIArtyState : AIBase {
             //    b_has_attacked = true;
             //    ent_main.OnAttack();
             //}
-            if (i_shotToFire > 0)
-            {
-                AimTarget();
-            }
+            f_suctionTimer += Time.deltaTime;
 
+            if (f_suctionTimer < f_suctionLifeSpan)
+            {
+                Debug.Log("SUCKING");
+   
+                ent_target.Rb_rigidbody.AddForce(GAcceleration(ent_main.GetPosition(), ent_main.Rb_rigidbody.mass, ent_target.Rb_rigidbody));
+            }
+            else
+            {
+                if (!b_has_attacked)
+                {
+                    Debug.Log("KABOOM");
+                    ent_target.Rb_rigidbody.AddExplosionForce(f_force, ent_main.GetPosition(), f_aoeRange, f_upwardForce, ForceMode.Impulse);
+                    b_has_attacked = true;
+                }
+
+            }
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }
@@ -159,40 +161,27 @@ public class AIArtyState : AIBase {
         return true;
     }
 
-    void AimTarget()
-    {
-        //Loads up the gameobject to be use for this shot.
-        if (!b_has_attacked) 
-        {
-            b_has_attacked = true;
-            go_targetCircle = ObjectPool.GetInstance().GetProjectileObjectFromPool(0);
-            ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(1).GetComponent<ArcBulllet>();
-        }
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
-        if (f_aimTimer < f_shotInterval)
-        {
-            //Lerp the Position for the targetCirce to the player.
-            f_aimTimer += Time.deltaTime;
-            Vector3 currentPos = Vector3.Lerp(ent_main.transform.position, ent_target.transform.position, f_aimTimer);
-            currentPos.y = 0.5f;
-            go_targetCircle.transform.position = currentPos;
-        }
-        else
-        {
-            Fire();
-        }
-    }
-
-    void Fire()
+    public Vector3 GAcceleration(Vector3 position, float mass, Rigidbody r)
     {
-        //Temp Spawn of rock to the position of the circle
-        if (ab_bullet)
-        {
-            b_has_attacked = false;
-            Debug.Log("FIRE");
-            ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2,2,2), go_targetCircle);
-            f_aimTimer = 0;
-            i_shotToFire--;
-        }
+        Vector3 direction = position - r.position;
+
+        //Realist GF with increasing force when getting closer to each other.
+        //float gravityForce = f_gravitiyConstant * ((mass * r.mass * 1000) / direction.sqrMagnitude);
+        //Simple GF with linear force.
+        float gravityForce = f_gravitiyConstant * (mass * r.mass * 1000);
+        gravityForce /= r.mass;
+        //Debug.Log("gravityForce: " + gravityForce);
+
+        return direction.normalized * gravityForce * Time.fixedDeltaTime;
     }
 }
