@@ -38,6 +38,8 @@ public class AIChase : AIBase
     {
         ent_target = null;
         b_is_chasing = false;
+        nma_agent = ent_main.GetComponent<NavMeshAgent>();
+        nma_agent.speed = ent_main.GetStats().F_speed;
 
         return true;
     }
@@ -48,17 +50,15 @@ public class AIChase : AIBase
         if (ep_player == null)
         {
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
-            nma_agent = ent_main.GetComponent<NavMeshAgent>();
-            nma_agent.speed = ent_main.GetStats().F_speed;
         }
 
+        // Dont chase if we're attacking
         if (ent_main.B_isAttacking)
             return false;
 
         // Chase player if within aggro range and if theres nothing blocking it
         if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_aggro_range)
         {
-            Debug.Log((ep_player.transform.position - ent_main.transform.position).magnitude);
             RaycastHit hitInfo;
 
             int ignoreEnemiesMask = (1 << LayerMask.NameToLayer("Enemies"));
@@ -86,7 +86,6 @@ public class AIChase : AIBase
         // Break if player got out of aggro range
         if ((ep_player.transform.position - ent_main.transform.position).magnitude >= f_aggro_break_range)
         {
-            EndAI();
             return false;
         }
 
@@ -98,7 +97,7 @@ public class AIChase : AIBase
         //ent_main.GetAnimator().SetBool("Walk Forward", true);
         //ent_main.GetAnimator().speed = ent_main.F_speed;
 
-        return true;
+        return false;
     }
 
     public override bool RunAI()

@@ -23,7 +23,7 @@ public class EntityMelee : EntityEnemy
         An_animator.Rebind();
         // RegisterAITask(new AIIdle(2, this));
         RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 10, 9999));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 
         GetComponent<Collider>().isTrigger = false;
@@ -86,9 +86,12 @@ public class EntityMelee : EntityEnemy
 
     public override void OnAttacked(DamageSource _dmgsrc)
     {
-        base.OnAttacked(_dmgsrc);
+        if (St_stats.F_health <= 0)
+            return;
 
+        base.OnAttacked(_dmgsrc);
         St_stats.F_health -= _dmgsrc.GetDamage();
+        An_animator.SetTrigger("Injured");
     }
 
 }
