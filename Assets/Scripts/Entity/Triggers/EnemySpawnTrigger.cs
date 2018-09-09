@@ -28,13 +28,9 @@ public class EnemySpawnTrigger : EntityTrigger
     bool b_is_spawned = false;
 
     List<EntityLivingBase> lst_enemy_collection = new List<EntityLivingBase>();
-
-    GameObject go_player;
-
+    
     protected override void Start()
     {
-        go_player = GameObject.FindWithTag("Player");
-
         if (m_spawning_type == SpawningType.OnStart)
             SpawnEnemies();
     }
@@ -62,15 +58,18 @@ public class EnemySpawnTrigger : EntityTrigger
             }
         }
 
+#if UNITY_EDITOR
         if (Input.GetKeyUp(KeyCode.Q))
         {
             foreach (var enemy in lst_enemy_collection)
             {
                 DamageSource dmgSrc = new DamageSource();
-                dmgSrc.SetUpDamageSource("God", "God", "God", 100);
+                dmgSrc.SetUpDamageSource("God", "God", "God", 10);
                 enemy.OnAttacked(dmgSrc);
             }
         }
+#endif
+
     }
 
     protected override void OnTriggerEnter(Collider other)

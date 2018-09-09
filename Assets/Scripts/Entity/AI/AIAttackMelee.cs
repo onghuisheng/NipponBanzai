@@ -17,6 +17,10 @@ public class AIAttackMelee : AIBase
 
     private EntityPlayer ep_player;
 
+    private NavMeshAgent nma_agent;
+
+    private Tweener tween_look_at_player;
+
     public AIAttackMelee(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange)
     {
         i_priority = _priority;
@@ -34,15 +38,20 @@ public class AIAttackMelee : AIBase
     public override bool StartAI()
     {
         ent_target = null;
+        nma_agent = ent_main.GetComponent<NavMeshAgent>();
+        nma_agent.speed = ent_main.GetStats().F_speed;
         return true;
     }
 
     public override bool ShouldContinueAI()
     {
-        //if (b_has_attacked && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime > ent_main.F_totalAnimationLength)
-        //{
-        //    return false;
-        //}
+        AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animatorState.IsName("Attack"))
+        {
+            ent_main.B_isAttacking = true;
+            return true;
+        }
 
         if (ep_player == null)
         {
@@ -55,24 +64,12 @@ public class AIAttackMelee : AIBase
             return true;
         }
 
-        //ent_main.GetAnimator().SetBool("PunchTrigger", true);
-        //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
-
         return false;
     }
 
     public override bool RunAI()
     {
-
-        //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
-        //{
-        //    b_has_attacked = true;
-        //    ent_main.OnAttack();
-        //} 
-
-        ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y);
-
-        var animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
         if (animatorState.IsName("Attack"))
         {
@@ -81,7 +78,11 @@ public class AIAttackMelee : AIBase
 
         if (!animatorState.IsName("Attack") && !b_has_attacked)
         {
-            ent_main.An_animator.SetTrigger("Attack");
+            // Look at the player and then attack, tweak the duration to adjust the rate of turning
+            tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y).OnComplete(() =>
+            {
+                ent_main.An_animator.SetTrigger("Attack"); 
+            });
             b_has_attacked = true;
         }
 
@@ -93,8 +94,9 @@ public class AIAttackMelee : AIBase
         ent_main.B_isAttacking = false;
         b_has_attacked = false;
 
-        //ent_main.GetAnimator().SetBool("PunchTrigger", false);
-        //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
+        if (tween_look_at_player != null)
+            tween_look_at_player.Kill();
+
         return true;
     }
 }
