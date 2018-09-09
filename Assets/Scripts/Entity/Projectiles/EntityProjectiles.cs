@@ -74,5 +74,6 @@ public class EntityProjectiles : Entity
         f_speed = _speed;
 
         v3_size = _size;
+
     }
 }

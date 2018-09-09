@@ -165,8 +165,8 @@ public class AIArtyState : AIBase {
         if (!b_has_attacked) 
         {
             b_has_attacked = true;
-            go_targetCircle = ObjectPool.GetInstance().GetProjectileObjectFromPool(0);
-            ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(1).GetComponent<ArcBulllet>();
+            go_targetCircle = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.TARGET_ZONE);
+            ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
         }
 
         if (f_aimTimer < f_shotInterval)

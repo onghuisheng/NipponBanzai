@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class TPCamera : MonoBehaviour
 {
 
     /*--------------------------------------------------- INITIALIZATION ---------------------------------------------------*/
+    [SerializeField]
+    private GameObject
+        go_cross_hair, 
+        go_canvas;
+     
     private GameObject go_target;   //Current camera's target
     private EntityPlayer
         script_entityplayer;
@@ -27,6 +33,13 @@ public class TPCamera : MonoBehaviour
     private Quaternion
         q_prev_rotation;
 
+
+    private Image
+        img_crosshair;
+
+    private CanvasGroup
+        cg_canvas;
+
     [SerializeField]
     private float
         f_Xrestrict;
@@ -39,6 +52,9 @@ public class TPCamera : MonoBehaviour
         go_target = ObjectPool.GetInstance().GetEntityPlayer();
         script_entityplayer = go_target.GetComponent<EntityPlayer>();
 
+        cg_canvas = gameObject.GetComponentInChildren<CanvasGroup>();
+        img_crosshair = go_cross_hair.GetComponent<Image>();
+
         v3_target_position = new Vector3(go_target.transform.position.x, go_target.transform.position.y + f_up_distance, go_target.transform.position.z);  //Setting the target position to a Vector3 variable
 
         transform.position = new Vector3(
@@ -46,9 +62,9 @@ public class TPCamera : MonoBehaviour
               v3_target_position.y + 10,
               v3_target_position.z - (((go_target.transform.forward).normalized).z * 7));
 
-        f_Xrestrict = 140;
+        f_Xrestrict = 115;
         f_zoomed = 0;
-        f_zoomed_dist = 8;
+        f_zoomed_dist = 9;
         f_speed_of_zooming = 10;
         f_up_distance = 2;
 
@@ -69,6 +85,57 @@ public class TPCamera : MonoBehaviour
             {
                 case EntityPlayer.TARGET_STATE.AIMING:
                     {
+                        if (cg_canvas != null)
+                        {
+                            if (cg_canvas.alpha < 1)
+                                cg_canvas.alpha += 0.02f;
+
+                            RaycastHit hit;
+                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            if (Physics.Raycast(ray, out hit))
+                            {
+                                if (hit.collider != null && hit.collider.gameObject.GetComponent<EntityLivingBase>() != null)
+                                {
+                                    if (go_cross_hair.transform.localScale.x > 0.5f)
+                                    {
+                                        float _speed = 3;
+                                        go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
+                                        float _temp = 0.5f / (45 / _speed);
+                                        go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
+                                        //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+
+                                        Debug.Log("Sizing Down");
+                                    }
+                                }
+                                else
+                                {
+                                    if (go_cross_hair.transform.localScale.x < 1)
+                                    {
+                                        float _speed = 3;
+                                        go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
+                                        float _temp = 0.5f / (45 / _speed);
+                                        go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
+                                       // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+
+                                        Debug.Log("Sizing Up");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (go_cross_hair.transform.localScale.x < 1)
+                                {
+                                    float _speed = 3;
+                                    go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
+                                    float _temp = 0.5f / (45 / _speed);
+                                    go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
+                                    img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+
+                                    Debug.Log("Sizing Up");
+                                }
+                            }
+                        }
+
                         if (f_zoomed < f_zoomed_dist)
                         {
                             f_zoomed += (f_speed_of_zooming * Time.deltaTime);
@@ -80,7 +147,7 @@ public class TPCamera : MonoBehaviour
 
                         transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
 
-                        if (transform.position.y > -0.5f)
+                        if (transform.position.y > -0.5f && transform.position.y < 4.5f)
                         {
                             transform.RotateAround(v3_target_position, transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
                         }
@@ -114,6 +181,15 @@ public class TPCamera : MonoBehaviour
 
                 case EntityPlayer.TARGET_STATE.NOT_AIMING:
                     {
+
+                        if (cg_canvas != null)
+                        {
+                            if (cg_canvas.alpha > 0)
+                            {
+                                cg_canvas.alpha -= 0.02f;
+                            }                        
+                        }
+                      
 
                         int layerMask = 1 << LayerMask.NameToLayer("Ground");
 

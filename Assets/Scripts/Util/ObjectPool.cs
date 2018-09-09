@@ -5,6 +5,24 @@ using UnityEngine;
 public class ObjectPool : Singleton<ObjectPool>
 {
 
+    public enum ENEMY
+    {
+        ENEMY_MELEE = 0,
+        ENEMY_RANGED,
+        ENEMY_MINIBOSS
+    }
+
+    public enum PROJECTILE
+    {
+        TARGET_ZONE = 0,
+        ARCH_PROJECTILE
+    }
+
+    public enum ENVIRONMENT
+    {
+        CRYSTAL = 0       
+    }
+
     public GameObject[] entity_list;
     public GameObject[] projectile_list;
     public GameObject[] enviroment_list;
@@ -161,63 +179,63 @@ public class ObjectPool : Singleton<ObjectPool>
     }
 
     //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
-    public GameObject GetEntityObjectFromPool(int type)
+    public GameObject GetEntityObjectFromPool(ENEMY _type)
     {
         foreach (GameObject entity_obj in entity_pool_list)
         {
-            if (!entity_obj.activeSelf && entity_obj.CompareTag(entity_list[type].tag))
+            if (!entity_obj.activeSelf && entity_obj.CompareTag(entity_list[(int)_type].tag))
             {
                 entity_obj.SetActive(true);
                 return entity_obj;
             }
         }
 
-        GameObject obj = Instantiate(entity_list[type]);
+        GameObject obj = Instantiate(entity_list[(int)_type]);
         obj.SetActive(false);
         entity_pool_list.Add(obj);
         obj.transform.parent = gameObject.transform;
 
-        return GetEntityObjectFromPool(type);
+        return GetEntityObjectFromPool(_type);
     }
 
     //RETURNS ENVIROMENT OBJECT IF IT FITS THE CRITERIA
-    public GameObject GetEnviromentObjectFromPool(int type)
+    public GameObject GetEnviromentObjectFromPool(ENVIRONMENT _type)
     {
         foreach (GameObject enviroment_obj in enviroment_pool_list)
         {
-            if (!enviroment_obj.activeSelf && enviroment_obj.CompareTag(enviroment_list[type].tag))
+            if (!enviroment_obj.activeSelf && enviroment_obj.CompareTag(enviroment_list[(int)_type].tag))
             {
                 enviroment_obj.SetActive(true);
                 return enviroment_obj;
             }
         }
 
-        GameObject obj = Instantiate(enviroment_list[type]);
+        GameObject obj = Instantiate(enviroment_list[(int)_type]);
         obj.SetActive(false);
         enviroment_pool_list.Add(obj);
         obj.transform.parent = gameObject.transform;
 
-        return GetEnviromentObjectFromPool(type);
+        return GetEnviromentObjectFromPool(_type);
     }
 
     //RETURNS PROJECTILE OBJECT IF IT FITS THE CRITERIA
-    public GameObject GetProjectileObjectFromPool(int type)
+    public GameObject GetProjectileObjectFromPool(PROJECTILE _type)
     {
         foreach (GameObject projectile_obj in projectile_pool_list)
         {
-            if (!projectile_obj.activeSelf && projectile_obj.CompareTag(projectile_list[type].tag))
+            if (!projectile_obj.activeSelf && projectile_obj.CompareTag(projectile_list[(int)_type].tag))
             {
                 projectile_obj.SetActive(true);
                 return projectile_obj;
             }
         }
 
-        GameObject obj = Instantiate(projectile_list[type]);
+        GameObject obj = Instantiate(projectile_list[(int)_type]);
         obj.SetActive(false);
         projectile_pool_list.Add(obj);
         obj.transform.parent = gameObject.transform;
 
-        return GetProjectileObjectFromPool(type);
+        return GetProjectileObjectFromPool(_type);
     }
 
 

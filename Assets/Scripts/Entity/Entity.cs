@@ -14,6 +14,12 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update() {}
 
+    protected virtual void SetCollisionSize()
+    {
+        if (gameObject.GetComponent<BoxCollider>().size != gameObject.GetComponent<MeshFilter>().mesh.bounds.size)
+            gameObject.GetComponent<BoxCollider>().size = gameObject.GetComponent<MeshFilter>().mesh.bounds.size;
+    }
+
     public Vector3 GetPosition()
     {
         return gameObject.transform.position;
@@ -53,8 +59,10 @@ public abstract class Entity : MonoBehaviour
         {
             rb_rigidbody.velocity = _input;
         }
-
-        Debug.Log("RigidBody Not Found In This Object: " + gameObject.name);
+        else
+        {
+            Debug.Log("RigidBody Not Found In This Object: " + gameObject.name);
+        }
     }
 
     public Rigidbody Rb_rigidbody

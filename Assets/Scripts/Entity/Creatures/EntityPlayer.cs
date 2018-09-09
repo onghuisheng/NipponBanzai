@@ -8,6 +8,7 @@ public class EntityPlayer : EntityLivingBase
     {
         IDLE,
         MOVING,
+        DASHING,
         DODGE,
         ATTACK,
         SUMMONING,
@@ -40,8 +41,24 @@ public class EntityPlayer : EntityLivingBase
     private int
         i_combo;
 
+    private float
+        f_player_speed;
+
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
+
+    public float F_player_speed
+    {
+        get
+        {
+            return f_player_speed;
+        }
+
+        set
+        {
+            f_player_speed = value;
+        }
+    }
 
     protected override void Start ()
     {
@@ -52,6 +69,7 @@ public class EntityPlayer : EntityLivingBase
 
         m_checkfuntions.Add(State.IDLE, IdleCheckFunction);
         m_checkfuntions.Add(State.MOVING, MovingCheckFunction);
+        m_checkfuntions.Add(State.DASHING, DashingCheckFunction);
         m_checkfuntions.Add(State.DODGE, DodgeCheckFunction);
         m_checkfuntions.Add(State.ATTACK, AttackCheckFunction);
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
@@ -60,22 +78,33 @@ public class EntityPlayer : EntityLivingBase
         Stats temp_stats = new Stats();
 
 
-        temp_stats.F_speed = 10;
+        temp_stats.F_speed = 20;
+        temp_stats.F_maxspeed = temp_stats.F_speed;
         temp_stats.F_health = 5;
 
         St_stats = temp_stats;
-
     }
 
     private void IdleCheckFunction()
-    {    
+    {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             player_state = State.MOVING;     
             return;
         }
 
-        if (Input.GetMouseButton(0))
+        if (DoubleTapCheck.GetInstance().IsDoubleTapTriggered() &&
+             (DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.W
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.A
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.S
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
+        {
+            player_state = State.DASHING;
+
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             player_state = State.ATTACK;
          
@@ -89,6 +118,7 @@ public class EntityPlayer : EntityLivingBase
             return;
         }
 
+        St_stats.F_speed = St_stats.F_maxspeed;
         i_combo = 0;
         player_dir = DIRECTION.FRONT;
     }
@@ -98,9 +128,42 @@ public class EntityPlayer : EntityLivingBase
         if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
         {
             player_state = State.IDLE;
-        }  
+        }
+
+        if (DoubleTapCheck.GetInstance().IsDoubleTapTriggered() && 
+            (DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.W 
+            || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.A
+            || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.S
+            || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
+        {
+            player_state = State.DASHING;
+
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            player_state = State.ATTACK;
+
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            player_state = State.DODGE;
+
+            return;
+        }
 
         i_combo = 0;
+    }
+
+    private void DashingCheckFunction()
+    {
+        if(player_target_state != TARGET_STATE.AIMING)
+            St_stats.F_speed = St_stats.F_maxspeed * 2;
+
+        player_state = State.MOVING;
     }
 
     private void DodgeCheckFunction()
@@ -159,9 +222,11 @@ public class EntityPlayer : EntityLivingBase
     {
         base.Update();
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             player_target_state = TARGET_STATE.AIMING;
+            if(St_stats.F_speed != St_stats.F_maxspeed)
+                St_stats.F_speed = St_stats.F_maxspeed;
         }
         else
         {
@@ -171,7 +236,7 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions[player_state]();
 
         Debug.Log(player_state);
-    }
+    }  
 
     public override void OnAttack()
     {

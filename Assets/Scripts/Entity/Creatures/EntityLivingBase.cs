@@ -12,6 +12,7 @@ public abstract class EntityLivingBase : Entity
             f_defence,
             f_damage,
             f_speed,
+            f_maxspeed,
             f_mass,
             f_knockback_resistance;
 
@@ -95,6 +96,19 @@ public abstract class EntityLivingBase : Entity
 
             set {
                 s_name = value;
+            }
+        }
+
+        public float F_maxspeed
+        {
+            get
+            {
+                return f_maxspeed;
+            }
+
+            set
+            {
+                f_maxspeed = value;
             }
         }
         #endregion

@@ -17,7 +17,8 @@ public class CharacterMovement : MonoBehaviour
         go_camera;
 
     private bool
-        b_moving;
+        b_moving, 
+        b_opposite;
 
     void Awake()
     {
@@ -41,6 +42,10 @@ public class CharacterMovement : MonoBehaviour
     {
         //Debug.Log("STATE: " + Component_Player.GetPlayerState());
 
+        if(Component_Player.GetPlayerTargetState() == EntityPlayer.TARGET_STATE.AIMING)
+            v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+
+
         if (Component_Player != null && Component_Player.Rb_rigidbody != null)
         {
             if (Component_Player.GetPlayerState() == EntityPlayer.State.IDLE)
@@ -49,20 +54,16 @@ public class CharacterMovement : MonoBehaviour
                     v3_player_last_position = transform.position;   //Saving the Player's last position into a Vector3 variable     
 
                 b_moving = false;
+                b_opposite = false;
             }
-            else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING)
+            else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING || Component_Player.GetPlayerState() == EntityPlayer.State.ATTACK && Component_Player.GetPlayerTargetState() == EntityPlayer.TARGET_STATE.AIMING)
             {
                 v3_player_last_position = transform.position;   //Saving the Player's last position into a Vector3 variable                             
 
                 switch (Component_Player.GetPlayerTargetState())
                 {
                     case EntityPlayer.TARGET_STATE.AIMING:
-                        {
-                            v3_player_new_dir = new Vector3(go_camera.transform.forward.x * 5, Component_Player.transform.forward.y, go_camera.transform.forward.z * 5).normalized;
-
-                            Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
-                            Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, 0.3f);
-
+                        {                     
                             Vector3 new_pos = Component_Player.Rb_rigidbody.transform.position;
 
                             if (Input.GetKey(KeyCode.W))
@@ -84,7 +85,6 @@ public class CharacterMovement : MonoBehaviour
                             }
 
                             Component_Player.Rb_rigidbody.MovePosition(new_pos);
-                            Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
 
                         }
                         break;
@@ -125,17 +125,19 @@ public class CharacterMovement : MonoBehaviour
                                 }
                             }
 
-
-                            Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
-                            Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, 0.3f);
-
-                            if (!b_moving && Vector3.Angle(gameObject.transform.forward, v3_player_new_dir) < 25)
+                            if (!b_opposite && -gameObject.transform.forward == v3_player_new_dir)
+                            {
+                                b_opposite = true;
+                            }
+                         
+                            if ((!b_moving || b_opposite) && Vector3.Angle(gameObject.transform.forward, v3_player_new_dir) < 25)
+                            {
                                 b_moving = true;
+                                b_opposite = false;
+                            }
 
-                            if (b_moving)
+                            if (b_moving && !b_opposite)
                                 Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
-
-                            Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
                         }
                         break;
 
@@ -143,29 +145,51 @@ public class CharacterMovement : MonoBehaviour
                         break;
                 }
             }
-            //else if(Component_Player.GetPlayerState() == EntityPlayer.State.DODGE)
-            //{
-            //    if ((transform.position - v3_player_last_position).normalized.Equals(Vector3.zero))
-            //    {
-            //        transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.F_speed;
-            //        //transform.Rotate(Vector3.right, Time.deltaTime * Component_Player.F_speed);
-            //    }
-            //    else
-            //    {
-            //        transform.position += Time.deltaTime * (transform.position - v3_player_last_position).normalized * Component_Player.F_speed;
 
-            //        //Vector3 temp_vec = new Vector3(
-            //        //    (((transform.position - v3_player_last_position).normalized.x) > 0 ? 1 : (((transform.position - v3_player_last_position).normalized.x) == 0 ? 0 : -1)),
-            //        //    (((transform.position - v3_player_last_position).normalized.y) > 0 ? 1 : (((transform.position - v3_player_last_position).normalized.y) == 0 ? 0 : -1)),
-            //        //    (((transform.position - v3_player_last_position).normalized.z) > 0 ? 1 : (((transform.position - v3_player_last_position).normalized.z) == 0 ? 0 : -1)));
+            if (v3_player_new_dir != Vector3.zero)
+            {
+                Quaternion new_rotate = Quaternion.LookRotation(v3_player_new_dir);
+                Quaternion new_target_rotation = Quaternion.Slerp(Component_Player.transform.rotation, new_rotate, 0.3f);
 
-            //        //transform.Rotate(Vector3.forward, Time.deltaTime * (temp_vec.x * Component_Player.F_speed));
-            //        //transform.Rotate(Vector3.right, Time.deltaTime * (temp_vec.z * Component_Player.F_speed));
-            //    }
-
-
-            //}
+                Component_Player.Rb_rigidbody.MoveRotation(new_target_rotation);
+            }
         }
     }
     /*----------------------------------------------------------------------------------------------------------------------*/
+
+    protected void FixedUpdate()
+    {
+        if (Component_Player.GetPlayerState() == EntityPlayer.State.DASHING)
+        {
+            float f_speed_multiplier = 2000;
+
+            switch (DoubleTapCheck.GetInstance().GetDoubleTapKey())
+            {
+
+                case KeyCode.W:
+                    v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                    Component_Player.Rb_rigidbody.AddForce(new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    break;
+
+                case KeyCode.A:
+                    v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                    Component_Player.Rb_rigidbody.AddForce(-new Vector3(go_camera.transform.right.x, Component_Player.transform.right.y, go_camera.transform.right.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    break;
+
+                case KeyCode.S:
+                    v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                    Component_Player.Rb_rigidbody.AddForce(-new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    break;
+
+                case KeyCode.D:
+                    v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                    Component_Player.Rb_rigidbody.AddForce(new Vector3(go_camera.transform.right.x, Component_Player.transform.right.y, go_camera.transform.right.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    break;
+
+                default:
+                    Component_Player.Rb_rigidbody.AddForce(go_camera.transform.forward.normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    break;
+            }
+        }
+    }
 }

@@ -100,7 +100,7 @@ public class EnemySpawnTrigger : EntityTrigger
     {
         for (int i = 0; i < i_melee_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(0).GetComponent<EntityLivingBase>();
+            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MELEE).GetComponent<EntityLivingBase>();
             enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
 
@@ -108,7 +108,7 @@ public class EnemySpawnTrigger : EntityTrigger
         }
         for (int i = 0; i < i_ranged_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(1).GetComponent<EntityLivingBase>();
+            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>();
             enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
 
@@ -116,7 +116,7 @@ public class EnemySpawnTrigger : EntityTrigger
         }
         for (int i = 0; i < i_miniboss_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(2).GetComponent<EntityLivingBase>();
+            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>();
             enemy.SetPosition(RandomInsideBox(enemy));
             lst_enemy_collection.Add(enemy);
 
