@@ -505,7 +505,7 @@ MonoBehaviour:
   m_destroyOnLoad: 0
   entity_list:
   - {fileID: 1332987433276612, guid: bf5a6a3b23cdd73448c29a92dce2fa1f, type: 2}
-  - {fileID: 1026265300416302, guid: 850438d30a647624e9c1031f16196db1, type: 2}
+  - {fileID: 1801496868864166, guid: 15345fdd2769b9345b377f0b6440c332, type: 2}
   - {fileID: 1581450924121206, guid: ae01656ae4d70f8408c9cf1fb90480f7, type: 2}
   projectile_list:
   - {fileID: 1649731254227142, guid: c95bd5ca0d9bec4419f7d8a79bf23cf1, type: 2}
