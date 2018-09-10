@@ -7,6 +7,9 @@ public static partial class AnimatorExtensions
 
     public static bool HasParameterOfType(this Animator self, string name, AnimatorControllerParameterType type)
     {
+        if (self == null)
+            return false;
+
         var parameters = self.parameters;
         foreach (var currParam in parameters)
         {
