@@ -57,7 +57,7 @@ public class AIArtyState : AIBase {
 
     public override bool EndAI()
     {
-        //ent_main.B_isAttacking = false;
+        ent_main.B_isAttacking = false;
 
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
@@ -133,6 +133,9 @@ public class AIArtyState : AIBase {
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", true);
         //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
+
+        ent_main.B_isAttacking = true;
+
         return true;
     }
 

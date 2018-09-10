@@ -51,6 +51,7 @@ public class AIAOEAttack : AIBase {
     {
         //ent_main.B_isAttacking = false;
         //b_has_attacked = false;
+        ent_main.B_isAttacking = true;
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
@@ -123,6 +124,7 @@ public class AIAOEAttack : AIBase {
 
         //ent_main.GetAnimator().SetBool("PunchTrigger", true);
         //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
+        ent_main.B_isAttacking = true;
         return true;
     }
 
@@ -141,8 +143,11 @@ public class AIAOEAttack : AIBase {
             if (f_suctionTimer < f_suctionLifeSpan)
             {
                 Debug.Log("SUCKING");
-   
-                ent_target.Rb_rigidbody.AddForce(GAcceleration(ent_main.GetPosition(), ent_main.Rb_rigidbody.mass, ent_target.Rb_rigidbody));
+
+                if (!IsPlayerInCover())
+                {
+                    ent_target.Rb_rigidbody.AddForce(GAcceleration(ent_main.GetPosition(), ent_main.Rb_rigidbody.mass, ent_target.Rb_rigidbody));
+                }  
             }
             else
             {
@@ -183,5 +188,27 @@ public class AIAOEAttack : AIBase {
         //Debug.Log("gravityForce: " + gravityForce);
 
         return direction.normalized * gravityForce * Time.fixedDeltaTime;
+    }
+
+    bool IsPlayerInCover()
+    {
+        RaycastHit hit;
+
+        Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
+
+        if (Physics.Linecast(ent_main.GetPosition(), ent_target.GetPosition(), out hit))
+        {
+            Debug.DrawLine(ent_main.GetPosition(), ent_target.GetPosition(), Color.yellow);
+            Debug.Log("Did Hit : " + hit.collider.gameObject);
+
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

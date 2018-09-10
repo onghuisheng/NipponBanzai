@@ -103,14 +103,14 @@ public class AIChase : AIBase
     public override bool RunAI()
     {
         nma_agent.destination = ep_player.transform.position;
-        ent_main.An_animator.SetBool("Moving", true);
+        //ent_main.An_animator.SetBool("Moving", true);
         return true;
     }
 
     public override bool EndAI()
     {
         nma_agent.SetDestination(nma_agent.transform.position);
-        ent_main.An_animator.SetBool("Moving", false);
+        //ent_main.An_animator.SetBool("Moving", false);
         StartAI();
         return true;
     }
