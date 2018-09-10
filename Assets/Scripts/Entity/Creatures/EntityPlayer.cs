@@ -41,22 +41,23 @@ public class EntityPlayer : EntityLivingBase
     private int
         i_combo;
 
-    private float
-        f_player_speed;
+    private float 
+        f_shooting_interval;
 
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
 
-    public float F_player_speed
+  
+    public float F_shooting_interval
     {
         get
         {
-            return f_player_speed;
+            return f_shooting_interval;
         }
 
         set
         {
-            f_player_speed = value;
+            f_shooting_interval = value;
         }
     }
 
@@ -83,6 +84,8 @@ public class EntityPlayer : EntityLivingBase
         temp_stats.F_health = 5;
 
         St_stats = temp_stats;
+
+        F_shooting_interval = 0.1f;
     }
 
     private void IdleCheckFunction()

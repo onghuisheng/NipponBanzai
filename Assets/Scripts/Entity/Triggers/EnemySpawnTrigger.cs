@@ -37,6 +37,8 @@ public class EnemySpawnTrigger : EntityTrigger
 
     protected override void Update()
     {
+        base.Update();
+
         // Endless wave respawn check
         if (b_is_spawned && m_spawning_type == SpawningType.OnTriggerEnterEndless)
         {

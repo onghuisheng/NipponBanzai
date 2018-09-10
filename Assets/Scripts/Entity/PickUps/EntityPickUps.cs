@@ -56,6 +56,8 @@ public class EntityPickUps : Entity
 
     protected override void Update()
     {
+        base.Update();
+
         if (f_lifetime > 0)
             f_lifetime -= Time.deltaTime;
         else

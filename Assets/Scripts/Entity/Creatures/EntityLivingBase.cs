@@ -260,6 +260,8 @@ public abstract class EntityLivingBase : Entity
 
     protected override void Update()
     {
+        base.Update();
+
         F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
 

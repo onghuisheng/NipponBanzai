@@ -22,7 +22,7 @@ public class HitboxTrigger : EntityTrigger {
     // Update is called once per frame
     protected override void Update()
     {
-        SetCollisionSize();
+        base.Update();
 
         if (f_timer > 0)
             f_timer -= Time.deltaTime;

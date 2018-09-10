@@ -41,6 +41,9 @@ public class ArcBulllet : EntityProjectiles {
         //{
         //    gameObject.SetActive(false);
         //}
+
+        base.Update();
+
         //Arcs the bullet.
         if (transform.position != v3_endPos)
         {

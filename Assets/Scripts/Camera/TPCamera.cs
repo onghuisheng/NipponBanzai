@@ -90,7 +90,7 @@ public class TPCamera : MonoBehaviour
                         if (cg_canvas != null)
                         {
                             if (cg_canvas.alpha < 1)
-                                cg_canvas.alpha += 0.02f;
+                                cg_canvas.alpha += 0.05f;
 
                             RaycastHit hit;
                             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -100,7 +100,7 @@ public class TPCamera : MonoBehaviour
                                 {
                                     if (go_cross_hair.transform.localScale.x > 0.5f)
                                     {
-                                        float _speed = 3;
+                                        float _speed = 5;
                                         go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
                                         float _temp = 0.5f / (45 / _speed);
                                         go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
@@ -113,7 +113,7 @@ public class TPCamera : MonoBehaviour
                                 {
                                     if (go_cross_hair.transform.localScale.x < 1)
                                     {
-                                        float _speed = 3;
+                                        float _speed = 5;
                                         go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
                                         float _temp = 0.5f / (45 / _speed);
                                         go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
@@ -199,7 +199,7 @@ public class TPCamera : MonoBehaviour
                         {
                             if (cg_canvas.alpha > 0)
                             {
-                                cg_canvas.alpha -= 0.02f;
+                                cg_canvas.alpha -= 0.05f;
                             }                        
                         }
                       
@@ -208,7 +208,7 @@ public class TPCamera : MonoBehaviour
 
                         RaycastHit hit;
 
-                        Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+                        Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
 
                         if (Physics.Raycast(v3_target_position, (v3_target_position - camPos), out hit, distance))
                         {                

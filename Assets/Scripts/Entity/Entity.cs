@@ -12,7 +12,10 @@ public abstract class Entity : MonoBehaviour
         rb_rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-    protected virtual void Update() {}
+    protected virtual void Update()
+    {
+        SetCollisionSize();
+    }
 
     protected virtual void SetCollisionSize()
     {

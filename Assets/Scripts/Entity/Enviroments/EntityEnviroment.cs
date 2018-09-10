@@ -107,6 +107,9 @@ public class EntityEnviroment : Entity {
 
     // Update is called once per frame
     protected override void Update () {
+
+        base.Update();
+
         if (b_willExpire)
         {
             f_lifeElapse += Time.deltaTime;
