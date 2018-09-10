@@ -19,6 +19,9 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void SetCollisionSize()
     {
+        if (!gameObject.GetComponent<BoxCollider>() || !gameObject.GetComponent<MeshFilter>())
+            return;
+
         if (gameObject.GetComponent<BoxCollider>().size != gameObject.GetComponent<MeshFilter>().mesh.bounds.size)
             gameObject.GetComponent<BoxCollider>().size = gameObject.GetComponent<MeshFilter>().mesh.bounds.size;
     }

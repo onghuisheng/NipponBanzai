@@ -22,7 +22,7 @@ public class EntityMelee : EntityEnemy
 
         An_animator.Rebind();
         // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
+        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class EntityRanged : EntityEnemy
 {
 
+    GameObject go_player;
+
     protected override void Start()
     {
         base.Start();
@@ -20,8 +22,9 @@ public class EntityRanged : EntityEnemy
 
         B_isHit = false;
 
+
         An_animator.Rebind();
-        RegisterAITask(new AIAttackRanged(1, this, typeof(EntityPlayer), 10));
+        RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
 
         GetComponent<Collider>().isTrigger = false;
@@ -76,8 +79,9 @@ public class EntityRanged : EntityEnemy
 
         //obj_hitbox.transform.rotation = transform.rotation;
 
-        ArcBulllet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        ab_bullet.SetUpProjectile(5, 20, 1, 10, transform.position, GameObject.FindWithTag("Player").transform.position, new Vector3(2, 2, 2), null);
+        go_player = GameObject.FindWithTag("Player");
+        StraightBullet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 1, Vector3.one);
     }
 
     public override void HardReset()

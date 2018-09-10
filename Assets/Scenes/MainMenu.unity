@@ -195,6 +195,7 @@ MonoBehaviour:
   projectile_list:
   - {fileID: 1649731254227142, guid: c95bd5ca0d9bec4419f7d8a79bf23cf1, type: 2}
   - {fileID: 1819166709965156, guid: c43c52ae3e9745a4fa36ee205f3154fa, type: 2}
+  - {fileID: 1069230488151892, guid: 3fb206b635b45fa4aab2d1291ac16a7f, type: 2}
   enviroment_list: []
   hitbox: {fileID: 1253757125116546, guid: a8703823e42953c459851755b9710ca9, type: 2}
   item_pickup: {fileID: 1792999001062160, guid: 48f0de838d82f2648b65fd55a516a385,
@@ -224,6 +225,7 @@ GameObject:
   - component: {fileID: 986759241}
   - component: {fileID: 986759240}
   - component: {fileID: 986759239}
+  - component: {fileID: 986759243}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -298,6 +300,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &986759243
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 986759238}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1055866119
 Prefab:
   m_ObjectHideFlags: 0
