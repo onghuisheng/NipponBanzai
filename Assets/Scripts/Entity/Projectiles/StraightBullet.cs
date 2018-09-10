@@ -44,11 +44,11 @@ public class StraightBullet : EntityProjectiles
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != gameObject.tag && go_firer.tag != other.tag)
+        if (go_firer.tag != other.tag && other.tag != gameObject.tag)
         {
             SetUpHitBox(go_firer.name, go_firer.tag, go_firer.GetInstanceID().ToString(), F_damage, transform.localScale, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
-
     }
+
 }
