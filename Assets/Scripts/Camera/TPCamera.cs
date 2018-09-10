@@ -204,11 +204,11 @@ public class TPCamera : MonoBehaviour
                         }
                       
 
-                        float distance = 8.0f;
+                        float distance = 20.0f;
 
                         RaycastHit hit;
 
-                        Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+                        Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
 
                         if (Physics.Raycast(v3_target_position, (v3_target_position - camPos), out hit, distance))
                         {                
