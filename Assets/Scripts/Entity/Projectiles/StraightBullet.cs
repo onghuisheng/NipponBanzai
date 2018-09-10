@@ -16,6 +16,8 @@ public class StraightBullet : EntityProjectiles
         v3_direction = _direction.normalized;
         go_firer = _firer;
         f_lifeElapse = 0;
+        transform.rotation = Quaternion.Euler(0, 0, -90); // Imagine a capsule lying on the floor
+        transform.Rotate(Mathf.Atan2(v3_direction.z, v3_direction.x) * Mathf.Rad2Deg, 0, 0); // Face the capsule to the direction
         // transform.Rotate(new Vector3(Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg, 0, 0), Space.Self);
     }
 
@@ -37,7 +39,7 @@ public class StraightBullet : EntityProjectiles
         }
         else
         {
-            transform.rotation.SetLookRotation(v3_direction);
+            // transform.localRotation.SetLookRotation(v3_direction);
             transform.position += (v3_direction * Time.deltaTime * F_speed);
         }
     }
@@ -47,9 +49,7 @@ public class StraightBullet : EntityProjectiles
         // Destroy on player hit
         if (go_firer.tag != other.tag && other.tag != gameObject.tag)
         {
-            DamageSource dmgSrc = new DamageSource();
-            dmgSrc.SetUpDamageSource(go_firer.name, go_firer.tag, go_firer.GetInstanceID().ToString(), F_damage);
-            other.GetComponent<EntityLivingBase>().OnAttacked(dmgSrc);
+            SetUpHitBox(go_firer.name, go_firer.tag, go_firer.GetInstanceID().ToString(), F_damage, transform.localScale, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
     }

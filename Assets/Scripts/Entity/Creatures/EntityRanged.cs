@@ -61,27 +61,9 @@ public class EntityRanged : EntityEnemy
 
     public override void OnAttack()
     {
-        //GameObject obj = ObjectPool.GetInstance().GetHitboxObjectFromPool();
-        //HitboxTrigger obj_hitbox = obj.GetComponent<HitboxTrigger>();
-
-        //DamageSource dmgsrc = new DamageSource();
-
-        //dmgsrc.SetUpDamageSource(St_stats.S_name + " " + gameObject.GetInstanceID().ToString(),
-        //    gameObject.tag,
-        //    gameObject.GetInstanceID().ToString(),
-        //    St_stats.F_damage
-        //    );
-
-        //obj_hitbox.SetHitbox(dmgsrc, new Vector3(1.5f, 1, 1.5f));
-
-        //obj_hitbox.transform.position = transform.position + (transform.forward * (obj_hitbox.transform.localScale * 0.8f).z);
-        //obj_hitbox.transform.position = new Vector3(obj_hitbox.transform.position.x, obj_hitbox.transform.position.y + 1, obj_hitbox.transform.position.z);
-
-        //obj_hitbox.transform.rotation = transform.rotation;
-
         go_player = GameObject.FindWithTag("Player");
         StraightBullet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 10, Vector3.one);
+        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 20, Vector3.one);
     }
 
     public override void HardReset()

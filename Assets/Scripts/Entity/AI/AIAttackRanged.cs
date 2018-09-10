@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AIAttackRanged : AIBase
 {
     private float
-        f_attack_range;
+        f_attack_range, f_turn_Rate;
 
     private System.Type
         type_target;
@@ -21,6 +21,7 @@ public class AIAttackRanged : AIBase
 
     private Tweener tween_look_at_player;
 
+
     public AIAttackRanged(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange)
     {
         i_priority = _priority;
@@ -30,6 +31,7 @@ public class AIAttackRanged : AIBase
         b_is_interruptable = false;
         f_attack_range = _attackrange;
         type_target = _type;
+        f_turn_Rate = 0.5f;
 
         b_has_attacked = false;
 
@@ -74,12 +76,13 @@ public class AIAttackRanged : AIBase
         if (animatorState.IsName("Attack"))
         {
             b_has_attacked = false;
+            ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y);
         }
 
         if (!animatorState.IsName("Attack") && !b_has_attacked)
         {
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
-            tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y).OnComplete(() =>
+            tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y).OnComplete(() =>
             {
                 ent_main.An_animator.SetTrigger("Attack"); 
             });

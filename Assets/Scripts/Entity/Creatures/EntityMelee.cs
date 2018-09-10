@@ -60,23 +60,7 @@ public class EntityMelee : EntityEnemy
 
     public override void OnAttack()
     {
-        GameObject obj = ObjectPool.GetInstance().GetHitboxObjectFromPool();
-        HitboxTrigger obj_hitbox = obj.GetComponent<HitboxTrigger>();
-
-        DamageSource dmgsrc = new DamageSource();
-
-        dmgsrc.SetUpDamageSource(St_stats.S_name + " " + gameObject.GetInstanceID().ToString(),
-            gameObject.tag,
-            gameObject.GetInstanceID().ToString(),
-            St_stats.F_damage
-            );
-
-        obj_hitbox.SetHitbox(dmgsrc, new Vector3(1.5f, 1, 1.5f));
-
-        obj_hitbox.transform.position = transform.position + (transform.forward * (obj_hitbox.transform.localScale * 0.8f).z);
-        obj_hitbox.transform.position = new Vector3(obj_hitbox.transform.position.x, obj_hitbox.transform.position.y + 1, obj_hitbox.transform.position.z);
-
-        obj_hitbox.transform.rotation = transform.rotation;
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, new Vector3(1.5f, 1, 1.5f), transform.position, transform.rotation);
     }
 
     public override void HardReset()
