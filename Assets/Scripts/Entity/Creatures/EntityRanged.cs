@@ -25,7 +25,7 @@ public class EntityRanged : EntityEnemy
 
         An_animator.Rebind();
         RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 
         GetComponent<Collider>().isTrigger = false;
 

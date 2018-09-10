@@ -15,11 +15,12 @@ public class AIChase : AIBase
     private float
         f_aggro_range, f_aggro_break_range;
 
+    private bool 
+        b_is_chasing;
+
     private EntityPlayer ep_player;
 
     private NavMeshAgent nma_agent;
-
-    private bool b_is_chasing;
 
     public AIChase(int _priority, EntityLivingBase _entity, System.Type _type, float _aggroRange, float _aggroBreakRange)
     {
@@ -37,7 +38,6 @@ public class AIChase : AIBase
     public override bool StartAI()
     {
         ent_target = null;
-        b_is_chasing = false;
         nma_agent = ent_main.GetComponent<NavMeshAgent>();
         nma_agent.speed = ent_main.GetStats().F_speed;
 
@@ -61,10 +61,11 @@ public class AIChase : AIBase
         {
             RaycastHit hitInfo;
 
-            int ignoreEnemiesMask = (1 << LayerMask.NameToLayer("Enemies"));
+            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
 
             // Cast a ray towards the player, ignoring all objects in the Enemies layer
-            if (!b_is_chasing && Physics.Raycast(ent_main.transform.position, (ep_player.transform.position - ent_main.transform.position), out hitInfo, f_aggro_range, ignoreEnemiesMask))
+            Vector3 colliderCenter = ent_main.GetComponent<Collider>().bounds.center;
+            if (!b_is_chasing && Physics.Raycast(colliderCenter, (ep_player.transform.position - colliderCenter), out hitInfo, f_aggro_range, ignoreEnemiesMask))
             {
                 if (hitInfo.collider.tag != "Player")
                 {
@@ -94,9 +95,6 @@ public class AIChase : AIBase
             return false;
         }
 
-        //ent_main.GetAnimator().SetBool("Walk Forward", true);
-        //ent_main.GetAnimator().speed = ent_main.F_speed;
-
         return false;
     }
 
@@ -117,7 +115,6 @@ public class AIChase : AIBase
         {
             ent_main.An_animator.SetBool("Moving", false);
         }
-        StartAI();
         return true;
     }
 }

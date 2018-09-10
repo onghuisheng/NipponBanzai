@@ -23,7 +23,7 @@ public class EntityMelee : EntityEnemy
         An_animator.Rebind();
         // RegisterAITask(new AIIdle(2, this));
         RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 
         GetComponent<Collider>().isTrigger = false;
@@ -60,7 +60,7 @@ public class EntityMelee : EntityEnemy
 
     public override void OnAttack()
     {
-        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, new Vector3(1.5f, 1, 1.5f), transform.position, transform.rotation);
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
     }
 
     public override void HardReset()
