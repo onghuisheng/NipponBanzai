@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcBulllet : EntityProjectiles {
-    private GameObject
-        go_source;
-
     private Vector3
         v3_startPos,
         v3_endPos;
@@ -20,7 +17,7 @@ public class ArcBulllet : EntityProjectiles {
 
     public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _height, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source, GameObject _marker)
     {
-        base.SetUpProjectile(_lifetime,_damage, _speed, _size);
+        base.SetUpProjectile(_source, _lifetime, _damage, _speed, _size, new Vector3(0, 0, 0));
 
         SetPosition(_start);
         f_height = _height;
@@ -29,7 +26,6 @@ public class ArcBulllet : EntityProjectiles {
         f_lifeElapse = 0;
         f_incrementor = 0;
 
-        go_source = _source;
         go_marker = _marker;
     }
 
@@ -69,7 +65,7 @@ public class ArcBulllet : EntityProjectiles {
                 //Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
                 //spawnedCrystal.SetUpObjectWLifeTime(50, gameObject.transform.position, new Vector3(3, 3, 3));
 
-                SetUpHitBox(go_source.name, go_source.tag, go_source.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2,2,2), GetPosition(), transform.rotation);
+                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2,2,2), GetPosition(), transform.rotation);
                 gameObject.SetActive(false);
             }
         }
