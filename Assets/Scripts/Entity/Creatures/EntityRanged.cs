@@ -76,7 +76,7 @@ public class EntityRanged : EntityEnemy
 
         //obj_hitbox.transform.rotation = transform.rotation;
 
-        ArcBulllet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(1).GetComponent<ArcBulllet>();
+        ArcBulllet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
         ab_bullet.SetUpProjectile(5, 20, 1, 10, transform.position, GameObject.FindWithTag("Player").transform.position, new Vector3(2, 2, 2), null);
     }
 
