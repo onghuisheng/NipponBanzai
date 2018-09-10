@@ -169,7 +169,7 @@ public class AIArtyState : AIBase {
         {
             b_has_attacked = true;
             go_targetCircle = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.TARGET_ZONE);
-            ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
+
         }
 
         if (f_aimTimer < f_shotInterval)
@@ -189,13 +189,11 @@ public class AIArtyState : AIBase {
     void Fire()
     {
         //Temp Spawn of rock to the position of the circle
-        if (ab_bullet)
-        {
-            b_has_attacked = false;
-            Debug.Log("FIRE");
-            ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2,2,2), go_targetCircle);
-            f_aimTimer = 0;
-            i_shotToFire--;
-        }
+        b_has_attacked = false;
+        ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
+        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2,2,2), ent_main.gameObject, go_targetCircle);
+        f_aimTimer = 0;
+        i_shotToFire--;
+        
     }
 }

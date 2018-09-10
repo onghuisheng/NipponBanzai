@@ -77,8 +77,8 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        //RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 3));
-        RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
+        RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 3));
+        //RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));

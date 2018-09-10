@@ -154,7 +154,7 @@ public class AIAOEAttack : AIBase {
                 if (!b_has_attacked)
                 {
                     Debug.Log("KABOOM");
-                    ent_target.Rb_rigidbody.AddExplosionForce(f_force, ent_main.GetPosition(), f_aoeRange, f_upwardForce, ForceMode.Impulse);
+                    ent_target.Rb_rigidbody.AddExplosionForce(f_force, ent_main.GetPosition(), f_aoeRange, f_upwardForce, ForceMode.Acceleration);
                     b_has_attacked = true;
                 }
 
