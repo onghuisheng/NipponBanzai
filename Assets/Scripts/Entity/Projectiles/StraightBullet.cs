@@ -15,7 +15,8 @@ public class StraightBullet : EntityProjectiles
         transform.position = _firer.transform.position;
         v3_direction = _direction.normalized;
         go_firer = _firer;
-        transform.Rotate(0, Mathf.Atan2(_direction.z, _direction.x) * Mathf.Rad2Deg, 0);
+        f_lifeElapse = 0;
+        // transform.Rotate(new Vector3(Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg, 0, 0), Space.Self);
     }
 
     protected override void Start()
@@ -36,6 +37,7 @@ public class StraightBullet : EntityProjectiles
         }
         else
         {
+            transform.rotation.SetLookRotation(v3_direction);
             transform.position += (v3_direction * Time.deltaTime * F_speed);
         }
     }
@@ -43,12 +45,11 @@ public class StraightBullet : EntityProjectiles
     private void OnTriggerEnter(Collider other)
     {
         // Destroy on player hit
-        if (other.tag == "Player")
+        if (go_firer.tag != other.tag && other.tag != gameObject.tag)
         {
             DamageSource dmgSrc = new DamageSource();
             dmgSrc.SetUpDamageSource(go_firer.name, go_firer.tag, go_firer.GetInstanceID().ToString(), F_damage);
-
-            other.GetComponent<EntityPlayer>().OnAttacked(dmgSrc);
+            other.GetComponent<EntityLivingBase>().OnAttacked(dmgSrc);
             gameObject.SetActive(false);
         }
     }

@@ -21,7 +21,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
     public enum ENVIRONMENT
     {
-        CRYSTAL = 0       
+        CRYSTAL = 0
     }
 
     public GameObject[] entity_list;
@@ -103,7 +103,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
         }
 
-        if(go_player_instance == null)
+        if (go_player_instance == null)
         {
             go_player_instance = Instantiate(go_player);
             go_player_instance.SetActive(false);
@@ -224,7 +224,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         foreach (GameObject projectile_obj in projectile_pool_list)
         {
-            if (!projectile_obj.activeSelf && projectile_obj.CompareTag(projectile_list[(int)_type].tag))
+            if (!projectile_obj.activeSelf && (projectile_obj.name.Equals(projectile_list[(int)_type].tag)))
             {
                 projectile_obj.SetActive(true);
                 return projectile_obj;

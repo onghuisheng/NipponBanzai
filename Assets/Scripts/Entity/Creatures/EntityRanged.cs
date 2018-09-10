@@ -81,7 +81,7 @@ public class EntityRanged : EntityEnemy
 
         go_player = GameObject.FindWithTag("Player");
         StraightBullet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 1, Vector3.one);
+        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 10, Vector3.one);
     }
 
     public override void HardReset()

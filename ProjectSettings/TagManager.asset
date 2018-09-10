@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - EnemyMelee
-  - EnemyRanged
-  - EnemyMiniBoss
-  - Crystal
   - TargetCircle
+  - Enemy
+  - Projectile
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -23,8 +22,6 @@ TagManager:
   - 
   - Living Entities
   - Ground
-  - 
-  - 
   - 
   - 
   - 
