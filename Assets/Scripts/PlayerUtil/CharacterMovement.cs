@@ -161,7 +161,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Component_Player.GetPlayerState() == EntityPlayer.State.DASHING)
         {
-            float f_speed_multiplier = 2000;
+            float f_speed_multiplier = 3000;
 
             switch (DoubleTapCheck.GetInstance().GetDoubleTapKey())
             {

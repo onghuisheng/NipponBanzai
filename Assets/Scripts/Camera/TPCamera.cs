@@ -42,7 +42,8 @@ public class TPCamera : MonoBehaviour
 
     [SerializeField]
     private float
-        f_Xrestrict;
+        f_Xrestrict,
+        f_Xrestrict_up;
 
     private bool
         b_is_zoomed;
@@ -63,6 +64,7 @@ public class TPCamera : MonoBehaviour
               v3_target_position.z - (((go_target.transform.forward).normalized).z * 7));
 
         f_Xrestrict = 115;
+        f_Xrestrict_up = 50;
         f_zoomed = 0;
         f_zoomed_dist = 9;
         f_speed_of_zooming = 10;
@@ -104,7 +106,7 @@ public class TPCamera : MonoBehaviour
                                         go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
                                         //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                        Debug.Log("Sizing Down");
+                                        //Debug.Log("Sizing Down");
                                     }
                                 }
                                 else
@@ -117,7 +119,7 @@ public class TPCamera : MonoBehaviour
                                         go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
                                        // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                        Debug.Log("Sizing Up");
+                                        //Debug.Log("Sizing Up");
                                     }
                                 }
                             }
@@ -131,7 +133,7 @@ public class TPCamera : MonoBehaviour
                                     go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
                                     img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                    Debug.Log("Sizing Up");
+                                    //Debug.Log("Sizing Up");
                                 }
                             }
                         }
@@ -141,13 +143,21 @@ public class TPCamera : MonoBehaviour
                             f_zoomed += (f_speed_of_zooming * Time.deltaTime);
                             transform.position -= (transform.position - (v3_target_position + (transform.right.normalized * 2))).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
 
+                            if(f_zoomed > f_zoomed_dist)
+                            {
+                                float minusor = f_zoomed - f_zoomed_dist;
+
+                                f_zoomed -= minusor;
+                                transform.position += (transform.position - (v3_target_position + (transform.right.normalized * 2))).normalized * minusor;  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                            }
+
                             q_prev_rotation = transform.rotation;
                             b_is_zoomed = true;
                         }
 
                         transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
 
-                        if (transform.position.y > -0.5f && transform.position.y < 4.5f)
+                        if (transform.position.y > -0.5f && transform.position.y < 5.0f)
                         {
                             transform.RotateAround(v3_target_position, transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
                         }
@@ -159,7 +169,7 @@ public class TPCamera : MonoBehaviour
 
                         // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
 
-                        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict)
+                        if(Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict - f_Xrestrict_up && gameObject.transform.position.y > v3_target_position.y)
                         {
                             if (-Input.GetAxis("Mouse Y") > 0)
                             {
@@ -168,7 +178,10 @@ public class TPCamera : MonoBehaviour
                                     transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                 }
                             }
-                            else if (-Input.GetAxis("Mouse Y") < 0)
+                        }
+                        else if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict && gameObject.transform.position.y < v3_target_position.y)
+                        {
+                           if (-Input.GetAxis("Mouse Y") < 0)
                             {
                                 if (gameObject.transform.position.y < v3_target_position.y)
                                 {
@@ -191,19 +204,27 @@ public class TPCamera : MonoBehaviour
                         }
                       
 
-                        int layerMask = 1 << LayerMask.NameToLayer("Ground");
+                        float distance = 8.0f;
 
                         RaycastHit hit;
 
                         Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
 
-                        if (Physics.Raycast(v3_target_position, (v3_target_position - camPos), out hit,layerMask))
+                        if (Physics.Raycast(v3_target_position, (v3_target_position - camPos), out hit, distance))
                         {                
                             if (f_zoomed > 0 && q_prev_rotation != transform.rotation || b_is_zoomed && f_zoomed > 0)
                             {
                                 f_zoomed -= (f_speed_of_zooming * Time.deltaTime);
                                 transform.position += (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
-                            }                         
+
+                                if (f_zoomed < 0)
+                                {
+                                    float plusor = -f_zoomed;
+
+                                    f_zoomed += plusor;
+                                    transform.position += (transform.position - (v3_target_position + (transform.right.normalized * 2))).normalized * plusor;  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                                }
+                            }                
                         }
                         else
                         {
@@ -212,6 +233,14 @@ public class TPCamera : MonoBehaviour
                                 b_is_zoomed = false;
                                 f_zoomed += f_speed_of_zooming * Time.deltaTime;
                                 transform.position -= (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                            }
+
+                            if (f_zoomed > f_zoomed_dist)
+                            {
+                                float minusor = f_zoomed - f_zoomed_dist;
+
+                                f_zoomed -= minusor;
+                                transform.position += (transform.position - (v3_target_position + (transform.right.normalized * 2))).normalized * minusor;  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
                             }
 
                             q_prev_rotation = transform.rotation;
@@ -228,7 +257,7 @@ public class TPCamera : MonoBehaviour
 
                         // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
 
-                        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict)
+                        if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict - f_Xrestrict_up && gameObject.transform.position.y > v3_target_position.y)
                         {
                             if (-Input.GetAxis("Mouse Y") > 0)
                             {
@@ -237,7 +266,10 @@ public class TPCamera : MonoBehaviour
                                     transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                 }
                             }
-                            else if (-Input.GetAxis("Mouse Y") < 0)
+                        }
+                        else if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict && gameObject.transform.position.y < v3_target_position.y)
+                        {
+                            if (-Input.GetAxis("Mouse Y") < 0)
                             {
                                 if (gameObject.transform.position.y < v3_target_position.y)
                                 {
