@@ -22,10 +22,9 @@ public class EntityRanged : EntityEnemy
 
         B_isHit = false;
 
-
         An_animator.Rebind();
         RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 60));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 
         GetComponent<Collider>().isTrigger = false;
 
@@ -63,7 +62,8 @@ public class EntityRanged : EntityEnemy
     {
         go_player = GameObject.FindWithTag("Player");
         StraightBullet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-        ab_bullet.SetUpProjectile(gameObject, go_player.transform.position - transform.position, 5, St_stats.F_damage, 20, Vector3.one);
+        Vector3 dir = go_player.transform.position - GetComponent<Collider>().bounds.center;
+        ab_bullet.SetUpProjectile(gameObject, dir, 5, St_stats.F_damage, 20, Vector3.one * 0.25f);
     }
 
     public override void HardReset()

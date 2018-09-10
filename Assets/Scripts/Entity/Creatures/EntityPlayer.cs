@@ -172,7 +172,8 @@ public class EntityPlayer : EntityLivingBase
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
-                    //spawn straight projectile based on size
+                    StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                    sb.SetUpProjectile(gameObject, gameObject.transform.forward, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                     if (b_is_charging_shot)
                         b_is_charging_shot = false;
@@ -187,7 +188,8 @@ public class EntityPlayer : EntityLivingBase
             {
                 if(f_shooting_interval >= f_shooting_max_interval)
                 {
-                    //spawn straight projectile
+                    StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                    sb.SetUpProjectile(gameObject, gameObject.transform.forward, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
                     Debug.Log("SHOOTO");
                     f_shooting_interval = 0;
                 }

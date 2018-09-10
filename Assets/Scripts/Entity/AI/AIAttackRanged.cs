@@ -47,17 +47,32 @@ public class AIAttackRanged : AIBase
 
     public override bool ShouldContinueAI()
     {
+
+        if (ep_player == null)
+        {
+            ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
+        }
+
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+
+        RaycastHit hitInfo;
+
+        // Cast a ray towards the player, ignoring all objects in the Enemies layer
+        Vector3 colliderCenter = ent_main.GetComponent<Collider>().bounds.center;
+        if (Physics.Raycast(colliderCenter, (ep_player.transform.position - colliderCenter), out hitInfo, f_attack_range, ignoreEnemiesMask))
+        {
+            if (hitInfo.collider.tag != "Player")
+            {
+                return false;
+            }
+        }
+
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
         if (animatorState.IsName("Attack"))
         {
             ent_main.B_isAttacking = true;
             return true;
-        }
-
-        if (ep_player == null)
-        {
-            ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
         if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_attack_range)
@@ -84,7 +99,7 @@ public class AIAttackRanged : AIBase
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y).OnComplete(() =>
             {
-                ent_main.An_animator.SetTrigger("Attack"); 
+                ent_main.An_animator.SetTrigger("Attack");
             });
             b_has_attacked = true;
         }
