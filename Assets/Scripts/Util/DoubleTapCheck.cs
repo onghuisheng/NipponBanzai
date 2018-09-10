@@ -135,7 +135,7 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
         return b_is_double_tap;
     }
 
-    public KeyCode GetDoubleTapKMouseKey()
+    public KeyCode GetDoubleTapMouseKey()
     {
         return kc_current_entered_mouse;
     }

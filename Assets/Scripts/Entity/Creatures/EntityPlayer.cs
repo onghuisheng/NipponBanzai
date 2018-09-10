@@ -9,7 +9,6 @@ public class EntityPlayer : EntityLivingBase
         IDLE,
         MOVING,
         DASHING,
-        DODGE,
         ATTACK,
         SUMMONING,
         DEAD
@@ -42,24 +41,19 @@ public class EntityPlayer : EntityLivingBase
         i_combo;
 
     private float 
-        f_shooting_interval;
+        f_shooting_interval,
+        f_shooting_max_interval,
+
+        f_charged_amount,
+        f_charged_max_amount,
+
+        f_charged_increase_amount;
+
+    private bool
+        b_is_charging_shot;
 
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
-
-  
-    public float F_shooting_interval
-    {
-        get
-        {
-            return f_shooting_interval;
-        }
-
-        set
-        {
-            f_shooting_interval = value;
-        }
-    }
 
     protected override void Start ()
     {
@@ -71,7 +65,6 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.IDLE, IdleCheckFunction);
         m_checkfuntions.Add(State.MOVING, MovingCheckFunction);
         m_checkfuntions.Add(State.DASHING, DashingCheckFunction);
-        m_checkfuntions.Add(State.DODGE, DodgeCheckFunction);
         m_checkfuntions.Add(State.ATTACK, AttackCheckFunction);
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
@@ -85,7 +78,11 @@ public class EntityPlayer : EntityLivingBase
 
         St_stats = temp_stats;
 
-        F_shooting_interval = 0.1f;
+        f_shooting_max_interval = f_shooting_interval = 0.1f;
+        f_charged_amount = 1.0f;
+        f_charged_max_amount = 2;
+        f_charged_increase_amount = 0.5f;
+        b_is_charging_shot = false;
     }
 
     private void IdleCheckFunction()
@@ -113,13 +110,6 @@ public class EntityPlayer : EntityLivingBase
          
             return;
         }   
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            player_state = State.DODGE;
-           
-            return;
-        }
 
         St_stats.F_speed = St_stats.F_maxspeed;
         i_combo = 0;
@@ -151,13 +141,6 @@ public class EntityPlayer : EntityLivingBase
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            player_state = State.DODGE;
-
-            return;
-        }
-
         i_combo = 0;
     }
 
@@ -169,26 +152,63 @@ public class EntityPlayer : EntityLivingBase
         player_state = State.MOVING;
     }
 
-    private void DodgeCheckFunction()
-    {
-        player_state = State.IDLE;
-    }
-
     private void AttackCheckFunction()
-    {  
-       if(player_target_state == TARGET_STATE.AIMING)
-        {
+    {
 
+        if (player_target_state == TARGET_STATE.AIMING)
+        {
+            if(DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
+            {
+                b_is_charging_shot = true;
+            }
+
+            if(b_is_charging_shot)
+            {
+
+                if (f_charged_amount < f_charged_max_amount)
+                    f_charged_amount += f_charged_increase_amount * Time.deltaTime;
+                else if (f_charged_amount > f_charged_max_amount)
+                    f_charged_amount = f_charged_max_amount;
+
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    //spawn straight projectile based on size
+
+                    if (b_is_charging_shot)
+                        b_is_charging_shot = false;
+
+                    if (f_charged_amount != 1)
+                        f_charged_amount = 1;
+
+                    f_shooting_interval = 0;
+                }
+            }
+            else
+            {
+                if(f_shooting_interval >= f_shooting_max_interval)
+                {
+                    //spawn straight projectile
+                    Debug.Log("SHOOTO");
+                    f_shooting_interval = 0;
+                }
+            }
         }
-       else
+        else
         {
             ++i_combo;
 
             if (i_combo > 3)
                 i_combo = 1;
+
+            if (b_is_charging_shot)
+                b_is_charging_shot = false;
+
+            if (f_charged_amount != 1)
+                f_charged_amount = 1;
         }
 
-        player_state = State.IDLE;
+        if (!b_is_charging_shot)
+            player_state = State.IDLE;
     }
 
     private void SummoningCheckFunction()
@@ -198,7 +218,8 @@ public class EntityPlayer : EntityLivingBase
 
     private void DeadCheckFunction()
     {
-        player_state = State.IDLE;
+        if (!IsDead())
+            player_state = State.IDLE;
     }
 
     public State GetPlayerState()
@@ -236,7 +257,13 @@ public class EntityPlayer : EntityLivingBase
             player_target_state = TARGET_STATE.NOT_AIMING;
         }
 
+        if (f_shooting_interval < f_shooting_max_interval)
+            f_shooting_interval += Time.deltaTime;
+
         m_checkfuntions[player_state]();
+
+        if (IsDead())
+            player_state = State.DEAD;
 
         Debug.Log(player_state);
     }  

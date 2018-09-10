@@ -9,6 +9,8 @@ public abstract class EntityLivingBase : Entity
         float
             f_health,
             f_max_health,
+            f_mana,
+            f_max_mana,
             f_defence,
             f_damage,
             f_speed,
@@ -109,6 +111,32 @@ public abstract class EntityLivingBase : Entity
             set
             {
                 f_maxspeed = value;
+            }
+        }
+
+        public float F_max_mana
+        {
+            get
+            {
+                return F_max_mana;
+            }
+
+            set
+            {
+                F_max_mana = value;
+            }
+        }
+
+        public float F_mana
+        {
+            get
+            {
+                return f_mana;
+            }
+
+            set
+            {
+                f_mana = value;
             }
         }
         #endregion
