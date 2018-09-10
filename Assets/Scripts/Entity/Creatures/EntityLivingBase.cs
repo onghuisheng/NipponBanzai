@@ -370,15 +370,15 @@ public abstract class EntityLivingBase : Entity
         }
 
 
-        if (!IsDead())
-        {
-            if (F_regen_timer > 2.0f)
-            {
-                F_regen_timer = 0.0f;
+        //if (!IsDead())
+        //{
+        //    if (F_regen_timer > 2.0f)
+        //    {
+        //        F_regen_timer = 0.0f;
 
-                st_stats.F_health += 1;
-            }
-        }
+        //        st_stats.F_health += 1;
+        //    }
+        //}
 
         if (B_isHit)
         {

@@ -40,7 +40,7 @@ public class EntityPlayer : EntityLivingBase
     private int
         i_combo;
 
-    private float 
+    private float
         f_shooting_interval,
         f_shooting_max_interval,
 
@@ -55,7 +55,7 @@ public class EntityPlayer : EntityLivingBase
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
 
-    protected override void Start ()
+    protected override void Start()
     {
         base.Start();
 
@@ -69,14 +69,12 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
 
-        Stats temp_stats = new Stats();
+        St_stats = new Stats();
+        St_stats.F_speed = 20;
+        St_stats.F_maxspeed = St_stats.F_speed;
+        St_stats.F_health = 5;
+        St_stats.F_damage = 50;
 
-
-        temp_stats.F_speed = 20;
-        temp_stats.F_maxspeed = temp_stats.F_speed;
-        temp_stats.F_health = 5;
-
-        St_stats = temp_stats;
 
         f_shooting_max_interval = f_shooting_interval = 0.1f;
         f_charged_amount = 1.0f;
@@ -89,7 +87,7 @@ public class EntityPlayer : EntityLivingBase
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            player_state = State.MOVING;     
+            player_state = State.MOVING;
             return;
         }
 
@@ -107,9 +105,9 @@ public class EntityPlayer : EntityLivingBase
         if (Input.GetKey(KeyCode.Mouse0))
         {
             player_state = State.ATTACK;
-         
+
             return;
-        }   
+        }
 
         St_stats.F_speed = St_stats.F_maxspeed;
         i_combo = 0;
@@ -123,8 +121,8 @@ public class EntityPlayer : EntityLivingBase
             player_state = State.IDLE;
         }
 
-        if (DoubleTapCheck.GetInstance().IsDoubleTapTriggered() && 
-            (DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.W 
+        if (DoubleTapCheck.GetInstance().IsDoubleTapTriggered() &&
+            (DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.W
             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.A
             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.S
             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
@@ -146,7 +144,7 @@ public class EntityPlayer : EntityLivingBase
 
     private void DashingCheckFunction()
     {
-        if(player_target_state != TARGET_STATE.AIMING)
+        if (player_target_state != TARGET_STATE.AIMING)
             St_stats.F_speed = St_stats.F_maxspeed * 2;
 
         player_state = State.MOVING;
@@ -157,12 +155,12 @@ public class EntityPlayer : EntityLivingBase
 
         if (player_target_state == TARGET_STATE.AIMING)
         {
-            if(DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
+            if (DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
             {
                 b_is_charging_shot = true;
             }
 
-            if(b_is_charging_shot)
+            if (b_is_charging_shot)
             {
 
                 if (f_charged_amount < f_charged_max_amount)
@@ -186,10 +184,13 @@ public class EntityPlayer : EntityLivingBase
             }
             else
             {
-                if(f_shooting_interval >= f_shooting_max_interval)
+                if (f_shooting_interval >= f_shooting_max_interval)
                 {
+                    
+                    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
+
                     StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                    sb.SetUpProjectile(gameObject, gameObject.transform.forward, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                    sb.SetUpProjectile(gameObject, target - transform.position, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
                     Debug.Log("SHOOTO");
                     f_shooting_interval = 0;
                 }
@@ -244,14 +245,14 @@ public class EntityPlayer : EntityLivingBase
         player_state = _player_new_state;
     }
 
-    protected override void Update ()
+    protected override void Update()
     {
         base.Update();
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
             player_target_state = TARGET_STATE.AIMING;
-            if(St_stats.F_speed != St_stats.F_maxspeed)
+            if (St_stats.F_speed != St_stats.F_maxspeed)
                 St_stats.F_speed = St_stats.F_maxspeed;
         }
         else
@@ -268,7 +269,7 @@ public class EntityPlayer : EntityLivingBase
             player_state = State.DEAD;
 
         Debug.Log(player_state);
-    }  
+    }
 
     public override void OnAttack()
     {

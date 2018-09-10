@@ -75,6 +75,7 @@ public class EntityMelee : EntityEnemy
 
         base.OnAttacked(_dmgsrc);
         St_stats.F_health -= _dmgsrc.GetDamage();
+        Debug.Log("OUCH, KENA HIT NOW MY HP IS " + St_stats.F_health + " DAMAGE DEALT IS " + _dmgsrc.GetDamage());
         An_animator.SetTrigger("Injured");
     }
 
