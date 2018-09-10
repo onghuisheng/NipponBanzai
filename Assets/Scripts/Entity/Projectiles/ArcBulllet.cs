@@ -65,11 +65,27 @@ public class ArcBulllet : EntityProjectiles {
                 go_marker.SetActive(false);
                 go_marker = null;
 
+                //Setup Hitbox 
+                SetUpHitBox(go_source.name, go_source.tag, go_source.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
 
-                //Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-                //spawnedCrystal.SetUpObjectWLifeTime(50, gameObject.transform.position, new Vector3(3, 3, 3));
+                //Apply Knockback
+                float range = 6;
+                Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
+                foreach (Collider hit in colliders)
+                {
+                    Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-                SetUpHitBox(go_source.name, go_source.tag, go_source.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2,2,2), GetPosition(), transform.rotation);
+                    if (rb)
+                    {
+                        rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
+                    }
+                }
+
+                //Spawn Crystal
+                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
+                spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
+
+
                 gameObject.SetActive(false);
             }
         }

@@ -10,6 +10,7 @@ public class AIArtyState : AIBase {
         f_maxStateTimer,
         f_shotInterval,
         f_stateCooldownTimer,
+        f_cooldown,
         f_aimTimer;
 
     private int
@@ -27,7 +28,7 @@ public class AIArtyState : AIBase {
     private ArcBulllet
         ab_bullet;
 
-    public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _shotInterval)
+    public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _cooldown, float _shotInterval)
     {
         i_priority = _priority;
         ent_main = _entity;
@@ -37,6 +38,7 @@ public class AIArtyState : AIBase {
         f_range = _range;
         type_target = _type;
         f_maxStateTimer = _stateTime;
+        f_cooldown = _cooldown;
         f_shotInterval = _shotInterval;
         i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
 
@@ -70,7 +72,7 @@ public class AIArtyState : AIBase {
 
     public override bool ShouldContinueAI()
     {
-        if(f_stateCooldownTimer < 12)
+        if(f_stateCooldownTimer < f_cooldown)
         {
             f_stateCooldownTimer += Time.deltaTime;
             return false;

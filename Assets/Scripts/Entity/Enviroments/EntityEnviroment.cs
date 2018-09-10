@@ -90,6 +90,7 @@ public class EntityEnviroment : Entity {
         SetSize(v3_size);
         f_lifetime = _lifetime;
         b_willExpire = true;
+        f_lifeElapse = 0;
     }
 
     public virtual void SetUpObject(Vector3 _pos, Vector3 _size, bool _isStatic = true)
