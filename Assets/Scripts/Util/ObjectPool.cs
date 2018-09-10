@@ -184,7 +184,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         foreach (GameObject entity_obj in entity_pool_list)
         {
-            if (!entity_obj.activeSelf && entity_obj.CompareTag(entity_list[(int)_type].tag))
+            if (!entity_obj.activeSelf && entity_obj.name.Equals(entity_list[(int)_type].name + "(Clone)"))
             {
                 entity_obj.SetActive(true);
                 return entity_obj;
@@ -204,7 +204,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         foreach (GameObject enviroment_obj in enviroment_pool_list)
         {
-            if (!enviroment_obj.activeSelf && enviroment_obj.CompareTag(enviroment_list[(int)_type].tag))
+            if (!enviroment_obj.activeSelf && enviroment_obj.name.Equals(enviroment_list[(int)_type].name + "(Clone)"))
             {
                 enviroment_obj.SetActive(true);
                 return enviroment_obj;
@@ -224,7 +224,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         foreach (GameObject projectile_obj in projectile_pool_list)
         {
-            if (!projectile_obj.activeSelf && (projectile_obj.name.Equals(projectile_list[(int)_type].tag)))
+            if (!projectile_obj.activeSelf && projectile_obj.name.Equals(projectile_list[(int)_type].name + "(Clone)"))
             {
                 projectile_obj.SetActive(true);
                 return projectile_obj;
