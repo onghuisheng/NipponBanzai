@@ -52,7 +52,7 @@ public class EntityMelee : EntityEnemy
             {
                 gameObject.SetActive(false);
 
-                ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(GetPosition(), 10, ItemHandler.GetItem((Item.ITEM_TYPE)Random.Range(0, (int)Item.ITEM_TYPE.TOTAL - 1)));
+                ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x, GetPosition().y + 0.5f, GetPosition().z), 30, ItemHandler.GetItem((Item.ITEM_TYPE)Random.Range(0, (int)Item.ITEM_TYPE.TOTAL - 1)));
             }
         }
     }
