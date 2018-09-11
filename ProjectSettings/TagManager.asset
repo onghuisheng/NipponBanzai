@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Projectile
   - Environment
+  - HitBox
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - 
   - PostProcessing
   - Enemies
-  - 
   - Living Entities
   - Ground
+  - 
   - 
   - 
   - 

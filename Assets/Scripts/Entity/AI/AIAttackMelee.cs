@@ -21,6 +21,7 @@ public class AIAttackMelee : AIBase
 
     private Tweener tween_look_at_player;
 
+    // Use navmesh agent stopping distance for attack range if possible
     public AIAttackMelee(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange)
     {
         i_priority = _priority;

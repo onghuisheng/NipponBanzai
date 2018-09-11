@@ -53,7 +53,8 @@ public class AIChase : AIBase
         }
 
         // Dont chase if we're attacking
-        if (ent_main.B_isAttacking)
+        var animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
+        if (ent_main.B_isAttacking || animatorState.IsName("Attack") || animatorState.IsName("Poison Attack"))
             return false;
 
         // Chase player if within aggro range and if theres nothing blocking it

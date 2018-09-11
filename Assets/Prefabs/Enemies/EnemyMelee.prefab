@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4598506747801632}
   - component: {fileID: 95409702350585424}
-  - component: {fileID: 65284516121680646}
+  - component: {fileID: 136561978922622478}
   - component: {fileID: 54146270280631312}
   - component: {fileID: 195650448758279512}
   - component: {fileID: 114191499121883980}
@@ -785,18 +785,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!65 &65284516121680646
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1332987433276612}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.17366116, y: 0.14462657, z: 0.24813838}
-  m_Center: {x: 0.0014197171, y: 0.05820744, z: 0.0016293526}
 --- !u!95 &95409702350585424
 Animator:
   serializedVersion: 3
@@ -826,6 +814,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7774e68164aba4846bd9763a4865c395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &136561978922622478
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332987433276612}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.28
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.13, z: 0}
 --- !u!137 &137092770267747864
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -896,7 +897,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1332987433276612}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.15
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -905,7 +906,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 0.13
+  m_Height: 0.15
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

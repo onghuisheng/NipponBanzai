@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114406905072534958}
   m_Layer: 0
   m_Name: EnemySpawnTrigger
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529962709650184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.52, z: 0}
+  m_LocalPosition: {x: -17.1, y: 0.83, z: -17.22}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,9 +64,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdc1c52aee042f4383a8f30323bace0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i_melee_spawn_count: 3
-  i_ranged_spawn_count: 2
-  i_miniboss_spawn_count: 1
-  m_spawning_type: 0
+  i_melee_spawn_count: 0
+  i_ranged_spawn_count: 0
+  i_miniboss_spawn_count: 3
+  m_spawning_type: 2
   b_randomize_spawn_interval: 1
-  v2_spawn_interval_min_max: {x: 0.25, y: 1}
+  v2_spawn_interval_min_max: {x: 1, y: 1}

@@ -28,7 +28,7 @@ public class EnemySpawnTrigger : EntityTrigger
     bool b_is_spawned = false;
 
     List<EntityLivingBase> lst_enemy_collection = new List<EntityLivingBase>();
-    
+
     protected override void Start()
     {
         if (m_spawning_type == SpawningType.OnStart)
@@ -101,57 +101,83 @@ public class EnemySpawnTrigger : EntityTrigger
     {
         for (int i = 0; i < i_melee_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MELEE).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox(enemy));
-            lst_enemy_collection.Add(enemy);
-
-            yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
+            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MELEE).GetComponent<EntityLivingBase>());
         }
         for (int i = 0; i < i_ranged_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox(enemy));
-            lst_enemy_collection.Add(enemy);
-
-            yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
+            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>());          
         }
         for (int i = 0; i < i_miniboss_spawn_count; i++)
         {
-            var enemy = ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>();
-            enemy.SetPosition(RandomInsideBox(enemy));
-            lst_enemy_collection.Add(enemy);
-
-            yield return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
+            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>());
         }
     }
 
-    Vector3 RandomInsideBox(EntityLivingBase enemy)
+    // Helper function for StartSpawning coroutine
+    WaitForSeconds SpawnAndWait(EntityLivingBase enemy)
+    {
+        Vector3 spawnPos = RandomInsideBox(enemy, 60);
+        enemy.SetPosition(spawnPos);
+
+        // Adjust the Y position to align with the ground
+        RaycastHit hitInfo;
+        if (Physics.Raycast(spawnPos, Vector3.down, out hitInfo, Mathf.Infinity, (1 << LayerMask.NameToLayer("Ground")))) { // Only check for ground
+            spawnPos.y = hitInfo.point.y;
+        }
+
+        enemy.SetPosition(spawnPos);
+
+        lst_enemy_collection.Add(enemy);
+
+        return new WaitForSeconds((b_randomize_spawn_interval) ? Random.Range(v2_spawn_interval_min_max.x, v2_spawn_interval_min_max.y) : 0);
+    }
+
+    // Returns a position where spawning an object would not collide with other enemies
+    Vector3 RandomInsideBox(EntityLivingBase enemy, int maxAttempt)
     {
         BoxCollider collider = GetComponent<BoxCollider>();
-        Vector3 value = new Vector3(
+
+        Vector3 spawnPos = new Vector3(
             Random.Range(collider.bounds.min.x, collider.bounds.max.x),
             transform.position.y,
             Random.Range(collider.bounds.min.z, collider.bounds.max.z)
-            );
+            ); // A random point in this trigger zone
 
-        if (CheckForCollision(enemy, value))
+        // Stop looping if we hit max attempts to prevent stackoverflow
+        if (maxAttempt <= 0)
         {
-            return RandomInsideBox(enemy);
+            Debug.LogWarning("Can't find empty space to spawn");
+            return spawnPos;
+        }
+
+        if (CheckForCollision(enemy, spawnPos)) // Check if we'll collide with any enemies that are already spawned in this trigger
+        {
+            return RandomInsideBox(enemy, --maxAttempt); // recurse until we get a valid position
         }
         else
         {
-            return value;
+            return spawnPos;
         }
     }
 
     // Checks if we're going to collide with anything while spawning
-    bool CheckForCollision(EntityLivingBase enemy, Vector3 destination)
+    bool CheckForCollision(EntityLivingBase enemy, Vector3 pos)
     {
-        foreach (var cat in lst_enemy_collection)
+
+        //Bounds bound = enemy.GetComponent<Collider>().bounds;
+        //enemy.GetComponent<Collider>().enabled = false;
+        //bool blocked = Physics.CheckBox(pos + bound.center, bound.extents, enemy.transform.rotation, (1 << LayerMask.NameToLayer("Enemies")));
+        //enemy.GetComponent<Collider>().enabled = true;
+
+        //Debug.Log(blocked);
+
+        //return blocked;
+
+        foreach (var it_enemy in lst_enemy_collection)
         {
             Bounds enemyColliderBounds = enemy.GetComponent<Collider>().bounds;
-            enemyColliderBounds.center = destination;
-            if (cat.GetComponent<Collider>().bounds.Intersects(enemyColliderBounds))
+            enemyColliderBounds.center = pos;
+            if (it_enemy.GetComponent<Collider>().bounds.Intersects(enemyColliderBounds))
             {
                 return true;
             }
