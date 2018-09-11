@@ -24,12 +24,19 @@ public class ObjectPool : Singleton<ObjectPool>
         CRYSTAL = 0
     }
 
+    public enum INDICATOR
+    {
+        RED_MARKER
+    }
+
     [SerializeField]
     private GameObject[] entity_list;
     [SerializeField]
     private GameObject[] projectile_list;
     [SerializeField]
     private GameObject[] enviroment_list;
+    [SerializeField]
+    private GameObject[] indicator_list;
 
     [SerializeField]
     private GameObject hitbox;
@@ -43,6 +50,7 @@ public class ObjectPool : Singleton<ObjectPool>
     private List<GameObject> hitbox_pool_list = new List<GameObject>();
     private List<GameObject> item_pool_list = new List<GameObject>();
     private List<GameObject> enviroment_pool_list = new List<GameObject>();
+    private List<GameObject> indicator_pool_list = new List<GameObject>();
     private GameObject go_player_instance;
 
     //SETTING UP THE SPAWNER
@@ -287,4 +295,25 @@ public class ObjectPool : Singleton<ObjectPool>
 
         return GetItemObjectFromPool();
     }
+
+    //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
+    public GameObject GetIndicatorObjectFromPool(INDICATOR _type)
+    {
+        foreach (GameObject indicator in indicator_pool_list)
+        {
+            if (!indicator.activeSelf && indicator.name.Equals(indicator_list[(int)_type].name + "(Clone)"))
+            {
+                indicator.SetActive(true);
+                return indicator;
+            }
+        }
+
+        GameObject obj = Instantiate(indicator_list[(int)_type]);
+        obj.SetActive(false);
+        indicator_pool_list.Add(obj);
+        obj.transform.parent = gameObject.transform;
+
+        return GetIndicatorObjectFromPool(_type);
+    }
+
 }

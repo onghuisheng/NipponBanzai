@@ -192,6 +192,7 @@ ModelImporter:
     7400000: Attack
     9500000: //RootNode
     13700000: model
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -207,7 +208,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: Event OnPoisonAttack has a time (1.009561) outside the
+      clip's valid range (1.400000..3.666667). It will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -223,7 +225,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack
       takeName: Attack
-      firstFrame: 286
+      firstFrame: 210
       lastFrame: 320
       wrapMode: 0
       orientationOffsetY: 0
@@ -244,7 +246,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.27533478
+      - time: 0.78246313
         functionName: OnPoisonAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
