@@ -81,14 +81,16 @@ public class EntityMiniBoss : EntityEnemy
         Start();
     }
 
-    public override void OnAttacked(DamageSource _dmgsrc)
+    public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-        if (St_stats.F_health <= 0)
-            return;
+        if (!B_isHit)
+        {
+            S_last_hit = _dmgsrc.GetName();
+            St_stats.F_health -= _dmgsrc.GetDamage();
+            ResetOnHit(_timer);
+            An_animator.SetTrigger("Injured");
 
-        base.OnAttacked(_dmgsrc);
-        St_stats.F_health -= _dmgsrc.GetDamage();
-        An_animator.SetTrigger("Injured");
+        }
     }
 
 }

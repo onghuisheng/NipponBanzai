@@ -51,9 +51,14 @@ public class EntityBoss : EntityEnemy {
         obj_hitbox.transform.rotation = transform.rotation;
     }
 
-    public override void OnAttacked(DamageSource _dmgsrc)
+    public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-
+        if (!B_isHit)
+        {
+            S_last_hit = _dmgsrc.GetName();
+            St_stats.F_health -= _dmgsrc.GetDamage();
+            ResetOnHit(_timer);
+        }
     }
 
     void Init()
