@@ -71,7 +71,7 @@ public class ArcBulllet : EntityProjectiles {
                 {
                     Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-                    if (rb)
+                    if (rb && rb.tag.Equals("Player"))
                     {
                         rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
                     }

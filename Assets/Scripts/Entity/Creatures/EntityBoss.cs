@@ -51,9 +51,14 @@ public class EntityBoss : EntityEnemy {
         obj_hitbox.transform.rotation = transform.rotation;
     }
 
-    public override void OnAttacked(DamageSource _dmgsrc)
+    public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-
+        if (!B_isHit)
+        {
+            S_last_hit = _dmgsrc.GetName();
+            St_stats.F_health -= _dmgsrc.GetDamage();
+            ResetOnHit(_timer);
+        }
     }
 
     void Init()
@@ -77,7 +82,8 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 1, 3));
+        //RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 1, 3));
+        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 10, 5));
         //RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));

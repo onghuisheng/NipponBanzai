@@ -6,7 +6,8 @@ public class EntityPickUps : Entity
 {
 
     private float
-       f_lifetime, 
+       f_lifetime,
+       f_max_lifetime,
 
        f_floating_offset,
        f_floating_speed,
@@ -46,7 +47,7 @@ public class EntityPickUps : Entity
             mr_meshrenderer = GetComponent<MeshRenderer>();
         }
 
-        f_lifetime = _lifetime;
+        f_max_lifetime = f_lifetime = _lifetime;
         i_id = _id;
         _id.SetUpItem();
 
@@ -74,6 +75,7 @@ public class EntityPickUps : Entity
         if (f_lifetime > 0)
         {
             f_lifetime -= Time.deltaTime;
+           
             i_id.OnGround(this);
         }
         else
