@@ -16,7 +16,8 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         TARGET_ZONE = 0,
         ARCH_PROJECTILE,
-        STRAIGHT_PROJECTILE
+        STRAIGHT_PROJECTILE,
+        LASER_PROJECTILE
     }
 
     public enum ENVIRONMENT
