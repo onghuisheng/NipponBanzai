@@ -18,6 +18,9 @@ public class AIBossLaser : AIBase {
     private bool
         b_has_attacked;
 
+    private int
+        i_numOfLasers;
+
     private Laser
         script_laser;
 
@@ -36,6 +39,7 @@ public class AIBossLaser : AIBase {
 
         f_stateCooldownTimer = 0;
         f_beamChargeTimer = 0;
+        i_numOfLasers = 4; //For now.
 
         b_has_attacked = false;
     }
@@ -144,8 +148,18 @@ public class AIBossLaser : AIBase {
             //    b_has_attacked = true;
             //    ent_main.OnAttack();
             //}
-            script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
-            script_laser.SetUpProjectile(5, 20, 3 , ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, ent_target.gameObject);
+            for (int i = 0; i < i_numOfLasers; ++i)
+            {
+                script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
+
+                var pos = RandomCircle(ent_main.transform.position, 10, i * 90);
+                // make the object face the center
+                //var rot = Quaternion.FromToRotation(Vector3.forward, ent_main.transform.position - pos);
+                Vector3 direction = pos - ent_main.transform.position;
+
+                script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
+            }
+            
 
             f_beamChargeTimer = 0;
 
@@ -153,5 +167,15 @@ public class AIBossLaser : AIBase {
         }
 
         return true;
+    }
+
+    private Vector3 RandomCircle(Vector3 _center, float _radius, float _angle) 
+     { // create random angle between 0 to 360 degrees
+        Vector3 pos;
+        pos.x = _center.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
+        //pos.y = _center.y + _radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.y = _center.y;
+        pos.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
+        return pos;
     }
 }
