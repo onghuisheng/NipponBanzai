@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4415587779490744}
   - component: {fileID: 33207076789619982}
   - component: {fileID: 23159169718610332}
-  - component: {fileID: 136856094752219036}
+  - component: {fileID: 65682335116994082}
   - component: {fileID: 114780156180728882}
   m_Layer: 0
   m_Name: ItemPickUp
@@ -85,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792999001062160}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65682335116994082
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792999001062160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114780156180728882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,16 +114,3 @@ MonoBehaviour:
   list_texture:
   - {fileID: 2800000, guid: c0b9d3b20ffc5784d99ab5075b9d28b1, type: 3}
   - {fileID: 2800000, guid: ba6a37c170e191b4793b0beed7529f61, type: 3}
---- !u!136 &136856094752219036
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1792999001062160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
