@@ -7,6 +7,8 @@ public class EntityMiniBoss : EntityEnemy
 
     GameObject go_player;
 
+    AIThrowPoison ai_throw_poison;
+
     protected override void Start()
     {
         base.Start();
@@ -23,7 +25,10 @@ public class EntityMiniBoss : EntityEnemy
         B_isHit = false;
 
         An_animator.Rebind();
-        RegisterAITask(new AIThrowPoison(2, this, typeof(EntityPlayer), 90, 5));
+
+        ai_throw_poison  = new AIThrowPoison(2, this, typeof(EntityPlayer), 10, 6);
+
+        RegisterAITask(ai_throw_poison);
         RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 
@@ -67,7 +72,7 @@ public class EntityMiniBoss : EntityEnemy
         //    ab_bullet.SetUpProjectile(gameObject, dir, 5, St_stats.F_damage, 20, Vector3.one * 0.25f);
 
         var bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, transform.position, GameObject.FindWithTag("Player").transform.position, Vector3.one, gameObject, null);
+        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, transform.position, ai_throw_poison.v3_poison_target, Vector3.one, gameObject, null);
         bullet.GetComponent<Collider>().isTrigger = true;
     }
 

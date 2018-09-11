@@ -27,7 +27,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
     public enum INDICATOR
     {
-        RED_MARKER
+        RED_MARKER = 0
     }
 
     [SerializeField]

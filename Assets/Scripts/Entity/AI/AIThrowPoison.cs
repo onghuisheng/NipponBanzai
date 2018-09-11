@@ -5,22 +5,25 @@ using DG.Tweening;
 using UnityEngine.AI;
 
 public class AIThrowPoison : AIBase
-{
+{    
     private float
         f_attack_range, f_turn_Rate, f_cooldown, f_next_cooldown_time;
-
+        
     private System.Type
         type_target;
 
     private bool
         b_has_attacked;
 
+    public Vector3 
+        v3_poison_target;
+
     private EntityPlayer ep_player;
 
     private NavMeshAgent nma_agent;
 
     private Tweener tween_look_at_player;
-
+    
 
     public AIThrowPoison(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange, float _cooldown)
     {
@@ -102,6 +105,11 @@ public class AIThrowPoison : AIBase
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y).OnComplete(() =>
             {
+                RedMarker marker = ObjectPool.GetInstance().GetIndicatorObjectFromPool(ObjectPool.INDICATOR.RED_MARKER).GetComponent<RedMarker>(); // Spawn indicator
+                marker.SetUpIndicator(ep_player.transform.position, 3, 2, 0, null, ent_main);
+
+                v3_poison_target = ep_player.transform.position;
+
                 ent_main.An_animator.SetTrigger("Poison Attack");
                 f_next_cooldown_time = Time.time + f_cooldown;
             });

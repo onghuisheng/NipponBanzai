@@ -121,7 +121,7 @@ public class EnemySpawnTrigger : EntityTrigger
 
         // Adjust the Y position to align with the ground
         RaycastHit hitInfo;
-        if (Physics.Raycast(spawnPos, Vector3.down, out hitInfo, Mathf.Infinity, (1 << LayerMask.NameToLayer("Ground")))) { // Only check for ground
+        if (Physics.Raycast(spawnPos, Vector3.down, out hitInfo, Mathf.Infinity, (1 << LayerMask.NameToLayer("Environment")))) { // Only check for environment
             spawnPos.y = hitInfo.point.y;
         }
 
