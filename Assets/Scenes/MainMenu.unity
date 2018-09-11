@@ -196,7 +196,8 @@ MonoBehaviour:
   - {fileID: 1649731254227142, guid: c95bd5ca0d9bec4419f7d8a79bf23cf1, type: 2}
   - {fileID: 1819166709965156, guid: c43c52ae3e9745a4fa36ee205f3154fa, type: 2}
   - {fileID: 1069230488151892, guid: 3fb206b635b45fa4aab2d1291ac16a7f, type: 2}
-  enviroment_list: []
+  enviroment_list:
+  - {fileID: 1009587866748322, guid: 7e2e6d3633985fb4d925d98b2c83d958, type: 2}
   hitbox: {fileID: 1253757125116546, guid: a8703823e42953c459851755b9710ca9, type: 2}
   item_pickup: {fileID: 1792999001062160, guid: 48f0de838d82f2648b65fd55a516a385,
     type: 2}
