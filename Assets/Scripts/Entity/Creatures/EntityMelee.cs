@@ -52,8 +52,7 @@ public class EntityMelee : EntityEnemy
             {
                 gameObject.SetActive(false);
 
-                // GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
-                // go.GetComponent<EntityPickUps>().SetPosition(GetPosition());
+                ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(GetPosition(), 10, ItemHandler.GetItem((Item.ITEM_TYPE)Random.Range(0, (int)Item.ITEM_TYPE.TOTAL - 1)));
             }
         }
     }
@@ -75,7 +74,7 @@ public class EntityMelee : EntityEnemy
 
         base.OnAttacked(_dmgsrc);
         St_stats.F_health -= _dmgsrc.GetDamage();
-        Debug.Log("OUCH, KENA HIT NOW MY HP IS " + St_stats.F_health + " DAMAGE DEALT IS " + _dmgsrc.GetDamage());
+       // Debug.Log("OUCH, KENA HIT NOW MY HP IS " + St_stats.F_health + " DAMAGE DEALT IS " + _dmgsrc.GetDamage());
         An_animator.SetTrigger("Injured");
     }
 

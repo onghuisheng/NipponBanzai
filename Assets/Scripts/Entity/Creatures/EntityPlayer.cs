@@ -191,7 +191,7 @@ public class EntityPlayer : EntityLivingBase
 
                     StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
                     sb.SetUpProjectile(gameObject, target - transform.position, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
-                    Debug.Log("SHOOTO");
+                    //Debug.Log("SHOOTO");
                     f_shooting_interval = 0;
                 }
             }

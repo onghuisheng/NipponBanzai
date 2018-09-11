@@ -24,13 +24,19 @@ public class ObjectPool : Singleton<ObjectPool>
         CRYSTAL = 0
     }
 
-    public GameObject[] entity_list;
-    public GameObject[] projectile_list;
-    public GameObject[] enviroment_list;
+    [SerializeField]
+    private GameObject[] entity_list;
+    [SerializeField]
+    private GameObject[] projectile_list;
+    [SerializeField]
+    private GameObject[] enviroment_list;
 
-    public GameObject hitbox;
-    public GameObject item_pickup;
-    public GameObject go_player;
+    [SerializeField]
+    private GameObject hitbox;
+    [SerializeField]
+    private GameObject item_pickup;
+    [SerializeField]
+    private GameObject go_player;
 
     private List<GameObject> entity_pool_list = new List<GameObject>();
     private List<GameObject> projectile_pool_list = new List<GameObject>();
