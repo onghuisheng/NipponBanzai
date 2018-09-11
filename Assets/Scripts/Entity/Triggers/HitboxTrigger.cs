@@ -35,7 +35,7 @@ public class HitboxTrigger : EntityTrigger {
     {
         if (dmgs_damageObj.GetSourceTag() != null)
         {
-            if (!other.CompareTag(dmgs_damageObj.GetSourceTag()) && !other.CompareTag(gameObject.tag))
+            if (!other.CompareTag(dmgs_damageObj.GetSourceTag()) && !other.CompareTag(gameObject.tag) && !TagHelper.IsTagBanned(other.tag))
             {
                 if (other.gameObject.GetComponent<EntityLivingBase>() != null)
                 {

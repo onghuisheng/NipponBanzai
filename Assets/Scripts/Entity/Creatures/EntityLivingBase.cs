@@ -153,6 +153,7 @@ public abstract class EntityLivingBase : Entity
     private float
         f_hit_timer,
         f_regen_timer,
+        f_regen_amount,
         f_death_timer,
         f_AI_task_change_timer;
 
@@ -268,6 +269,19 @@ public abstract class EntityLivingBase : Entity
             an_animator = value;
         }
     }
+
+    public float F_regen_amount
+    {
+        get
+        {
+            return f_regen_amount;
+        }
+
+        set
+        {
+            f_regen_amount = value;
+        }
+    }
     #endregion
 
     private void Awake()
@@ -281,6 +295,7 @@ public abstract class EntityLivingBase : Entity
         base.Start();
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
+        F_regen_amount = 0;
 
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
@@ -370,15 +385,19 @@ public abstract class EntityLivingBase : Entity
         }
 
 
-        //if (!IsDead())
-        //{
-        //    if (F_regen_timer > 2.0f)
-        //    {
-        //        F_regen_timer = 0.0f;
+        if (!IsDead())
+        {
+            if (F_regen_amount > 0)
+            {
+                if (F_regen_timer > 0.5f)
+                {
+                    F_regen_timer = 0.0f;
 
-        //        st_stats.F_health += 1;
-        //    }
-        //}
+                    F_regen_amount -= 1;
+                    st_stats.F_health += 1;
+                }
+            }
+        }
 
         if (B_isHit)
         {
@@ -457,5 +476,5 @@ public abstract class EntityLivingBase : Entity
 
     public virtual void OnAttack() { }
 
-    public virtual void OnAttacked(DamageSource _dmgsrc) { }
+    public virtual void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f) { }
 }

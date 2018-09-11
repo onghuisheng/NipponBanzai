@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Environment
   - HitBox
+  - Non-Hitable
   layers:
   - Default
   - TransparentFX

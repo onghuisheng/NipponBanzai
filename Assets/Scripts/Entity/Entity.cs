@@ -26,7 +26,7 @@ public abstract class Entity : MonoBehaviour
             gameObject.GetComponent<BoxCollider>().size = gameObject.GetComponent<MeshFilter>().mesh.bounds.size;
     }
 
-    protected virtual void SetUpHitBox(string _name, string _tag, string _id, float _damage, Vector3 _size, Vector3 _pos, Quaternion _rot)
+    protected virtual void SetUpHitBox(string _name, string _tag, string _id, float _damage, Vector3 _size, Vector3 _pos, Quaternion _rot, float _timer = 1)
     {
         GameObject obj = ObjectPool.GetInstance().GetHitboxObjectFromPool();
         HitboxTrigger obj_hitbox = obj.GetComponent<HitboxTrigger>();
@@ -38,7 +38,7 @@ public abstract class Entity : MonoBehaviour
             _id,
             _damage);
 
-        obj_hitbox.SetHitbox(dmgsrc, _size);
+        obj_hitbox.SetHitbox(dmgsrc, _size, _timer);
 
         obj_hitbox.SetPosition(_pos);
 

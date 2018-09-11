@@ -70,11 +70,9 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
 
         St_stats = new Stats();
-        St_stats.F_speed = 20;
-        St_stats.F_maxspeed = St_stats.F_speed;
-        St_stats.F_health = 5;
-        St_stats.F_damage = 50;
-
+        St_stats.F_maxspeed = St_stats.F_speed = 20;
+        St_stats.F_max_health = St_stats.F_health = 5;
+        St_stats.F_damage = 1;
 
         f_shooting_max_interval = f_shooting_interval = 0.1f;
         f_charged_amount = 1.0f;
@@ -265,9 +263,15 @@ public class EntityPlayer : EntityLivingBase
 
         m_checkfuntions[player_state]();
 
+        if (player_state == State.DASHING)
+            B_isDodging = true;
+        else
+            B_isDodging = false;
+
         if (IsDead())
             player_state = State.DEAD;
 
+        Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
         Debug.Log(player_state);
     }
 
@@ -276,8 +280,13 @@ public class EntityPlayer : EntityLivingBase
 
     }
 
-    public override void OnAttacked(DamageSource _dmgsrc)
+    public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-
+        if (!B_isDodging && !B_isHit)
+        {
+            S_last_hit = _dmgsrc.GetName();
+            St_stats.F_health -= _dmgsrc.GetDamage();
+            ResetOnHit(_timer);
+        }
     }
 }
