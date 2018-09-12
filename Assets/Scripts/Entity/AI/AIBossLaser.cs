@@ -41,7 +41,7 @@ public class AIBossLaser : AIBase {
         f_maxStateTimer = _stateTime;
 
         f_stateCooldownTimer = 0;
-        f_beamChargeTimer = 0;
+        f_beamChargeTimer = 5;
         i_numOfLasers = 4; //For now.
 
         b_has_attacked = false;
@@ -67,6 +67,8 @@ public class AIBossLaser : AIBase {
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
 
         StartAI();
+
+        script_boss.As_currentAttState = EntityBoss.AttackState.None;
         return true;
     }
 
@@ -150,7 +152,7 @@ public class AIBossLaser : AIBase {
         }
 
         f_beamChargeTimer += Time.deltaTime;
-        if (ent_target != null && f_beamChargeTimer > 5)
+        if (ent_main.B_isAttacking == true && f_beamChargeTimer > 5.0f)
         {
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
             //{
@@ -192,13 +194,13 @@ public class AIBossLaser : AIBase {
 
         var pos = RandomCircle(ent_main.transform.position, 10, _index * 90);
         Vector3 direction = pos - ent_main.transform.position;
-        script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
+        script_laser.SetUpProjectile(5, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
     }
 
     private void OnTargetBeam()
     {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-        script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
+        script_laser.SetUpProjectile(5, 20, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
     }
 }

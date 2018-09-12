@@ -6,6 +6,7 @@ public class EntityBoss : EntityEnemy {
 
     public enum AttackState
     {
+        None,
         Gravity,
         Laser,
         Arty
@@ -113,9 +114,9 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 1, 3));
-        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 10, 5));
-        //RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
+        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
+        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 5, 10));
+        RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,10));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));

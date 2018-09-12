@@ -100,6 +100,7 @@ public class Laser : EntityProjectiles
 
             float x = Mathf.Lerp(0, f_distance, f_incrementor);
             v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
+            v3_currEndPos.z += f_incrementor;
 
             CheckForObjectsInPath();
 

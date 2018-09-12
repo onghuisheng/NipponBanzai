@@ -29,6 +29,9 @@ public class AIArtyState : AIBase
     private ArcBulllet
         ab_bullet;
 
+    private EntityBoss
+        script_boss;
+
     public AIArtyState(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _cooldown, float _shotInterval)
     {
         i_priority = _priority;
@@ -47,11 +50,15 @@ public class AIArtyState : AIBase
         f_stateCooldownTimer = 0;
 
         b_has_attacked = false;
+
+        script_boss = ent_main.GetComponent<EntityBoss>();
     }
 
     public override bool StartAI()
     {
         ent_main.B_isVulnerable = true;
+
+        script_boss.As_currentAttState = EntityBoss.AttackState.Arty;
 
         Reset();
 
@@ -63,6 +70,9 @@ public class AIArtyState : AIBase
         ent_main.B_isAttacking = false;
         ent_main.B_isVulnerable = false;
         Reset();
+
+
+        script_boss.As_currentAttState = EntityBoss.AttackState.None;
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
         return true;
@@ -132,7 +142,7 @@ public class AIArtyState : AIBase
             return false;
         }
 
-        //ent_main.GetAnimator().SetBool("PunchTrigger", true);
+        //ent_main.GetAnimator().SetInt("AttackState", script_boss.As_currentAttState);
         //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
 
         ent_main.B_isAttacking = true;
@@ -143,9 +153,12 @@ public class AIArtyState : AIBase
 
     public override bool RunAI()
     {
-        Debug.Log("RUNNING");
         if (ent_target != null)
         {
+            if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "AttackState", AnimatorControllerParameterType.Int))
+            {
+                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.As_currentAttState);
+            }
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
             //{
             //    b_has_attacked = true;
