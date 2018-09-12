@@ -79,6 +79,7 @@ public class EntityPlayer : EntityLivingBase
         f_charged_max_amount = 2;
         f_charged_increase_amount = 0.5f;
         b_is_charging_shot = false;
+        i_combo = 1;
     }
 
     private void IdleCheckFunction()
@@ -108,7 +109,7 @@ public class EntityPlayer : EntityLivingBase
         }
 
         St_stats.F_speed = St_stats.F_maxspeed;
-        i_combo = 0;
+        i_combo = 1;
         player_dir = DIRECTION.FRONT;
     }
 
@@ -137,7 +138,7 @@ public class EntityPlayer : EntityLivingBase
             return;
         }
 
-        i_combo = 0;
+        i_combo = 1;
     }
 
     private void DashingCheckFunction()
@@ -196,12 +197,7 @@ public class EntityPlayer : EntityLivingBase
             }
         }
         else
-        {
-            ++i_combo;
-
-            if (i_combo > 3)
-                i_combo = 1;
-
+        {        
             if (b_is_charging_shot)
                 b_is_charging_shot = false;
 
@@ -209,8 +205,10 @@ public class EntityPlayer : EntityLivingBase
                 f_charged_amount = 1;
         }
 
-        if (!b_is_charging_shot)
+        if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
+        {
             player_state = State.IDLE;
+        }
     }
 
     private void SummoningCheckFunction()
@@ -249,6 +247,7 @@ public class EntityPlayer : EntityLivingBase
         base.Update();      
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
+        An_animator.SetInteger("Combo", i_combo);
 
         m_checkfuntions[player_state]();
 
@@ -313,38 +312,43 @@ public class EntityPlayer : EntityLivingBase
         switch (player_state)
         {
             case State.ATTACK:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsAttacking", true);
                 break;
 
             case State.DASHING:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
                 break;
 
             case State.DEAD:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", true);
+                An_animator.SetBool("IsAttacking", false);
                 break;
 
             case State.IDLE:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsAttacking", false);
                 break;
 
-            case State.MOVING:
-                An_animator.SetBool("IsMoving", true);
+            case State.MOVING:                
                 An_animator.SetBool("IsDead", false);
+
+                An_animator.SetBool("IsMoving", true);
                 break;
 
             case State.SUMMONING:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsAttacking", false);
                 break;
 
             default:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsAttacking", false);
                 break;
         }
 
@@ -355,6 +359,11 @@ public class EntityPlayer : EntityLivingBase
 
     public override void OnAttack()
     {
+        ++i_combo;
+
+        if (i_combo > 3)
+            i_combo = 1;
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
 
     }
 
@@ -367,5 +376,10 @@ public class EntityPlayer : EntityLivingBase
             An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
+    }
+
+    public void EndAttackAnimation()
+    {
+        An_animator.SetBool("IsAttacking", false);
     }
 }

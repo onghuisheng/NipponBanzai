@@ -161,7 +161,7 @@ public class TPCamera : MonoBehaviour
                         go_parent.transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
 
 
-                        Debug.Log(transform.position.y);
+                       // Debug.Log(transform.position.y);
 
                         if (transform.position.y > -0.5f && transform.position.y < 4.3f)
                         {
