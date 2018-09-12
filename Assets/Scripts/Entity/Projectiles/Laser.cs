@@ -77,7 +77,6 @@ public class Laser : EntityProjectiles
         }
 
 
-
         CheckForObjectsInPath();
 
         UpdatePosition(v3_startPos, v3_endPos);

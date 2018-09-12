@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TagHelper
 {
-	private static string[] s_tags = { "HitBox", "Non-Hitable" };
+	private static string[] s_tags = { "HitBox", "Non-Hitable" , "CritBox" };
 
     public static bool IsTagBanned(string _tag)
     {

@@ -20,6 +20,10 @@ public abstract class EntityLivingBase : Entity
 
         string
             s_name;
+
+        bool
+            b_isVulnerable;
+
         #region Getter/Setter
         public float F_health {
             get {
@@ -137,6 +141,19 @@ public abstract class EntityLivingBase : Entity
             set
             {
                 f_mana = value;
+            }
+        }
+
+        public bool B_isVulnerable
+        {
+            get
+            {
+                return b_isVulnerable;
+            }
+
+            set
+            {
+                b_isVulnerable = value;
             }
         }
         #endregion
