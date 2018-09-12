@@ -195,7 +195,7 @@ public class AIArtyState : AIBase
         //Temp Spawn of rock to the position of the circle
         b_has_attacked = false;
         ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, null);
+        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
         f_aimTimer = 0;
         i_shotToFire--;
 

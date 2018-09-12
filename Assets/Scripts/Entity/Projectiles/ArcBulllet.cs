@@ -12,10 +12,8 @@ public class ArcBulllet : EntityProjectiles {
         f_height,
         f_incrementor;
 
-    private GameObject
-        go_marker;
 
-    public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _height, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source, GameObject _marker)
+    public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _height, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source)
     {
         base.SetUpProjectile(_source, _lifetime, _damage, _speed, _size, new Vector3(0, 0, 0));
 
@@ -25,8 +23,6 @@ public class ArcBulllet : EntityProjectiles {
         v3_endPos = _end;
         f_lifeElapse = 0;
         f_incrementor = 0;
-
-        go_marker = _marker;
     }
 
     // Use this for initialization
@@ -55,34 +51,27 @@ public class ArcBulllet : EntityProjectiles {
         }
         else
         {
-            //Disable the marker that is tracking the player.
-            if (go_marker && go_marker.activeInHierarchy)
+            //Setup Hitbox 
+            SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
+
+            //Apply Knockback
+            float range = 6;
+            Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
+            foreach (Collider hit in colliders)
             {
-                go_marker.SetActive(false);
-                go_marker = null;
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-                //Setup Hitbox 
-                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
-
-                //Apply Knockback
-                float range = 6;
-                Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
-                foreach (Collider hit in colliders)
+                if (rb && rb.tag.Equals("Player"))
                 {
-                    Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-                    if (rb && rb.tag.Equals("Player"))
-                    {
-                        rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
-                    }
+                    rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
                 }
-
-                //Spawn Crystal
-                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-                spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
-
-                gameObject.SetActive(false);
             }
+
+            //Spawn Crystal
+            Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
+            spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
+
+            gameObject.SetActive(false);
         }
     }
 }

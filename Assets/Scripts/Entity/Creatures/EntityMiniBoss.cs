@@ -72,7 +72,7 @@ public class EntityMiniBoss : EntityEnemy
         //    ab_bullet.SetUpProjectile(gameObject, dir, 5, St_stats.F_damage, 20, Vector3.one * 0.25f);
 
         var bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, transform.position, ai_throw_poison.v3_poison_target, Vector3.one, gameObject, null);
+        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, transform.position, ai_throw_poison.v3_poison_target, Vector3.one, gameObject);
         bullet.GetComponent<Collider>().isTrigger = true;
     }
 
