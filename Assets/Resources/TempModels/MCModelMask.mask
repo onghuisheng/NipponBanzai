@@ -7,4 +7,220 @@ AvatarMask:
   m_PrefabInternal: {fileID: 0}
   m_Name: MCModelMask
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: character
+    m_Weight: 1
+  - m_Path: global_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_L_ctrl/foot01_L_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_L_ctrl/foot02_L_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_R_ctrl/foot01_R_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/foot_R_ctrl/foot02_R_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/head_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/knee_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/knee_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/hip_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/cannister_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/elbow_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/elbow_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_L_grp
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_L_grp/hand_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_L_grp/hand_L_ctrl/hand_L_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_R_grp
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_R_grp/hand_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/hand_R_grp/hand_R_ctrl/hand_R_IK
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/shoulder_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/pelvis_ctrl/spine_ctrl/chest_ctrl/shoulder_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/weaponHandle_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/weaponHandle_ctrl/weapon_L_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/weaponHandle_ctrl/weapon_R_ctrl
+    m_Weight: 1
+  - m_Path: global_ctrl/main_ctrl/wire_ctrl
+    m_Weight: 1
+  - m_Path: pelvis_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/hip_L_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_L_joint/knee_L_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_L_joint/knee_L_joint/ankle_L_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_L_joint/knee_L_joint/ankle_L_joint/bridge_L_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_L_joint/knee_L_joint/ankle_L_joint/bridge_L_joint/ball_L_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_R_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_R_joint/knee_R_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_R_joint/knee_R_joint/ankle_R_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_R_joint/knee_R_joint/ankle_R_joint/bridge_R_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/hip_R_joint/knee_R_joint/ankle_R_joint/bridge_R_joint/ball_R_joint
+    m_Weight: 0
+  - m_Path: pelvis_joint/spine_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint/pickAxeBlade01_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint/pickAxeBlade01_L_joint/pickAxeBlade02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint/pickAxeBlade01_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint/pickAxeBlade01_R_joint/pickAxeBlade02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/container_joint/containerBase_joint/wire_joint/pickAxe_joint/pickAxeHead_joint/pickAxeTip_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint/neckTop_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint/neckTop_joint/head_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint/neckTop_joint/head_joint/headTop_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint/neckTop_joint/head_joint/jaw02_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/neckBottom_joint/neckTop_joint/head_joint/jaw02_joint/jaw01_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleFourth_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleFourth_L_joint/fingerFourth03_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleFourth_L_joint/fingerFourth03_L_joint/fingerFourth02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleFourth_L_joint/fingerFourth03_L_joint/fingerFourth02_L_joint/fingerFourth01_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleIndex_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleIndex_L_joint/fingerIndex03_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleIndex_L_joint/fingerIndex03_L_joint/fingerIndex02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleIndex_L_joint/fingerIndex03_L_joint/fingerIndex02_L_joint/fingerIndex01_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleMiddle_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleMiddle_L_joint/fingerMiddle03_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleMiddle_L_joint/fingerMiddle03_L_joint/fingerMiddle02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleMiddle_L_joint/fingerMiddle03_L_joint/fingerMiddle02_L_joint/fingerMiddle01_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knuclePinky_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knuclePinky_L_joint/fingerPinky03_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knuclePinky_L_joint/fingerPinky03_L_joint/fingerPinky02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knuclePinky_L_joint/fingerPinky03_L_joint/fingerPinky02_L_joint/fingerPinky01_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleThumb_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleThumb_L_joint/fingerThumb02_L_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_L_joint/elbow_L_joint/wrist_L_joint/palm_L_joint/knucleThumb_L_joint/fingerThumb02_L_joint/fingerThumb02_L_joint
+      1
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleFourth_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleFourth_R_joint/fingerFourth03_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleFourth_R_joint/fingerFourth03_R_joint/fingerFourth02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleFourth_R_joint/fingerFourth03_R_joint/fingerFourth02_R_joint/fingerFourth01_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleIndex_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleIndex_R_joint/fingerIndex03_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleIndex_R_joint/fingerIndex03_R_joint/fingerIndex02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleIndex_R_joint/fingerIndex03_R_joint/fingerIndex02_R_joint/fingerIndex01_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleMiddle_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleMiddle_R_joint/fingerMiddle03_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleMiddle_R_joint/fingerMiddle03_R_joint/fingerMiddle02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleMiddle_R_joint/fingerMiddle03_R_joint/fingerMiddle02_R_joint/fingerMiddle01_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knuclePinky_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knuclePinky_R_joint/fingerPinky03_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knuclePinky_R_joint/fingerPinky03_R_joint/fingerPinky02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knuclePinky_R_joint/fingerPinky03_R_joint/fingerPinky02_R_joint/fingerPinky01_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleThumb_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleThumb_R_joint/fingerThumb02_R_joint
+    m_Weight: 1
+  - m_Path: pelvis_joint/spine_joint/chest_joint/shoulder_R_joint/elbow_R_joint/wrist_R_joint/palm_R_joint/knucleThumb_R_joint/fingerThumb02_R_joint/fingerThumb02_R_joint
+      1
+    m_Weight: 1
