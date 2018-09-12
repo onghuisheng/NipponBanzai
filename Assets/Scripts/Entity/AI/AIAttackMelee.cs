@@ -48,7 +48,7 @@ public class AIAttackMelee : AIBase
     {
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        if (animatorState.IsName("Attack"))
+        if (animatorState.IsTag("Attack"))
         {
             ent_main.B_isAttacking = true;
             return true;
@@ -80,7 +80,7 @@ public class AIAttackMelee : AIBase
         if (!animatorState.IsTag("Attack") && !b_has_attacked)
         {
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
-            tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y).OnComplete(() =>
+            tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.1f, AxisConstraint.Y).OnComplete(() =>
             {
                 if (ent_main.An_animator.HasParameterOfType("AttackType", AnimatorControllerParameterType.Int))
                     ent_main.An_animator.SetInteger("AttackType", Random.Range(1, 3));

@@ -5,9 +5,7 @@ using DG.Tweening;
 
 public class RedMarker : MonoBehaviour
 {
-
-    float f_duration, f_max_size;
-
+    
     Transform
         tf_followee;
 
@@ -45,8 +43,7 @@ public class RedMarker : MonoBehaviour
         transform.localScale = Vector3.zero;
         transform.rotation = Quaternion.Euler(0, Random.Range(0, 360.0f), 0); // Reset rotation
         transform.position = _pos;
-        f_duration = _duration;
-        f_max_size = _max_size / 2; // divide by 2 as orthographic view is doubled
+        _max_size /= 2; // divide by 2 as orthographic view is doubled
         act_oncomplete = _onComplete;
 
         tf_followee = null;
