@@ -72,17 +72,20 @@ public class AIAttackMelee : AIBase
     {
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        if (animatorState.IsName("Attack"))
+        if (animatorState.IsTag("Attack"))
         {
             b_has_attacked = false;
         }
 
-        if (!animatorState.IsName("Attack") && !b_has_attacked)
+        if (!animatorState.IsTag("Attack") && !b_has_attacked)
         {
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y).OnComplete(() =>
             {
-                ent_main.An_animator.SetTrigger("Attack"); 
+                if (ent_main.An_animator.HasParameterOfType("AttackType", AnimatorControllerParameterType.Int))
+                    ent_main.An_animator.SetInteger("AttackType", Random.Range(1, 3));
+
+                ent_main.An_animator.SetTrigger("Attack");
             });
             b_has_attacked = true;
         }
@@ -94,6 +97,9 @@ public class AIAttackMelee : AIBase
     {
         ent_main.B_isAttacking = false;
         b_has_attacked = false;
+
+        if (ent_main.An_animator.HasParameterOfType("AttackType", AnimatorControllerParameterType.Int))
+            ent_main.An_animator.SetInteger("AttackType", 0);
 
         if (tween_look_at_player != null)
             tween_look_at_player.Kill();

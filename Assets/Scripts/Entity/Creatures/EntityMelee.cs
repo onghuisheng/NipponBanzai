@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EntityMelee : EntityEnemy
 {
@@ -15,14 +16,14 @@ public class EntityMelee : EntityEnemy
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_speed = 3;
         St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 2.0f;
+        St_stats.F_damage = 5.0f;
         St_stats.F_mass = 2.0f;
 
         B_isHit = false;
 
         An_animator.Rebind();
         // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
+        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 

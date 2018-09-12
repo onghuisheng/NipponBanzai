@@ -71,7 +71,7 @@ public class EntityPlayer : EntityLivingBase
 
         St_stats = new Stats();
         St_stats.F_maxspeed = St_stats.F_speed = 20;
-        St_stats.F_max_health = St_stats.F_health = 5;
+        St_stats.F_max_health = St_stats.F_health = 100;
         St_stats.F_damage = 1;
 
         f_shooting_max_interval = f_shooting_interval = 0.1f;

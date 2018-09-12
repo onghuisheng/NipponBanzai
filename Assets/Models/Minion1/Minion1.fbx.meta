@@ -1,0 +1,339 @@
+fileFormatVersion: 2
+guid: dfb9be796decdd3498b38ae958b11add
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: L_M1_Wingbone1
+    100002: L_M1_Wingbone10
+    100004: L_M1_Wingbone11
+    100006: L_M1_Wingbone12
+    100008: L_M1_Wingbone13
+    100010: L_M1_Wingbone2
+    100012: L_M1_Wingbone3
+    100014: L_M1_Wingbone4
+    100016: L_M1_Wingbone5
+    100018: L_M1_Wingbone6
+    100020: L_M1_Wingbone7
+    100022: L_M1_Wingbone8
+    100024: L_M1_Wingbone9
+    100026: L_M1_WingFlapA1
+    100028: L_M1_WingFlapA2
+    100030: L_M1_WingFlapA3
+    100032: L_M1_WingFlapB1
+    100034: L_M1_WingFlapB2
+    100036: L_M1_WingFlapB3
+    100038: L_M1_WingFlapC1
+    100040: L_M1_WingFlapC2
+    100042: L_M1_WingFlapD1
+    100044: L_M1_WingFlapD2
+    100046: M1_Head
+    100048: M1_MasterCtrl
+    100050: M1_Spine1
+    100052: M1_Spine3
+    100054: M1_Spine4
+    100056: M1_Spine5
+    100058: M1_SpineMid
+    100060: M1_Tail
+    100062: //RootNode
+    100064: PelvisCtrl
+    100066: polySurface5
+    100068: R_M1_Wingbone1
+    100070: R_M1_Wingbone10
+    100072: R_M1_Wingbone11
+    100074: R_M1_Wingbone12
+    100076: R_M1_Wingbone13
+    100078: R_M1_Wingbone2
+    100080: R_M1_Wingbone3
+    100082: R_M1_Wingbone4
+    100084: R_M1_Wingbone5
+    100086: R_M1_Wingbone6
+    100088: R_M1_Wingbone7
+    100090: R_M1_Wingbone8
+    100092: R_M1_Wingbone9
+    100094: R_M1_WingFlapA1
+    100096: R_M1_WingFlapA2
+    100098: R_M1_WingFlapA3
+    100100: R_M1_WingFlapB1
+    100102: R_M1_WingFlapB2
+    100104: R_M1_WingFlapB3
+    100106: R_M1_WingFlapC1
+    100108: R_M1_WingFlapC2
+    100110: R_M1_WingFlapD1
+    100112: R_M1_WingFlapD2
+    100114: Tail
+    100116: transform1
+    400000: L_M1_Wingbone1
+    400002: L_M1_Wingbone10
+    400004: L_M1_Wingbone11
+    400006: L_M1_Wingbone12
+    400008: L_M1_Wingbone13
+    400010: L_M1_Wingbone2
+    400012: L_M1_Wingbone3
+    400014: L_M1_Wingbone4
+    400016: L_M1_Wingbone5
+    400018: L_M1_Wingbone6
+    400020: L_M1_Wingbone7
+    400022: L_M1_Wingbone8
+    400024: L_M1_Wingbone9
+    400026: L_M1_WingFlapA1
+    400028: L_M1_WingFlapA2
+    400030: L_M1_WingFlapA3
+    400032: L_M1_WingFlapB1
+    400034: L_M1_WingFlapB2
+    400036: L_M1_WingFlapB3
+    400038: L_M1_WingFlapC1
+    400040: L_M1_WingFlapC2
+    400042: L_M1_WingFlapD1
+    400044: L_M1_WingFlapD2
+    400046: M1_Head
+    400048: M1_MasterCtrl
+    400050: M1_Spine1
+    400052: M1_Spine3
+    400054: M1_Spine4
+    400056: M1_Spine5
+    400058: M1_SpineMid
+    400060: M1_Tail
+    400062: //RootNode
+    400064: PelvisCtrl
+    400066: polySurface5
+    400068: R_M1_Wingbone1
+    400070: R_M1_Wingbone10
+    400072: R_M1_Wingbone11
+    400074: R_M1_Wingbone12
+    400076: R_M1_Wingbone13
+    400078: R_M1_Wingbone2
+    400080: R_M1_Wingbone3
+    400082: R_M1_Wingbone4
+    400084: R_M1_Wingbone5
+    400086: R_M1_Wingbone6
+    400088: R_M1_Wingbone7
+    400090: R_M1_Wingbone8
+    400092: R_M1_Wingbone9
+    400094: R_M1_WingFlapA1
+    400096: R_M1_WingFlapA2
+    400098: R_M1_WingFlapA3
+    400100: R_M1_WingFlapB1
+    400102: R_M1_WingFlapB2
+    400104: R_M1_WingFlapB3
+    400106: R_M1_WingFlapC1
+    400108: R_M1_WingFlapC2
+    400110: R_M1_WingFlapD1
+    400112: R_M1_WingFlapD2
+    400114: Tail
+    400116: transform1
+    2100000: lambert1
+    2100002: lambert2
+    4300000: polySurface5
+    7400000: Minion1_Idle
+    7400002: Minion1_Move
+    7400004: Minion1_Attack1
+    7400006: Minion1_Attack2
+    9500000: //RootNode
+    13700000: polySurface5
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Minion1_Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Minion1_Move
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 92
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Minion1_Attack1
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 138
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.6600382
+        functionName: OnAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Minion1_Attack2
+      takeName: Take 001
+      firstFrame: 150
+      lastFrame: 194
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.6500956
+        functionName: OnAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

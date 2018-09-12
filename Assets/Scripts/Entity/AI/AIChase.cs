@@ -54,7 +54,7 @@ public class AIChase : AIBase
 
         // Dont chase if we're attacking
         var animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
-        if (ent_main.B_isAttacking || animatorState.IsName("Attack") || animatorState.IsName("Poison Attack"))
+        if (ent_main.B_isAttacking || animatorState.IsTag("Attack") || animatorState.IsName("Poison Attack"))
             return false;
 
         // Chase player if within aggro range and if theres nothing blocking it
@@ -101,11 +101,14 @@ public class AIChase : AIBase
 
     public override bool RunAI()
     {
-        nma_agent.destination = ep_player.transform.position;
+        if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "MoveSpeed", AnimatorControllerParameterType.Float))
+            ent_main.An_animator.SetFloat("MoveSpeed", ent_main.St_stats.F_speed);
+
+            nma_agent.destination = ep_player.transform.position;
+
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "Moving", AnimatorControllerParameterType.Bool))
-        {
             ent_main.An_animator.SetBool("Moving", true);
-        }
+
         return true;
     }
 
@@ -113,9 +116,8 @@ public class AIChase : AIBase
     {
         nma_agent.SetDestination(nma_agent.transform.position);
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "Moving", AnimatorControllerParameterType.Bool))
-        {
             ent_main.An_animator.SetBool("Moving", false);
-        }
+
         return true;
     }
 }
