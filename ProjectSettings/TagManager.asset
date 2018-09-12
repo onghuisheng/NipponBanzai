@@ -10,6 +10,7 @@ TagManager:
   - Environment
   - HitBox
   - Non-Hitable
+  - CritBox
   layers:
   - Default
   - TransparentFX
