@@ -39,6 +39,7 @@ public class HitboxTrigger : EntityTrigger {
             {
                 if (other.gameObject.GetComponent<EntityLivingBase>() != null)
                 {
+                    dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
                     other.gameObject.GetComponent<EntityLivingBase>().OnAttacked(dmgs_damageObj);
                 }
             }

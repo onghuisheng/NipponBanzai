@@ -168,8 +168,10 @@ public class EntityPlayer : EntityLivingBase
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
+                    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
+
                     StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                    sb.SetUpProjectile(gameObject, gameObject.transform.forward, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                    sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                     if (b_is_charging_shot)
                         b_is_charging_shot = false;
@@ -183,12 +185,11 @@ public class EntityPlayer : EntityLivingBase
             else
             {
                 if (f_shooting_interval >= f_shooting_max_interval)
-                {
-                    
+                {                  
                     Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
 
                     StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                    sb.SetUpProjectile(gameObject, target - transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                    sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
                     //Debug.Log("SHOOTO");
                     f_shooting_interval = 0;
                 }
