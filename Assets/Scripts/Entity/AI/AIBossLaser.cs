@@ -24,6 +24,9 @@ public class AIBossLaser : AIBase {
     private Laser
         script_laser;
 
+    private EntityBoss
+        script_boss;
+
 
     public AIBossLaser(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _cooldown)
     {
@@ -42,10 +45,13 @@ public class AIBossLaser : AIBase {
         i_numOfLasers = 4; //For now.
 
         b_has_attacked = false;
+
+        script_boss = ent_main.GetComponent<EntityBoss>();
     }
 
     public override bool StartAI()
     {
+        script_boss.As_currentAttState = EntityBoss.AttackState.Laser;
         f_stateTimer = 0;
 
         ent_target = null;
@@ -138,7 +144,10 @@ public class AIBossLaser : AIBase {
 
     public override bool RunAI()
     {
-        Debug.Log("RUNNING");
+        if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "AttackState", AnimatorControllerParameterType.Int))
+        {
+            ent_main.An_animator.SetInteger("AttackState", (int)script_boss.As_currentAttState);
+        }
 
         f_beamChargeTimer += Time.deltaTime;
         if (ent_target != null && f_beamChargeTimer > 5)
