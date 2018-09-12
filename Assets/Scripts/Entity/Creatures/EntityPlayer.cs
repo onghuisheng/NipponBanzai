@@ -150,7 +150,6 @@ public class EntityPlayer : EntityLivingBase
 
     private void AttackCheckFunction()
     {
-
         if (player_target_state == TARGET_STATE.AIMING)
         {
             if (DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
@@ -183,14 +182,15 @@ public class EntityPlayer : EntityLivingBase
                 }
             }
             else
-            {
+            {               
+
                 if (f_shooting_interval >= f_shooting_max_interval)
                 {                  
                     Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
 
                     StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
                     sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
-                    //Debug.Log("SHOOTO");
+
                     f_shooting_interval = 0;
                 }
             }
@@ -253,6 +253,22 @@ public class EntityPlayer : EntityLivingBase
             player_target_state = TARGET_STATE.AIMING;
             if (St_stats.F_speed != St_stats.F_maxspeed)
                 St_stats.F_speed = St_stats.F_maxspeed;
+
+            if (!b_is_charging_shot)
+            {
+                if (Input.GetKey(KeyCode.Mouse0))
+                    An_animator.SetBool("IsShooting", true);
+                else
+                    An_animator.SetBool("IsShooting", false);
+            }
+            else
+            {
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                    An_animator.SetBool("IsShooting", true);
+                else
+                    An_animator.SetBool("IsShooting", false);
+            }
+
         }
         else
         {
@@ -260,7 +276,9 @@ public class EntityPlayer : EntityLivingBase
         }
 
         if (f_shooting_interval < f_shooting_max_interval)
-            f_shooting_interval += Time.deltaTime;
+            f_shooting_interval += Time.deltaTime;     
+      
+        An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
 
         m_checkfuntions[player_state]();
 
@@ -272,8 +290,54 @@ public class EntityPlayer : EntityLivingBase
         if (IsDead())
             player_state = State.DEAD;
 
+        switch (player_target_state)
+        {
+            case TARGET_STATE.AIMING:
+                An_animator.SetBool("IsAiming", true);
+                break;
+            case TARGET_STATE.NOT_AIMING:
+                An_animator.SetBool("IsAiming", false);
+                break;
+
+            default:
+                An_animator.SetBool("IsAiming", false);
+                break;
+        }
+
+        switch (player_state)
+        {
+            case State.ATTACK:
+                An_animator.SetBool("IsMoving", false);
+                break;
+
+            case State.DASHING:
+                An_animator.SetBool("IsMoving", false);
+                break;
+
+            case State.DEAD:
+                An_animator.SetBool("IsMoving", false);
+                break;
+
+            case State.IDLE:
+                An_animator.SetBool("IsMoving", false);
+                break;
+
+            case State.MOVING:
+                An_animator.SetBool("IsMoving", true);
+                break;
+
+            case State.SUMMONING:
+                An_animator.SetBool("IsMoving", false);
+                break;
+
+            default:
+                An_animator.SetBool("IsMoving", false);
+                break;
+        }
+
         Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
         Debug.Log(player_state);
+        
     }
 
     public override void OnAttack()

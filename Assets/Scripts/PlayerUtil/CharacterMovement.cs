@@ -63,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
                 switch (Component_Player.GetPlayerTargetState())
                 {
                     case EntityPlayer.TARGET_STATE.AIMING:
-                        {                     
+                        {
                             Vector3 new_pos = Component_Player.Rb_rigidbody.transform.position;
 
                             if (Input.GetKey(KeyCode.W))

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitboxTrigger : EntityTrigger {
 
     private float
+        f_iframe_timer,
         f_timer;            //How long the hitbox stays in the world
 
     private DamageSource
@@ -53,16 +54,17 @@ public class HitboxTrigger : EntityTrigger {
                     if (_ent != null)
                     {
                         dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
-                        _ent.OnAttacked(dmgs_damageObj);
+                        _ent.OnAttacked(dmgs_damageObj, f_iframe_timer);
                     }
                 }
             }
         }
     }
 
-    public void SetHitbox(DamageSource _dmgsrc, Vector3 _size, float _timer = 1.0f)
+    public void SetHitbox(DamageSource _dmgsrc, Vector3 _size, float _timer = 1.0f, float _iframe_timer = 0.3f)
     {
         f_timer = _timer;
+        f_iframe_timer = _iframe_timer;
         dmgs_damageObj = _dmgsrc;
 
         SetSize(_size);
