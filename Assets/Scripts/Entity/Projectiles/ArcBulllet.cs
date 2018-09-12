@@ -16,7 +16,10 @@ public class ArcBulllet : EntityProjectiles
     System.Action<Collider>
         act_onTriggerEnter;
 
-    public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _height, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source, System.Action<Collider> _onTriggerEnter = null)
+    System.Action
+        act_onDestinationReached;
+
+    public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _height, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source, System.Action<Collider> _onTriggerEnter = null, System.Action _onDestinationReached = null)
     {
         base.SetUpProjectile(_source, _lifetime, _damage, _speed, _size, new Vector3(0, 0, 0));
 
@@ -27,6 +30,7 @@ public class ArcBulllet : EntityProjectiles
         f_lifeElapse = 0;
         f_incrementor = 0;
         act_onTriggerEnter = _onTriggerEnter;
+        act_onDestinationReached = _onDestinationReached;
     }
 
     // Use this for initialization
@@ -57,33 +61,43 @@ public class ArcBulllet : EntityProjectiles
         }
         else
         {
-            //Setup Hitbox 
-            SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
-
-            //Apply Knockback
-            float range = 6;
-            Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
-            foreach (Collider hit in colliders)
+            // TODO: Move all these to boss code later
+            if (act_onTriggerEnter == null)
             {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                //Setup Hitbox 
+                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
 
-                if (rb && rb.tag.Equals("Player"))
+                //Apply Knockback
+                float range = 6;
+                Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
+                foreach (Collider hit in colliders)
                 {
-                    rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
+                    Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                    if (rb && rb.tag.Equals("Player"))
+                    {
+                        rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
+                    }
                 }
+
+                //Spawn Crystal
+                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
+                spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
+
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                if (act_onDestinationReached != null)
+                    act_onDestinationReached.Invoke();
             }
 
-            //Spawn Crystal
-            Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-            spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
-
-            gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (act_onTriggerEnter != null)
+        if (act_onTriggerEnter != null && !other.CompareTag(Go_owner.tag) && !other.CompareTag(gameObject.tag) && !TagHelper.IsTagBanned(other.tag))
             act_onTriggerEnter.Invoke(other);
     }
 

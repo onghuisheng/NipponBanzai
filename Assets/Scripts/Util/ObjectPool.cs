@@ -22,7 +22,8 @@ public class ObjectPool : Singleton<ObjectPool>
 
     public enum ENVIRONMENT
     {
-        CRYSTAL = 0
+        CRYSTAL = 0,
+        POISON_POOL
     }
 
     public enum INDICATOR

@@ -26,7 +26,7 @@ public class EntityMiniBoss : EntityEnemy
 
         An_animator.Rebind();
 
-        ai_throw_poison  = new AIThrowPoison(2, this, typeof(EntityPlayer), 10, 6);
+        ai_throw_poison = new AIThrowPoison(2, this, typeof(EntityPlayer), 10, 6);
 
         RegisterAITask(ai_throw_poison);
         RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
@@ -67,8 +67,24 @@ public class EntityMiniBoss : EntityEnemy
     public void OnPoisonAttack()
     {
         var bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, transform.position, ai_throw_poison.v3_poison_target, Vector3.one, gameObject);
-        bullet.GetComponent<Collider>().isTrigger = true;
+
+        Vector3 bulletSpawnPos = transform.position;
+        bulletSpawnPos.y += 5;
+
+        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, bulletSpawnPos, ai_throw_poison.v3_poison_target, Vector3.one, gameObject, (collider) =>
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            {
+                EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
+                pool.SetUpPoisonPoolWLifeTime(St_stats.F_damage / 2, 10, bullet.GetPosition(), Vector3.one);
+                bullet.gameObject.SetActive(false);
+            }
+        }, () =>
+        {
+            EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
+            pool.SetUpPoisonPoolWLifeTime(St_stats.F_damage / 2, 10, bullet.GetPosition(), Vector3.one);
+            bullet.gameObject.SetActive(false);
+        });
     }
 
     public override void OnAttack()
