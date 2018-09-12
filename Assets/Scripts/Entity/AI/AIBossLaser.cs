@@ -148,16 +148,14 @@ public class AIBossLaser : AIBase {
             //    b_has_attacked = true;
             //    ent_main.OnAttack();
             //}
+
+            //OnTargetBeam();
             for (int i = 0; i < i_numOfLasers; ++i)
             {
-                script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-                var pos = RandomCircle(ent_main.transform.position, 10, i * 90);
-                // make the object face the center
-                //var rot = Quaternion.FromToRotation(Vector3.forward, ent_main.transform.position - pos);
-                Vector3 direction = pos - ent_main.transform.position;
+                AOEBeam(i);
 
-                script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
+
             }
             
 
@@ -177,5 +175,21 @@ public class AIBossLaser : AIBase {
         pos.y = _center.y;
         pos.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
         return pos;
+    }
+
+    private void AOEBeam(int _index)
+    {
+        script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
+
+        var pos = RandomCircle(ent_main.transform.position, 10, _index * 90);
+        Vector3 direction = pos - ent_main.transform.position;
+        script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
+    }
+
+    private void OnTargetBeam()
+    {
+        script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
+
+        script_laser.SetUpProjectile(3, 20, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
     }
 }

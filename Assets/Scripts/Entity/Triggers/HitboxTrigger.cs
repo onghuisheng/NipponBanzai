@@ -35,12 +35,26 @@ public class HitboxTrigger : EntityTrigger {
     {
         if (dmgs_damageObj.GetSourceTag() != null)
         {
+            EntityLivingBase _ent = null;
+
             if (!other.CompareTag(dmgs_damageObj.GetSourceTag()) && !other.CompareTag(gameObject.tag) && !TagHelper.IsTagBanned(other.tag))
             {
-                if (other.gameObject.GetComponent<EntityLivingBase>() != null)
+                _ent = other.gameObject.GetComponent<EntityLivingBase>();
+
+                if (_ent != null)
                 {
                     dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
-                    other.gameObject.GetComponent<EntityLivingBase>().OnAttacked(dmgs_damageObj);
+                    _ent.OnAttacked(dmgs_damageObj);
+                }
+                else
+                {
+                    _ent = other.gameObject.GetComponentInParent<EntityLivingBase>();
+
+                    if (_ent != null)
+                    {
+                        dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
+                        _ent.OnAttacked(dmgs_damageObj);
+                    }
                 }
             }
         }

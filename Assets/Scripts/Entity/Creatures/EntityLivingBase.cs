@@ -21,9 +21,6 @@ public abstract class EntityLivingBase : Entity
         string
             s_name;
 
-        bool
-            b_isVulnerable;
-
         #region Getter/Setter
         public float F_health {
             get {
@@ -143,19 +140,6 @@ public abstract class EntityLivingBase : Entity
                 f_mana = value;
             }
         }
-
-        public bool B_isVulnerable
-        {
-            get
-            {
-                return b_isVulnerable;
-            }
-
-            set
-            {
-                b_isVulnerable = value;
-            }
-        }
         #endregion
     }
 
@@ -165,7 +149,8 @@ public abstract class EntityLivingBase : Entity
     private bool
        b_isHit,
        b_isAttacking,
-       b_isDodging;
+       b_isDodging,
+       b_isVulnerable;
 
     private float
         f_hit_timer,
@@ -214,6 +199,19 @@ public abstract class EntityLivingBase : Entity
 
         set {
             b_isDodging = value;
+        }
+    }
+
+    public bool B_isVulnerable
+    {
+        get
+        {
+            return b_isVulnerable;
+        }
+
+        set
+        {
+            b_isVulnerable = value;
         }
     }
 

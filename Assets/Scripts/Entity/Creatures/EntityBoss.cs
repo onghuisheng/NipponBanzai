@@ -56,7 +56,14 @@ public class EntityBoss : EntityEnemy {
         if (!B_isHit)
         {
             S_last_hit = _dmgsrc.GetName();
-            St_stats.F_health -= _dmgsrc.GetDamage();
+
+            if (TagHelper.IsTagCritSpot(_dmgsrc.GetAttackedTag()) && B_isVulnerable)
+                St_stats.F_health -= _dmgsrc.GetDamage() * 2; //YEET
+            else
+                St_stats.F_health -= _dmgsrc.GetDamage();
+
+            Debug.Log("BOSS HP = " + St_stats.F_health);
+
             ResetOnHit(_timer);
         }
     }

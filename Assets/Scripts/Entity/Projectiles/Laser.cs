@@ -6,6 +6,7 @@ public class Laser : EntityProjectiles
 {
     private Vector3
         v3_startPos,
+        v3_currEndPos,
         v3_endPos;
 
     private float
@@ -30,8 +31,15 @@ public class Laser : EntityProjectiles
         SetPosition(_start);
         v3_startPos = _start;
         v3_endPos = _end;
+        v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
+
+        lr_line = GetComponent<LineRenderer>();
+        lr_line.SetPosition(0, v3_startPos);
+        lr_line.SetPosition(1, v3_currEndPos);
+        lr_line.startWidth = 0.2f;
+        lr_line.endWidth = 1f;
 
         go_target = _target;
         b_isDirect = true;
@@ -45,18 +53,23 @@ public class Laser : EntityProjectiles
         SetPosition(_start);
         v3_startPos = _start;
         v3_endPos = _direction * 30.0f; //30.0f is the range for now.
+        v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
         b_isDirect = false;
 
         f_distance = Vector3.Distance(v3_startPos, v3_endPos);
+
+        lr_line = GetComponent<LineRenderer>();
+        lr_line.SetPosition(0, v3_startPos);
+        lr_line.SetPosition(1, v3_currEndPos);
+        lr_line.startWidth = 0.2f;
+        lr_line.endWidth = 1f;
     }
+
     // Use this for initialization
     protected override void Start()
     {
-        lr_line = GetComponent<LineRenderer>();
-        lr_line.startWidth = 0.2f;
-        lr_line.endWidth = 1f;
     }
 
     // Update is called once per frame
@@ -76,23 +89,22 @@ public class Laser : EntityProjectiles
             v3_endPos = go_target.transform.position;
         }
 
-
-        CheckForObjectsInPath();
-
-        UpdatePosition(v3_startPos, v3_endPos);
+        UpdatePosition();
     }
 
-    public void UpdatePosition(Vector3 _start, Vector3 _end)
+    public void UpdatePosition()
     {
         if (f_incrementor < f_distance)
         {
             f_incrementor += F_speed * Time.deltaTime;
 
             float x = Mathf.Lerp(0, f_distance, f_incrementor);
-            Vector3 finalPoint = x * Vector3.Normalize(_end - _start) + _start;
+            v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
 
-            lr_line.SetPosition(0, _start);
-            lr_line.SetPosition(1, finalPoint);
+            CheckForObjectsInPath();
+
+            lr_line.SetPosition(0, v3_startPos);
+            lr_line.SetPosition(1, v3_currEndPos);
         }
     }
 
@@ -100,11 +112,11 @@ public class Laser : EntityProjectiles
     {
         RaycastHit hit;
 
-        Vector3 direction = v3_endPos - v3_startPos;
+        Vector3 direction = v3_currEndPos - v3_startPos;
 
-        if (Physics.Linecast(v3_startPos, v3_endPos, out hit))
+        if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit))
         {
-            v3_endPos = hit.point;
+            v3_currEndPos = hit.point;
 
             if (hit.collider.gameObject.CompareTag("Player"))
             {

@@ -50,22 +50,20 @@ public class AIArtyState : AIBase {
 
     public override bool StartAI()
     {
-        f_stateTimer = 0;
-        f_aimTimer = 0;
+        ent_main.B_isVulnerable = true;
 
-        ent_target = null;
+        Reset();
+
         return true;
     }
 
     public override bool EndAI()
     {
         ent_main.B_isAttacking = false;
-
-
+        ent_main.B_isVulnerable = false;
+        Reset();
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
-
-        StartAI();
         return true;
     }
 
@@ -197,5 +195,12 @@ public class AIArtyState : AIBase {
         f_aimTimer = 0;
         i_shotToFire--;
         
+    }
+
+    void Reset()
+    {
+        f_stateTimer = 0;
+        f_aimTimer = 0;
+        ent_target = null;
     }
 }
