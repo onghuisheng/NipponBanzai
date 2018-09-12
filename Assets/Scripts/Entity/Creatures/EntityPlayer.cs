@@ -70,7 +70,7 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
 
         St_stats = new Stats();
-        St_stats.F_maxspeed = St_stats.F_speed = 20;
+        St_stats.F_maxspeed = St_stats.F_speed = 5;
         St_stats.F_max_health = St_stats.F_health = 100;
         St_stats.F_damage = 1;
 
@@ -246,38 +246,8 @@ public class EntityPlayer : EntityLivingBase
 
     protected override void Update()
     {
-        base.Update();
+        base.Update();      
 
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            player_target_state = TARGET_STATE.AIMING;
-            if (St_stats.F_speed != St_stats.F_maxspeed)
-                St_stats.F_speed = St_stats.F_maxspeed;
-
-            if (!b_is_charging_shot)
-            {
-                if (Input.GetKey(KeyCode.Mouse0))
-                    An_animator.SetBool("IsShooting", true);
-                else
-                    An_animator.SetBool("IsShooting", false);
-            }
-            else
-            {
-                if (Input.GetKeyUp(KeyCode.Mouse0))
-                    An_animator.SetBool("IsShooting", true);
-                else
-                    An_animator.SetBool("IsShooting", false);
-            }
-
-        }
-        else
-        {
-            player_target_state = TARGET_STATE.NOT_AIMING;
-        }
-
-        if (f_shooting_interval < f_shooting_max_interval)
-            f_shooting_interval += Time.deltaTime;     
-      
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
 
         m_checkfuntions[player_state]();
@@ -288,7 +258,43 @@ public class EntityPlayer : EntityLivingBase
             B_isDodging = false;
 
         if (IsDead())
+        {
             player_state = State.DEAD;
+            player_target_state = TARGET_STATE.NOT_AIMING;
+        }
+
+        if (!IsDead())
+        {
+            if (Input.GetKey(KeyCode.Mouse1))
+            {
+                player_target_state = TARGET_STATE.AIMING;
+                if (St_stats.F_speed != St_stats.F_maxspeed)
+                    St_stats.F_speed = St_stats.F_maxspeed;
+
+                if (!b_is_charging_shot)
+                {
+                    if (Input.GetKey(KeyCode.Mouse0))
+                        An_animator.SetBool("IsShooting", true);
+                    else
+                        An_animator.SetBool("IsShooting", false);
+                }
+                else
+                {
+                    if (Input.GetKeyUp(KeyCode.Mouse0))
+                        An_animator.SetBool("IsShooting", true);
+                    else
+                        An_animator.SetBool("IsShooting", false);
+                }
+
+            }
+            else
+            {
+                player_target_state = TARGET_STATE.NOT_AIMING;
+            }
+
+            if (f_shooting_interval < f_shooting_max_interval)
+                f_shooting_interval += Time.deltaTime;    
+        }
 
         switch (player_target_state)
         {
@@ -308,30 +314,37 @@ public class EntityPlayer : EntityLivingBase
         {
             case State.ATTACK:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             case State.DASHING:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             case State.DEAD:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", true);
                 break;
 
             case State.IDLE:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             case State.MOVING:
                 An_animator.SetBool("IsMoving", true);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             case State.SUMMONING:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             default:
                 An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsDead", false);
                 break;
         }
 
@@ -347,10 +360,11 @@ public class EntityPlayer : EntityLivingBase
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-        if (!B_isDodging && !B_isHit)
+        if (!IsDead() && !B_isDodging && !B_isHit)
         {
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
+            An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
     }
