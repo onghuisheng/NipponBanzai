@@ -8,6 +8,12 @@ public class RedMarker : MonoBehaviour
 
     float f_duration, f_max_size;
 
+    Transform
+        tf_followee;
+
+    Vector3
+        v3_rotation_axis;
+
     Projector
         p_main_projector;
 
@@ -29,7 +35,7 @@ public class RedMarker : MonoBehaviour
     /// <param name="_finish_delay">How long this indicator should be alive after reaching _max_size</param>
     /// <param name="_onComplete">Function to run when this indicator finishes and the object disappears</param>
     /// <param name="_firer">If assigned, this indicator will be removed upon the _firer dying or getting disabled</param>
-    public void SetUpIndicator(Vector3 _pos, float _duration, float _max_size, float _finish_delay = 0, System.Action _onComplete = null, EntityLivingBase _firer = null)
+    public RedMarker SetUpIndicator(Vector3 _pos, float _duration, float _max_size, float _finish_delay = 0, System.Action _onComplete = null, EntityLivingBase _firer = null)
     {
         if (p_main_projector == null)
             p_main_projector = transform.GetChild(0).GetComponent<Projector>();
@@ -43,6 +49,9 @@ public class RedMarker : MonoBehaviour
         f_max_size = _max_size / 2; // divide by 2 as orthographic view is doubled
         act_oncomplete = _onComplete;
 
+        tf_followee = null;
+        v3_rotation_axis = Vector3.zero;
+
         transform.DOScale(_max_size, _duration).SetEase(Ease.OutQuart).OnUpdate(() =>
         {
             p_main_projector.orthographicSize = transform.localScale.x;
@@ -50,10 +59,29 @@ public class RedMarker : MonoBehaviour
         {
             Invoke("DisableObject", _finish_delay);
         });
+
+        return this;
+    }
+
+    public RedMarker SetToFollow(Transform _transform)
+    {
+        tf_followee = _transform;
+        return this;
+    }
+
+    public RedMarker SetToRotate(Vector3 _axis)
+    {
+        v3_rotation_axis = _axis;
+        return this;
     }
 
     private void Update()
     {
+        if (tf_followee)
+            transform.position = tf_followee.position;
+
+        transform.Rotate(v3_rotation_axis * Time.deltaTime);
+
         if (et_firer != null && (et_firer.IsDead() || !et_firer.gameObject.activeInHierarchy))
             DisableObject();
     }

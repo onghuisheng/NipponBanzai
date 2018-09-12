@@ -4,6 +4,30 @@ using UnityEngine;
 
 public class EntityBoss : EntityEnemy {
 
+    public enum AttackState
+    {
+        Gravity,
+        Laser,
+        Arty
+    };
+
+    AttackState currentAttState;
+
+    #region Getter/Setter
+    public AttackState As_currentAttState
+    {
+        get
+        {
+            return currentAttState;
+        }
+
+        set
+        {
+            currentAttState = value;
+        }
+    }
+    #endregion
+
     protected override void Start()
     {
         base.Start();
@@ -89,8 +113,8 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        //RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 1, 3));
-        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 10, 5));
+        RegisterAITask(new AIArtyState(3, this, typeof(EntityPlayer), 20, 12, 1, 3));
+        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 10, 5));
         //RegisterAITask(new AIAOEAttack(1, this, typeof(EntityPlayer), 20, 5));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));

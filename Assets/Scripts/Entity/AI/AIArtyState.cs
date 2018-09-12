@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIArtyState : AIBase {
+public class AIArtyState : AIBase
+{
 
     private float
         f_range,
@@ -22,8 +23,8 @@ public class AIArtyState : AIBase {
     private bool
         b_has_attacked;
 
-    private GameObject
-        go_targetCircle;
+    private RedMarker
+        marker_targetCircle;
 
     private ArcBulllet
         ab_bullet;
@@ -70,7 +71,7 @@ public class AIArtyState : AIBase {
 
     public override bool ShouldContinueAI()
     {
-        if(f_stateCooldownTimer < f_cooldown)
+        if (f_stateCooldownTimer < f_cooldown)
         {
             f_stateCooldownTimer += Time.deltaTime;
             return false;
@@ -165,25 +166,28 @@ public class AIArtyState : AIBase {
     void AimTarget()
     {
         //Loads up the gameobject to be use for this shot.
-        if (!b_has_attacked) 
+        if (!b_has_attacked)
         {
             b_has_attacked = true;
-            go_targetCircle = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.TARGET_ZONE);
 
+            marker_targetCircle = ObjectPool.GetInstance().GetIndicatorObjectFromPool(ObjectPool.INDICATOR.RED_MARKER).GetComponent<RedMarker>();
+            marker_targetCircle.SetUpIndicator(ent_target.transform.position, f_shotInterval, 3.0f, 1, () =>
+            {
+                Fire();
+            })
+            .SetToFollow(ent_target.transform)
+            .SetToRotate(new Vector3(0, 90, 0));
         }
 
         if (f_aimTimer < f_shotInterval)
         {
             //Lerp the Position for the targetCirce to the player.
             f_aimTimer += Time.deltaTime;
-            Vector3 currentPos = Vector3.Lerp(ent_main.transform.position, ent_target.transform.position, f_aimTimer);
-            currentPos.y = 0.5f;
-            go_targetCircle.transform.position = currentPos;
+            //Vector3 currentPos = Vector3.Lerp(ent_main.transform.position, ent_target.transform.position, f_aimTimer);
+            //currentPos.y = 0.5f;
+            //go_targetCircle.transform.position = currentPos;
         }
-        else
-        {
-            Fire();
-        }
+
     }
 
     void Fire()
@@ -191,10 +195,10 @@ public class AIArtyState : AIBase {
         //Temp Spawn of rock to the position of the circle
         b_has_attacked = false;
         ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2,2,2), ent_main.gameObject, go_targetCircle);
+        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, null);
         f_aimTimer = 0;
         i_shotToFire--;
-        
+
     }
 
     void Reset()
