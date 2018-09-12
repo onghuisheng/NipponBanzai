@@ -38,7 +38,7 @@ public abstract class Entity : MonoBehaviour
             _id,
             _damage);
 
-        obj_hitbox.SetHitbox(dmgsrc, _size, _timer);
+        obj_hitbox.SetHitbox(dmgsrc, _size, _timer, _iframe_timer);
 
         obj_hitbox.SetPosition(_pos);
 
