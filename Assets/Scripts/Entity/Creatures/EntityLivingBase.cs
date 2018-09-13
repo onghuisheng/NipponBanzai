@@ -150,14 +150,19 @@ public abstract class EntityLivingBase : Entity
        b_isHit,
        b_isAttacking,
        b_isDodging,
-       b_isVulnerable;
+       b_isVulnerable, 
+       b_isGrounded;
 
     private float
         f_hit_timer,
         f_regen_timer,
         f_regen_amount,
         f_death_timer,
-        f_AI_task_change_timer;
+        f_AI_task_change_timer,
+        f_ground_height;
+
+    private RaycastHit
+       rch_raycast;
 
     private Animator
         an_animator;
@@ -297,6 +302,19 @@ public abstract class EntityLivingBase : Entity
             f_regen_amount = value;
         }
     }
+
+    public bool B_isGrounded
+    {
+        get
+        {
+            return b_isGrounded;
+        }
+
+        set
+        {
+            b_isGrounded = value;
+        }
+    }
     #endregion
 
     private void Awake()
@@ -314,6 +332,7 @@ public abstract class EntityLivingBase : Entity
 
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
+        rch_raycast = new RaycastHit();
     }
 
     protected override void Update()
@@ -498,10 +517,10 @@ public abstract class EntityLivingBase : Entity
         if (Physics.Raycast(
             GetPosition(),
             -gameObject.transform.up,
-            out _raycast
+            out rch_raycast
         ))
         {
-            f_ground_height = _raycast.point.y;
+            f_ground_height = rch_raycast.point.y;
         }
 
         if (System.Math.Round(f_ground_height, 2) == System.Math.Round(GetPosition().y, 2))
@@ -516,7 +535,7 @@ public abstract class EntityLivingBase : Entity
         }
 
         if (!B_isGrounded)
-            SetPosition(new Vector3(GetPosition().x, GetPosition().y + (_gravity * F_mass * Time.deltaTime), GetPosition().z));
+            SetPosition(new Vector3(GetPosition().x, GetPosition().y + (_gravity * St_stats.F_mass * Time.deltaTime), GetPosition().z));
 
         if (GetPosition().y < f_ground_height)
         {
