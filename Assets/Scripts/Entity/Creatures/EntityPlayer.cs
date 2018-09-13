@@ -197,6 +197,8 @@ public class EntityPlayer : EntityLivingBase
                             f_charged_amount = 1;
 
                         f_shooting_interval = 0;
+
+                        An_animator.SetBool("IsAttacking", false);
                     }
                 }
                 else
@@ -224,6 +226,7 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsMelee", true);
             }
         }
+
         if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
             player_state = State.IDLE;
@@ -307,9 +310,13 @@ public class EntityPlayer : EntityLivingBase
                 else
                 {
                     if (Input.GetKeyUp(KeyCode.Mouse0))
+                    {
                         An_animator.SetBool("IsShooting", true);
+                    }
                     else
+                    {
                         An_animator.SetBool("IsShooting", false);
+                    }
                 }
 
             }
