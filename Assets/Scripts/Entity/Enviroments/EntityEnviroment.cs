@@ -13,6 +13,7 @@ public class EntityEnviroment : Entity {
 
     private bool
         b_isStatic,
+        b_isDestructible,
         b_willExpire;
 
     #region Getter/Setter
@@ -81,6 +82,19 @@ public class EntityEnviroment : Entity {
         }
     }
 
+    public bool B_isDestructible
+    {
+        get
+        {
+            return b_isDestructible;
+        }
+
+        set
+        {
+            b_isDestructible = value;
+        }
+    }
+
     #endregion
 
     public virtual void SetUpObjectWLifeTime(float _lifetime, Vector3 _pos, Vector3 _size, bool _isStatic = true)
@@ -89,16 +103,20 @@ public class EntityEnviroment : Entity {
         v3_size = _size;
         SetSize(v3_size);
         f_lifetime = _lifetime;
+        b_isStatic = _isStatic;
         b_willExpire = true;
         f_lifeElapse = 0;
     }
 
-    public virtual void SetUpObject(Vector3 _pos, Vector3 _size, bool _isStatic = true)
+    public virtual void SetUpObject(Vector3 _pos, Vector3 _size, bool _isDestructible, bool _isStatic = true)
     {
         SetPosition(_pos);
         v3_size = _size;
         SetSize(v3_size);
+        b_isDestructible = _isDestructible;
+        b_isStatic = _isStatic;
         b_willExpire = false;
+
     }
 
     // Use this for initialization
@@ -119,10 +137,6 @@ public class EntityEnviroment : Entity {
             {
                 gameObject.SetActive(false);
             }
-
         }
-
-
-
     }
 }
