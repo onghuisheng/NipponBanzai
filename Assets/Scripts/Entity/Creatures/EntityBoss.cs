@@ -21,6 +21,13 @@ public class EntityBoss : EntityEnemy {
 
     AttackState currentAttState;
 
+    float
+        dissolveRate;
+
+    [SerializeField]
+    Material
+        bossMat;
+
     #region Getter/Setter
     public AttackState As_currentAttState
     {
@@ -50,6 +57,8 @@ public class EntityBoss : EntityEnemy {
         {
             F_death_timer += Time.deltaTime;
             //An_animator.SetBool("DeadTrigger", true);
+            dissolveRate += Time.deltaTime;
+            bossMat.SetFloat("_DissolveAmount", dissolveRate);
 
             if (F_death_timer > 5.0f)
             {
@@ -105,7 +114,7 @@ public class EntityBoss : EntityEnemy {
         ClearAITask();
 
         St_stats.S_name = "Perstilence";
-        St_stats.F_max_health = 50.0f;
+        St_stats.F_max_health = 5.0f;
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_damage = 5.0f;
         St_stats.F_defence = 5.0f;
@@ -117,7 +126,11 @@ public class EntityBoss : EntityEnemy {
         B_isDodging = false;
         B_isHit = false;
 
+        dissolveRate = 0f;
+
         var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MINIBOSS };
+
+        bossMat = gameObject.GetComponentInChildren<Renderer>().material;
 
         //TODO: Set Animation Values
 
