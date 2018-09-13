@@ -160,12 +160,9 @@ public class AIBossLaser : AIBase {
             //OnTargetBeam();
             for (int i = 0; i < i_numOfLasers; ++i)
             {
-
                 AOEBeam(i);
-
-
             }
-            
+
 
             f_beamChargeTimer = 0;
 
@@ -198,6 +195,6 @@ public class AIBossLaser : AIBase {
     {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-        script_laser.SetUpProjectile(5, 2, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
+        script_laser.SetUpProjectile(5, 2, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, false);
     }
 }
