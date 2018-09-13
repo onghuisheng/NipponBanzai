@@ -51,7 +51,7 @@ public class AIBossLaser : AIBase {
 
     public override bool StartAI()
     {
-        script_boss.As_currentAttState = EntityBoss.AttackState.Laser;
+        script_boss.As_currentAttState = EntityBoss.AttackState.LASER;
         f_stateTimer = 0;
 
         ent_target = null;
@@ -68,7 +68,7 @@ public class AIBossLaser : AIBase {
 
         StartAI();
 
-        script_boss.As_currentAttState = EntityBoss.AttackState.None;
+        script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
         return true;
     }
 
@@ -160,12 +160,9 @@ public class AIBossLaser : AIBase {
             //OnTargetBeam();
             for (int i = 0; i < i_numOfLasers; ++i)
             {
-
                 AOEBeam(i);
-
-
             }
-            
+
 
             f_beamChargeTimer = 0;
 
@@ -191,13 +188,13 @@ public class AIBossLaser : AIBase {
 
         var pos = RandomCircle(ent_main.transform.position, 10, _index * 90);
         Vector3 direction = pos - ent_main.transform.position;
-        script_laser.SetUpProjectile(5, 20, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject);
+        script_laser.SetUpProjectile(5, 2, 0.05f, ent_main.transform.position, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
     }
 
     private void OnTargetBeam()
     {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-        script_laser.SetUpProjectile(5, 20, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
+        script_laser.SetUpProjectile(5, 2, 0.05f, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, false);
     }
 }

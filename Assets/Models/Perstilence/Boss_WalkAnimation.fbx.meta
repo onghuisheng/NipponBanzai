@@ -241,8 +241,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Movement
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 130
+      firstFrame: 31
+      lastFrame: 90
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

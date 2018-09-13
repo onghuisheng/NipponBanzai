@@ -54,7 +54,7 @@ public class AIAOEAttack : AIBase {
     public override bool StartAI()
     {
         ent_target = null;
-        script_boss.As_currentAttState = EntityBoss.AttackState.Gravity;
+        script_boss.As_currentAttState = EntityBoss.AttackState.GRAVITY;
         return true;
     }
 
@@ -68,7 +68,7 @@ public class AIAOEAttack : AIBase {
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
 
         StartAI();
-        script_boss.As_currentAttState = EntityBoss.AttackState.None;
+        script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
         return true;
     }
 
@@ -215,7 +215,9 @@ public class AIAOEAttack : AIBase {
 
         Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
 
-        if (Physics.Linecast(ent_main.GetPosition(), ent_target.GetPosition(), out hit))
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+
+        if (Physics.Linecast(ent_main.GetPosition(), ent_target.GetPosition(), out hit, ignoreEnemiesMask))
         {
             Debug.DrawLine(ent_main.GetPosition(), ent_target.GetPosition(), Color.yellow);
             Debug.Log("Did Hit : " + hit.collider.gameObject);
