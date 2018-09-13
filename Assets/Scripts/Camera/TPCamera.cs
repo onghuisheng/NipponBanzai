@@ -144,8 +144,8 @@ public class TPCamera : MonoBehaviour
 
                             if (f_zoomed < f_zoomed_dist)
                             {
-                                f_zoomed += (f_speed_of_zooming * Time.deltaTime);
-                                transform.position -= (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                                f_zoomed += (f_speed_of_zooming * Time.unscaledDeltaTime);
+                                transform.position -= (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * (f_speed_of_zooming * Time.unscaledDeltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
 
                                 if (f_zoomed > f_zoomed_dist)
                                 {
@@ -167,9 +167,9 @@ public class TPCamera : MonoBehaviour
 
                             if (go_parent.transform.position.y > -8f && go_parent.transform.position.y < 12.0f)
                             {
-                                go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
                             }
-                            go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                            go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
 
                             Vector3 cubeTOCam = transform.position - v3_target_position;
                             Vector3 camToCube = -cubeTOCam;
@@ -183,7 +183,7 @@ public class TPCamera : MonoBehaviour
                                 {
                                     if (gameObject.transform.position.y > v3_target_position.y)
                                     {
-                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                     }
                                 }
                             }
@@ -193,7 +193,7 @@ public class TPCamera : MonoBehaviour
                                 {
                                     if (gameObject.transform.position.y < v3_target_position.y)
                                     {
-                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                     }
                                 }
                             }
@@ -235,8 +235,8 @@ public class TPCamera : MonoBehaviour
                             if (q_prev_rotation != transform.rotation || b_is_zoomed)
                             {
                                 if(f_zoomed > 0)
-                                    f_zoomed -= (f_speed_of_zooming * Time.deltaTime);
-                                transform.position += (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable                              
+                                    f_zoomed -= (f_speed_of_zooming * Time.unscaledDeltaTime);
+                                transform.position += (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.unscaledDeltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable                              
 
                                 Vector3 forward = go_parent.transform.forward;
                                 Vector3 toOther = transform.position - go_parent.transform.position;
@@ -261,8 +261,8 @@ public class TPCamera : MonoBehaviour
                             if (f_zoomed < f_zoomed_dist)
                             {
                                 b_is_zoomed = false;
-                                f_zoomed += f_speed_of_zooming * Time.deltaTime;
-                                transform.position -= (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                                f_zoomed += f_speed_of_zooming * Time.unscaledDeltaTime;
+                                transform.position -= (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.unscaledDeltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
                             }
 
                             if (f_zoomed > f_zoomed_dist)
@@ -279,8 +279,8 @@ public class TPCamera : MonoBehaviour
                         //transform.LookAt(v3_target_position);
                         go_parent.transform.LookAt(v3_target_position); 
 
-                        go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
-                        go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                        go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
+                        go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
 
                         Vector3 cubeTOCam = transform.position - v3_target_position;
                         Vector3 camToCube = -cubeTOCam;
@@ -294,7 +294,7 @@ public class TPCamera : MonoBehaviour
                             {
                                 if (gameObject.transform.position.y > v3_target_position.y)
                                 {
-                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                 }
                             }
                         }
@@ -304,7 +304,7 @@ public class TPCamera : MonoBehaviour
                             {
                                 if (gameObject.transform.position.y < v3_target_position.y)
                                 {
-                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
                                 }
                             }
                         }

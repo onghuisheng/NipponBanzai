@@ -68,20 +68,20 @@ public class CharacterMovement : MonoBehaviour
 
                             if (Input.GetKey(KeyCode.W))
                             {
-                                new_pos += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                new_pos += Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
                             else if (Input.GetKey(KeyCode.S))
                             {
-                                new_pos -= Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                new_pos -= Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
 
                             if (Input.GetKey(KeyCode.A))
                             {
-                                new_pos -= Time.deltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                new_pos -= Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
                             else if (Input.GetKey(KeyCode.D))
                             {
-                                new_pos += Time.deltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                new_pos += Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
 
                             Component_Player.Rb_rigidbody.MovePosition(new_pos);
@@ -137,7 +137,7 @@ public class CharacterMovement : MonoBehaviour
                             }
 
                             if (b_moving && !b_opposite)
-                                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
+                                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
                         }
                         break;
 
@@ -161,7 +161,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Component_Player.GetPlayerState() == EntityPlayer.State.DASHING)
         {
-            float f_speed_multiplier = 3000;
+            float f_speed_multiplier = 2000;
 
             switch (DoubleTapCheck.GetInstance().GetDoubleTapKey())
             {
