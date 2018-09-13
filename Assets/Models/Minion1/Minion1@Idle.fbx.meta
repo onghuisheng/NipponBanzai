@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: e43a41b39f9035c4a941bc1f40ed2795
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: L_M1_Wingbone1
+    100002: L_M1_Wingbone10
+    100004: L_M1_Wingbone11
+    100006: L_M1_Wingbone12
+    100008: L_M1_Wingbone13
+    100010: L_M1_Wingbone2
+    100012: L_M1_Wingbone3
+    100014: L_M1_Wingbone4
+    100016: L_M1_Wingbone5
+    100018: L_M1_Wingbone6
+    100020: L_M1_Wingbone7
+    100022: L_M1_Wingbone8
+    100024: L_M1_Wingbone9
+    100026: L_M1_WingFlapA1
+    100028: L_M1_WingFlapA2
+    100030: L_M1_WingFlapA3
+    100032: L_M1_WingFlapB1
+    100034: L_M1_WingFlapB2
+    100036: L_M1_WingFlapB3
+    100038: L_M1_WingFlapC1
+    100040: L_M1_WingFlapC2
+    100042: L_M1_WingFlapD1
+    100044: L_M1_WingFlapD2
+    100046: M1_Head
+    100048: M1_Spine1
+    100050: M1_Spine3
+    100052: M1_Spine4
+    100054: M1_Spine5
+    100056: M1_SpineMid
+    100058: M1_Tail
+    100060: //RootNode
+    100062: R_M1_Wingbone1
+    100064: R_M1_Wingbone10
+    100066: R_M1_Wingbone11
+    100068: R_M1_Wingbone12
+    100070: R_M1_Wingbone13
+    100072: R_M1_Wingbone2
+    100074: R_M1_Wingbone3
+    100076: R_M1_Wingbone4
+    100078: R_M1_Wingbone5
+    100080: R_M1_Wingbone6
+    100082: R_M1_Wingbone7
+    100084: R_M1_Wingbone8
+    100086: R_M1_Wingbone9
+    100088: R_M1_WingFlapA1
+    100090: R_M1_WingFlapA2
+    100092: R_M1_WingFlapA3
+    100094: R_M1_WingFlapB1
+    100096: R_M1_WingFlapB2
+    100098: R_M1_WingFlapB3
+    100100: R_M1_WingFlapC1
+    100102: R_M1_WingFlapC2
+    100104: R_M1_WingFlapD1
+    100106: R_M1_WingFlapD2
+    400000: L_M1_Wingbone1
+    400002: L_M1_Wingbone10
+    400004: L_M1_Wingbone11
+    400006: L_M1_Wingbone12
+    400008: L_M1_Wingbone13
+    400010: L_M1_Wingbone2
+    400012: L_M1_Wingbone3
+    400014: L_M1_Wingbone4
+    400016: L_M1_Wingbone5
+    400018: L_M1_Wingbone6
+    400020: L_M1_Wingbone7
+    400022: L_M1_Wingbone8
+    400024: L_M1_Wingbone9
+    400026: L_M1_WingFlapA1
+    400028: L_M1_WingFlapA2
+    400030: L_M1_WingFlapA3
+    400032: L_M1_WingFlapB1
+    400034: L_M1_WingFlapB2
+    400036: L_M1_WingFlapB3
+    400038: L_M1_WingFlapC1
+    400040: L_M1_WingFlapC2
+    400042: L_M1_WingFlapD1
+    400044: L_M1_WingFlapD2
+    400046: M1_Head
+    400048: M1_Spine1
+    400050: M1_Spine3
+    400052: M1_Spine4
+    400054: M1_Spine5
+    400056: M1_SpineMid
+    400058: M1_Tail
+    400060: //RootNode
+    400062: R_M1_Wingbone1
+    400064: R_M1_Wingbone10
+    400066: R_M1_Wingbone11
+    400068: R_M1_Wingbone12
+    400070: R_M1_Wingbone13
+    400072: R_M1_Wingbone2
+    400074: R_M1_Wingbone3
+    400076: R_M1_Wingbone4
+    400078: R_M1_Wingbone5
+    400080: R_M1_Wingbone6
+    400082: R_M1_Wingbone7
+    400084: R_M1_Wingbone8
+    400086: R_M1_Wingbone9
+    400088: R_M1_WingFlapA1
+    400090: R_M1_WingFlapA2
+    400092: R_M1_WingFlapA3
+    400094: R_M1_WingFlapB1
+    400096: R_M1_WingFlapB2
+    400098: R_M1_WingFlapB3
+    400100: R_M1_WingFlapC1
+    400102: R_M1_WingFlapC2
+    400104: R_M1_WingFlapD1
+    400106: R_M1_WingFlapD2
+    7400000: Idle
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

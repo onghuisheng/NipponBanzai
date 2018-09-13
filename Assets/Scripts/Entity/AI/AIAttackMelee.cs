@@ -83,7 +83,7 @@ public class AIAttackMelee : AIBase
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.25f, AxisConstraint.Y).OnComplete(() =>
             {
                 if (ent_main.An_animator.HasParameterOfType("AttackType", AnimatorControllerParameterType.Int))
-                    ent_main.An_animator.SetInteger("AttackType", Random.Range(1, 3));
+                    ent_main.An_animator.SetInteger("AttackType", Random.Range(1, 4));
 
                 ent_main.An_animator.SetTrigger("Attack");
             });
