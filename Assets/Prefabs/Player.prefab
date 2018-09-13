@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4042322823615392}
   m_Layer: 0
   m_Name: shoulder_L_joint
-  m_TagString: Untagged
+  m_TagString: Hand_Joints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4941420365694422}
   m_Layer: 0
   m_Name: pickAxe_joint
-  m_TagString: Untagged
+  m_TagString: Hand_Joints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 4610042334079308}
   m_Layer: 0
   m_Name: shoulder_R_joint
-  m_TagString: Untagged
+  m_TagString: Hand_Joints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -163,6 +163,66 @@ public class ObjectPool : Singleton<ObjectPool>
 
         full_list.Add(list);
 
+        //ENVIRONMENT
+        list = new List<GameObject>();       
+        foreach (GameObject i in enviroment_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
+        //PROJECTILE
+        list = new List<GameObject>();
+        foreach (GameObject i in enviroment_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
+        //HITBOX
+        list = new List<GameObject>();
+        foreach (GameObject i in hitbox_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
+        //ITEM
+        list = new List<GameObject>();
+        foreach (GameObject i in item_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
+        //INDICATOR
+        list = new List<GameObject>();
+        foreach (GameObject i in indicator_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        full_list.Add(list);
+
         list = new List<GameObject>();
         list.Add(go_player_instance);
 
@@ -193,6 +253,93 @@ public class ObjectPool : Singleton<ObjectPool>
             }
         }
         return true;
+    }
+
+    public List<GameObject> GetActiveEntityObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+
+        list.Add(go_player_instance);
+
+        foreach (GameObject i in entity_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetActiveEnvironmentObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (GameObject i in enviroment_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetActiveProjectileObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (GameObject i in projectile_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetActiveHitBoxObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (GameObject i in hitbox_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetActivePickUpObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (GameObject i in item_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetActiveIndicatorObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (GameObject i in indicator_pool_list)
+        {
+            if (i.activeSelf)
+            {
+                list.Add(i);
+            }
+        }
+
+        return list;
     }
 
     //RETURNS ENTITY OBJECT IF IT FITS THE CRITERIA
