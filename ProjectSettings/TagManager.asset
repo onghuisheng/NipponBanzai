@@ -11,6 +11,7 @@ TagManager:
   - HitBox
   - Non-Hitable
   - CritBox
+  - Hand_Joints
   layers:
   - Default
   - TransparentFX

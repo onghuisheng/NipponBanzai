@@ -447,7 +447,7 @@ public abstract class EntityLivingBase : Entity
         }       
     }
 
-    public void LateUpdate()
+    protected virtual void LateUpdate()
     {
         UpdateYOffset();
     }
