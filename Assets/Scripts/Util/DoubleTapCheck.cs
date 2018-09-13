@@ -35,7 +35,7 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
     protected override void Update()
     {
         #region Keyboard
-        if (Time.time - f_timer_when_pressed > f_interval && b_is_double_tap)
+        if (Time.unscaledTime - f_timer_when_pressed > f_interval && b_is_double_tap)
             b_is_double_tap = false;
 
         if (Input.anyKeyDown)
@@ -58,15 +58,15 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
                 }
             }
 
-            if (kc_current_entered_key == KeyCode.None || kc_current_entered_key != temp || Time.time - f_timer_when_pressed > f_interval)
+            if (kc_current_entered_key == KeyCode.None || kc_current_entered_key != temp || Time.unscaledTime - f_timer_when_pressed > f_interval)
             {
                 kc_current_entered_key = temp;
                 b_is_double_tap = false;
-                f_timer_when_pressed = Time.time;
+                f_timer_when_pressed = Time.unscaledTime;
             }
             else
             {
-                if (Time.time - f_timer_when_pressed < f_interval)
+                if (Time.unscaledTime - f_timer_when_pressed < f_interval)
                 {
                     b_is_double_tap = true;
                     //Debug.Log("Double Tapped: " + kc_current_entered_key);
@@ -80,7 +80,7 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
         #endregion
 
         #region Mouse
-        if (Time.time - f_timer_when_pressed_mouse > f_interval_mouse && b_is_double_tap_mouse)
+        if (Time.unscaledTime - f_timer_when_pressed_mouse > f_interval_mouse && b_is_double_tap_mouse)
             b_is_double_tap_mouse = false;
 
         if (Input.anyKeyDown)
@@ -103,15 +103,15 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
                 }
             }
 
-            if (kc_current_entered_mouse == KeyCode.None || kc_current_entered_mouse != temp || Time.time - f_timer_when_pressed_mouse > f_interval_mouse)
+            if (kc_current_entered_mouse == KeyCode.None || kc_current_entered_mouse != temp || Time.unscaledTime - f_timer_when_pressed_mouse > f_interval_mouse)
             {
                 kc_current_entered_mouse = temp;
                 b_is_double_tap_mouse = false;
-                f_timer_when_pressed_mouse = Time.time;
+                f_timer_when_pressed_mouse = Time.unscaledTime;
             }
             else
             {
-                if (Time.time - f_timer_when_pressed_mouse < f_interval_mouse)
+                if (Time.unscaledTime - f_timer_when_pressed_mouse < f_interval_mouse)
                 {
                     b_is_double_tap_mouse = true;
                     //Debug.Log("Double Clicked: " + kc_current_entered_mouse);

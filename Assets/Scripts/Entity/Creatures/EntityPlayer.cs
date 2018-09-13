@@ -162,6 +162,7 @@ public class EntityPlayer : EntityLivingBase
         if (player_target_state != TARGET_STATE.AIMING)
             St_stats.F_speed = St_stats.F_maxspeed * 2;
 
+
         player_state = State.MOVING;
     }
 
@@ -179,7 +180,7 @@ public class EntityPlayer : EntityLivingBase
                 if (b_is_charging_shot)
                 {
                     if (f_charged_amount < f_charged_max_amount)
-                        f_charged_amount += f_charged_increase_amount * Time.deltaTime;
+                        f_charged_amount += f_charged_increase_amount * Time.unscaledDeltaTime;
                     else if (f_charged_amount > f_charged_max_amount)
                         f_charged_amount = f_charged_max_amount;
 
@@ -327,7 +328,7 @@ public class EntityPlayer : EntityLivingBase
             }
 
             if (f_shooting_interval < f_shooting_max_interval)
-                f_shooting_interval += Time.deltaTime;
+                f_shooting_interval += Time.unscaledDeltaTime;
         }
 
         switch (player_target_state)
@@ -406,17 +407,48 @@ public class EntityPlayer : EntityLivingBase
 
     public override void OnAttack()
     {
-        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
+        Vector3 _attack_hitbox;
+        float _multiplier;
+
+        switch(i_combo)
+        {
+            case 1:
+            case 2:
+                _multiplier = 1;
+                _attack_hitbox = new Vector3(3, 1, 2);
+                break;
+
+            case 3:
+                _multiplier = 2;
+                _attack_hitbox = new Vector3(2, 1, 3);
+                break;
+
+            default:
+                _multiplier = 1;
+                _attack_hitbox = Vector3.one;
+                break;
+        }
+
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation, 0.1f);
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
-        if (!IsDead() && !B_isDodging && !B_isHit)
+
+        Debug.Log("Player hit guy: " + _dmgsrc.GetSourceTag());
+
+        if (!IsDead() && !B_isHit && player_state != State.DASHING)
         {
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
-            An_animator.SetTrigger("IsHit");
+            //An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
+        }
+        else if(player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
+        {
+            ResetOnHit(_timer);
+            TimeHandler.GetInstance().AffectTime(0.1f, 20);
+            Debug.Log("Slowing down");
         }
     }
 
