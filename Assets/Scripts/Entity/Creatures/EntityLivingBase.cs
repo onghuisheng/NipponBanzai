@@ -527,29 +527,28 @@ public abstract class EntityLivingBase : Entity
             f_ground_height = rch_raycast.point.y;
         }
 
-        if (System.Math.Round(f_ground_height, 2) == System.Math.Round(GetPosition().y, 2))
+        if (System.Math.Round(f_ground_height, 3) == System.Math.Round(GetPosition().y, 3))
         {
             B_isGrounded = true;
-            // Debug.Log("Grounded");
+            f_y_velocity = 0;
+            Debug.Log("Grounded");
         }
         else
         {
             B_isGrounded = false;
-            // Debug.Log("Not Grounded");
+             Debug.Log("Not Grounded");
         }
 
         if (!B_isGrounded)
         {
             f_y_velocity += _gravity * St_stats.F_mass * Time.deltaTime;
             SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_y_velocity, GetPosition().z));
-        }
 
-        if (GetPosition().y < f_ground_height)
-        {
-            SetPosition(new Vector3(GetPosition().x, f_ground_height, GetPosition().z));
-            f_y_velocity = 0;
+            if (GetPosition().y < f_ground_height)
+            {
+                SetPosition(new Vector3(GetPosition().x, f_ground_height, GetPosition().z));               
+            }
         }
-
     }
 
     public virtual void OnAttack() { }
