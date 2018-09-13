@@ -100,34 +100,31 @@ public class AIArtyState : AIBase
 
         if (ent_target == null)
         {
-            foreach (var list in ObjectPool.GetInstance().GetAllEntity())
+            foreach (GameObject l_go in ObjectPool.GetInstance().GetActiveEntityObjects())
             {
-                foreach (GameObject l_go in list)
+                if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
                 {
-                    if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
+                    if (!l_go.GetComponent<EntityLivingBase>().IsDead())
                     {
-                        if (!l_go.GetComponent<EntityLivingBase>().IsDead())
+                        if (ent_target == null)
                         {
-                            if (ent_target == null)
+                            if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
                             {
-                                if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
+                                ent_target = l_go.GetComponent<EntityLivingBase>();
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
                             {
-                                if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
+                                ent_target = l_go.GetComponent<EntityLivingBase>();
                             }
                         }
                     }
-                    else
-                    {
-                        break;
-                    }
+                }
+                else
+                {
+                    break;
                 }
             }
         }
@@ -208,10 +205,55 @@ public class AIArtyState : AIBase
         //Temp Spawn of rock to the position of the circle
         b_has_attacked = false;
         ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
-        ab_bullet.SetUpProjectile(5, 20, 1, 10, ent_main.transform.position, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject);
+
+        Vector3 bulletSpawnPos = ent_main.transform.position;
+        bulletSpawnPos.y += 5;
+
+        ab_bullet.SetUpProjectile(5, 20, 1, 10, bulletSpawnPos, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, (collider) =>
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            {
+                //Apply Knockback
+                float range = 6;
+                Collider[] colliders = Physics.OverlapSphere(ab_bullet.GetPosition(), range);
+                foreach (Collider hit in colliders)
+                {
+                    Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                    if (rb && rb.tag.Equals("Player"))
+                    {
+                        rb.AddExplosionForce(15000f, ab_bullet.GetPosition(), range * 2, 0, ForceMode.Acceleration);
+                    }
+                }
+
+                //Spawn Crystal
+                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
+                spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, ab_bullet.GetPosition(), new Vector3(3, 3, 3), true);
+                ab_bullet.gameObject.SetActive(false);
+            }
+        }, () =>
+        {
+            //Apply Knockback
+            float range = 6;
+            Collider[] colliders = Physics.OverlapSphere(ab_bullet.GetPosition(), range);
+            foreach (Collider hit in colliders)
+            {
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                if (rb && rb.tag.Equals("Player"))
+                {
+                    rb.AddExplosionForce(15000f, ab_bullet.GetPosition(), range * 2, 0, ForceMode.Acceleration);
+                }
+            }
+
+            //Spawn Crystal
+            Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
+            spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, ab_bullet.GetPosition(), new Vector3(3, 3, 3), true);
+            ab_bullet.gameObject.SetActive(false);
+        });
+
         f_aimTimer = 0;
         i_shotToFire--;
-
     }
 
     void Reset()

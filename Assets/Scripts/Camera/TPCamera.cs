@@ -165,7 +165,7 @@ public class TPCamera : MonoBehaviour
 
                             // Debug.Log(transform.position.y);
 
-                            if (transform.position.y > -0.5f && transform.position.y < 4.3f)
+                            if (go_parent.transform.position.y > -8f && go_parent.transform.position.y < 12.0f)
                             {
                                 go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
                             }

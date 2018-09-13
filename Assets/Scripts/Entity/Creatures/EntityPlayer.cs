@@ -55,8 +55,8 @@ public class EntityPlayer : EntityLivingBase
     private List<GameObject>
         list_joints;
 
-    private List<Transform>
-        list_last_joint_transform;
+    //private List<Transform>
+    //    list_last_joint_transform;
 
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
@@ -69,7 +69,7 @@ public class EntityPlayer : EntityLivingBase
             m_checkfuntions = new Dictionary<State, m_checkfunction>();
 
         list_joints = new List<GameObject>();
-        list_last_joint_transform = new List<Transform>();
+        // list_last_joint_transform = new List<Transform>();
 
         m_checkfuntions.Add(State.IDLE, IdleCheckFunction);
         m_checkfuntions.Add(State.MOVING, MovingCheckFunction);
@@ -91,9 +91,9 @@ public class EntityPlayer : EntityLivingBase
         b_is_charging_shot = false;
         i_combo = 1;
 
-        foreach(Transform _trans in gameObject.GetComponentsInChildren<Transform>())
+        foreach (Transform _trans in gameObject.GetComponentsInChildren<Transform>())
         {
-            if(TagHelper.IsTagJoint(_trans.gameObject.tag))
+            if (TagHelper.IsTagJoint(_trans.gameObject.tag))
                 list_joints.Add(_trans.gameObject);
         }
     }
@@ -263,7 +263,7 @@ public class EntityPlayer : EntityLivingBase
 
     protected override void Update()
     {
-        base.Update();      
+        base.Update();
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
@@ -285,19 +285,13 @@ public class EntityPlayer : EntityLivingBase
         {
             if (Input.GetKey(KeyCode.Mouse1))
             {
-                if(list_last_joint_transform.Count == 0)
-                {
-                    foreach(GameObject go in list_joints)
-                    {
-                        list_last_joint_transform.Add(go.transform);
-                    }
-                }
-
-                foreach (GameObject go in list_joints)
-                {
-                    go.transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25);
-                    Debug.Log(go.transform + ": " + go.transform.localEulerAngles + " / " + go.transform.localPosition);
-                }
+                //if(list_last_joint_transform.Count == 0)
+                //{
+                //    foreach(GameObject go in list_joints)
+                //    {
+                //        list_last_joint_transform.Add(go.transform);
+                //    }
+                //}
 
                 player_target_state = TARGET_STATE.AIMING;
                 if (St_stats.F_speed != St_stats.F_maxspeed)
@@ -323,21 +317,10 @@ public class EntityPlayer : EntityLivingBase
             {
                 player_target_state = TARGET_STATE.NOT_AIMING;
                 An_animator.SetBool("IsShooting", false);
-
-                if (list_last_joint_transform.Count > 0)
-                {
-                    for(int i = 0; i < list_last_joint_transform.Count; ++i)
-                    {
-                        list_joints[i].transform.localPosition = list_last_joint_transform[i].localPosition;
-                        list_joints[i].transform.localRotation = list_last_joint_transform[i].localRotation;
-                    }
-
-                    list_last_joint_transform.Clear();
-                }
             }
 
             if (f_shooting_interval < f_shooting_max_interval)
-                f_shooting_interval += Time.deltaTime;    
+                f_shooting_interval += Time.deltaTime;
         }
 
         switch (player_target_state)
@@ -377,7 +360,7 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsDead", false);
                 break;
 
-            case State.MOVING:                
+            case State.MOVING:
                 An_animator.SetBool("IsDead", false);
 
                 An_animator.SetBool("IsMoving", true);
@@ -394,14 +377,28 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsAttacking", false);
                 break;
         }
+    }
+
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
 
         // Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
         // Debug.Log(player_state);
-        
+        if (player_target_state == TARGET_STATE.AIMING)
+        {
+            foreach (GameObject go in list_joints)
+            {
+                go.transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 100);
+                go.transform.localEulerAngles = new Vector3(go.transform.localRotation.x + 45,
+                     go.transform.localRotation.y,
+                     go.transform.localRotation.z + 45);
+            }
+        }
     }
 
     public override void OnAttack()
-    {             
+    {
         SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
     }
 

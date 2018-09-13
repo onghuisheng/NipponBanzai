@@ -93,34 +93,31 @@ public class AIBossLaser : AIBase {
 
         if (ent_target == null)
         {
-            foreach (var list in ObjectPool.GetInstance().GetAllEntity())
+            foreach (GameObject l_go in ObjectPool.GetInstance().GetActiveEntityObjects())
             {
-                foreach (GameObject l_go in list)
+                if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
                 {
-                    if (type_target.Equals(l_go.GetComponent<EntityLivingBase>().GetType()))
+                    if (!l_go.GetComponent<EntityLivingBase>().IsDead())
                     {
-                        if (!l_go.GetComponent<EntityLivingBase>().IsDead())
+                        if (ent_target == null)
                         {
-                            if (ent_target == null)
+                            if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
                             {
-                                if (Vector3.Distance(ent_main.GetPosition(), l_go.transform.position) < f_range)
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
+                                ent_target = l_go.GetComponent<EntityLivingBase>();
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
                             {
-                                if (Vector3.Distance(ent_main.GetPosition(), ent_target.transform.position) > Vector3.Distance(ent_main.GetPosition(), l_go.transform.position))
-                                {
-                                    ent_target = l_go.GetComponent<EntityLivingBase>();
-                                }
+                                ent_target = l_go.GetComponent<EntityLivingBase>();
                             }
                         }
                     }
-                    else
-                    {
-                        break;
-                    }
+                }
+                else
+                {
+                    break;
                 }
             }
         }

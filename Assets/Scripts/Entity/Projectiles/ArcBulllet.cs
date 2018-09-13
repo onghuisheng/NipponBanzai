@@ -61,30 +61,9 @@ public class ArcBulllet : EntityProjectiles
         }
         else
         {
-            // TODO: Move all these to boss code later
             if (act_onTriggerEnter == null)
             {
-                //Setup Hitbox 
-                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, GetSize() + new Vector3(2, 2, 2), GetPosition(), transform.rotation);
 
-                //Apply Knockback
-                float range = 6;
-                Collider[] colliders = Physics.OverlapSphere(GetPosition(), range);
-                foreach (Collider hit in colliders)
-                {
-                    Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-                    if (rb && rb.tag.Equals("Player"))
-                    {
-                        rb.AddExplosionForce(15000f, GetPosition(), range * 2, 0, ForceMode.Acceleration);
-                    }
-                }
-
-                //Spawn Crystal
-                Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-                spawnedCrystal.SetUpObjectWLifeTime(15, gameObject.transform.position, new Vector3(3, 3, 3));
-
-                gameObject.SetActive(false);
             }
             else
             {
