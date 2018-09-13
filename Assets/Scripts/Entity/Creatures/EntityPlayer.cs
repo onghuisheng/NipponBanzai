@@ -395,8 +395,8 @@ public class EntityPlayer : EntityLivingBase
                 break;
         }
 
-        Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
-        Debug.Log(player_state);
+        // Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
+        // Debug.Log(player_state);
         
     }
 

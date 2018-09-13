@@ -30,7 +30,7 @@ public class AIThrowPoison : AIBase
         i_priority = _priority;
         ent_main = _entity;
         s_ID = "Combat";
-        s_display_name = "Ranged Attack";
+        s_display_name = "Poison Attack";
         b_is_interruptable = false;
         f_attack_range = _attackrange;
         type_target = _type;

@@ -11,7 +11,7 @@ public class HitboxTrigger : EntityTrigger
 
     private DamageSource
         dmgs_damageObj = new DamageSource();     //Damage source
-
+    
     protected override void Start()
     {
         //Material material = new Material(Shader.Find("Custom/Transparent"));

@@ -416,8 +416,8 @@ public abstract class EntityLivingBase : Entity
                 if (dic.Value != null)
                 {
                     dic.Value.RunAI();
-                    //Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
-                    //Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
+                    // Debug.Log("Size of AI Task: " + dic_running_AI_list.Count);
+                    // Debug.Log("Running AI of: " + dic.Value.GetID() + " - " + dic.Value.GetDisplayName() +  " With priority: " + dic.Value.GetPriority());
                 }
             }
         }
