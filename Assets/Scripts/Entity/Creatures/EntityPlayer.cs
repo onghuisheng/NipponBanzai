@@ -90,7 +90,7 @@ public class EntityPlayer : EntityLivingBase
         f_charged_increase_amount = 0.5f;
         b_is_charging_shot = false;
         i_combo = 1;
-
+        
         foreach (Transform _trans in gameObject.GetComponentsInChildren<Transform>())
         {
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))

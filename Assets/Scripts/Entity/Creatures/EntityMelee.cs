@@ -75,9 +75,9 @@ public class EntityMelee : EntityEnemy
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
             ResetOnHit(_timer);
-            An_animator.SetTrigger("Injured");
 
-            Debug.Log("KENA HIT");
+            if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+                An_animator.SetTrigger("Injured");
         }
     }
 }
