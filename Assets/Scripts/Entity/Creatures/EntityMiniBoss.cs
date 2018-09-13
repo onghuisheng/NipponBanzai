@@ -76,13 +76,13 @@ public class EntityMiniBoss : EntityEnemy
             if (collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
             {
                 EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
-                pool.SetUpPoisonPoolWLifeTime(St_stats.F_damage / 2, 10, bullet.GetPosition(), Vector3.one);
+                pool.SetUpPoisonPoolWLifeTime(gameObject, St_stats.F_damage / 2, 10, bullet.GetPosition());
                 bullet.gameObject.SetActive(false);
             }
         }, () =>
         {
             EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
-            pool.SetUpPoisonPoolWLifeTime(St_stats.F_damage / 2, 10, bullet.GetPosition(), Vector3.one);
+            pool.SetUpPoisonPoolWLifeTime(gameObject, St_stats.F_damage / 2, 10, bullet.GetPosition());
             bullet.gameObject.SetActive(false);
         });
     }

@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitboxTrigger : EntityTrigger {
+public class HitboxTrigger : EntityTrigger
+{
 
     private float
         f_iframe_timer,
-        f_timer;            //How long the hitbox stays in the world
+        f_timer = 1;            //How long the hitbox stays in the world
 
     private DamageSource
-        dmgs_damageObj;     //Damage source
+        dmgs_damageObj = new DamageSource();     //Damage source
 
     protected override void Start()
     {
-        f_timer = 1;
-        dmgs_damageObj = new DamageSource();
-
         //Material material = new Material(Shader.Find("Custom/Transparent"));
         //GetComponent<Renderer>().material = material;
     }
@@ -29,8 +27,8 @@ public class HitboxTrigger : EntityTrigger {
             f_timer -= Time.deltaTime;
         else
             gameObject.SetActive(false);
-        
-	}
+
+    }
 
     protected override void OnTriggerEnter(Collider other)
     {

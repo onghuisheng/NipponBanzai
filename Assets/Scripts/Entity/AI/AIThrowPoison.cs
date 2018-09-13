@@ -63,14 +63,13 @@ public class AIThrowPoison : AIBase
 
         RaycastHit hitInfo;
 
-        // Cast a ray towards the player, ignoring all objects in the Enemies layer
-        Vector3 colliderCenter = ent_main.GetComponent<Collider>().bounds.center;
-        if (Physics.Raycast(colliderCenter, (ep_player.transform.position - colliderCenter), out hitInfo, f_attack_range, ignoreEnemiesMask))
+        // Cast a ray towards the player while ignoring all objects in the Enemies layer
+        Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;
+        Vector3 playerCenter = ep_player.GetComponent<Collider>().bounds.center;
+        if (Physics.Raycast(enemyCenter, playerCenter - enemyCenter, out hitInfo, f_attack_range, ignoreEnemiesMask))
         {
             if (hitInfo.collider.tag != "Player")
-            {
                 return false;
-            }
         }
 
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);

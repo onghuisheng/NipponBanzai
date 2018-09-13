@@ -15,7 +15,7 @@ public class AIChase : AIBase
     private float
         f_aggro_range, f_aggro_break_range;
 
-    private bool 
+    private bool
         b_is_chasing;
 
     private EntityPlayer ep_player;
@@ -65,8 +65,9 @@ public class AIChase : AIBase
             int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
 
             // Cast a ray towards the player, ignoring all objects in the Enemies layer
-            Vector3 colliderCenter = ent_main.GetComponent<Collider>().bounds.center;
-            if (!b_is_chasing && Physics.Raycast(colliderCenter, (ep_player.transform.position - colliderCenter), out hitInfo, f_aggro_range, ignoreEnemiesMask))
+            Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;
+            Vector3 playerCenter = ep_player.GetComponent<Collider>().bounds.center;
+            if (!b_is_chasing && Physics.Raycast(enemyCenter, playerCenter - enemyCenter, out hitInfo, f_aggro_range, ignoreEnemiesMask))
             {
                 if (hitInfo.collider.tag != "Player")
                 {
@@ -104,7 +105,7 @@ public class AIChase : AIBase
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "MoveSpeed", AnimatorControllerParameterType.Float))
             ent_main.An_animator.SetFloat("MoveSpeed", ent_main.St_stats.F_speed);
 
-            nma_agent.destination = ep_player.transform.position;
+        nma_agent.destination = ep_player.transform.position;
 
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "Moving", AnimatorControllerParameterType.Bool))
             ent_main.An_animator.SetBool("Moving", true);

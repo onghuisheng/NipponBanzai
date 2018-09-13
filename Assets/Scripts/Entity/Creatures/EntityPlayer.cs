@@ -79,6 +79,7 @@ public class EntityPlayer : EntityLivingBase
         f_charged_max_amount = 2;
         f_charged_increase_amount = 0.5f;
         b_is_charging_shot = false;
+        i_combo = 1;
     }
 
     private void IdleCheckFunction()
@@ -108,7 +109,7 @@ public class EntityPlayer : EntityLivingBase
         }
 
         St_stats.F_speed = St_stats.F_maxspeed;
-        i_combo = 0;
+        i_combo = 1;
         player_dir = DIRECTION.FRONT;
     }
 
@@ -137,7 +138,7 @@ public class EntityPlayer : EntityLivingBase
             return;
         }
 
-        i_combo = 0;
+        i_combo = 1;
     }
 
     private void DashingCheckFunction()
@@ -150,67 +151,67 @@ public class EntityPlayer : EntityLivingBase
 
     private void AttackCheckFunction()
     {
-        if (player_target_state == TARGET_STATE.AIMING)
+        if (An_animator.GetBool("IsAttacking"))
         {
-            if (DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
+            if (player_target_state == TARGET_STATE.AIMING && !An_animator.GetBool("IsMelee"))
             {
-                b_is_charging_shot = true;
-            }
-
-            if (b_is_charging_shot)
-            {
-
-                if (f_charged_amount < f_charged_max_amount)
-                    f_charged_amount += f_charged_increase_amount * Time.deltaTime;
-                else if (f_charged_amount > f_charged_max_amount)
-                    f_charged_amount = f_charged_max_amount;
-
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                if (DoubleTapCheck.GetInstance().IsDoubleClickTriggered() && DoubleTapCheck.GetInstance().GetDoubleTapMouseKey() == KeyCode.Mouse0 && !b_is_charging_shot)
                 {
-                    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
+                    b_is_charging_shot = true;
+                }
 
-                    StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                    sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                if (b_is_charging_shot)
+                {
+                    if (f_charged_amount < f_charged_max_amount)
+                        f_charged_amount += f_charged_increase_amount * Time.deltaTime;
+                    else if (f_charged_amount > f_charged_max_amount)
+                        f_charged_amount = f_charged_max_amount;
 
-                    if (b_is_charging_shot)
-                        b_is_charging_shot = false;
+                    if (Input.GetKeyUp(KeyCode.Mouse0))
+                    {
+                        Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
 
-                    if (f_charged_amount != 1)
-                        f_charged_amount = 1;
+                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                        sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
-                    f_shooting_interval = 0;
+                        if (b_is_charging_shot)
+                            b_is_charging_shot = false;
+
+                        if (f_charged_amount != 1)
+                            f_charged_amount = 1;
+
+                        f_shooting_interval = 0;
+                    }
+                }
+                else
+                {
+
+                    if (f_shooting_interval >= f_shooting_max_interval)
+                    {
+                        Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
+
+                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                        sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+
+                        f_shooting_interval = 0;
+                    }
                 }
             }
             else
-            {               
+            {
+                if (b_is_charging_shot)
+                    b_is_charging_shot = false;
 
-                if (f_shooting_interval >= f_shooting_max_interval)
-                {                  
-                    Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
+                if (f_charged_amount != 1)
+                    f_charged_amount = 1;
 
-                    StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                    sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
-
-                    f_shooting_interval = 0;
-                }
+                An_animator.SetBool("IsMelee", true);
             }
         }
-        else
+        if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
-            ++i_combo;
-
-            if (i_combo > 3)
-                i_combo = 1;
-
-            if (b_is_charging_shot)
-                b_is_charging_shot = false;
-
-            if (f_charged_amount != 1)
-                f_charged_amount = 1;
-        }
-
-        if (!b_is_charging_shot)
             player_state = State.IDLE;
+        }
     }
 
     private void SummoningCheckFunction()
@@ -249,6 +250,7 @@ public class EntityPlayer : EntityLivingBase
         base.Update();      
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
+        An_animator.SetInteger("Combo", i_combo);
 
         m_checkfuntions[player_state]();
 
@@ -290,6 +292,7 @@ public class EntityPlayer : EntityLivingBase
             else
             {
                 player_target_state = TARGET_STATE.NOT_AIMING;
+                An_animator.SetBool("IsShooting", false);
             }
 
             if (f_shooting_interval < f_shooting_max_interval)
@@ -313,18 +316,19 @@ public class EntityPlayer : EntityLivingBase
         switch (player_state)
         {
             case State.ATTACK:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsMoving", false);
+                An_animator.SetBool("IsAttacking", true);
                 break;
 
             case State.DASHING:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
                 break;
 
             case State.DEAD:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", true);
+                An_animator.SetBool("IsAttacking", false);
                 break;
 
             case State.IDLE:
@@ -332,9 +336,10 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsDead", false);
                 break;
 
-            case State.MOVING:
-                An_animator.SetBool("IsMoving", true);
+            case State.MOVING:                
                 An_animator.SetBool("IsDead", false);
+
+                An_animator.SetBool("IsMoving", true);
                 break;
 
             case State.SUMMONING:
@@ -345,6 +350,7 @@ public class EntityPlayer : EntityLivingBase
             default:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsAttacking", false);
                 break;
         }
 
@@ -355,6 +361,11 @@ public class EntityPlayer : EntityLivingBase
 
     public override void OnAttack()
     {
+        ++i_combo;
+
+        if (i_combo > 3)
+            i_combo = 1;
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
 
     }
 
@@ -367,5 +378,11 @@ public class EntityPlayer : EntityLivingBase
             An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
+    }
+
+    public void EndAttackAnimation()
+    {
+        An_animator.SetBool("IsAttacking", false);
+        An_animator.SetBool("IsMelee", false);
     }
 }

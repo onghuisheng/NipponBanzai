@@ -58,8 +58,9 @@ public class AIAttackRanged : AIBase
         RaycastHit hitInfo;
 
         // Cast a ray towards the player, ignoring all objects in the Enemies layer
-        Vector3 colliderCenter = ent_main.GetComponent<Collider>().bounds.center;
-        if (Physics.Raycast(colliderCenter, (ep_player.transform.position - colliderCenter), out hitInfo, f_attack_range, ignoreEnemiesMask))
+        Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;
+        Vector3 playerCenter = ep_player.GetComponent<Collider>().bounds.center;
+        if (Physics.Raycast(enemyCenter, playerCenter, out hitInfo, f_attack_range, ignoreEnemiesMask))
         {
             if (hitInfo.collider.tag != "Player")
             {
@@ -69,7 +70,7 @@ public class AIAttackRanged : AIBase
 
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        if (animatorState.IsName("Attack"))
+        if (animatorState.IsTag("Attack"))
         {
             ent_main.B_isAttacking = true;
             return true;
@@ -88,13 +89,13 @@ public class AIAttackRanged : AIBase
     {
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        if (animatorState.IsName("Attack"))
+        if (animatorState.IsTag("Attack"))
         {
             b_has_attacked = false;
             ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y);
         }
 
-        if (!animatorState.IsName("Attack") && !b_has_attacked)
+        if (!animatorState.IsTag("Attack") && !b_has_attacked)
         {
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y).OnComplete(() =>

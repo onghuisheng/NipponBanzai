@@ -89,125 +89,128 @@ public class TPCamera : MonoBehaviour
             {
                 case EntityPlayer.TARGET_STATE.AIMING:
                     {
-                        if (cg_canvas != null)
+                        if (!script_entityplayer.An_animator.GetBool("IsMelee"))
                         {
-                            if (cg_canvas.alpha < 1)
-                                cg_canvas.alpha += 0.05f;
-
-                            RaycastHit hit;
-                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                            if (Physics.Raycast(ray, out hit))
+                            if (cg_canvas != null)
                             {
-                                if (hit.collider != null && hit.collider.gameObject.GetComponent<EntityLivingBase>() != null)
-                                {
-                                    if (go_cross_hair.transform.localScale.x > 0.5f)
-                                    {
-                                        float _speed = 5;
-                                        go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
-                                        float _temp = 0.5f / (45 / _speed);
-                                        go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
-                                        //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+                                if (cg_canvas.alpha < 1)
+                                    cg_canvas.alpha += 0.05f;
 
-                                        //Debug.Log("Sizing Down");
+                                RaycastHit hit;
+                                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                                if (Physics.Raycast(ray, out hit))
+                                {
+                                    if (hit.collider != null && hit.collider.gameObject.GetComponent<EntityLivingBase>() != null)
+                                    {
+                                        if (go_cross_hair.transform.localScale.x > 0.5f)
+                                        {
+                                            float _speed = 5;
+                                            go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
+                                            float _temp = 0.5f / (45 / _speed);
+                                            go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
+                                            //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+
+                                            //Debug.Log("Sizing Down");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (go_cross_hair.transform.localScale.x < 1)
+                                        {
+                                            float _speed = 5;
+                                            go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
+                                            float _temp = 0.5f / (45 / _speed);
+                                            go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
+                                            // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+
+                                            //Debug.Log("Sizing Up");
+                                        }
                                     }
                                 }
                                 else
                                 {
                                     if (go_cross_hair.transform.localScale.x < 1)
                                     {
-                                        float _speed = 5;
+                                        float _speed = 3;
                                         go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
                                         float _temp = 0.5f / (45 / _speed);
                                         go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
-                                       // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+                                        img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
                                         //Debug.Log("Sizing Up");
                                     }
                                 }
                             }
-                            else
-                            {
-                                if (go_cross_hair.transform.localScale.x < 1)
-                                {
-                                    float _speed = 3;
-                                    go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
-                                    float _temp = 0.5f / (45 / _speed);
-                                    go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
-                                    img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                    //Debug.Log("Sizing Up");
+                            if (f_zoomed < f_zoomed_dist)
+                            {
+                                f_zoomed += (f_speed_of_zooming * Time.deltaTime);
+                                transform.position -= (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+
+                                if (f_zoomed > f_zoomed_dist)
+                                {
+                                    float minusor = f_zoomed - f_zoomed_dist;
+
+                                    f_zoomed -= minusor;
+                                    transform.position += (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * minusor;  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
+                                }
+
+                                q_prev_rotation = transform.rotation;
+                                b_is_zoomed = true;
+                            }
+
+                            //transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
+                            go_parent.transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
+
+
+                            // Debug.Log(transform.position.y);
+
+                            if (transform.position.y > -0.5f && transform.position.y < 4.3f)
+                            {
+                                go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
+                            }
+                            go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+
+                            Vector3 cubeTOCam = transform.position - v3_target_position;
+                            Vector3 camToCube = -cubeTOCam;
+                            camToCube.y = transform.position.y;
+
+                            // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
+
+                            if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict - f_Xrestrict_up && gameObject.transform.position.y > v3_target_position.y)
+                            {
+                                if (-Input.GetAxis("Mouse Y") > 0)
+                                {
+                                    if (gameObject.transform.position.y > v3_target_position.y)
+                                    {
+                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                    }
                                 }
                             }
-                        }
-
-                        if (f_zoomed < f_zoomed_dist)
-                        {
-                            f_zoomed += (f_speed_of_zooming * Time.deltaTime);
-                            transform.position -= (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * (f_speed_of_zooming * Time.deltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
-
-                            if(f_zoomed > f_zoomed_dist)
+                            else if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict && gameObject.transform.position.y < v3_target_position.y)
                             {
-                                float minusor = f_zoomed - f_zoomed_dist;
-
-                                f_zoomed -= minusor;
-                                transform.position += (transform.position - (v3_target_position + (go_parent.transform.right.normalized * 2))).normalized * minusor;  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable
-                            }
-
-                            q_prev_rotation = transform.rotation;
-                            b_is_zoomed = true;
-                        }
-
-                       //transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
-                        go_parent.transform.LookAt((v3_target_position + (transform.right.normalized * 2)));
-
-
-                        Debug.Log(transform.position.y);
-
-                        if (transform.position.y > -0.5f && transform.position.y < 4.3f)
-                        {
-                            go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.deltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
-                        }
-                        go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
-
-                        Vector3 cubeTOCam = transform.position - v3_target_position;
-                        Vector3 camToCube = -cubeTOCam;
-                        camToCube.y = transform.position.y;
-
-                        // Debug.Log(Vector3.Angle(cubeTOCam, camToCube));
-
-                        if(Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict - f_Xrestrict_up && gameObject.transform.position.y > v3_target_position.y)
-                        {
-                            if (-Input.GetAxis("Mouse Y") > 0)
-                            {
-                                if (gameObject.transform.position.y > v3_target_position.y)
+                                if (-Input.GetAxis("Mouse Y") < 0)
                                 {
-                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                    if (gameObject.transform.position.y < v3_target_position.y)
+                                    {
+                                        go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
+                                    }
                                 }
                             }
-                        }
-                        else if (Vector3.Angle(cubeTOCam, camToCube) < f_Xrestrict && gameObject.transform.position.y < v3_target_position.y)
-                        {
-                           if (-Input.GetAxis("Mouse Y") < 0)
+
+                            Vector3 forward = go_parent.transform.forward;
+                            Vector3 toOther = transform.position - go_parent.transform.position;
+
+                            if (Vector3.Dot(forward, toOther) < 0)
                             {
-                                if (gameObject.transform.position.y < v3_target_position.y)
-                                {
-                                    go_parent.transform.RotateAround(v3_target_position, transform.right, -30 * Time.deltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
-                                }
+                                transform.position = go_parent.transform.position;
                             }
+
+                            //Debug.Log("Child position: " + transform.position);
+                            //Debug.Log("Parent position: " + go_parent.transform.position);
                         }
-
-                        Vector3 forward = go_parent.transform.forward;
-                        Vector3 toOther = transform.position - go_parent.transform.position;
-
-                        if (Vector3.Dot(forward, toOther) < 0)
-                        {
-                            transform.position = go_parent.transform.position;
-                        }
-
-                        //Debug.Log("Child position: " + transform.position);
-                        //Debug.Log("Parent position: " + go_parent.transform.position);
+                        break;
                     }
-                    break;
 
                 case EntityPlayer.TARGET_STATE.NOT_AIMING:
                     {
