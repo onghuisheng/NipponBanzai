@@ -30,7 +30,7 @@ public class HitboxTrigger : EntityTrigger
 
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (dmgs_damageObj.GetSourceTag() != null)
         {
