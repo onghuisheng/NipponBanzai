@@ -26,10 +26,11 @@ public class EntityMiniBoss : EntityEnemy
 
         An_animator.Rebind();
 
-        ai_throw_poison = new AIThrowPoison(2, this, typeof(EntityPlayer), 10, 6);
+        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
 
-        RegisterAITask(ai_throw_poison);
-        RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 3));
+        RegisterAITask(new AIAttackMelee(3, this, typeof(EntityPlayer), 3));
+        RegisterAITask(ai_throw_poison = new AIThrowPoison(2, this, typeof(EntityPlayer), 10, 6));
+        RegisterAITask(new AISpawnMobs(3, this, typeof(EntityPlayer), 10, 10, enemiesToSpawn));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 
         GetComponent<Collider>().isTrigger = false;

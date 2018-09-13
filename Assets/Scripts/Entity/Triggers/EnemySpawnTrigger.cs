@@ -136,7 +136,7 @@ public class EnemySpawnTrigger : EntityTrigger
     Vector3 RandomInsideBox(EntityLivingBase enemy, int maxAttempt)
     {
         BoxCollider collider = GetComponent<BoxCollider>();
-
+;
         Vector3 spawnPos = new Vector3(
             Random.Range(collider.bounds.min.x, collider.bounds.max.x),
             transform.position.y,

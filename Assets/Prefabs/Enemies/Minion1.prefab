@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4041800699670920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapB1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4397893650953980}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapB2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4649662331873622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4628880794325126}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4559687616750148}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4697546263597576}
   - component: {fileID: 137681423317891130}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4221967282792938}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4209810015667268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4024532107322000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4237543096450152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4406022804692716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4586342572927314}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4438159913679488}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapA1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4041684936863444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,13 +235,13 @@ GameObject:
   - component: {fileID: 136802637736259154}
   - component: {fileID: 195077775845750046}
   - component: {fileID: 114602288501204704}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Minion1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1296136845467868
 GameObject:
   m_ObjectHideFlags: 1
@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4954954885760426}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4035277607872198}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4185846756146442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000733992053978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapA2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4231241651623858}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4501395867678310}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4549599997284210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4228866191202620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4818842134339708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4769322998873558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175632481315364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapC2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4655402691885492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4080995139542718}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4210093220437092}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapC1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4344661250711236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4614431659942382}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4306551880775128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapA1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4824789810377532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4713009940021130}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapC1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4343674387891516}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4585765253461538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapA3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4779820542780960}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapB2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4642199822318172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4047454312546108}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_SpineMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4949056064312370}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Spine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4753300371952578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4777879047085488}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4837491402759848}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4647814113518914}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapC2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4748525391160308}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4180680858692322}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapB3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4992726383207458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Spine5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4168839095034976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_Wingbone13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +745,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4931616081965014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapA3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +760,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4473870381721338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: M1_Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4865536253438392}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapB3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +790,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4672246365441668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapB1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +805,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4772087010394344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_Wingbone5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4058194685617154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_M1_WingFlapD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4817637419902338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_M1_WingFlapA2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,8 +1243,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1259337521567822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.02, y: -0.96, z: 9.49}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -4.1965976, y: -1.31, z: -0.71320766}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4047454312546108}
   - {fileID: 4697546263597576}
@@ -1626,7 +1626,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!95 &95236985286265488
 Animator:
@@ -1666,7 +1666,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Height: 2.05
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -1779,7 +1779,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1259337521567822}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
