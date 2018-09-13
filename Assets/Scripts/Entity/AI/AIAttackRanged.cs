@@ -60,7 +60,7 @@ public class AIAttackRanged : AIBase
         // Cast a ray towards the player, ignoring all objects in the Enemies layer
         Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;
         Vector3 playerCenter = ep_player.GetComponent<Collider>().bounds.center;
-        if (Physics.Raycast(enemyCenter, playerCenter, out hitInfo, f_attack_range, ignoreEnemiesMask))
+        if (Physics.Raycast(enemyCenter, playerCenter - enemyCenter, out hitInfo, f_attack_range, ignoreEnemiesMask))
         {
             if (hitInfo.collider.tag != "Player")
             {
@@ -69,7 +69,7 @@ public class AIAttackRanged : AIBase
         }
 
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
-
+            
         if (animatorState.IsTag("Attack"))
         {
             ent_main.B_isAttacking = true;

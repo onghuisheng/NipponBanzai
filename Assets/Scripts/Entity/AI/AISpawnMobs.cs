@@ -2,37 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AISpawnMobs : AIBase {
+public class AISpawnMobs : AIBase
+{
 
     private float
-     f_range,
-     f_stateTimer,
-     f_maxStateTimer,
+     f_spawnRadius,
      f_cooldown,
-     f_stateCooldownTimer;
+     f_nextCooldownTime;
 
     private System.Type
         type_target;
 
-    private bool
-        b_has_attacked;
+    List<ObjectPool.ENEMY> list_enemiesToSpawn;
+    
 
-
-    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _cooldown)
+    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _spawnRadius, float _cooldown, List<ObjectPool.ENEMY> _enemiesToSpawn)
     {
         i_priority = _priority;
         ent_main = _entity;
         s_ID = "Combat";
-        s_display_name = "Boss Spawn";
+        s_display_name = "Spawn Mobs";
         b_is_interruptable = false;
-        f_range = _range;
+        f_spawnRadius = _spawnRadius;
         type_target = _type;
         f_cooldown = _cooldown;
-        f_maxStateTimer = _stateTime;
-
-        f_stateCooldownTimer = 0;
-
-        b_has_attacked = false;
+        list_enemiesToSpawn = _enemiesToSpawn;
     }
 
     public override bool StartAI()
@@ -43,7 +37,17 @@ public class AISpawnMobs : AIBase {
 
     public override bool ShouldContinueAI()
     {
-        throw new System.NotImplementedException();
+        if (Time.time < f_nextCooldownTime)
+        {
+            return false;
+        }
+        else
+        {
+            
+
+
+            return true;
+        }
     }
 
 
