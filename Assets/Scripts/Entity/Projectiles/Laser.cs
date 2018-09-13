@@ -21,7 +21,9 @@ public class Laser : EntityProjectiles
         go_target;
 
     private bool
+        b_isRotatable,
         b_isDirect; //Set is the laser a direct fire to the target.
+    
 
     //Set up projectile with a end point in mind.
     public void SetUpProjectile(float _lifetime, float _damage, float _speed, Vector3 _start, Vector3 _end, Vector3 _size, GameObject _source, GameObject _target)
@@ -46,7 +48,7 @@ public class Laser : EntityProjectiles
     }
 
     //Set up projectile with no end point in mind only direction.
-    public void SetUpProjectile(float _lifetime, float _damage, float _speed, Vector3 _start, Vector3 _direction, Vector3 _size, GameObject _source)
+    public void SetUpProjectile(float _lifetime, float _damage, float _speed, Vector3 _start, Vector3 _direction, Vector3 _size, GameObject _source, bool _isRotatable = false)
     {
         base.SetUpProjectile(_source, _lifetime, _damage, _speed, _size, _direction);
 
@@ -56,6 +58,7 @@ public class Laser : EntityProjectiles
         v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
+        b_isRotatable = true;
         b_isDirect = false;
 
         f_distance = Vector3.Distance(v3_startPos, v3_endPos);
@@ -89,7 +92,16 @@ public class Laser : EntityProjectiles
             v3_endPos = go_target.transform.position;
         }
 
+        if (b_isRotatable)
+            UpdateRotation();
+
         UpdatePosition();
+    }
+
+    public void UpdateRotation()
+    {
+        Vector3 angle = Quaternion.Euler(90, 0, 0) * Vector3.forward;
+        v3_endPos = RotatePointAroundPivot(v3_endPos, v3_startPos, angle);
     }
 
     public void UpdatePosition()
@@ -114,15 +126,25 @@ public class Laser : EntityProjectiles
         RaycastHit hit;
 
         Vector3 direction = v3_currEndPos - v3_startPos;
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
 
-        if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit))
+        if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit, ignoreEnemiesMask))
         {
             v3_currEndPos = hit.point;
 
             if (hit.collider.gameObject.CompareTag("Player"))
             {
                 //Spawn Hitbox to damage player.
+                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, transform.localScale, v3_currEndPos, transform.rotation, 0.1f);
             }
         }
+    }
+
+    public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
+    {
+        Vector3 dir = point - pivot; // get point direction relative to pivot
+        dir = Quaternion.Euler(angles) * dir; // rotate it
+        point = dir + pivot; // calculate rotated point
+        return point;
     }
 }

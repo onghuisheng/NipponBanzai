@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class EntityBoss : EntityEnemy {
 
+    public enum BossState
+    {
+        FULLHEALTH,
+        HALFHEALTH,
+        QUARTERHEATLH
+    };
+
     public enum AttackState
     {
-        None,
-        Gravity,
-        Laser,
-        Arty
+        NONE,
+        GRAVITY,
+        LASER,
+        ARTY
     };
 
     AttackState currentAttState;
@@ -110,14 +117,16 @@ public class EntityBoss : EntityEnemy {
         B_isDodging = false;
         B_isHit = false;
 
+        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MINIBOSS };
+
         //TODO: Set Animation Values
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
+        //RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
         RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 5, 10));
-        RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
-        //RegisterAITask(new AIRoam(3, this, 5.0f));
+        //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
+        //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
     }

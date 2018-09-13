@@ -58,7 +58,7 @@ public class AIArtyState : AIBase
     {
         ent_main.B_isVulnerable = true;
 
-        script_boss.As_currentAttState = EntityBoss.AttackState.Arty;
+        script_boss.As_currentAttState = EntityBoss.AttackState.ARTY;
 
         Reset();
 
@@ -72,7 +72,7 @@ public class AIArtyState : AIBase
         Reset();
 
 
-        script_boss.As_currentAttState = EntityBoss.AttackState.None;
+        script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
         return true;
