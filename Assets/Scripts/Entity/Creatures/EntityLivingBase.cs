@@ -422,6 +422,8 @@ public abstract class EntityLivingBase : Entity
             if (F_hit_timer <= 0)
                 B_isHit = false;
         }
+
+        UpdateYOffset();
     }
 
     public Stats GetStats()
@@ -487,6 +489,40 @@ public abstract class EntityLivingBase : Entity
     public void ClearAITask()
     {
         dic_AI_list.Clear();
+    }
+
+    public virtual void UpdateYOffset()
+    {
+        float _gravity = -9.8f;
+
+        if (Physics.Raycast(
+            GetPosition(),
+            -gameObject.transform.up,
+            out _raycast
+        ))
+        {
+            f_ground_height = _raycast.point.y;
+        }
+
+        if (System.Math.Round(f_ground_height, 2) == System.Math.Round(GetPosition().y, 2))
+        {
+            B_isGrounded = true;
+            // Debug.Log("Grounded");
+        }
+        else
+        {
+            B_isGrounded = false;
+            // Debug.Log("Not Grounded");
+        }
+
+        if (!B_isGrounded)
+            SetPosition(new Vector3(GetPosition().x, GetPosition().y + (_gravity * F_mass * Time.deltaTime), GetPosition().z));
+
+        if (GetPosition().y < f_ground_height)
+        {
+            SetPosition(new Vector3(GetPosition().x, f_ground_height, GetPosition().z));
+        }
+
     }
 
     public virtual void OnAttack() { }
