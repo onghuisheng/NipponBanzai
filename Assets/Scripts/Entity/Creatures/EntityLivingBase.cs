@@ -159,6 +159,7 @@ public abstract class EntityLivingBase : Entity
         f_regen_amount,
         f_death_timer,
         f_AI_task_change_timer,
+        f_y_velocity,
         f_ground_height;
 
     private RaycastHit
@@ -329,6 +330,9 @@ public abstract class EntityLivingBase : Entity
         F_death_timer = 0.0f;
         F_AI_task_change_timer = 0.0f;
         F_regen_amount = 0;
+        f_y_velocity = 0;
+        B_isGrounded = true;
+
 
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
@@ -535,11 +539,15 @@ public abstract class EntityLivingBase : Entity
         }
 
         if (!B_isGrounded)
-            SetPosition(new Vector3(GetPosition().x, GetPosition().y + (_gravity * St_stats.F_mass * Time.deltaTime), GetPosition().z));
+        {
+            f_y_velocity += _gravity * St_stats.F_mass * Time.deltaTime;
+            SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_y_velocity, GetPosition().z));
+        }
 
         if (GetPosition().y < f_ground_height)
         {
             SetPosition(new Vector3(GetPosition().x, f_ground_height, GetPosition().z));
+            f_y_velocity = 0;
         }
 
     }
