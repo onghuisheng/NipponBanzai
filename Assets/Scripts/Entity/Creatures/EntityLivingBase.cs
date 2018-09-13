@@ -521,10 +521,14 @@ public abstract class EntityLivingBase : Entity
     {
         float _gravity = -9.8f;
 
+        int layer = 1 << LayerMask.NameToLayer("Environment");
+
         if (Physics.Raycast(
-            GetPosition(),
-            -gameObject.transform.up,
-            out rch_raycast
+            new Vector3(GetPosition().x, GetPosition().y + 2, GetPosition().z),
+            Vector3.down,
+            out rch_raycast,
+            Mathf.Infinity,
+            layer
         ))
         {
             f_ground_height = rch_raycast.point.y;
