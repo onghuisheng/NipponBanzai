@@ -59,7 +59,7 @@ public class HitboxTrigger : EntityTrigger
         }
     }
 
-    public void SetHitbox(DamageSource _dmgsrc, Vector3 _size, float _timer = 1.0f, float _iframe_timer = 0.3f)
+    public void SetHitbox(DamageSource _dmgsrc, Vector3 _size, float _timer = 0.1f, float _iframe_timer = 0.3f)
     {
         f_timer = _timer;
         f_iframe_timer = _iframe_timer;

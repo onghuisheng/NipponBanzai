@@ -28,14 +28,9 @@ public class TimeHandler : Singleton<TimeHandler>
 
         //Debug.Log("Timing: " + Time.timeScale);
 
-        if(Time.timeScale != 1)
+        if (f_difference < 0)
         {
-            Time.timeScale += (((float)i_percentage_recovery_speed / 100.0f) * f_difference) * Time.unscaledDeltaTime;
-        }
-
-        if(f_difference < 0)
-        {
-            if(Time.timeScale < 1)
+            if (Time.timeScale < 1)
             {
                 Time.timeScale = 1;
             }
@@ -47,5 +42,15 @@ public class TimeHandler : Singleton<TimeHandler>
                 Time.timeScale = 1;
             }
         }
+
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale += (((float)i_percentage_recovery_speed / 100.0f) * f_difference) * Time.unscaledDeltaTime;
+        }       
+    }
+
+    public bool IsTimeScaleDefault()
+    {
+        return Time.timeScale == 1;
     }
 }

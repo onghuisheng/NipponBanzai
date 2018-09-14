@@ -435,7 +435,7 @@ public class EntityPlayer : EntityLivingBase
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
 
-        Debug.Log("Player hit guy: " + _dmgsrc.GetSourceTag());
+        //Debug.Log("Player hit guy: " + _dmgsrc.GetSourceTag());
 
         if (!IsDead() && !B_isHit && player_state != State.DASHING)
         {
@@ -447,8 +447,8 @@ public class EntityPlayer : EntityLivingBase
         else if(player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
         {
             ResetOnHit(_timer);
-            TimeHandler.GetInstance().AffectTime(0.1f, 20);
-            Debug.Log("Slowing down");
+            TimeHandler.GetInstance().AffectTime(0.1f, 10);
+            //Debug.Log("Slowing down");
         }
     }
 

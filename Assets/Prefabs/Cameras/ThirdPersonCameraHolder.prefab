@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 124442496527296586}
   - component: {fileID: 81080608349720240}
   - component: {fileID: 114276042705317660}
+  - component: {fileID: 114611523307240314}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -166,6 +167,7 @@ MonoBehaviour:
   go_cross_hair: {fileID: 1466995226530442}
   go_canvas: {fileID: 1676522864139508}
   go_parent: {fileID: 1048287882315034}
+  ppp_profile: {fileID: 11400000, guid: d982e879ff67b4d3fb6522d08c3cd5af, type: 2}
   f_zoomed: 0
   f_zoomed_dist: 0
   f_speed_of_zooming: 0
@@ -173,6 +175,18 @@ MonoBehaviour:
   f_speed_of_rotation: 4
   f_Xrestrict: 100
   f_Xrestrict_up: 0
+--- !u!114 &114611523307240314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416513534517262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d982e879ff67b4d3fb6522d08c3cd5af, type: 2}
 --- !u!114 &114665761092113958
 MonoBehaviour:
   m_ObjectHideFlags: 1

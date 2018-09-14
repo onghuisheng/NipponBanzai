@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.PostProcessing;
 
 public class TPCamera : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class TPCamera : MonoBehaviour
     private GameObject go_target;   //Current camera's target
     private EntityPlayer
         script_entityplayer;
+
+    [SerializeField]
+    private PostProcessingProfile
+        ppp_profile;
 
     [SerializeField]
     private float
@@ -81,6 +86,26 @@ public class TPCamera : MonoBehaviour
 
 
     /*------------------------------------------------------ UPDATES ------------------------------------------------------*/
+    void Update()
+    {
+        //Camera Effect
+        if (ppp_profile.vignette.enabled)
+        {
+            VignetteModel.Settings _setting = ppp_profile.vignette.settings;
+            _setting.intensity = 1 - Time.timeScale;
+            Mathf.Clamp(_setting.intensity, 0.1f, 0.9f);
+            ppp_profile.vignette.settings = _setting;
+        }
+
+        if (ppp_profile.grain.enabled)
+        {
+            GrainModel.Settings _setting = ppp_profile.grain.settings;
+            _setting.intensity = 1 - (script_entityplayer.St_stats.F_health / script_entityplayer.St_stats.F_max_health);
+            Mathf.Clamp(_setting.intensity, 0.1f, 0.9f);
+            ppp_profile.grain.settings = _setting;
+        }
+    }
+
     void LateUpdate()
     {
         if (script_entityplayer != null)
