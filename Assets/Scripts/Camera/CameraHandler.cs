@@ -39,13 +39,38 @@ public class CameraHandler : Singleton<CameraHandler>
 
     private void Start()
     {
-        ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
-        ChangeCamera(CameraType.ThirdPerson);
+        // Sets up the camera type on start up
+        switch (SceneHandler.GetInstance().GetCurrentSceneType())
+        {
+            case SceneHandler.SceneType.MainMenu:
+                // TODO: change this back to main menu camera when not testing
+                // ChangeCamera(CameraType.MainMenu);
+                ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
+                ChangeCamera(CameraType.ThirdPerson);
+                break;
+            case SceneHandler.SceneType.Level1:
+            case SceneHandler.SceneType.Level2:
+                ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
+                ChangeCamera(CameraType.ThirdPerson);
+                break;
+            default:
+                Debug.LogError("Unknown sceneType");
+                break;
+        }
     }
 
     protected override void Update()
     {
         base.Update();
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            CinematicPathing.GetPathWithName("MyFirstPath").DoCinematicPath(() =>
+            {
+                ChangeCamera(CameraType.ThirdPerson);
+            });
+        }
+
     }
 
     public void ChangeCamera(CameraType _type)
@@ -69,20 +94,69 @@ public class CameraHandler : Singleton<CameraHandler>
         return enum_currentCamType;
     }
 
-    public void DoCinematicPath(Vector3 _startPos, Transform[] _wayPoints, float _moveSpeed, Ease easing = Ease.Linear, Transform _lookAtPos = null, System.Action onComplete = null, System.Action<int> onWayPointChange = null)
+    public void DoCinematicPath(CinematicPathing paths, System.Action onComplete = null, System.Action<int> onWayPointChange = null, System.Action onUpdate = null)
     {
-        ChangeCamera(CameraType.Cinematic);
+        var wayPointNodes = paths.GetPathNodes();
 
-        List<Vector3> wayPoints = new List<Vector3>();
-
-        foreach (Transform point in _wayPoints)
+        // Abort if paths are empty or null
+        if (paths == null || wayPointNodes.Count == 0)
         {
-            wayPoints.Add(point.position);
+            Debug.LogError("Cinematic Paths cannot be null or empty!");
+            return;
         }
 
-        go_currentCamera.transform.DOPath(wayPoints.ToArray(), _moveSpeed, PathType.CatmullRom, PathMode.Full3D).SetSpeedBased(true).SetLookAt(_lookAtPos)
-            .OnComplete(() => { if (onComplete != null) onComplete.Invoke(); })
-            .OnWaypointChange((index) => { if (onWayPointChange != null) onWayPointChange.Invoke(index); });
+        // Start the cinematic camera position at the previous camera's position
+        GameObject cinematicCamera = list_cameras[(int)CameraType.Cinematic];
+        cinematicCamera.transform.position = GetCurrentCamera().transform.position;
+        cinematicCamera.transform.rotation = GetCurrentCamera().transform.rotation;
+
+        List<Vector3> wayPoints = paths.GetPathPositions();
+
+        Transform initialTransform = GetCurrentCamera().transform;
+
+        if (paths.loopbackToInitial)
+            wayPoints.Add(initialTransform.position);
+
+        // Toggle cinematic camera before starting animation
+        ChangeCamera(CameraType.Cinematic);
+
+        CinematicPathNode firstNode = wayPointNodes[0];
+
+        var tweener = go_currentCamera.transform.DOPath(wayPoints.ToArray(), paths.moveSpeed, paths.pathType, PathMode.Full3D).SetEase(paths.easeType).SetSpeedBased(true);
+
+        tweener
+        .OnUpdate(() =>
+        {
+            if (onUpdate != null)
+                onUpdate.Invoke();
+
+            go_currentCamera.transform.DOLookAt(paths.lookAtTarget.position, 0.1f);
+        })
+        .OnComplete(() =>
+        {
+            if (paths.loopbackToInitial)
+            {
+                // Wait for the current camera to merge with the initial camera before invoking complete
+                GetCurrentCamera().transform.DORotate(initialTransform.rotation.eulerAngles, 1).OnComplete(() =>
+                {
+                    if (onComplete != null)
+                        onComplete.Invoke();
+                });
+            }
+            else
+            {
+                if (onComplete != null)
+                    onComplete.Invoke();
+            }
+        })
+        .OnWaypointChange((index) =>
+        {
+            if (onWayPointChange != null)
+                onWayPointChange.Invoke(index);
+
+
+        });
+
     }
 
 }

@@ -9,10 +9,13 @@ public class SceneHandler : Singleton<SceneHandler>
 
     public enum SceneType : int
     {
+        None,
         MainMenu,
         Level1,
         Level2,
     }
+
+    private SceneType currentSceneType;
 
     public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete)
     {
@@ -47,6 +50,21 @@ public class SceneHandler : Singleton<SceneHandler>
 
         if (onComplete != null)
             onComplete.Invoke();
+    }
+
+    public SceneType GetCurrentSceneType()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "MainMenu":
+                return SceneType.MainMenu;
+            case "Level1":
+                return SceneType.Level1;
+            case "Level2":
+                return SceneType.Level2;
+            default:
+                return SceneType.None;
+        }
     }
 
 }
