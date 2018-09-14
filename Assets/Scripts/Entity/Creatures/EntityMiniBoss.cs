@@ -12,30 +12,6 @@ public class EntityMiniBoss : EntityEnemy
     protected override void Start()
     {
         base.Start();
-
-        ClearAITask();
-
-        St_stats.F_max_health = 50;
-        St_stats.F_health = St_stats.F_max_health;
-        St_stats.F_speed = 3;
-        St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 2.0f;
-        St_stats.F_mass = 2.0f;
-
-        B_isHit = false;
-
-        An_animator.Rebind();
-
-        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
-
-        RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 1.04f, enemiesToSpawn));
-        RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 10, 6));
-        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
-
-        GetComponent<Collider>().isTrigger = false;
-
-        St_stats.S_name = "MiniBossBro";
     }
 
     protected override void Update()
@@ -47,7 +23,7 @@ public class EntityMiniBoss : EntityEnemy
         else
         {
             F_death_timer += Time.deltaTime;
-
+                
             if (!An_animator.GetBool("Dead"))
             {
                 EndAndClearAITask();
@@ -95,7 +71,31 @@ public class EntityMiniBoss : EntityEnemy
 
     public override void HardReset()
     {
-        Start();
+        base.HardReset();
+
+        ClearAITask();
+
+        St_stats.F_max_health = 50;
+        St_stats.F_health = St_stats.F_max_health;
+        St_stats.F_speed = 3;
+        St_stats.F_defence = 20.0f;
+        St_stats.F_damage = 2.0f;
+        St_stats.F_mass = 2.0f;
+
+        B_isHit = false;
+
+        An_animator.Rebind();
+
+        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
+
+        RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 1.04f, enemiesToSpawn));
+        RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 10, 6));
+        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
+
+        GetComponent<Collider>().isTrigger = false;
+
+        St_stats.S_name = "MiniBossBro";
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)

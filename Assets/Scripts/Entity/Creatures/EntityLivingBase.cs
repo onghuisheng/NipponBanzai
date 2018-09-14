@@ -146,6 +146,9 @@ public abstract class EntityLivingBase : Entity
     private Stats
         st_stats = new Stats();
 
+    private Inventory
+        inven_inventory;
+
     private bool
        b_isHit,
        b_isAttacking,
@@ -326,17 +329,8 @@ public abstract class EntityLivingBase : Entity
 
     protected override void Start ()
     {
+        HardReset();
         base.Start();
-        F_death_timer = 0.0f;
-        F_AI_task_change_timer = 0.0f;
-        F_regen_amount = 0;
-        f_y_velocity = 0;
-        B_isGrounded = true;
-
-
-        An_animator = GetComponent<Animator>();
-        Rb_rigidbody = GetComponent<Rigidbody>();
-        rch_raycast = new RaycastHit();
     }
 
     protected override void Update()
@@ -560,6 +554,30 @@ public abstract class EntityLivingBase : Entity
         //Debug.Log("Velocity: " + f_y_velocity);
         //Debug.Log("Ground Height: " + System.Math.Round(f_ground_height, 2));
         //Debug.Log("Player Height: " + System.Math.Round(GetPosition().y, 2));
+    }
+
+    public override void HardReset()
+    {
+        base.HardReset();
+
+        F_death_timer = 0.0f;
+        F_AI_task_change_timer = 0.0f;
+        F_regen_amount = 0;
+        f_y_velocity = 0;
+        B_isGrounded = true;
+
+
+        An_animator = GetComponent<Animator>();
+        Rb_rigidbody = GetComponent<Rigidbody>();
+        rch_raycast = new RaycastHit();
+
+        inven_inventory = new Inventory();
+        inven_inventory.SetUpInventory();
+    }
+
+    public virtual Inventory GetInventory()
+    {
+        return inven_inventory;
     }
 
     public virtual void OnAttack() { }

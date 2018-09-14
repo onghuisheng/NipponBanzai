@@ -9,7 +9,7 @@ public abstract class Entity : MonoBehaviour
 
 	protected virtual void Start ()
     {
-        rb_rigidbody = gameObject.GetComponent<Rigidbody>();
+        HardReset();
     }
 
     protected virtual void Update()
@@ -101,5 +101,10 @@ public abstract class Entity : MonoBehaviour
         {
             rb_rigidbody = value;
         }
+    }
+
+    public virtual void HardReset()
+    {
+        rb_rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 }

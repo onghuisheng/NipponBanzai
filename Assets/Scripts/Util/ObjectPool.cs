@@ -264,7 +264,7 @@ public class ObjectPool : Singleton<ObjectPool>
         foreach (GameObject i in entity_pool_list)
         {
             if (i.activeSelf)
-            {
+            {          
                 list.Add(i);
             }
         }
@@ -349,6 +349,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!entity_obj.activeSelf && entity_obj.name.Equals(entity_list[(int)_type].name + "(Clone)"))
             {
+                entity_obj.GetComponent<Entity>().HardReset();
                 entity_obj.SetActive(true);
                 return entity_obj;
             }
@@ -369,6 +370,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!enviroment_obj.activeSelf && enviroment_obj.name.Equals(enviroment_list[(int)_type].name + "(Clone)"))
             {
+                enviroment_obj.GetComponent<Entity>().HardReset();
                 enviroment_obj.SetActive(true);
                 return enviroment_obj;
             }
@@ -389,6 +391,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!projectile_obj.activeSelf && projectile_obj.name.Equals(projectile_list[(int)_type].name + "(Clone)"))
             {
+                projectile_obj.GetComponent<Entity>().HardReset();
                 projectile_obj.SetActive(true);
                 return projectile_obj;
             }
@@ -410,6 +413,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!hitbox_obj.activeSelf)
             {
+                hitbox_obj.GetComponent<Entity>().HardReset();
                 hitbox_obj.SetActive(true);
                 return hitbox_obj;
             }
@@ -431,6 +435,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!item_obj.activeSelf)
             {
+                item_obj.GetComponent<Entity>().HardReset();
                 item_obj.SetActive(true);
                 return item_obj;
             }

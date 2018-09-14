@@ -9,26 +9,7 @@ public class EntityRanged : EntityEnemy
 
     protected override void Start()
     {
-        base.Start();
-
-        ClearAITask();
-
-        St_stats.F_max_health = 50;
-        St_stats.F_health = St_stats.F_max_health;
-        St_stats.F_speed = 3;
-        St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 2.0f;
-        St_stats.F_mass = 2.0f;
-
-        B_isHit = false;
-
-        An_animator.Rebind();
-        RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
-
-        GetComponent<Collider>().isTrigger = false;
-
-        St_stats.S_name = "RangedDude";
+        base.Start();    
     }
 
     protected override void Update()
@@ -68,7 +49,26 @@ public class EntityRanged : EntityEnemy
 
     public override void HardReset()
     {
-        Start();
+        base.HardReset();
+
+        ClearAITask();
+
+        St_stats.F_max_health = 50;
+        St_stats.F_health = St_stats.F_max_health;
+        St_stats.F_speed = 3;
+        St_stats.F_defence = 20.0f;
+        St_stats.F_damage = 2.0f;
+        St_stats.F_mass = 2.0f;
+
+        B_isHit = false;
+
+        An_animator.Rebind();
+        RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
+
+        GetComponent<Collider>().isTrigger = false;
+
+        St_stats.S_name = "RangedDude";
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)

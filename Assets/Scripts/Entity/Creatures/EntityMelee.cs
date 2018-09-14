@@ -9,27 +9,6 @@ public class EntityMelee : EntityEnemy
     protected override void Start()
     {
         base.Start();
-
-        ClearAITask();
-
-        St_stats.F_max_health = 50;
-        St_stats.F_health = St_stats.F_max_health;
-        St_stats.F_speed = 3;
-        St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 5.0f;
-        St_stats.F_mass = 2.0f;
-
-        B_isHit = false;
-
-        An_animator.Rebind();
-        // RegisterAITask(new AIIdle(2, this));
-        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
-        //RegisterAITask(new AIRoam(3, this, 5.0f));
-
-        GetComponent<Collider>().isTrigger = false;
-
-        St_stats.S_name = "MeleeDude";
     }
 
     protected override void Update()
@@ -53,7 +32,13 @@ public class EntityMelee : EntityEnemy
             {
                 gameObject.SetActive(false);
 
-                ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x, GetPosition().y + 0.5f, GetPosition().z), 30, ItemHandler.GetItem((Item.ITEM_TYPE)Random.Range(0, (int)Item.ITEM_TYPE.TOTAL - 1)));
+                foreach(var type in GetInventory().GetInventory())
+                {
+                    for(int i = 0; i < type.Value; ++i)
+                    {
+                        ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x, GetPosition().y + 0.5f, GetPosition().z), 30, ItemHandler.GetItem(type.Key));
+                    }
+                }
             }
         }
     }
@@ -65,7 +50,30 @@ public class EntityMelee : EntityEnemy
 
     public override void HardReset()
     {
-        Start();
+        base.HardReset();
+
+        ClearAITask();
+
+        St_stats.F_max_health = 50;
+        St_stats.F_health = St_stats.F_max_health;
+        St_stats.F_speed = 3;
+        St_stats.F_defence = 20.0f;
+        St_stats.F_damage = 5.0f;
+        St_stats.F_mass = 2.0f;
+
+        B_isHit = false;
+
+        An_animator.Rebind();
+        // RegisterAITask(new AIIdle(2, this));
+        RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
+        //RegisterAITask(new AIRoam(3, this, 5.0f));
+
+        GetComponent<Collider>().isTrigger = false;
+
+        GetInventory().AddItemToInventory(Item.ITEM_TYPE.HEALTH_POTION, 50);
+
+        St_stats.S_name = "MeleeDude";
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)

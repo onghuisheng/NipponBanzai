@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EntityPickUps : Entity
 {
-
     private float
        f_lifetime,
        f_max_lifetime,
@@ -33,11 +32,6 @@ public class EntityPickUps : Entity
 
     private MeshRenderer
         mr_meshrenderer;
-
-    protected override void Start()
-    {
-        
-    }
 
     public virtual void SetUpPickUp(Vector3 _pos, float _lifetime, Item _id)
     {
