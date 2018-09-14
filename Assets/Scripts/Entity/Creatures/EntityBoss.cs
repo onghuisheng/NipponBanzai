@@ -57,7 +57,7 @@ public class EntityBoss : EntityEnemy {
         {
             F_death_timer += Time.deltaTime;
             //An_animator.SetBool("DeadTrigger", true);
-            dissolveRate += Time.deltaTime;
+            dissolveRate += Time.deltaTime * 0.2f;
             bossMat.SetFloat("_DissolveAmount", dissolveRate);
 
             if (F_death_timer > 5.0f)
