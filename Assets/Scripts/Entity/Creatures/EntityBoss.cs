@@ -16,7 +16,8 @@ public class EntityBoss : EntityEnemy {
         NONE,
         GRAVITY,
         LASER,
-        ARTY
+        ARTY,
+        SPINATTACK
     };
 
     AttackState currentAttState;
@@ -24,7 +25,6 @@ public class EntityBoss : EntityEnemy {
     float
         dissolveRate;
 
-    [SerializeField]
     Material
         bossMat;
 
@@ -56,8 +56,8 @@ public class EntityBoss : EntityEnemy {
         else
         {
             F_death_timer += Time.deltaTime;
-            //An_animator.SetBool("DeadTrigger", true);
-            dissolveRate += Time.deltaTime * 0.2f;
+            An_animator.SetBool("Dead", true);
+            dissolveRate += Time.deltaTime * 0.25f;
             bossMat.SetFloat("_DissolveAmount", dissolveRate);
 
             if (F_death_timer > 5.0f)
@@ -136,11 +136,26 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        //RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
-        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 5, 10));
+        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
+        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 5, 10));
         //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
         //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
+    }
+
+    public void StartAnimAiming()
+    {
+        An_animator.SetBool("Aiming", true);
+    }
+
+    public void EndAnimAiming()
+    {
+        An_animator.SetBool("Aiming", false);
+    }
+
+    public void SetAnimShooting(int _value)
+    {
+        An_animator.SetBool("Shooting", (_value == 1));
     }
 }

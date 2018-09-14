@@ -59,7 +59,6 @@ public class AIArtyState : AIBase
         ent_main.B_isVulnerable = true;
 
         script_boss.As_currentAttState = EntityBoss.AttackState.ARTY;
-
         Reset();
 
         return true;
@@ -71,7 +70,7 @@ public class AIArtyState : AIBase
         ent_main.B_isVulnerable = false;
         Reset();
 
-
+        ent_main.An_animator.SetBool("Shooting", false);
         script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
@@ -90,6 +89,7 @@ public class AIArtyState : AIBase
         // Breaking point for the arty state.
         if (f_stateTimer > f_maxStateTimer && i_shotToFire < 1)
         {
+            Debug.Log("Brek");
             i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
             f_stateCooldownTimer = 0;
             b_has_attacked = false;
@@ -165,7 +165,6 @@ public class AIArtyState : AIBase
             {
                 AimTarget();
             }
-
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }

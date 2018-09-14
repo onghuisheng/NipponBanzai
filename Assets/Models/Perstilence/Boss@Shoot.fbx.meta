@@ -1,0 +1,391 @@
+fileFormatVersion: 2
+guid: 335242c051cc41e42bbd26fcd5beef61
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Halo
+    100004: Head
+    100006: HeartBall_Jt
+    100008: Hip
+    100010: Hip_Ring
+    100012: L_BladeRingA_Btm
+    100014: L_BladeRingA_Top
+    100016: L_BladeRingB_Btm
+    100018: L_BladeRingB_Top
+    100020: L_BladeRingC_Btm
+    100022: L_BladeRingC_Top
+    100024: L_Chain_01
+    100026: L_Chain_02
+    100028: L_Chain_03
+    100030: L_Chain_04
+    100032: L_Chain_05
+    100034: L_Chain_06
+    100036: L_Chain_07
+    100038: L_Chain_08
+    100040: L_Chain_09
+    100042: L_Chain_10
+    100044: L_Chain_11
+    100046: L_Chain_12
+    100048: L_Chain_13
+    100050: L_Chain_14
+    100052: L_Chain_End
+    100054: L_Chain_Ring
+    100056: L_HeadCloth_Back
+    100058: L_HeadCloth_Front
+    100060: L_HeadCloth_Side
+    100062: L_RibEnd_Btm
+    100064: L_RibEnd_Mid
+    100066: L_RibEnd_Top
+    100068: L_RibMid_Mid
+    100070: L_RibSide_Btm
+    100072: L_RibSide_Top
+    100074: L_Skirt_A
+    100076: L_Skirt_B
+    100078: L_Skirt_C
+    100080: L_Skirt_D
+    100082: L_SkirtBoneA_Btm
+    100084: L_SkirtBoneA_Top
+    100086: L_SkirtBoneB_Btm
+    100088: L_SkirtBoneB_Top
+    100090: L_SkirtBoneC_Btm
+    100092: L_SkirtBoneC_Top
+    100094: L_SkirtBoneD_Btm
+    100096: L_SkirtBoneD_Top
+    100098: R_BladeRingA_Btm
+    100100: R_BladeRingA_Top
+    100102: R_BladeRingB_Btm
+    100104: R_BladeRingB_Top
+    100106: R_BladeRingC_Btm
+    100108: R_BladeRingC_Top
+    100110: R_Chain_01
+    100112: R_Chain_02
+    100114: R_Chain_03
+    100116: R_Chain_04
+    100118: R_Chain_05
+    100120: R_Chain_06
+    100122: R_Chain_07
+    100124: R_Chain_08
+    100126: R_Chain_09
+    100128: R_Chain_10
+    100130: R_Chain_11
+    100132: R_Chain_12
+    100134: R_Chain_13
+    100136: R_Chain_14
+    100138: R_Chain_End
+    100140: R_Chain_Ring
+    100142: R_HeadCloth_Front
+    100144: R_HeadCloth_Side
+    100146: R_RibEnd_Btm
+    100148: R_RibEnd_Mid
+    100150: R_RibEnd_Top
+    100152: R_RibMid_Mid
+    100154: R_RibSide_Btm
+    100156: R_RibSide_Top
+    100158: R_Skirt_A
+    100160: R_Skirt_B
+    100162: R_Skirt_C
+    100164: R_Skirt_D
+    100166: R_SkirtBoneA_Btm
+    100168: R_SkirtBoneA_Top
+    100170: R_SkirtBoneB_Btm
+    100172: R_SkirtBoneB_Top
+    100174: R_SkirtBoneC_Btm
+    100176: R_SkirtBoneC_Top
+    100178: R_SkirtBoneD_Btm
+    100180: R_SkirtBoneD_Top
+    100182: Skirt_Back
+    100184: SkirtBoneBack_Btm
+    100186: SkirtBoneBack_Top
+    100188: Spine_Low
+    100190: Spine_Lower
+    100192: Spine_Mid
+    100194: Spine_Top
+    400000: //RootNode
+    400002: Halo
+    400004: Head
+    400006: HeartBall_Jt
+    400008: Hip
+    400010: Hip_Ring
+    400012: L_BladeRingA_Btm
+    400014: L_BladeRingA_Top
+    400016: L_BladeRingB_Btm
+    400018: L_BladeRingB_Top
+    400020: L_BladeRingC_Btm
+    400022: L_BladeRingC_Top
+    400024: L_Chain_01
+    400026: L_Chain_02
+    400028: L_Chain_03
+    400030: L_Chain_04
+    400032: L_Chain_05
+    400034: L_Chain_06
+    400036: L_Chain_07
+    400038: L_Chain_08
+    400040: L_Chain_09
+    400042: L_Chain_10
+    400044: L_Chain_11
+    400046: L_Chain_12
+    400048: L_Chain_13
+    400050: L_Chain_14
+    400052: L_Chain_End
+    400054: L_Chain_Ring
+    400056: L_HeadCloth_Back
+    400058: L_HeadCloth_Front
+    400060: L_HeadCloth_Side
+    400062: L_RibEnd_Btm
+    400064: L_RibEnd_Mid
+    400066: L_RibEnd_Top
+    400068: L_RibMid_Mid
+    400070: L_RibSide_Btm
+    400072: L_RibSide_Top
+    400074: L_Skirt_A
+    400076: L_Skirt_B
+    400078: L_Skirt_C
+    400080: L_Skirt_D
+    400082: L_SkirtBoneA_Btm
+    400084: L_SkirtBoneA_Top
+    400086: L_SkirtBoneB_Btm
+    400088: L_SkirtBoneB_Top
+    400090: L_SkirtBoneC_Btm
+    400092: L_SkirtBoneC_Top
+    400094: L_SkirtBoneD_Btm
+    400096: L_SkirtBoneD_Top
+    400098: R_BladeRingA_Btm
+    400100: R_BladeRingA_Top
+    400102: R_BladeRingB_Btm
+    400104: R_BladeRingB_Top
+    400106: R_BladeRingC_Btm
+    400108: R_BladeRingC_Top
+    400110: R_Chain_01
+    400112: R_Chain_02
+    400114: R_Chain_03
+    400116: R_Chain_04
+    400118: R_Chain_05
+    400120: R_Chain_06
+    400122: R_Chain_07
+    400124: R_Chain_08
+    400126: R_Chain_09
+    400128: R_Chain_10
+    400130: R_Chain_11
+    400132: R_Chain_12
+    400134: R_Chain_13
+    400136: R_Chain_14
+    400138: R_Chain_End
+    400140: R_Chain_Ring
+    400142: R_HeadCloth_Front
+    400144: R_HeadCloth_Side
+    400146: R_RibEnd_Btm
+    400148: R_RibEnd_Mid
+    400150: R_RibEnd_Top
+    400152: R_RibMid_Mid
+    400154: R_RibSide_Btm
+    400156: R_RibSide_Top
+    400158: R_Skirt_A
+    400160: R_Skirt_B
+    400162: R_Skirt_C
+    400164: R_Skirt_D
+    400166: R_SkirtBoneA_Btm
+    400168: R_SkirtBoneA_Top
+    400170: R_SkirtBoneB_Btm
+    400172: R_SkirtBoneB_Top
+    400174: R_SkirtBoneC_Btm
+    400176: R_SkirtBoneC_Top
+    400178: R_SkirtBoneD_Btm
+    400180: R_SkirtBoneD_Top
+    400182: Skirt_Back
+    400184: SkirtBoneBack_Btm
+    400186: SkirtBoneBack_Top
+    400188: Spine_Low
+    400190: Spine_Lower
+    400192: Spine_Mid
+    400194: Spine_Top
+    7400000: PerstilenceShoot
+    7400002: PerstilenceStartShoot
+    7400004: PerstilenceEndShoot
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: PerstilenceShoot
+      takeName: Take 001
+      firstFrame: 1641
+      lastFrame: 1760
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: PerstilenceStartShoot
+      takeName: Take 001
+      firstFrame: 1561
+      lastFrame: 1640
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.0028328367
+        functionName: StartAnimAiming
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: SetAnimShooting
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: PerstilenceEndShoot
+      takeName: Take 001
+      firstFrame: 1761
+      lastFrame: 1840
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.5042493
+        functionName: EndAnimAiming
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
