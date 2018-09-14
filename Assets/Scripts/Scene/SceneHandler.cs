@@ -13,6 +13,7 @@ public class SceneHandler : Singleton<SceneHandler>
         MainMenu,
         Level1,
         Level2,
+        JJPlayground
     }
 
     private SceneType currentSceneType;
@@ -62,6 +63,8 @@ public class SceneHandler : Singleton<SceneHandler>
                 return SceneType.Level1;
             case "Level2":
                 return SceneType.Level2;
+            case "JJ_Playground":
+                return SceneType.JJPlayground;
             default:
                 return SceneType.None;
         }

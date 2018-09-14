@@ -46,7 +46,6 @@ public class EntityBoss : EntityEnemy {
     protected override void Start()
     {
         base.Start();
-        Init();
     }
 
     protected override void Update()
@@ -109,8 +108,9 @@ public class EntityBoss : EntityEnemy {
         }
     }
 
-    void Init()
+    public override void HardReset()
     {
+        base.HardReset();
         ClearAITask();
 
         St_stats.S_name = "Perstilence";

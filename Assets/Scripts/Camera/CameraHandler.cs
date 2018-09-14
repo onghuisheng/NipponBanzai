@@ -50,6 +50,7 @@ public class CameraHandler : Singleton<CameraHandler>
                 break;
             case SceneHandler.SceneType.Level1:
             case SceneHandler.SceneType.Level2:
+            case SceneHandler.SceneType.JJPlayground:
                 ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
                 ChangeCamera(CameraType.ThirdPerson);
                 break;
@@ -130,7 +131,8 @@ public class CameraHandler : Singleton<CameraHandler>
             if (onUpdate != null)
                 onUpdate.Invoke();
 
-            go_currentCamera.transform.DOLookAt(paths.lookAtTarget.position, 0.1f);
+            if (paths.lookAtTarget != null)
+                go_currentCamera.transform.DOLookAt(paths.lookAtTarget.position, 0.1f);
         })
         .OnComplete(() =>
         {
