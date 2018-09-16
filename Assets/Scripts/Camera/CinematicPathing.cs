@@ -25,7 +25,6 @@ public class CinematicPathing : MonoBehaviour
     }
 
     [SerializeField]
-    [Tooltip("Rate of movement to the next node")]
     private float m_MoveSpeed = 10;
     public float moveSpeed {
         get { return m_MoveSpeed; }
