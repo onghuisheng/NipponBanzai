@@ -20,7 +20,16 @@ public class EntityBoss : EntityEnemy {
         SPINATTACK
     };
 
-    AttackState currentAttState;
+    public enum ChargeState
+    {
+        NONE,
+        STAGE_1,
+        STAGE_2,
+        END
+    };
+
+    AttackState enum_currentAttState;
+    ChargeState enum_currentChargeState;
 
     float
         dissolveRate;
@@ -29,16 +38,29 @@ public class EntityBoss : EntityEnemy {
         bossMat;
 
     #region Getter/Setter
-    public AttackState As_currentAttState
+    public AttackState Enum_currentAttState
     {
         get
         {
-            return currentAttState;
+            return enum_currentAttState;
         }
 
         set
         {
-            currentAttState = value;
+            enum_currentAttState = value;
+        }
+    }
+
+    public ChargeState Enum_currentChargeState
+    {
+        get
+        {
+            return enum_currentChargeState;
+        }
+
+        set
+        {
+            enum_currentChargeState = value;
         }
     }
     #endregion
@@ -136,26 +158,29 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        //RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 10, 3));
-        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 5, 10));
+        //RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 10, 3));
+        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 14, 10));
         //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
         RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
     }
 
-    public void StartAnimAiming()
+    public void NextChargeState()
     {
-        An_animator.SetBool("Aiming", true);
+        Enum_currentChargeState += 1;
+        An_animator.SetInteger("ChargeState", (int)Enum_currentChargeState);
     }
 
-    public void EndAnimAiming()
+    public void NextChargeState(ChargeState _chargeState)
     {
-        An_animator.SetBool("Aiming", false);
+        Enum_currentChargeState = _chargeState;
+        An_animator.SetInteger("ChargeState", (int)Enum_currentChargeState);
     }
 
-    public void SetAnimShooting(int _value)
+    public void NextAttackState(AttackState _attackState)
     {
-        An_animator.SetBool("Shooting", (_value == 1));
+        Enum_currentAttState = _attackState;
+        An_animator.SetInteger("AttackState", (int)Enum_currentAttState);
     }
 }

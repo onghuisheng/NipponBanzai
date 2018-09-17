@@ -57,8 +57,8 @@ public class AIArtyState : AIBase
     public override bool StartAI()
     {
         ent_main.B_isVulnerable = true;
-
-        script_boss.As_currentAttState = EntityBoss.AttackState.ARTY;
+        script_boss.NextAttackState(EntityBoss.AttackState.ARTY);
+        script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
         Reset();
 
         return true;
@@ -70,8 +70,8 @@ public class AIArtyState : AIBase
         ent_main.B_isVulnerable = false;
         Reset();
 
-        ent_main.An_animator.SetBool("Shooting", false);
-        script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
+        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
+        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
         return true;
@@ -87,16 +87,23 @@ public class AIArtyState : AIBase
         }
 
         // Breaking point for the arty state.
-        if (f_stateTimer > f_maxStateTimer && i_shotToFire < 1)
+        if (f_stateTimer > f_maxStateTimer && i_shotToFire < 1 && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.END)
         {
-            Debug.Log("Brek");
-            i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
-            f_stateCooldownTimer = 0;
-            b_has_attacked = false;
-            return false;
+            if (ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                Debug.Log("Brek");
+                i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
+                f_stateCooldownTimer = 0;
+                b_has_attacked = false;
+                return false;
+            }
+        }
+        else
+        {
+            f_stateTimer += Time.deltaTime;
         }
 
-        f_stateTimer += Time.deltaTime;
+
 
         if (ent_target == null)
         {
@@ -154,7 +161,12 @@ public class AIArtyState : AIBase
         {
             if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "AttackState", AnimatorControllerParameterType.Int))
             {
-                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.As_currentAttState);
+                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.Enum_currentAttState);
+            }
+
+            if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "ChargeState", AnimatorControllerParameterType.Int))
+            {
+                ent_main.An_animator.SetInteger("ChargeState", (int)script_boss.Enum_currentChargeState);
             }
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
             //{
@@ -164,6 +176,10 @@ public class AIArtyState : AIBase
             if (i_shotToFire > 0)
             {
                 AimTarget();
+            }
+            else
+            {
+                script_boss.Enum_currentChargeState = EntityBoss.ChargeState.END;
             }
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
@@ -175,7 +191,7 @@ public class AIArtyState : AIBase
     void AimTarget()
     {
         //Loads up the gameobject to be use for this shot.
-        if (!b_has_attacked)
+        if (!b_has_attacked && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)
         {
             b_has_attacked = true;
 
@@ -187,16 +203,6 @@ public class AIArtyState : AIBase
             .SetToFollow(ent_target.transform)
             .SetToRotate(new Vector3(0, 90, 0));
         }
-
-        if (f_aimTimer < f_shotInterval)
-        {
-            //Lerp the Position for the targetCirce to the player.
-            f_aimTimer += Time.deltaTime;
-            //Vector3 currentPos = Vector3.Lerp(ent_main.transform.position, ent_target.transform.position, f_aimTimer);
-            //currentPos.y = 0.5f;
-            //go_targetCircle.transform.position = currentPos;
-        }
-
     }
 
     void Fire()

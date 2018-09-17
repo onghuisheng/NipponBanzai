@@ -54,7 +54,7 @@ public class AIAOEAttack : AIBase {
     public override bool StartAI()
     {
         ent_target = null;
-        script_boss.As_currentAttState = EntityBoss.AttackState.GRAVITY;
+        script_boss.Enum_currentAttState = EntityBoss.AttackState.GRAVITY;
         return true;
     }
 
@@ -68,7 +68,7 @@ public class AIAOEAttack : AIBase {
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
 
         StartAI();
-        script_boss.As_currentAttState = EntityBoss.AttackState.NONE;
+        script_boss.Enum_currentAttState = EntityBoss.AttackState.NONE;
         return true;
     }
 
@@ -144,7 +144,7 @@ public class AIAOEAttack : AIBase {
         {
             if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "AttackState", AnimatorControllerParameterType.Int))
             {
-                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.As_currentAttState);
+                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.Enum_currentAttState);
             }
             //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
             //{

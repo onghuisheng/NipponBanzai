@@ -283,19 +283,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.0028328367
-        functionName: StartAnimAiming
+      - time: 0.79036826
+        functionName: NextChargeState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: SetAnimShooting
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 1
         messageOptions: 0
       transformMask: []
       maskType: 3
@@ -326,7 +319,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.5042493
-        functionName: EndAnimAiming
+        functionName: NextChargeState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

@@ -22,6 +22,7 @@ public class Laser : EntityProjectiles
 
     private bool
         b_isRotatable,
+        b_filpped,
         b_isDirect; //Set is the laser a direct fire to the target.
     
 
@@ -102,6 +103,24 @@ public class Laser : EntityProjectiles
     {
         Vector3 angle = Quaternion.Euler(90, 0, 0) * Vector3.forward;
         v3_endPos = RotatePointAroundPivot(v3_endPos, v3_startPos, angle);
+
+        if (v3_endPos.y > -50) //Min
+        {
+            b_filpped = false;
+        }
+        else if ( v3_endPos.y < -300) //Max
+        {
+            b_filpped = true;
+        }
+
+        if (b_filpped)
+        {
+            v3_endPos.y += 50.0f * Time.deltaTime;
+        }
+        else
+            v3_endPos.y -= 50.0f * Time.deltaTime;
+
+        //Debug.Log("beam y :" + v3_endPos.y);
     }
 
     public void UpdatePosition()
@@ -112,7 +131,8 @@ public class Laser : EntityProjectiles
 
             float x = Mathf.Lerp(0, f_distance, f_incrementor);
             v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
-            v3_currEndPos.z += f_incrementor;
+            //v3_currEndPos.y -= f_incrementor * 10;
+            //v3_currEndPos.z += f_incrementor * 100;
 
             CheckForObjectsInPath();
 
