@@ -335,6 +335,17 @@ public class EntityPlayer : EntityLivingBase
         {
             case TARGET_STATE.AIMING:
                 An_animator.SetBool("IsAiming", true);
+
+                if (Input.GetKey(KeyCode.W))
+                    player_dir = DIRECTION.FRONT;
+                else if (Input.GetKey(KeyCode.S))
+                    player_dir = DIRECTION.BACK;
+                else if (Input.GetKey(KeyCode.A))
+                    player_dir = DIRECTION.LEFT;
+                else if (Input.GetKey(KeyCode.D))
+                    player_dir = DIRECTION.RIGHT;
+
+                An_animator.SetInteger("Direction", (int)player_dir);
                 break;
             case TARGET_STATE.NOT_AIMING:
                 An_animator.SetBool("IsAiming", false);

@@ -64,28 +64,31 @@ public class CharacterMovement : MonoBehaviour
                 {
                     case EntityPlayer.TARGET_STATE.AIMING:
                         {
-                            Vector3 new_pos = Component_Player.Rb_rigidbody.transform.position;
-
-                            if (Input.GetKey(KeyCode.W))
+                            if (!Component_Player.An_animator.GetBool("IsMelee"))
                             {
-                                new_pos += Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
-                            }
-                            else if (Input.GetKey(KeyCode.S))
-                            {
-                                new_pos -= Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
-                            }
+                                Vector3 new_pos = Component_Player.Rb_rigidbody.transform.position;
 
-                            if (Input.GetKey(KeyCode.A))
-                            {
-                                new_pos -= Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
-                            }
-                            else if (Input.GetKey(KeyCode.D))
-                            {
-                                new_pos += Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
-                            }
+                                if (Input.GetKey(KeyCode.W))
+                                {
+                                    new_pos += Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                }
+                                else if (Input.GetKey(KeyCode.S))
+                                {
+                                    new_pos -= Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                }
 
-                            Component_Player.Rb_rigidbody.MovePosition(new_pos);
+                                if (Input.GetKey(KeyCode.A))
+                                {
+                                    new_pos -= Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                }
+                                else if (Input.GetKey(KeyCode.D))
+                                {
+                                    new_pos += Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
+                                }
 
+                                Component_Player.Rb_rigidbody.MovePosition(new_pos);
+
+                            }
                         }
                         break;
 
