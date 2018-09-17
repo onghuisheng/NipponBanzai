@@ -518,7 +518,7 @@ public abstract class EntityLivingBase : Entity
         int layer = 1 << LayerMask.NameToLayer("Environment");
 
         if (Physics.Raycast(
-            GetComponent<Collider>().bounds.center,
+            new Vector3(GetPosition().x, GetPosition().y + 2, GetPosition().z),
             Vector3.down,
             out rch_raycast,
             Mathf.Infinity,
@@ -528,19 +528,16 @@ public abstract class EntityLivingBase : Entity
             f_ground_height = rch_raycast.point.y;
         }
 
-        Debug.Log("Velocity: " + f_y_velocity);
-        Debug.Log("Ground Height: " + System.Math.Round(f_ground_height, 2));
-        Debug.Log("Player Height: " + System.Math.Round(GetPosition().y, 2));
         if (System.Math.Round(f_ground_height, 2) == System.Math.Round(GetPosition().y, 2))
         {
             B_isGrounded = true;
             f_y_velocity = 0;
-            Debug.Log("Grounded");
+            //Debug.Log("Grounded");
         }
         else
         {
              B_isGrounded = false;
-             Debug.Log("Not Grounded");
+             //Debug.Log("Not Grounded");
         }
 
         if (!B_isGrounded)
@@ -554,6 +551,9 @@ public abstract class EntityLivingBase : Entity
             SetPosition(new Vector3(GetPosition().x, f_ground_height, GetPosition().z));
         }
 
+        //Debug.Log("Velocity: " + f_y_velocity);
+        //Debug.Log("Ground Height: " + System.Math.Round(f_ground_height, 2));
+        //Debug.Log("Player Height: " + System.Math.Round(GetPosition().y, 2));
     }
 
     public override void HardReset()

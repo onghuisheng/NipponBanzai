@@ -68,20 +68,20 @@ public class CharacterMovement : MonoBehaviour
 
                             if (Input.GetKey(KeyCode.W))
                             {
-                                new_pos += Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed;
+                                new_pos += Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
                             else if (Input.GetKey(KeyCode.S))
                             {
-                                new_pos -= Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed;
+                                new_pos -= Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
 
                             if (Input.GetKey(KeyCode.A))
                             {
-                                new_pos -= Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed;
+                                new_pos -= Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
                             else if (Input.GetKey(KeyCode.D))
                             {
-                                new_pos += Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed;
+                                new_pos += Time.unscaledDeltaTime * (transform.right).normalized * Component_Player.GetStats().F_speed * 0.3f;
                             }
 
                             Component_Player.Rb_rigidbody.MovePosition(new_pos);
