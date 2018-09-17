@@ -7,9 +7,12 @@ public class EntityRanged : EntityEnemy
 
     GameObject go_player;
 
+    [SerializeField]
+    Transform tf_beak;
+
     protected override void Start()
     {
-        base.Start();    
+        base.Start();
     }
 
     protected override void Update()
@@ -41,10 +44,12 @@ public class EntityRanged : EntityEnemy
 
     public override void OnAttack()
     {
-        go_player = GameObject.FindWithTag("Player");
+        if (go_player == null)
+            go_player = GameObject.FindWithTag("Player");
+
         StraightBullet ab_bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-        Vector3 dir = go_player.transform.position - GetComponent<Collider>().bounds.center;
-        ab_bullet.SetUpProjectile(gameObject, dir, 5, St_stats.F_damage, 20, Vector3.one * 0.25f);
+        Vector3 dir = go_player.GetComponent<Collider>().bounds.center - tf_beak.position;
+        ab_bullet.SetUpProjectile(gameObject, tf_beak.position, dir, 5, St_stats.F_damage, 20, Vector3.one * 0.25f);
     }
 
     public override void HardReset()

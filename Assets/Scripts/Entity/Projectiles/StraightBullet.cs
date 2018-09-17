@@ -7,10 +7,10 @@ public class StraightBullet : EntityProjectiles
 
     private float f_lifeElapse;
 
-    public void SetUpProjectile(GameObject _firer, Vector3 _direction, float _lifetime, float _damage, float _speed, Vector3 _size)
+    public void SetUpProjectile(GameObject _firer, Vector3 _position, Vector3 _direction, float _lifetime, float _damage, float _speed, Vector3 _size)
     {
         base.SetUpProjectile(_firer, _lifetime, _damage, _speed, _size, _direction.normalized);
-        transform.position = _firer.GetComponent<Collider>().bounds.center;
+        transform.position = _position;
         f_lifeElapse = 0;
         transform.rotation = Quaternion.Euler(0, 0, -90); // Imagine a capsule lying on the floor
         transform.Rotate(Mathf.Atan2(V3_dir.z, V3_dir.x) * Mathf.Rad2Deg, 0, 0); // Face the capsule to the direction

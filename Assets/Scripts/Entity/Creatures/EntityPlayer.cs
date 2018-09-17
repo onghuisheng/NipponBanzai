@@ -91,7 +91,7 @@ public class EntityPlayer : EntityLivingBase
         f_charged_increase_amount = 0.5f;
         b_is_charging_shot = false;
         i_combo = 1;
-        
+
         foreach (Transform _trans in gameObject.GetComponentsInChildren<Transform>())
         {
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))
@@ -192,7 +192,7 @@ public class EntityPlayer : EntityLivingBase
                         Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
 
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                        sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                        sb.SetUpProjectile(gameObject, transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                         if (b_is_charging_shot)
                             b_is_charging_shot = false;
@@ -213,7 +213,7 @@ public class EntityPlayer : EntityLivingBase
                         Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 25;
 
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
-                        sb.SetUpProjectile(gameObject, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                        sb.SetUpProjectile(gameObject, transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                         f_shooting_interval = 0;
                     }
@@ -272,9 +272,9 @@ public class EntityPlayer : EntityLivingBase
     {
         base.Update();
 
-        if(GetInventory().GetInventoryContainer().Count > 0)
+        if (GetInventory().GetInventoryContainer().Count > 0)
         {
-            foreach(var dic in GetInventory().GetInventoryContainer())
+            foreach (var dic in GetInventory().GetInventoryContainer())
             {
                 Debug.Log(dic.Key.ToString() + " x" + dic.Value.ToString());
             }
@@ -443,7 +443,7 @@ public class EntityPlayer : EntityLivingBase
         Vector3 _attack_hitbox;
         float _multiplier;
 
-        switch(i_combo)
+        switch (i_combo)
         {
             case 1:
             case 2:
@@ -477,7 +477,7 @@ public class EntityPlayer : EntityLivingBase
             //An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
-        else if(player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
+        else if (player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
         {
             ResetOnHit(_timer);
             TimeHandler.GetInstance().AffectTime(0.1f, 10);

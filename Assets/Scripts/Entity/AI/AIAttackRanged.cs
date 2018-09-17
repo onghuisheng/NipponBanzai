@@ -20,9 +20,9 @@ public class AIAttackRanged : AIBase
     private NavMeshAgent nma_agent;
 
     private Tweener tween_look_at_player;
+    
 
-
-    public AIAttackRanged(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange)
+    public AIAttackRanged(int _priority, EntityLivingBase _entity, System.Type _type,float _attackrange)
     {
         i_priority = _priority;
         ent_main = _entity;
