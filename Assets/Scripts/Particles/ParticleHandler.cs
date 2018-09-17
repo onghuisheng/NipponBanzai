@@ -7,7 +7,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
 
     public enum ParticleType
     {
-        PoisonCloud = 0
+        PoisonCloud = 0,
+        PoisonMouthDrip,
     }
 
     [SerializeField]
@@ -23,7 +24,7 @@ public class ParticleHandler : Singleton<ParticleHandler>
         base.Update();
     }
 
-    public GameObject SpawnParticle(ParticleType type, Transform parent, Vector3 localPos, Vector3 localRotation, float duration)
+    public GameObject SpawnParticle(ParticleType type, Transform parent, Vector3 localPos, Vector3 localScale, Vector3 localRotation, float duration)
     {
         if (m_ParticlePrefabs[(int)type].name != type.ToString())
         {
@@ -31,9 +32,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
             return null;
         }
 
-        GameObject go = Instantiate(m_ParticlePrefabs[(int)type], parent);
-        go.transform.localPosition = localPos;
-        go.transform.localRotation = Quaternion.Euler(localRotation);
+        GameObject go = Instantiate(m_ParticlePrefabs[(int)type], (parent == null) ? localPos : parent.position + localPos, Quaternion.Euler(localRotation), parent);
+        go.transform.localScale = localScale;
 
         if (duration != 0)
             Destroy(go, duration);

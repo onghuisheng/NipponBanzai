@@ -26,7 +26,7 @@ public class EntityMiniBoss : EntityEnemy
         else
         {
             F_death_timer += Time.deltaTime;
-                
+
             if (!An_animator.GetBool("Dead"))
             {
                 EndAndClearAITask();
@@ -47,6 +47,7 @@ public class EntityMiniBoss : EntityEnemy
     public void OnPoisonAttack()
     {
         var bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
+        GameObject bulletTrail = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.PoisonMouthDrip, bullet.transform, Vector3.zero, Vector3.one * 2, Vector3.zero, 0);
 
         Vector3 bulletSpawnPos = tf_poison_start_position.position;
 
@@ -56,12 +57,14 @@ public class EntityMiniBoss : EntityEnemy
             {
                 EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
                 pool.SetUpPoisonPoolWLifeTime(gameObject, St_stats.F_damage / 2, 10, bullet.GetPosition());
+                Destroy(bulletTrail);
                 bullet.gameObject.SetActive(false);
             }
         }, () =>
         {
             EntityPoisonPool pool = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.POISON_POOL).GetComponent<EntityPoisonPool>();
             pool.SetUpPoisonPoolWLifeTime(gameObject, St_stats.F_damage / 2, 10, bullet.GetPosition());
+            Destroy(bulletTrail);
             bullet.gameObject.SetActive(false);
         });
     }
@@ -91,7 +94,11 @@ public class EntityMiniBoss : EntityEnemy
         var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
 
         RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 2.6f, enemiesToSpawn, 10));
-        RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 10, 6));
+        RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 10, 6, () =>
+        {
+            // Spawn poison particle on mouth
+            ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.PoisonMouthDrip, tf_poison_start_position, Vector3.zero, Vector3.one, -tf_poison_start_position.rotation.eulerAngles, 2);
+        }));
         RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 

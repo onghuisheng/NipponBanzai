@@ -24,8 +24,9 @@ public class AIThrowPoison : AIBase
 
     private Tweener tween_look_at_player;
 
+    private System.Action action_onAttackStart;
 
-    public AIThrowPoison(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange, float _cooldown)
+    public AIThrowPoison(int _priority, EntityLivingBase _entity, System.Type _type, float _attackrange, float _cooldown, System.Action onAttackStart)
     {
         i_priority = _priority;
         ent_main = _entity;
@@ -36,6 +37,7 @@ public class AIThrowPoison : AIBase
         type_target = _type;
         f_turn_Rate = 0.5f;
         f_cooldown = _cooldown;
+        action_onAttackStart = onAttackStart;
 
         b_has_attacked = false;
 
@@ -109,6 +111,9 @@ public class AIThrowPoison : AIBase
 
                 v3_poison_target = ep_player.transform.position;
                 v3_poison_target.y -= ep_player.GetComponent<CapsuleCollider>().height;
+
+                if (action_onAttackStart != null)
+                    action_onAttackStart.Invoke();
 
                 ent_main.An_animator.SetTrigger("Poison Attack");
                 f_next_cooldown_time = Time.time + f_cooldown;
