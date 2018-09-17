@@ -93,7 +93,7 @@ public class TPCamera : MonoBehaviour
         {
             VignetteModel.Settings _setting = ppp_profile.vignette.settings;
             _setting.intensity = 1 - Time.timeScale;
-            Mathf.Clamp(_setting.intensity, 0.1f, 1.0f);
+            _setting.intensity = Mathf.Clamp(_setting.intensity, 0.1f, 1.0f);
             ppp_profile.vignette.settings = _setting;
         }
 
@@ -101,7 +101,7 @@ public class TPCamera : MonoBehaviour
         {
             ColorGradingModel.Settings _setting = ppp_profile.colorGrading.settings;
             _setting.basic.saturation = (script_entityplayer.St_stats.F_health / script_entityplayer.St_stats.F_max_health);
-            Mathf.Clamp(_setting.basic.saturation, 0.1f, 1.0f);
+            _setting.basic.saturation = Mathf.Clamp(_setting.basic.saturation, 0.1f, 1.0f);
             ppp_profile.colorGrading.settings = _setting;
         }
     }

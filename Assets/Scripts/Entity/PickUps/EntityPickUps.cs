@@ -80,7 +80,7 @@ public class EntityPickUps : Entity
 
         if(Vector3.Distance(GetPosition(), ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()) < 2)
         {
-            i_id.OnTaken(this);
+            i_id.OnTaken(this, ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>());
             gameObject.SetActive(false);
         }
     }
@@ -98,5 +98,10 @@ public class EntityPickUps : Entity
 
         SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_floating_speed * Time.deltaTime, GetPosition().z));
         transform.Rotate(0, f_rotation_speed * Time.deltaTime, 0);
+    }
+
+    public Item CurrentItem()
+    {
+        return i_id;
     }
 }

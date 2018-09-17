@@ -71,11 +71,11 @@ public abstract class Item
 
     public abstract void SetUpItem();
 
-    public abstract void OnUse(EntityLivingBase _ent);
+    public abstract bool OnUse(EntityLivingBase _ent);
 
     public abstract void OnGround(EntityPickUps _go);
 
-    public abstract void OnTaken(EntityPickUps _go);
+    public abstract void OnTaken(EntityPickUps _go, EntityLivingBase _taker);
 
     public abstract void OnExpire(EntityPickUps _go);
 }

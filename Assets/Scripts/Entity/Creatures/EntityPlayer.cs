@@ -81,6 +81,7 @@ public class EntityPlayer : EntityLivingBase
         St_stats = new Stats();
         St_stats.F_maxspeed = St_stats.F_speed = 5;
         St_stats.F_max_health = St_stats.F_health = 100;
+        St_stats.F_max_mana = St_stats.F_mana = 100;
         St_stats.F_damage = 20;
         St_stats.F_mass = 1;
 
@@ -168,6 +169,8 @@ public class EntityPlayer : EntityLivingBase
 
     private void AttackCheckFunction()
     {
+        St_stats.F_speed = St_stats.F_maxspeed;
+
         if (An_animator.GetBool("IsAttacking"))
         {
             if (player_target_state == TARGET_STATE.AIMING && !An_animator.GetBool("IsMelee"))
@@ -230,7 +233,7 @@ public class EntityPlayer : EntityLivingBase
 
         if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
-            player_state = State.IDLE;
+            player_state = State.MOVING;
         }
     }
 
@@ -269,6 +272,14 @@ public class EntityPlayer : EntityLivingBase
     {
         base.Update();
 
+        if(GetInventory().GetInventoryContainer().Count > 0)
+        {
+            foreach(var dic in GetInventory().GetInventoryContainer())
+            {
+                Debug.Log(dic.Key.ToString() + " x" + dic.Value.ToString());
+            }
+        }
+
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
 
@@ -287,6 +298,19 @@ public class EntityPlayer : EntityLivingBase
 
         if (!IsDead())
         {
+            //Debug.Log("Health: " + St_stats.F_health + " / " + St_stats.F_max_health);
+            //Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.HEALTH_POTION);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.MANA_POTION);
+            }
+
             if (Input.GetKey(KeyCode.Mouse1))
             {
                 //if(list_last_joint_transform.Count == 0)
@@ -360,7 +384,6 @@ public class EntityPlayer : EntityLivingBase
         {
             case State.ATTACK:
                 An_animator.SetBool("IsDead", false);
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsAttacking", true);
                 break;
 
@@ -381,7 +404,6 @@ public class EntityPlayer : EntityLivingBase
 
             case State.MOVING:
                 An_animator.SetBool("IsDead", false);
-
                 An_animator.SetBool("IsMoving", true);
                 break;
 

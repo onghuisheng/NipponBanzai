@@ -15,7 +15,7 @@ public class ItemHandler
 
             case Item.ITEM_TYPE.MANA_POTION:
                 {
-                    return new ItemHealthPotion();
+                    return new ItemManaPotion();
                 }
 
             default:

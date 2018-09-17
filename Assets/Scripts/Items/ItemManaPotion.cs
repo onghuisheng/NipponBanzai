@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemHealthPotion : Item
+public class ItemManaPotion : Item
 {
     private static float
         f_heal_amount;
@@ -13,17 +13,17 @@ public class ItemHealthPotion : Item
 
         f_heal_amount = 20;
 
-        inf_info.It_type = ITEM_TYPE.HEALTH_POTION;
-        inf_info.S_name = "Health Potion";
-        inf_info.S_desc = "Recovers a portion of the user's health";
+        inf_info.It_type = ITEM_TYPE.MANA_POTION;
+        inf_info.S_name = "Mana Potion";
+        inf_info.S_desc = "Recovers a portion of the user's mana";
     }
 
     public override bool OnUse(EntityLivingBase _ent)
     {
-        if (_ent.St_stats.F_health >= _ent.St_stats.F_max_health)
+        if (_ent.St_stats.F_mana >= _ent.St_stats.F_max_mana)
             return false;
 
-        _ent.F_regen_amount += f_heal_amount;
+        _ent.F_mana_regen_amount += f_heal_amount;
         return true;
     }
 

@@ -16,7 +16,7 @@ public class Inventory {
         i_souls = 0;
     }	
 
-    public Dictionary<Item.ITEM_TYPE, int> GetInventory()
+    public Dictionary<Item.ITEM_TYPE, int> GetInventoryContainer()
     {
         if(dic_storage != null)
             return dic_storage;
@@ -28,7 +28,7 @@ public class Inventory {
         return i_souls;
     }
 
-    public void AddSouls(int _amount)
+    public void AdjustSoulsAmount(int _amount)      //parameter - _amount(int): to increase/decrease value of current souls
     {
         i_souls += _amount;
         Mathf.Clamp(i_souls, 0, int.MaxValue);
@@ -45,6 +45,18 @@ public class Inventory {
         {
             dic_storage[_item_to_store] += _amount;
             Mathf.Clamp(dic_storage[_item_to_store], 0, int.MaxValue);
+        }
+    }
+
+    public void UseItemInInventory(EntityLivingBase _owner, Item.ITEM_TYPE _itemid)
+    {
+        if(dic_storage.ContainsKey(_itemid))
+        {
+            if (dic_storage[_itemid] > 0)
+            {
+                if (ItemHandler.GetItem(_itemid).OnUse(_owner))
+                    --dic_storage[_itemid];
+            }
         }
     }
 }

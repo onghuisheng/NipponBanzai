@@ -115,19 +115,6 @@ public abstract class EntityLivingBase : Entity
             }
         }
 
-        public float F_max_mana
-        {
-            get
-            {
-                return F_max_mana;
-            }
-
-            set
-            {
-                F_max_mana = value;
-            }
-        }
-
         public float F_mana
         {
             get
@@ -140,6 +127,20 @@ public abstract class EntityLivingBase : Entity
                 f_mana = value;
             }
         }
+
+        public float F_max_mana
+        {
+            get
+            {
+                return f_max_mana;
+            }
+
+            set
+            {
+                f_max_mana = value;
+            }
+        }
+
         #endregion
     }
 
@@ -160,6 +161,7 @@ public abstract class EntityLivingBase : Entity
         f_hit_timer,
         f_regen_timer,
         f_regen_amount,
+        f_mana_regen_amount,
         f_death_timer,
         f_AI_task_change_timer,
         f_y_velocity,
@@ -319,6 +321,19 @@ public abstract class EntityLivingBase : Entity
             b_isGrounded = value;
         }
     }
+
+    public float F_mana_regen_amount
+    {
+        get
+        {
+            return f_mana_regen_amount;
+        }
+
+        set
+        {
+            f_mana_regen_amount = value;
+        }
+    }
     #endregion
 
     private void Awake()
@@ -419,21 +434,30 @@ public abstract class EntityLivingBase : Entity
 
         if (!IsDead())
         {
-            if (F_regen_amount > 0)
+            if (F_regen_timer > 0.5f)
             {
-                if (F_regen_timer > 0.5f)
+                if (F_regen_amount > 0)
                 {
-                    F_regen_timer = 0.0f;
-
                     F_regen_amount -= 1;
                     st_stats.F_health += 1;
+
+                    st_stats.F_health = Mathf.Clamp(st_stats.F_health, 0, st_stats.F_max_health);
                 }
+
+                if (F_mana_regen_amount > 0)
+                {                   
+                    F_mana_regen_amount -= 1;
+                    st_stats.F_mana += 1;
+
+                    st_stats.F_mana = Mathf.Clamp(st_stats.F_mana, 0, st_stats.F_max_mana);
+                }
+
+                F_regen_timer = 0.0f;
             }
         }
 
         if (B_isHit)
         {
-            F_regen_timer = 0;
             F_hit_timer -= Time.deltaTime;
 
             if (F_hit_timer <= 0)
@@ -578,6 +602,14 @@ public abstract class EntityLivingBase : Entity
     public virtual Inventory GetInventory()
     {
         return inven_inventory;
+    }
+
+    public virtual void SetDrops(Item.ITEM_TYPE _type, int _amount, float _percentage)
+    {
+        if(Random.Range(0, 100) < _percentage)
+        {
+            GetInventory().AddItemToInventory(_type, _amount);
+        }
     }
 
     public virtual void OnAttack() { }

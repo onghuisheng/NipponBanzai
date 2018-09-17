@@ -32,11 +32,11 @@ public class EntityMelee : EntityEnemy
             {
                 gameObject.SetActive(false);
 
-                foreach(var type in GetInventory().GetInventory())
+                foreach(var type in GetInventory().GetInventoryContainer())
                 {
                     for(int i = 0; i < type.Value; ++i)
                     {
-                        ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x, GetPosition().y + 0.5f, GetPosition().z), 30, ItemHandler.GetItem(type.Key));
+                        ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + 0.5f, GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(type.Key));
                     }
                 }
             }
@@ -71,7 +71,9 @@ public class EntityMelee : EntityEnemy
 
         GetComponent<Collider>().isTrigger = false;
 
-        GetInventory().AddItemToInventory(Item.ITEM_TYPE.HEALTH_POTION, 50);
+        SetDrops(Item.ITEM_TYPE.HEALTH_POTION, 1, 70);
+        SetDrops(Item.ITEM_TYPE.MANA_POTION, 1, 70);
+
 
         St_stats.S_name = "MeleeDude";
     }
