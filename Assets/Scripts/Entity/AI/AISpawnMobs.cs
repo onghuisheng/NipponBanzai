@@ -9,7 +9,8 @@ public class AISpawnMobs : AIBase
         f_spawnRadius,
         f_cooldown,
         f_nextCooldownTime,
-        f_summonAnimationDelay;
+        f_summonAnimationDelay,
+        f_attack_range;
 
     private bool
         b_IsSummoning;
@@ -19,7 +20,7 @@ public class AISpawnMobs : AIBase
 
     List<ObjectPool.ENEMY> list_enemiesToSpawn;
 
-    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _spawnRadius, float _cooldown, float _summonAnimationDelay, List<ObjectPool.ENEMY> _enemiesToSpawn)
+    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _spawnRadius, float _cooldown, float _summonAnimationDelay, List<ObjectPool.ENEMY> _enemiesToSpawn, float _attackRange = 0)
     {
         i_priority = _priority;
         ent_main = _entity;
@@ -31,6 +32,7 @@ public class AISpawnMobs : AIBase
         type_target = _type;
         f_cooldown = _cooldown;
         f_summonAnimationDelay = _summonAnimationDelay;
+        f_attack_range = _attackRange;
         list_enemiesToSpawn = _enemiesToSpawn;
     }
 
@@ -43,14 +45,36 @@ public class AISpawnMobs : AIBase
 
     public override bool ShouldContinueAI()
     {
+        if (ent_target == null)
+        {
+            ent_target = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
+        }
+
         if (Time.time < f_nextCooldownTime && !b_IsSummoning || ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             return false;
         }
         else
         {
-            return true;
+            // If we do not have a range to check, just spawn mobs immediately
+            if (f_attack_range == 0)
+                return true;
+
+            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+
+            RaycastHit hitInfo;
+
+            // Cast a ray towards the player while ignoring all objects in the Enemies layer
+            Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;
+            Vector3 playerCenter = ent_target.GetComponent<Collider>().bounds.center;
+            if (Physics.Raycast(enemyCenter, playerCenter - enemyCenter, out hitInfo, f_attack_range, ignoreEnemiesMask))
+            {
+                if (hitInfo.collider.tag == "Player")
+                    return true;
+            }
         }
+
+        return false;
     }
 
 

@@ -9,6 +9,9 @@ public class EntityMiniBoss : EntityEnemy
 
     AIThrowPoison ai_throw_poison;
 
+    [SerializeField]
+    Transform tf_poison_start_position;
+
     protected override void Start()
     {
         base.Start();
@@ -45,10 +48,9 @@ public class EntityMiniBoss : EntityEnemy
     {
         var bullet = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.ARCH_PROJECTILE).GetComponent<ArcBulllet>();
 
-        Vector3 bulletSpawnPos = transform.position;
-        bulletSpawnPos.y += 5;
+        Vector3 bulletSpawnPos = tf_poison_start_position.position;
 
-        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 5, bulletSpawnPos, ai_throw_poison.v3_poison_target, Vector3.one, gameObject, (collider) =>
+        bullet.SetUpProjectile(5, St_stats.F_damage, 1, 1, bulletSpawnPos, ai_throw_poison.v3_poison_target, Vector3.one * 0.75f, gameObject, (collider) =>
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
             {
@@ -88,7 +90,7 @@ public class EntityMiniBoss : EntityEnemy
 
         var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
 
-        RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 1.04f, enemiesToSpawn));
+        RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 2.6f, enemiesToSpawn, 10));
         RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 10, 6));
         RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), 3));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
