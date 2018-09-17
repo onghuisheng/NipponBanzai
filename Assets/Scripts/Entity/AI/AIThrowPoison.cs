@@ -105,7 +105,7 @@ public class AIThrowPoison : AIBase
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, f_turn_Rate, AxisConstraint.Y).OnComplete(() =>
             {
                 RedMarker marker = ObjectPool.GetInstance().GetIndicatorObjectFromPool(ObjectPool.INDICATOR.RED_MARKER).GetComponent<RedMarker>(); // Spawn indicator
-                marker.SetUpIndicator(ep_player.transform.position, 3, 2, 0, null, ent_main);
+                marker.SetUpIndicator(ep_player.transform.position, 1, 2, 0, null, ent_main).SetToRotate(new Vector3(0, 180, 0));
 
                 v3_poison_target = ep_player.transform.position;
                 v3_poison_target.y -= ep_player.GetComponent<CapsuleCollider>().height;
