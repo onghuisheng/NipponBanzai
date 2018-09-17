@@ -50,14 +50,17 @@ public class AISpawnMobs : AIBase
             ent_target = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
-        if (Time.time < f_nextCooldownTime && !b_IsSummoning || ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if ((Time.time < f_nextCooldownTime && !b_IsSummoning) || ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             return false;
         }
         else
         {
+            if (b_IsSummoning)
+                return true;
+
             // If we do not have a range to check, just spawn mobs immediately
-            if (f_attack_range == 0)
+            if (f_attack_range <= 0)
                 return true;
 
             int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));

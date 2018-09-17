@@ -108,7 +108,7 @@ public class EntityMiniBoss : EntityEnemy
             St_stats.F_health -= _dmgsrc.GetDamage();
             ResetOnHit(_timer);
 
-            if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Summon"))
                 An_animator.SetTrigger("Injured");
         }
     }
