@@ -205,8 +205,9 @@ public class AIBossLaser : AIBase {
         Vector3 direction = pos - ent_main.transform.position;
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
-        Debug.Log("StateTimer : " + f_stateTimer);
-        script_laser.SetUpProjectile(f_maxStateTimer - f_stateTimer, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
+        float lazerLife = f_maxStateTimer - f_stateTimer;
+        if (lazerLife > 9.5) lazerLife = 9.5f;
+        script_laser.SetUpProjectile(lazerLife, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
         //script_laser.SetUpProjectile(f_maxStateTimer, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
     }
 
