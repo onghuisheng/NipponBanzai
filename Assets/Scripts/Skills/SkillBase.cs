@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBase
+public abstract class SkillBase
 {
     public enum TYPE
     {
@@ -12,24 +12,21 @@ public class SkillBase
 
     private string
         s_name,
-        s_description;
+        s_description, 
+        s_caster_tag;
 
     private float
         f_mana_amount;
 
     private TYPE
-        type_style;
+        type_style;   
 
-    public virtual void SetUpSkill(string _name, string _description, float _mana_amount, TYPE _type)
+    public virtual void SetUpSkill(string _caster_tag = "")
     {
-        s_name = _name;
-        s_description = _description;
-        f_mana_amount = _mana_amount;
-        type_style = _type;
+        s_caster_tag = _caster_tag;
     }
 
-	public virtual void RunSkill ()
-    {
-		
-	}
+    public abstract void RunSkill();
+
+    public abstract void EndSkill();
 }

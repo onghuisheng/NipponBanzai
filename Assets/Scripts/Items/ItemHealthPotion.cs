@@ -30,6 +30,7 @@ public class ItemHealthPotion : Item
     public override void OnGround(EntityPickUps _go)
     {
         _go.DoFloating();
+        _go.DoSucking(100);
     }
 
     public override void OnTaken(EntityPickUps _go, EntityLivingBase _taker)

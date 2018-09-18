@@ -968,6 +968,10 @@ Prefab:
       propertyPath: dialogue.sentences.Array.data[2]
       value: Hi Chee Mun
       objectReference: {fileID: 0}
+    - target: {fileID: 1992458142595656, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}
+      propertyPath: m_TagString
+      value: Non-Hitable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}
   m_IsPrefabParent: 0
