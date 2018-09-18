@@ -9,6 +9,7 @@ public class AIBossSpinAttack : AIBase {
         f_stateTimer,
         f_maxStateTimer,
         f_cooldown,
+        f_spinRange,
         f_stateCooldownTimer;
 
     private System.Type
@@ -35,6 +36,7 @@ public class AIBossSpinAttack : AIBase {
         f_maxStateTimer = _stateTime;
 
         f_stateCooldownTimer = 0;
+        f_spinRange = 0;
 
         b_has_attacked = false;
 
@@ -44,7 +46,9 @@ public class AIBossSpinAttack : AIBase {
     public override bool StartAI()
     {
         f_stateTimer = 0;
+        f_spinRange = 0;
         script_boss.NextAttackState(EntityBoss.AttackState.SPINATTACK);
+        script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
 
         ent_target = null;
         return true;
@@ -55,10 +59,14 @@ public class AIBossSpinAttack : AIBase {
         ent_main.B_isAttacking = false;
         b_has_attacked = false;
 
+        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
+        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
+        f_stateTimer = 0;
+        f_spinRange = 0;
+        f_stateCooldownTimer = 0;
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
 
-        StartAI();
         return true;
     }
 
@@ -142,7 +150,13 @@ public class AIBossSpinAttack : AIBase {
             //}
             b_has_attacked = true;
 
-            ent_main.OnAOEAttack(f_stateTimer);
+            if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)
+            {
+                f_spinRange += Time.deltaTime;
+                float f_spinSize = Mathf.Lerp(0f, 12f, f_spinRange);
+                ent_main.OnAOEAttack(f_spinSize);
+
+            }
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }

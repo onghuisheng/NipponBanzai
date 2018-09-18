@@ -15,7 +15,7 @@
 }
 
 SubShader{
-	Tags { "RenderType" = "Opaque" }
+	Tags { "RenderType" = "Transparent" }
 	LOD 200
 	Cull Off //Fast way to turn your material double-sided
 
