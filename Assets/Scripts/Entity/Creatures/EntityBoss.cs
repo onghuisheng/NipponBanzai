@@ -178,7 +178,7 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 12.0f, 5, 10));
+        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 12.0f, 8, 10));
         //RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 10, 3));
         //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 14, 10));
         //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
