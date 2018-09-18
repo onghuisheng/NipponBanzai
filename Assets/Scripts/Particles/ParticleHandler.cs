@@ -10,6 +10,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
         PoisonCloud = 0,
         PoisonMouthDrip,
         SummoningPortal,
+        Charging,
+        Heart_Burst
     }
 
     [SerializeField]

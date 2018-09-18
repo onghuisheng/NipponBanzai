@@ -55,6 +55,9 @@ public class EntityPlayer : EntityLivingBase
     private List<GameObject>
         list_joints;
 
+    private GameObject
+        go_charging_particle;
+
     //private List<Transform>
     //    list_last_joint_transform;
 
@@ -88,9 +91,11 @@ public class EntityPlayer : EntityLivingBase
         f_shooting_max_interval = f_shooting_interval = 0.1f;
         f_charged_amount = 1.0f;
         f_charged_max_amount = 2;
-        f_charged_increase_amount = 0.5f;
+        f_charged_increase_amount = 1.0f;
         b_is_charging_shot = false;
         i_combo = 1;
+
+        go_charging_particle = null;
 
         foreach (Transform _trans in gameObject.GetComponentsInChildren<Transform>())
         {
@@ -183,9 +188,22 @@ public class EntityPlayer : EntityLivingBase
                 if (b_is_charging_shot)
                 {
                     if (f_charged_amount < f_charged_max_amount)
+                    {
+                        if (go_charging_particle == null)
+                            go_charging_particle = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Charging, list_joints[0].transform, new Vector3(0, 0, 0), Vector3.one, Vector3.zero, 0);
+
                         f_charged_amount += f_charged_increase_amount * Time.unscaledDeltaTime;
-                    else if (f_charged_amount > f_charged_max_amount)
+                    }
+                    else if (f_charged_amount >= f_charged_max_amount)
+                    {
+                        if(go_charging_particle != null)
+                        {
+                            Destroy(go_charging_particle);
+                            go_charging_particle = null;                           
+                        }
+
                         f_charged_amount = f_charged_max_amount;
+                    }
 
                     if (Input.GetKeyUp(KeyCode.Mouse0))
                     {
@@ -193,6 +211,13 @@ public class EntityPlayer : EntityLivingBase
 
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
                         sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                        ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, new Vector3(0, 0.5f, 0), Vector3.one, Vector3.zero, 1.0f);
+
+                        if (go_charging_particle != null)
+                        {
+                            Destroy(go_charging_particle);
+                            go_charging_particle = null;
+                        }
 
                         if (b_is_charging_shot)
                             b_is_charging_shot = false;
@@ -215,7 +240,7 @@ public class EntityPlayer : EntityLivingBase
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
                         sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
-                        ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, list_joints[0].transform.position, Vector3.one, Vector3.zero, 1);
+                        ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, new Vector3(0, 0.5f, 0), Vector3.one, Vector3.zero, 1.0f);
 
                         f_shooting_interval = 0;
                     }
@@ -274,13 +299,13 @@ public class EntityPlayer : EntityLivingBase
     {
         base.Update();
 
-        if (GetInventory().GetInventoryContainer().Count > 0)
-        {
-            foreach (var dic in GetInventory().GetInventoryContainer())
-            {
-                Debug.Log(dic.Key.ToString() + " x" + dic.Value.ToString());
-            }
-        }
+        //if (GetInventory().GetInventoryContainer().Count > 0)
+        //{
+        //    foreach (var dic in GetInventory().GetInventoryContainer())
+        //    {
+        //        Debug.Log(dic.Key.ToString() + " x" + dic.Value.ToString());
+        //    }
+        //}
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
