@@ -215,6 +215,8 @@ public class EntityPlayer : EntityLivingBase
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
                         sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
+                        ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, list_joints[0].transform.position, Vector3.one, Vector3.zero, 1);
+
                         f_shooting_interval = 0;
                     }
                 }
@@ -415,11 +417,13 @@ public class EntityPlayer : EntityLivingBase
 
             case State.IDLE:
                 An_animator.SetBool("IsDead", false);
-                An_animator.SetBool("IsMoving", false);
+                if(player_target_state == TARGET_STATE.NOT_AIMING)
+                    An_animator.SetBool("IsMoving", false);
                 break;
 
             case State.MOVING:
-                An_animator.SetBool("IsMoving", true);
+                if (player_target_state == TARGET_STATE.NOT_AIMING)
+                    An_animator.SetBool("IsMoving", true);
                 An_animator.SetBool("IsDead", false);
                 break;
 

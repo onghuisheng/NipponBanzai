@@ -23,7 +23,7 @@ public class ParticleHandler : Singleton<ParticleHandler>
     {
         base.Update();
     }
-
+        
     public GameObject SpawnParticle(ParticleType type, Transform parent, Vector3 localPos, Vector3 localScale, Vector3 localRotation, float duration)
     {
         if (m_ParticlePrefabs[(int)type].name != type.ToString())
