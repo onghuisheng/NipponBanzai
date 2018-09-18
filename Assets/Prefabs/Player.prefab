@@ -1491,7 +1491,7 @@ GameObject:
   - component: {fileID: 4111829066279362}
   m_Layer: 0
   m_Name: Wand_inner_ring_ctrl
-  m_TagString: Untagged
+  m_TagString: Hand_Joints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
