@@ -361,13 +361,29 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsAiming", true);
 
                 if (Input.GetKey(KeyCode.W))
+                {
                     player_dir = DIRECTION.FRONT;
+                    An_animator.SetBool("IsMoving", true);
+                }
                 else if (Input.GetKey(KeyCode.S))
+                {
                     player_dir = DIRECTION.BACK;
+                    An_animator.SetBool("IsMoving", true);
+                }
                 else if (Input.GetKey(KeyCode.A))
+                {
                     player_dir = DIRECTION.LEFT;
+                    An_animator.SetBool("IsMoving", true);
+                }
                 else if (Input.GetKey(KeyCode.D))
+                {
                     player_dir = DIRECTION.RIGHT;
+                    An_animator.SetBool("IsMoving", true);
+                }
+                else
+                {
+                    An_animator.SetBool("IsMoving", false);
+                }
 
                 An_animator.SetInteger("Direction", (int)player_dir);
                 break;
@@ -398,17 +414,16 @@ public class EntityPlayer : EntityLivingBase
                 break;
 
             case State.IDLE:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
+                An_animator.SetBool("IsMoving", false);
                 break;
 
             case State.MOVING:
-                An_animator.SetBool("IsDead", false);
                 An_animator.SetBool("IsMoving", true);
+                An_animator.SetBool("IsDead", false);
                 break;
 
             case State.SUMMONING:
-                An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
                 break;
 
