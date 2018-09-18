@@ -73,9 +73,10 @@ public class EntityMelee : EntityEnemy
 
         SetDrops(Item.ITEM_TYPE.HEALTH_POTION, 1, 70);
         SetDrops(Item.ITEM_TYPE.MANA_POTION, 1, 70);
-
-
+        
         St_stats.S_name = "MeleeDude";
+
+        DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)

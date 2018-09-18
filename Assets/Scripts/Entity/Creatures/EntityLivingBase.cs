@@ -102,41 +102,32 @@ public abstract class EntityLivingBase : Entity
             }
         }
 
-        public float F_maxspeed
-        {
-            get
-            {
+        public float F_maxspeed {
+            get {
                 return f_maxspeed;
             }
 
-            set
-            {
+            set {
                 f_maxspeed = value;
             }
         }
 
-        public float F_mana
-        {
-            get
-            {
+        public float F_mana {
+            get {
                 return f_mana;
             }
 
-            set
-            {
+            set {
                 f_mana = value;
             }
         }
 
-        public float F_max_mana
-        {
-            get
-            {
+        public float F_max_mana {
+            get {
                 return f_max_mana;
             }
 
-            set
-            {
+            set {
                 f_max_mana = value;
             }
         }
@@ -154,8 +145,9 @@ public abstract class EntityLivingBase : Entity
        b_isHit,
        b_isAttacking,
        b_isDodging,
-       b_isVulnerable, 
-       b_isGrounded;
+       b_isVulnerable,
+       b_isGrounded,
+       b_isAIEnabled;
 
     private float
         f_hit_timer,
@@ -213,16 +205,23 @@ public abstract class EntityLivingBase : Entity
         }
     }
 
-    public bool B_isVulnerable
-    {
-        get
-        {
+    public bool B_isVulnerable {
+        get {
             return b_isVulnerable;
         }
 
-        set
-        {
+        set {
             b_isVulnerable = value;
+        }
+    }
+
+    public bool B_isAIEnabled {
+        get {
+            return b_isAIEnabled;
+        }
+
+        set {
+            b_isAIEnabled = value;
         }
     }
 
@@ -296,41 +295,32 @@ public abstract class EntityLivingBase : Entity
         }
     }
 
-    public float F_regen_amount
-    {
-        get
-        {
+    public float F_regen_amount {
+        get {
             return f_regen_amount;
         }
 
-        set
-        {
+        set {
             f_regen_amount = value;
         }
     }
 
-    public bool B_isGrounded
-    {
-        get
-        {
+    public bool B_isGrounded {
+        get {
             return b_isGrounded;
         }
 
-        set
-        {
+        set {
             b_isGrounded = value;
         }
     }
 
-    public float F_mana_regen_amount
-    {
-        get
-        {
+    public float F_mana_regen_amount {
+        get {
             return f_mana_regen_amount;
         }
 
-        set
-        {
+        set {
             f_mana_regen_amount = value;
         }
     }
@@ -342,7 +332,7 @@ public abstract class EntityLivingBase : Entity
         dic_running_AI_list = new Dictionary<string, AIBase>();
     }
 
-    protected override void Start ()
+    protected override void Start()
     {
         HardReset();
         base.Start();
@@ -355,7 +345,7 @@ public abstract class EntityLivingBase : Entity
         F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
 
-        if (dic_AI_list.Count > 0)
+        if (dic_AI_list.Count > 0 && b_isAIEnabled)
         {
 
             //   if (f_AI_task_change_timer > 1.0f)
@@ -445,7 +435,7 @@ public abstract class EntityLivingBase : Entity
                 }
 
                 if (F_mana_regen_amount > 0)
-                {                   
+                {
                     F_mana_regen_amount -= 1;
                     st_stats.F_mana += 1;
 
@@ -462,7 +452,7 @@ public abstract class EntityLivingBase : Entity
 
             if (F_hit_timer <= 0)
                 B_isHit = false;
-        }       
+        }
     }
 
     protected virtual void LateUpdate()
@@ -560,14 +550,14 @@ public abstract class EntityLivingBase : Entity
         }
         else
         {
-             B_isGrounded = false;
-             //Debug.Log("Not Grounded");
+            B_isGrounded = false;
+            //Debug.Log("Not Grounded");
         }
 
         if (!B_isGrounded)
         {
             f_y_velocity += _gravity * St_stats.F_mass * Time.deltaTime;
-            SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_y_velocity, GetPosition().z));        
+            SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_y_velocity, GetPosition().z));
         }
 
         if (System.Math.Round(GetPosition().y, 2) < System.Math.Round(f_ground_height, 2))
@@ -606,7 +596,7 @@ public abstract class EntityLivingBase : Entity
 
     public virtual void SetDrops(Item.ITEM_TYPE _type, int _amount, float _percentage)
     {
-        if(Random.Range(0, 100) < _percentage)
+        if (Random.Range(0, 100) < _percentage)
         {
             GetInventory().AddItemToInventory(_type, _amount);
         }

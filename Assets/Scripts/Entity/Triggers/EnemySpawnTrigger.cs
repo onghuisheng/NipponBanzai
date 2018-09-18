@@ -31,6 +31,8 @@ public class EnemySpawnTrigger : EntityTrigger
 
     protected override void Start()
     {
+        Random.InitState((int)Time.realtimeSinceStartup);
+
         if (m_spawning_type == SpawningType.OnStart)
             SpawnEnemies();
     }
@@ -136,7 +138,7 @@ public class EnemySpawnTrigger : EntityTrigger
     Vector3 RandomInsideBox(EntityLivingBase enemy, int maxAttempt)
     {
         BoxCollider collider = GetComponent<BoxCollider>();
-;
+
         Vector3 spawnPos = new Vector3(
             Random.Range(collider.bounds.min.x, collider.bounds.max.x),
             transform.position.y,

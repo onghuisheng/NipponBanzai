@@ -74,6 +74,8 @@ public class EntityRanged : EntityEnemy
         GetComponent<Collider>().isTrigger = false;
 
         St_stats.S_name = "RangedDude";
+
+        DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
