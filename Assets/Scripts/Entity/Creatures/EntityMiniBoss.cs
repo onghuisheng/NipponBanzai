@@ -12,6 +12,13 @@ public class EntityMiniBoss : EntityEnemy
     [SerializeField]
     Transform tf_poison_start_position;
 
+    private void OnEnable()
+    {
+        //ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.SummoningPortal, transform, Vector3.zero, Vector3);
+
+
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -106,7 +113,7 @@ public class EntityMiniBoss : EntityEnemy
 
         St_stats.S_name = "MiniBossBro";
     }
-
+    
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
         if (!B_isHit)
