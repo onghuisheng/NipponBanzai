@@ -451,8 +451,8 @@ GameObject:
   - component: {fileID: 605763962}
   - component: {fileID: 605763961}
   m_Layer: 11
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Floor
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -751,16 +751,6 @@ Prefab:
     - target: {fileID: 4665592543844126, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114199162475129822, guid: 182e1a08ed672c54c92c570645e37e27,
-        type: 2}
-      propertyPath: DestroyOnTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114199162475129822, guid: 182e1a08ed672c54c92c570645e37e27,
-        type: 2}
-      propertyPath: dialogue.sentences.Array.data[2]
-      value: Hi Jing Jie
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}

@@ -113,6 +113,26 @@ public class EntityBoss : EntityEnemy {
         obj_hitbox.transform.rotation = transform.rotation;
     }
 
+    public override void OnAOEAttack(float _size = 1.0f)
+    {
+        GameObject obj = ObjectPool.GetInstance().GetHitboxObjectFromPool();
+        HitboxTrigger obj_hitbox = obj.GetComponent<HitboxTrigger>();
+
+        DamageSource dmgsrc = new DamageSource();
+
+        dmgsrc.SetUpDamageSource(St_stats.S_name + " " + gameObject.GetInstanceID().ToString(),
+            gameObject.tag,
+            gameObject.GetInstanceID().ToString(),
+            St_stats.F_damage);
+
+        obj_hitbox.SetHitbox(dmgsrc, new Vector3(_size,_size,_size));
+
+        //obj_hitbox.transform.position = transform.position + (transform.forward * (obj_hitbox.transform.localScale * 0.8f).z);
+        //obj_hitbox.transform.position = new Vector3(obj_hitbox.transform.position.x, obj_hitbox.transform.position.y + 1, obj_hitbox.transform.position.z);
+        obj_hitbox.transform.position = transform.position;
+        obj_hitbox.transform.rotation = transform.rotation;
+    }
+
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
         if (!B_isHit)
@@ -158,11 +178,12 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
+        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 12.0f, 5, 10));
         //RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 10, 3));
-        RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 14, 10));
+        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 14, 10));
         //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
-        RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
+        //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
         //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
     }
 
