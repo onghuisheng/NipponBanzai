@@ -603,6 +603,6 @@ public abstract class EntityLivingBase : Entity
     }
 
     public virtual void OnAttack() { }
-
+    public virtual void OnAOEAttack(float _size) { }
     public virtual void OnAttacked(DamageSource _dmgsrc, float _timer = 0.3f) { }
 }

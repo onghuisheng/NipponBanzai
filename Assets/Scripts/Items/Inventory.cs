@@ -10,10 +10,18 @@ public class Inventory {
     private Dictionary<Item.ITEM_TYPE, int>
         dic_storage;
 
+    private List<SkillBase>
+        list_skills_inventory;
+
+    private int
+        f_curr_skill;
+
 	public void SetUpInventory()
     {
         dic_storage = new Dictionary<Item.ITEM_TYPE, int>();
+        list_skills_inventory = new List<SkillBase>();
         i_souls = 0;
+        f_curr_skill = 0;
     }	
 
     public Dictionary<Item.ITEM_TYPE, int> GetInventoryContainer()
@@ -58,5 +66,42 @@ public class Inventory {
                     --dic_storage[_itemid];
             }
         }
+    }
+
+    public SkillBase GetNextSkill(bool _getRight)
+    {
+        if (list_skills_inventory.Count <= 0)
+            return null;
+
+        if(f_curr_skill > list_skills_inventory.Count - 1)
+        {
+            f_curr_skill = list_skills_inventory.Count - 1;
+        }
+
+        if (_getRight)
+            ++f_curr_skill;
+        else
+            --f_curr_skill;
+
+        if (f_curr_skill > list_skills_inventory.Count - 1)
+            f_curr_skill = 0;
+        else if (f_curr_skill < 0)
+            f_curr_skill = list_skills_inventory.Count - 1;
+
+
+        return list_skills_inventory[f_curr_skill];
+    }
+
+    public SkillBase GetCurrSkill()
+    {
+        if (f_curr_skill < 0 || f_curr_skill > list_skills_inventory.Count - 1)
+            return null;
+
+        return list_skills_inventory[f_curr_skill];
+    }
+
+    public List<SkillBase> GetAllSkills()
+    {
+        return list_skills_inventory;
     }
 }

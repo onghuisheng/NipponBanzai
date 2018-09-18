@@ -24,6 +24,9 @@ public class AIAOEAttack : AIBase {
     private EntityBoss
         script_boss;
 
+    private Collider
+        c_targetCenter;
+
 
     public AIAOEAttack(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _suctionTime, float _cooldown)
     {
@@ -39,7 +42,7 @@ public class AIAOEAttack : AIBase {
 
         //Force Values
         f_aoeRange = 20;
-        f_force = 5000f;
+        f_force = 50000f;
         f_upwardForce = 0.0f;
         f_gravitiyConstant = 9.8f;
 
@@ -54,21 +57,19 @@ public class AIAOEAttack : AIBase {
     public override bool StartAI()
     {
         ent_target = null;
-        script_boss.Enum_currentAttState = EntityBoss.AttackState.GRAVITY;
+        script_boss.NextAttackState(EntityBoss.AttackState.GRAVITY);
+        script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
         return true;
     }
 
     public override bool EndAI()
     {
-        //ent_main.B_isAttacking = false;
-        //b_has_attacked = false;
-        ent_main.B_isAttacking = true;
+        ent_main.B_isAttacking = false;
+        ent_target = null;
 
-        //ent_main.GetAnimator().SetBool("PunchTrigger", false);
-        //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
+        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
+        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
 
-        StartAI();
-        script_boss.Enum_currentAttState = EntityBoss.AttackState.NONE;
         return true;
     }
 
@@ -142,52 +143,48 @@ public class AIAOEAttack : AIBase {
     {
         if (ent_target != null)
         {
-            if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "AttackState", AnimatorControllerParameterType.Int))
+            if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)
             {
-                ent_main.An_animator.SetInteger("AttackState", (int)script_boss.Enum_currentAttState);
-            }
-            //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
-            //{
-            //    b_has_attacked = true;
-            //    ent_main.OnAttack();
-            //}
-            f_suctionTimer += Time.deltaTime;
+                f_suctionTimer += Time.deltaTime;
 
-            if (f_suctionTimer < f_suctionLifeSpan)
-            {
-                Debug.Log("SUCKING");
+                if (f_suctionTimer < f_suctionLifeSpan)
+                {
+                    Debug.Log("SUCKING");
 
-                if (!IsPlayerInCover())
-                {
-                    ent_target.Rb_rigidbody.AddForce(GAcceleration(ent_main.GetPosition(), ent_main.Rb_rigidbody.mass, ent_target.Rb_rigidbody));
-                }  
-            }
-            else
-            {
-                if (!b_has_attacked)
-                {
-                    Debug.Log("KABOOM");
                     if (!IsPlayerInCover())
                     {
-                        ent_target.Rb_rigidbody.AddExplosionForce(f_force, ent_main.GetPosition(), f_aoeRange, f_upwardForce, ForceMode.Acceleration);
-                    }
-
-                    b_has_attacked = true;
-
-                    var crystalList = ObjectPool.GetInstance().GetActiveEnvironmentObjects();
-
-                    foreach(GameObject i in crystalList)
-                    {
-                        EntityEnviroment envir = i.GetComponent<EntityEnviroment>();
-
-                        if (envir.B_isDestructible)
-                        {
-                            i.SetActive(false);
-                        }
+                        ent_target.Rb_rigidbody.AddForce(GAcceleration(ent_main.GetPosition(), ent_main.Rb_rigidbody.mass, ent_target.Rb_rigidbody));
                     }
                 }
+                else
+                {
+                    if (!b_has_attacked)
+                    {
+                        script_boss.NextChargeState(EntityBoss.ChargeState.END);
+                        Debug.Log("KABOOM");
+                        if (!IsPlayerInCover())
+                        {
+                            ent_target.Rb_rigidbody.AddExplosionForce(f_force, ent_main.GetPosition(), f_aoeRange, f_upwardForce, ForceMode.Acceleration);
+                        }
 
+                        b_has_attacked = true;
+
+                        var crystalList = ObjectPool.GetInstance().GetActiveEnvironmentObjects();
+
+                        foreach (GameObject i in crystalList)
+                        {
+                            EntityEnviroment envir = i.GetComponent<EntityEnviroment>();
+
+                            if (envir.B_isDestructible)
+                            {
+                                i.SetActive(false);
+                            }
+                        }
+                    }
+
+                }
             }
+              
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }
@@ -214,12 +211,13 @@ public class AIAOEAttack : AIBase {
         RaycastHit hit;
 
         Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
+        c_targetCenter = ent_target.GetComponent<Collider>();
 
         int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
 
-        if (Physics.Linecast(ent_main.GetPosition(), ent_target.GetPosition(), out hit, ignoreEnemiesMask))
+        if (Physics.Linecast(ent_main.GetPosition(), c_targetCenter.bounds.center, out hit, ignoreEnemiesMask))
         {
-            Debug.DrawLine(ent_main.GetPosition(), ent_target.GetPosition(), Color.yellow);
+            Debug.DrawLine(ent_main.GetPosition(), c_targetCenter.bounds.center, Color.yellow);
             Debug.Log("Did Hit : " + hit.collider.gameObject);
 
             if (hit.collider.gameObject.CompareTag("Player"))

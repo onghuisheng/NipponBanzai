@@ -33,6 +33,9 @@ public class EntityPickUps : Entity
     private MeshRenderer
         mr_meshrenderer;
 
+    private GameObject
+        go_particle;
+
     public virtual void SetUpPickUp(Vector3 _pos, float _lifetime, Item _id)
     {
         if (mf_meshfilter == null)
@@ -48,6 +51,7 @@ public class EntityPickUps : Entity
         f_floating_offset = 0.5f;
         f_floating_speed = 0.1f;
         f_rotation_speed = 3;
+        go_particle = null;
 
         v3_original_pos = _pos;
         SetPosition(v3_original_pos);
@@ -75,12 +79,26 @@ public class EntityPickUps : Entity
         else
         {
             i_id.OnExpire(this);
+
+            if(go_particle != null)
+            {
+                Destroy(go_particle);
+                go_particle = null;
+            }
+
             gameObject.SetActive(false);
         }
 
         if(Vector3.Distance(GetPosition(), ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()) < 2)
         {
             i_id.OnTaken(this, ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>());
+
+            if (go_particle != null)
+            {
+                Destroy(go_particle);
+                go_particle = null;
+            }
+
             gameObject.SetActive(false);
         }
     }
@@ -98,6 +116,22 @@ public class EntityPickUps : Entity
 
         SetPosition(new Vector3(GetPosition().x, GetPosition().y + f_floating_speed * Time.deltaTime, GetPosition().z));
         transform.Rotate(0, f_rotation_speed * Time.deltaTime, 0);
+    }
+
+    public void DoSpawnParticle(ParticleHandler.ParticleType _type, Vector3 _pos, Vector3 _scale, Vector3 _rotation)
+    {
+        if(go_particle == null)
+            go_particle = ParticleHandler.GetInstance().SpawnParticle(_type, gameObject.transform, _pos, _scale, _rotation, 0);
+    }
+
+    public void DoSucking(float _radius)
+    {
+        if (Vector3.Distance(GetPosition(), ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()) < _radius)
+        {
+            Vector3 _dir = (GetPosition() - ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition().normalized);
+
+            SetPosition(GetPosition() - (_dir * 0.5f));
+        }
     }
 
     public Item CurrentItem()

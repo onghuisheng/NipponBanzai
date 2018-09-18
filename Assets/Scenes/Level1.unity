@@ -362,6 +362,53 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &326988283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 326988284}
+  - component: {fileID: 326988285}
+  m_Layer: 0
+  m_Name: ParticleHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326988284
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 326988283}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.243856, y: 1.2275457, z: 0.09277964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 358312527}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &326988285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 326988283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c3ef2d6ee9ae342a62d89b9ce910d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_destroyOnLoad: 0
+  m_ParticlePrefabs:
+  - {fileID: 1788333622054468, guid: 93833885a8fe50645942da9d9afafe57, type: 2}
+  - {fileID: 1459869139309956, guid: 2312a1a33f5259c43bf9c3d9b31b6563, type: 2}
+  - {fileID: 100000, guid: a3ac9c1c2470b7f44806858af5764f04, type: 2}
+  - {fileID: 1092418431479760, guid: d97dcd2b8f6e49643b571a2fa5b3653e, type: 2}
+  - {fileID: 1716279366028320, guid: 319d72010cc672147ac76610deecc490, type: 2}
 --- !u!1 &358312526
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,8 +436,8 @@ Transform:
   m_Children:
   - {fileID: 1784028396}
   - {fileID: 605096766}
-  - {fileID: 949573061}
   - {fileID: 793165816}
+  - {fileID: 326988284}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -582,7 +629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 358312527}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &793165817
 MonoBehaviour:
@@ -597,50 +644,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 488960116}
   dialogueText: {fileID: 141154753}
---- !u!1 &949573060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 949573061}
-  - component: {fileID: 949573062}
-  m_Layer: 0
-  m_Name: ParticleHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &949573061
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949573060}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.243856, y: 1.2275457, z: 0.09277964}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 358312527}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &949573062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949573060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68c3ef2d6ee9ae342a62d89b9ce910d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_destroyOnLoad: 0
-  m_ParticlePrefabs:
-  - {fileID: 1788333622054468, guid: 93833885a8fe50645942da9d9afafe57, type: 2}
-  - {fileID: 1459869139309956, guid: 2312a1a33f5259c43bf9c3d9b31b6563, type: 2}
 --- !u!1 &1101992117
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +823,7 @@ Transform:
   m_Children:
   - {fileID: 1494077782}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396303287
 GameObject:
@@ -964,6 +967,10 @@ Prefab:
         type: 2}
       propertyPath: dialogue.sentences.Array.data[2]
       value: Hi Chee Mun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992458142595656, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}
+      propertyPath: m_TagString
+      value: Non-Hitable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 182e1a08ed672c54c92c570645e37e27, type: 2}

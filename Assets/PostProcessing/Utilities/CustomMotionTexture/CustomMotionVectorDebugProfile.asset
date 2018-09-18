@@ -124,7 +124,7 @@ MonoBehaviour:
         temperature: 0
         tint: 0
         hueShift: 0
-        saturation: 0
+        saturation: 1
         contrast: 1
       channelMixer:
         red: {x: 1, y: 0, z: 0}
@@ -322,7 +322,7 @@ MonoBehaviour:
       mode: 0
       color: {r: 0.06314526, g: 0.4056604, b: 0.40208563, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0
+      intensity: 0.1
       smoothness: 0.672
       roundness: 1
       mask: {fileID: 0}
