@@ -13,12 +13,16 @@ public class DialogueHandler : MonoBehaviour
 
     public delegate void OnDialogueEndDelegate();
     public static OnDialogueEndDelegate m_OnDialogueEnd;
-    
+
     public static bool isInDialogue { get; set; }
 
     private Queue<string> sentences;
 
     private const float tweenPosY = 200;
+
+    private bool isSentencing = false;
+
+    private string currentSentence = "";
 
     // Use this for initialization
     void Start()
@@ -28,27 +32,15 @@ public class DialogueHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space) && isInDialogue)
+        if (Input.GetKeyDown(KeyCode.Space) && isInDialogue)
         {
             DisplayNextSentence();
-        }
-
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            Dialogue dialog = new Dialogue();
-            dialog.name = "Eyy";
-            dialog.sentences.Add("Hi");
-            dialog.sentences.Add("This is a test dialog");
-            dialog.sentences.Add("bye");
-
-            StartDialogue(dialog);
         }
 
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
-        // TODO: Tween dialogue
         nameText.transform.parent.GetComponent<RectTransform>().DOAnchorPosY(tweenPosY, 1).SetEase(Ease.OutExpo);
 
         // remove later
@@ -69,21 +61,32 @@ public class DialogueHandler : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (isSentencing)
         {
-            EndDialogue();
-            return;
+            StopAllCoroutines();
+            dialogueText.text = currentSentence;
+            isSentencing = false;
         }
-        string sentence = sentences.Dequeue(); // Getting the next sentence in the queue
+        else
+        {
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
 
-        //This to make sure that it stops animating if the user rushes through CONTINUE
-        StopAllCoroutines();
-        //Start animating! 
-        StartCoroutine(TypeSentence(sentence));
+            currentSentence = sentences.Dequeue(); // Getting the next sentence in the queue
+
+            //This to make sure that it stops animating if the user rushes through CONTINUE
+            StopAllCoroutines();
+            //Start animating! 
+            StartCoroutine(TypeSentence(currentSentence));
+        }
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        isSentencing = true;
         dialogueText.text = "";
         //Loop through all character in individual sentence
         foreach (char letter in sentence.ToCharArray()) // ToCharArray is a function that converts string into a character array
@@ -92,6 +95,7 @@ public class DialogueHandler : MonoBehaviour
             //After each letter, wait a small amount of time
             yield return null; //This returns a single frame
         }
+        isSentencing = false;
     }
 
     void EndDialogue()
@@ -124,7 +128,7 @@ public class Dialogue
 {
     // Store all information needed for a single dialogue
     public string name = ""; // Name of NPC
-        
+
     public List<string> sentences = new List<string>();
 
 }
