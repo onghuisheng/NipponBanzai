@@ -260,7 +260,7 @@ public class EntityPlayer : EntityLivingBase
 
         if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
-            player_state = State.MOVING;
+            player_state = State.IDLE;
         }
     }
 
@@ -537,5 +537,11 @@ public class EntityPlayer : EntityLivingBase
 
         if (i_combo > 3)
             i_combo = 1;
+    }
+
+    public void EndShootAnimation()
+    {
+        An_animator.SetBool("IsAttacking", false);
+        An_animator.SetBool("IsMelee", false);      
     }
 }
