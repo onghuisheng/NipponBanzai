@@ -470,16 +470,16 @@ public class EntityPlayer : EntityLivingBase
 
         // Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
         // Debug.Log(player_state);
-        if (player_target_state == TARGET_STATE.AIMING)
-        {
-            foreach (GameObject go in list_joints)
-            {
-                go.transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 100);
-                go.transform.localEulerAngles = new Vector3(go.transform.localRotation.x + 45,
-                     go.transform.localRotation.y,
-                     go.transform.localRotation.z + 45);
-            }
-        }
+        //if (player_target_state == TARGET_STATE.AIMING)
+        //{
+        //    foreach (GameObject go in list_joints)
+        //    {
+        //        go.transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 100);
+        //        go.transform.localEulerAngles = new Vector3(go.transform.localRotation.x + 45,
+        //             go.transform.localRotation.y,
+        //             go.transform.localRotation.z + 45);
+        //    }
+        //}
     }
 
     public override void OnAttack()
