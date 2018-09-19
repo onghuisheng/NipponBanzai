@@ -104,4 +104,16 @@ public class Inventory {
     {
         return list_skills_inventory;
     }
+
+    public void AddSkill(SkillBase _skill)
+    {
+        if(!list_skills_inventory.Contains(_skill))
+            list_skills_inventory.Add(_skill);
+    }
+
+    public void RemoveSkill(SkillBase _skill)
+    {
+        if (list_skills_inventory.Contains(_skill))
+            list_skills_inventory.Remove(_skill);
+    }
 }

@@ -102,6 +102,13 @@ public class EntityPlayer : EntityLivingBase
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))
                 list_joints.Add(_trans.gameObject);
         }
+
+
+        //TEMPO PLS REMOVE
+        SkillBase _skill = new SkillSwordSummoning();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
+        ///
     }
 
     private void IdleCheckFunction()
@@ -121,6 +128,18 @@ public class EntityPlayer : EntityLivingBase
             player_state = State.DASHING;
 
             return;
+        }
+
+        if (GetPlayerTargetState() == TARGET_STATE.AIMING)
+        {
+            if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
+            {
+                GetInventory().GetCurrSkill().StartSkill(this);
+                An_animator.SetBool("IsSummoning", true);
+                An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
+                player_state = State.SUMMONING;
+                return;
+            }
         }
 
         if (Input.GetKey(KeyCode.Mouse0))
@@ -151,6 +170,18 @@ public class EntityPlayer : EntityLivingBase
             player_state = State.DASHING;
 
             return;
+        }
+
+        if (GetPlayerTargetState() == TARGET_STATE.AIMING)
+        {
+            if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
+            {
+                GetInventory().GetCurrSkill().StartSkill(this);
+                An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
+                An_animator.SetBool("IsSummoning", true);
+                player_state = State.SUMMONING;
+                return;
+            }
         }
 
         if (Input.GetKey(KeyCode.Mouse0))
@@ -266,7 +297,15 @@ public class EntityPlayer : EntityLivingBase
 
     private void SummoningCheckFunction()
     {
-        player_state = State.IDLE;
+        if (!An_animator.GetBool("IsSummoning"))
+        {
+            GetInventory().GetCurrSkill().EndSkill();
+            player_state = State.IDLE;
+        }
+
+        GetInventory().GetCurrSkill().RunSkill();
+        Debug.Log("Summoning");
+
     }
 
     private void DeadCheckFunction()
@@ -306,6 +345,11 @@ public class EntityPlayer : EntityLivingBase
         //        Debug.Log(dic.Key.ToString() + " x" + dic.Value.ToString());
         //    }
         //}
+
+        foreach(SkillBase sb in GetInventory().GetAllSkills())
+        {
+            sb.UpdateSkill();
+        }
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
@@ -509,7 +553,7 @@ public class EntityPlayer : EntityLivingBase
                 break;
         }
 
-        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation, 0.1f);
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude * 1.5f), transform.rotation, 0.1f);
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
@@ -533,6 +577,16 @@ public class EntityPlayer : EntityLivingBase
     }
 
     public void EndAttackAnimation()
+    {
+        An_animator.SetBool("IsAttacking", false);
+        An_animator.SetBool("IsMelee", false);
+        ++i_combo;
+
+        if (i_combo > 3)
+            i_combo = 1;
+    }
+
+    public void EndSummoningAnimation()
     {
         An_animator.SetBool("IsAttacking", false);
         An_animator.SetBool("IsMelee", false);
