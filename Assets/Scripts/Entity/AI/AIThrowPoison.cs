@@ -60,6 +60,14 @@ public class AIThrowPoison : AIBase
         {
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
+        
+        AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animatorState.IsName("Poison Attack"))
+        {
+            ent_main.B_isAttacking = true;
+            return true;
+        }
 
         int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
 
@@ -72,14 +80,6 @@ public class AIThrowPoison : AIBase
         {
             if (hitInfo.collider.tag != "Player")
                 return false;
-        }
-
-        AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
-
-        if (animatorState.IsName("Poison Attack"))
-        {
-            ent_main.B_isAttacking = true;
-            return true;
         }
 
         if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_attack_range)
