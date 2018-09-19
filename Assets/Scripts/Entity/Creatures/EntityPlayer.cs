@@ -490,14 +490,17 @@ public class EntityPlayer : EntityLivingBase
         switch (i_combo)
         {
             case 1:
-            case 2:
                 _multiplier = 1;
                 _attack_hitbox = new Vector3(3, 1, 2);
+                break;
+            case 2:
+                _multiplier = 1.5f;
+                _attack_hitbox = new Vector3(2, 1, 3);
                 break;
 
             case 3:
                 _multiplier = 2;
-                _attack_hitbox = new Vector3(2, 1, 3);
+                _attack_hitbox = new Vector3(3, 1, 3);
                 break;
 
             default:
