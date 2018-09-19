@@ -72,6 +72,17 @@ public class EnemySpawnTrigger : EntityTrigger
                 enemy.OnAttacked(dmgSrc);
             }
         }
+
+
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+
+            foreach (var enemy in lst_enemy_collection)
+            {
+                var gg = new StatusPoison(5, 1, 0.25f);
+                enemy.Stc_Status.ApplyStatus(gg);
+            }
+        }
 #endif
 
     }
@@ -107,7 +118,7 @@ public class EnemySpawnTrigger : EntityTrigger
         }
         for (int i = 0; i < i_ranged_spawn_count; i++)
         {
-            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>());          
+            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>());
         }
         for (int i = 0; i < i_miniboss_spawn_count; i++)
         {
@@ -123,7 +134,8 @@ public class EnemySpawnTrigger : EntityTrigger
 
         // Adjust the Y position to align with the ground
         RaycastHit hitInfo;
-        if (Physics.Raycast(spawnPos, Vector3.down, out hitInfo, Mathf.Infinity, (1 << LayerMask.NameToLayer("Environment")))) { // Only check for environment
+        if (Physics.Raycast(spawnPos, Vector3.down, out hitInfo, Mathf.Infinity, (1 << LayerMask.NameToLayer("Environment"))))
+        { // Only check for environment
             spawnPos.y = hitInfo.point.y;
         }
 

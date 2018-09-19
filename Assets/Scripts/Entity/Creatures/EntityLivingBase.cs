@@ -138,6 +138,9 @@ public abstract class EntityLivingBase : Entity
     private Stats
         st_stats = new Stats();
 
+    private StatusContainer
+        stc_statusContainer = new StatusContainer();
+
     private Inventory
         inven_inventory;
 
@@ -245,6 +248,12 @@ public abstract class EntityLivingBase : Entity
         }
     }
 
+    public StatusContainer Stc_Status {
+        get {
+            return stc_statusContainer;
+        }
+    }
+
     public float F_hit_timer {
         get {
             return f_hit_timer;
@@ -341,6 +350,8 @@ public abstract class EntityLivingBase : Entity
     protected override void Update()
     {
         base.Update();
+
+        stc_statusContainer.UpdateStatuses(this);
 
         F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
@@ -580,11 +591,11 @@ public abstract class EntityLivingBase : Entity
         f_y_velocity = 0;
         B_isGrounded = true;
         B_isAIEnabled = true;
-
-
+        
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
         rch_raycast = new RaycastHit();
+        stc_statusContainer = new StatusContainer();
 
         inven_inventory = new Inventory();
         inven_inventory.SetUpInventory();

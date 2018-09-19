@@ -71,7 +71,7 @@ public class CameraHandler : Singleton<CameraHandler>
                 ChangeCamera(CameraType.ThirdPerson);
             });
         }
-
+        
     }
 
     public void ChangeCamera(CameraType _type)
