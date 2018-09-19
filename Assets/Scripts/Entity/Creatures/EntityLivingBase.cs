@@ -579,6 +579,7 @@ public abstract class EntityLivingBase : Entity
         F_regen_amount = 0;
         f_y_velocity = 0;
         B_isGrounded = true;
+        B_isAIEnabled = true;
 
 
         An_animator = GetComponent<Animator>();
