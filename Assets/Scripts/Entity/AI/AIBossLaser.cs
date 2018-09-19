@@ -41,7 +41,7 @@ public class AIBossLaser : AIBase {
         f_cooldown = _cooldown;
         f_maxStateTimer = _stateTime;
 
-        f_stateCooldownTimer = 0;
+        f_stateCooldownTimer = f_cooldown;
         f_beamChargeTimer = 0;
         i_numOfLasers = 4; //For now.
         f_maxBeamCharge = 4.5f;

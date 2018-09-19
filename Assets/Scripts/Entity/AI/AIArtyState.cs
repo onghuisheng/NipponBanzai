@@ -47,7 +47,7 @@ public class AIArtyState : AIBase
         i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
 
         f_aimTimer = 0;
-        f_stateCooldownTimer = 0;
+        f_stateCooldownTimer = f_cooldown;
 
         b_has_attacked = false;
 

@@ -47,7 +47,7 @@ public class AIAOEAttack : AIBase {
         f_gravitiyConstant = 9.8f;
 
         //Timers
-        f_stateCooldownTimer = 0.0f;
+        f_stateCooldownTimer = f_cooldown;
         f_suctionTimer = 0.0f;
         b_has_attacked = false;
 

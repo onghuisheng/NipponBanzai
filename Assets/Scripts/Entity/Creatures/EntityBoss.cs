@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EntityBoss : EntityEnemy {
 
@@ -17,7 +18,9 @@ public class EntityBoss : EntityEnemy {
         GRAVITY,
         LASER,
         ARTY,
-        SPINATTACK
+        SPINATTACK,
+        H_MEELE,
+        V_MEELE
     };
 
     public enum ChargeState
@@ -95,22 +98,34 @@ public class EntityBoss : EntityEnemy {
 
     public override void OnAttack()
     {
-        GameObject obj = ObjectPool.GetInstance().GetHitboxObjectFromPool();
-        HitboxTrigger obj_hitbox = obj.GetComponent<HitboxTrigger>();
+        Vector3 attack_hitbox = new Vector3(3, 2, 8);
+        Vector3 attack_dir = transform.forward;
 
-        DamageSource dmgsrc = new DamageSource();
+        if (enum_currentAttState == AttackState.H_MEELE)
+        {
+            switch (enum_currentChargeState)
+            {
+                case ChargeState.NONE:
+                    break;
+                case ChargeState.STAGE_1:
+                    attack_hitbox = new Vector3(8, 2, 12);
+                    attack_dir = -transform.right;
+                    break;
+                case ChargeState.STAGE_2:
+                    attack_hitbox = new Vector3(8, 2, 12);
+                    attack_dir = transform.right;
+                    break;
+                case ChargeState.END:
+                    attack_hitbox = new Vector3(12, 2, 8);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        dmgsrc.SetUpDamageSource(St_stats.S_name + " " + gameObject.GetInstanceID().ToString(),
-            gameObject.tag,
-            gameObject.GetInstanceID().ToString(),
-            St_stats.F_damage);
 
-        obj_hitbox.SetHitbox(dmgsrc, new Vector3(1.5f, 1, 1.5f));
 
-        obj_hitbox.transform.position = transform.position + (transform.forward * (obj_hitbox.transform.localScale * 0.8f).z);
-        obj_hitbox.transform.position = new Vector3(obj_hitbox.transform.position.x, obj_hitbox.transform.position.y + 1, obj_hitbox.transform.position.z);
-
-        obj_hitbox.transform.rotation = transform.rotation;
+        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, attack_hitbox, transform.position + (attack_dir * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
     }
 
     public override void OnAOEAttack(float _size = 1.0f)
@@ -178,16 +193,16 @@ public class EntityBoss : EntityEnemy {
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 8, 10));
-        //RegisterAITask(new AIArtyState(1, this, typeof(EntityPlayer), 20, 12, 10, 3));
-        //RegisterAITask(new AIBossLaser(1, this, typeof(EntityPlayer), 50, 14, 10));
-        //RegisterAITask(new AIAOEAttack(3, this, typeof(EntityPlayer), 20, 15,12));
+        RegisterAITask(new AIBossSpinAttack(3, this, typeof(EntityPlayer), 20.0f, 8, 10));
+        RegisterAITask(new AIArtyState(4, this, typeof(EntityPlayer), 20, 12, 10, 15));
+        RegisterAITask(new AIBossLaser(5, this, typeof(EntityPlayer), 50, 14, 20));
+        RegisterAITask(new AIAOEAttack(6, this, typeof(EntityPlayer), 20, 15, 30));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
-        //RegisterAITask(new AIChase(2, this, typeof(EntityPlayer), 20.0f, 9999));
-        //RegisterAITask(new AIAttackMelee(1, this, typeof(EntityPlayer), 2.0f));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20.0f, 9999));
+        RegisterAITask(new AIBossMeleeAttack(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
     }
 
-    public void NextChargeState()
+        public void NextChargeState()
     {
         Enum_currentChargeState += 1;
         An_animator.SetInteger("ChargeState", (int)Enum_currentChargeState);

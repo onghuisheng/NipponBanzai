@@ -35,7 +35,7 @@ public class AIBossSpinAttack : AIBase {
         f_cooldown = _cooldown;
         f_maxStateTimer = _stateTime;
 
-        f_stateCooldownTimer = 0;
+        f_stateCooldownTimer = f_cooldown;
         f_spinRange = 0;
 
         b_has_attacked = false;
