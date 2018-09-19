@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4913156825702842}
-  - component: {fileID: 33317361952077402}
-  - component: {fileID: 23952190853446578}
   - component: {fileID: 65410301940156918}
   - component: {fileID: 114033696517377700}
   - component: {fileID: 208086382740906366}
+  - component: {fileID: 33254588543341476}
+  - component: {fileID: 23800165009342698}
   m_Layer: 0
   m_Name: Crystal
   m_TagString: Environment
@@ -38,13 +38,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009587866748322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.169367, y: 1.99, z: 3.7779684}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23952190853446578
+--- !u!23 &23800165009342698
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 57a694192801899468e91b9390ec3b55, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,13 +79,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33317361952077402
+--- !u!33 &33254588543341476
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009587866748322}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 497cf0182a794154b875ff0fe2c777b4, type: 3}
 --- !u!65 &65410301940156918
 BoxCollider:
   m_ObjectHideFlags: 1
