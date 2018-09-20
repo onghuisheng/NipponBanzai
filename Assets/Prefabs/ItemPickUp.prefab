@@ -110,11 +110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list_mesh:
-  - {fileID: 4300000, guid: 847c2c4716f8e54499ea3b1af3b11710, type: 3}
-  - {fileID: 4300000, guid: 753dc939323c58e489f7712f60e4e802, type: 3}
+  - {fileID: 4300000, guid: c5c2b48ddc07fe648a9b89aa1a2905f2, type: 3}
+  - {fileID: 4300000, guid: 497cf0182a794154b875ff0fe2c777b4, type: 3}
   list_texture:
-  - {fileID: 2800000, guid: c0b9d3b20ffc5784d99ab5075b9d28b1, type: 3}
-  - {fileID: 2800000, guid: ba6a37c170e191b4793b0beed7529f61, type: 3}
+  - {fileID: 2800000, guid: be0d53f315a07a44e867524978a1fab9, type: 3}
+  - {fileID: 2800000, guid: be0d53f315a07a44e867524978a1fab9, type: 3}
 --- !u!136 &136050340369696364
 CapsuleCollider:
   m_ObjectHideFlags: 1

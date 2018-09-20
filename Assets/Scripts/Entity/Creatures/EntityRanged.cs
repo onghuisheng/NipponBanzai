@@ -68,6 +68,7 @@ public class EntityRanged : EntityEnemy
         B_isHit = false;
 
         An_animator.Rebind();
+        RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
         RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 

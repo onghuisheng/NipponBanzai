@@ -13,6 +13,7 @@ public class AIPanic : AIBase
 
     private NavMeshAgent nma_agent;
 
+
     public AIPanic(int _priority, EntityLivingBase _entity, System.Type _type)
     {
         i_priority = _priority;
@@ -36,11 +37,11 @@ public class AIPanic : AIBase
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
-        //if (ent_main.B_isPanicking)
-        //{
-        //    return true;
-        //}
-        
+        if (ent_main.Stc_Status.isPanicking)
+        {
+            return true;
+        }
+
         return false;
     }
 

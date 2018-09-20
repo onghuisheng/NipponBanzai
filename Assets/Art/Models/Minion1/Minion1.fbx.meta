@@ -62,6 +62,7 @@ ModelImporter:
     100112: R_M1_WingFlapD2
     100114: Tail
     100116: transform1
+    100118: group1
     400000: L_M1_Wingbone1
     400002: L_M1_Wingbone10
     400004: L_M1_Wingbone11
@@ -121,9 +122,13 @@ ModelImporter:
     400112: R_M1_WingFlapD2
     400114: Tail
     400116: transform1
+    400118: group1
     2100000: lambert1
     2100002: lambert2
     2100004: lambert3
+    2100006: StingrayPBS4
+    2100008: Default_Material
+    2100010: StingrayPBS5
     4300000: polySurface5
     7400000: Minion1_Idle
     7400002: Minion1_Move

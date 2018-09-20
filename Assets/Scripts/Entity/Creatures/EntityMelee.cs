@@ -64,7 +64,7 @@ public class EntityMelee : EntityEnemy
         B_isHit = false;
 
         An_animator.Rebind();
-        // RegisterAITask(new AIIdle(2, this));
+        RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
         RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance));
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
         //RegisterAITask(new AIRoam(3, this, 5.0f));

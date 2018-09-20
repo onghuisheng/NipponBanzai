@@ -94,6 +94,7 @@ public class EntityMiniBoss : EntityEnemy
 
         var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
 
+        RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
         RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 2.6f, enemiesToSpawn, 10));
         RegisterAITask(ai_throw_poison = new AIThrowPoison(1, this, typeof(EntityPlayer), 15, 6, () =>
         {
