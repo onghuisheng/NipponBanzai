@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[assembly: InternalsVisibleTo("StatusContainer")]
-public abstract class Status
+public abstract class StatusBase
 {
     [Flags]
     public enum StatusType
@@ -28,7 +27,7 @@ public abstract class Status
         internal set { m_TimeLeft = value; }
     }
 
-    protected Status(StatusType statusType, float duration)
+    protected StatusBase(StatusType statusType,  float duration)
     {
         m_StatusType = statusType;
         m_TimeLeft = duration;

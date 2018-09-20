@@ -81,8 +81,13 @@ public class EnemySpawnTrigger : EntityTrigger
             {
                 var gg = new StatusPoison(5, 1, 0.25f);
                 enemy.Stc_Status.ApplyStatus(gg);
+                Debug.Log("Panic:" + enemy.Stc_Status.isPanicking);
+                Debug.Log("Poison:" + enemy.Stc_Status.isPoisoned);
+                Debug.Log("Stunned:" + enemy.Stc_Status.isStunned);
             }
+            
         }
+        
 #endif
 
     }
