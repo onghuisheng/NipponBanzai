@@ -45,6 +45,7 @@ public class AIBossSpinAttack : AIBase {
 
     public override bool StartAI()
     {
+        Debug.Log("SPIN");
         Reset();
         script_boss.NextAttackState(EntityBoss.AttackState.SPINATTACK);
         script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
@@ -53,7 +54,7 @@ public class AIBossSpinAttack : AIBase {
 
     public override bool EndAI()
     {
-        ent_main.B_isAttacking = false;
+        //ent_main.B_isAttacking = false;
         b_has_attacked = false;
         f_stateCooldownTimer = 0;
 
@@ -76,15 +77,18 @@ public class AIBossSpinAttack : AIBase {
             return false;
         }
 
+        AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
+
         // Breaking point
         if (f_stateTimer > f_maxStateTimer)
         {
-            f_stateTimer = 0;
+            Debug.Log("ASHFHAKFESLKFELKASJFLJFJFLJAEFK");
             b_has_attacked = false;
             return false;
         }
 
         f_stateTimer += Time.deltaTime;
+
         if (ent_target == null)
         {
             foreach (GameObject l_go in ObjectPool.GetInstance().GetActiveEntityObjects())
@@ -129,7 +133,7 @@ public class AIBossSpinAttack : AIBase {
         //ent_main.GetAnimator().SetBool("PunchTrigger", true);
         //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
 
-        ent_main.B_isAttacking = true;
+        //ent_main.B_isAttacking = true;
 
         return true;
     }
@@ -140,11 +144,6 @@ public class AIBossSpinAttack : AIBase {
         Debug.Log("RUNNING");
         if (ent_target != null)
         {
-            //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
-            //{
-            //    b_has_attacked = true;
-            //    ent_main.OnAttack();
-            //}
             b_has_attacked = true;
 
             if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)

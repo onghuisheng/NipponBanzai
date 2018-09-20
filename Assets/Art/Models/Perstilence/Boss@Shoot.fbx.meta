@@ -318,7 +318,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5042493
+      - time: 0.8243626
         functionName: NextChargeState
         data: 
         objectReferenceParameter: {instanceID: 0}

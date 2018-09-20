@@ -68,6 +68,7 @@ public class AIBossLaser : AIBase {
         Debug.Log("end");
         ent_main.B_isAttacking = false;
         ent_main.B_isVulnerable = false;
+        f_stateCooldownTimer = 0;
 
         script_boss.NextAttackState(EntityBoss.AttackState.NONE);
         script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
@@ -87,7 +88,7 @@ public class AIBossLaser : AIBase {
         }
 
         // Breaking point
-        if (f_stateTimer > f_maxStateTimer && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.END)
+        if (f_stateTimer > f_maxStateTimer && script_boss.Enum_currentChargeState >= EntityBoss.ChargeState.END)
         {
             if (ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
@@ -207,7 +208,7 @@ public class AIBossLaser : AIBase {
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
         float lazerLife = f_maxStateTimer - f_stateTimer;
-        if (lazerLife > 9.5) lazerLife = 9.5f;
+        if (lazerLife < 9.5) lazerLife = 9.5f;
         script_laser.SetUpProjectile(lazerLife, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
         //script_laser.SetUpProjectile(f_maxStateTimer, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
     }
@@ -222,7 +223,6 @@ public class AIBossLaser : AIBase {
 
     void Reset()
     {
-        f_stateCooldownTimer = 0;
         f_stateTimer = 0;
         ent_target = null;
     }

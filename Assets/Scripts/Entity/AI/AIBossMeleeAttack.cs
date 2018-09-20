@@ -12,14 +12,12 @@ public class AIBossMeleeAttack : AIBase
         f_cooldown,
         f_stateCooldownTimer;
 
-    private int
-        i_randomChance;
-
     private System.Type
         type_target;
 
     private bool
         b_has_attacked;
+
 
     private EntityPlayer ep_player;
 
@@ -45,13 +43,12 @@ public class AIBossMeleeAttack : AIBase
         //f_stateCooldownTimer = f_cooldown;
 
         b_has_attacked = false;
-        i_randomChance = 5;
-
         script_boss = ent_main.GetComponent<EntityBoss>();
     }
 
     public override bool StartAI()
     {
+        Debug.Log("MELEE");
         Reset();
         nma_agent = ent_main.GetComponent<NavMeshAgent>();
         nma_agent.speed = ent_main.GetStats().F_speed * 0.5f;
@@ -70,30 +67,24 @@ public class AIBossMeleeAttack : AIBase
             return false;
         }
 
-        //// USING RNG TO PROCEED FOR ATTACK
-        //if (Random.Range(0,10) > i_randomChance)
-        //{
-        //    return false;
-        //}
-
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        if (animatorState.IsTag("Attack"))
-        {
-            //ent_main.B_isAttacking = true;
-            return true;
-        }
+        //if (animatorState.IsTag("Attack"))
+        //{
+        //    //ent_main.B_isAttacking = true;
+        //    return true;
+        //}
 
         if (ep_player == null)
         {
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
-        //if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_attack_range)
-        //{
-        //    //ent_main.B_isAttacking = true;
-        //    return true;
-        //}
+        //if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_attack_range && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.END)
+        if (script_boss.Enum_currentChargeState > EntityBoss.ChargeState.END && animatorState.normalizedTime >= 0.95f)
+        {
+            return false;
+        }
 
         return true;
     }
