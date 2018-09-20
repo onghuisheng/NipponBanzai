@@ -47,7 +47,8 @@ public class AIArtyState : AIBase
         i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
 
         f_aimTimer = 0;
-        f_stateCooldownTimer = f_cooldown;
+
+        //f_stateCooldownTimer = f_cooldown;
 
         b_has_attacked = false;
 
@@ -68,6 +69,7 @@ public class AIArtyState : AIBase
     {
         ent_main.B_isAttacking = false;
         ent_main.B_isVulnerable = false;
+        f_stateCooldownTimer = 0;
         Reset();
 
         script_boss.NextAttackState(EntityBoss.AttackState.NONE);

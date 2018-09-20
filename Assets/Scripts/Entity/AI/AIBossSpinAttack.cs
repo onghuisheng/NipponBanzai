@@ -35,7 +35,7 @@ public class AIBossSpinAttack : AIBase {
         f_cooldown = _cooldown;
         f_maxStateTimer = _stateTime;
 
-        f_stateCooldownTimer = f_cooldown;
+        //f_stateCooldownTimer = f_cooldown;
         f_spinRange = 0;
 
         b_has_attacked = false;
@@ -45,12 +45,9 @@ public class AIBossSpinAttack : AIBase {
 
     public override bool StartAI()
     {
-        f_stateTimer = 0;
-        f_spinRange = 0;
+        Reset();
         script_boss.NextAttackState(EntityBoss.AttackState.SPINATTACK);
         script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
-
-        ent_target = null;
         return true;
     }
 
@@ -58,12 +55,12 @@ public class AIBossSpinAttack : AIBase {
     {
         ent_main.B_isAttacking = false;
         b_has_attacked = false;
+        f_stateCooldownTimer = 0;
 
+        Reset();
         script_boss.NextAttackState(EntityBoss.AttackState.NONE);
         script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
-        f_stateTimer = 0;
-        f_spinRange = 0;
-        f_stateCooldownTimer = 0;
+
         //ent_main.GetAnimator().SetBool("PunchTrigger", false);
         //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
 
@@ -162,5 +159,12 @@ public class AIBossSpinAttack : AIBase {
         }
 
         return true;
+    }
+
+    void Reset()
+    {
+        f_stateTimer = 0;
+        f_spinRange = 0;
+        ent_target = null;
     }
 }

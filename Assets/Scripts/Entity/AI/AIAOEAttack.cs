@@ -47,7 +47,7 @@ public class AIAOEAttack : AIBase {
         f_gravitiyConstant = 9.8f;
 
         //Timers
-        f_stateCooldownTimer = f_cooldown;
+        //f_stateCooldownTimer = f_cooldown;
         f_suctionTimer = 0.0f;
         b_has_attacked = false;
 
@@ -56,7 +56,7 @@ public class AIAOEAttack : AIBase {
 
     public override bool StartAI()
     {
-        ent_target = null;
+        Reset();
         script_boss.NextAttackState(EntityBoss.AttackState.GRAVITY);
         script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
         return true;
@@ -64,9 +64,8 @@ public class AIAOEAttack : AIBase {
 
     public override bool EndAI()
     {
-        ent_main.B_isAttacking = false;
-        ent_target = null;
-
+        Reset();
+        f_stateCooldownTimer = 0;
         script_boss.NextAttackState(EntityBoss.AttackState.NONE);
         script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
 
@@ -85,9 +84,6 @@ public class AIAOEAttack : AIBase {
         // Breaking point for the arty state.
         if (b_has_attacked)
         {
-            f_stateCooldownTimer = 0;
-            b_has_attacked = false;
-            f_suctionTimer = 0;
             return false;
         }
 
@@ -229,5 +225,13 @@ public class AIAOEAttack : AIBase {
         }
 
         return false;
+    }
+
+    void Reset()
+    {
+        ent_main.B_isAttacking = false;
+        ent_target = null;
+        b_has_attacked = false;
+        f_suctionTimer = 0;
     }
 }

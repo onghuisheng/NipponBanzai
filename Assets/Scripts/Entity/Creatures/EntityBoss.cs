@@ -194,11 +194,11 @@ public class EntityBoss : EntityEnemy {
 
         //TODO: Register AI Task
         RegisterAITask(new AIBossSpinAttack(3, this, typeof(EntityPlayer), 20.0f, 8, 10));
-        RegisterAITask(new AIArtyState(4, this, typeof(EntityPlayer), 20, 12, 10, 15));
-        RegisterAITask(new AIBossLaser(5, this, typeof(EntityPlayer), 50, 14, 20));
+        RegisterAITask(new AIArtyState(4, this, typeof(EntityPlayer), 20, 12, 15, 3));
+        RegisterAITask(new AIBossLaser(5, this, typeof(EntityPlayer), 20, 16, 20));
         RegisterAITask(new AIAOEAttack(6, this, typeof(EntityPlayer), 20, 15, 30));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20.0f, 9999));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 50.0f, 9999));
         RegisterAITask(new AIBossMeleeAttack(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
     }
 
