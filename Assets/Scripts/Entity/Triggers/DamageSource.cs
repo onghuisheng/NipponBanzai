@@ -13,12 +13,16 @@ public struct DamageSource {
     private float
         f_damage;
 
-    public void SetUpDamageSource(string _name, string _tag, string _id, float _damage)
+    private bool
+        b_isFlinching;
+
+    public void SetUpDamageSource(string _name, string _tag, string _id, float _damage, bool _flinch = true)
     {
         s_name = _name;
         s_source_id = _id;
         f_damage = _damage;
         s_tag = _tag;
+        b_isFlinching = _flinch;
     }
 
     public string GetName()
@@ -50,4 +54,10 @@ public struct DamageSource {
     {
         return f_damage;
     }   
+
+    public bool IsFlinching()
+    {
+        return b_isFlinching;
+    }
+
 }
