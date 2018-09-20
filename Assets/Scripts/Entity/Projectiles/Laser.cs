@@ -146,13 +146,13 @@ public class Laser : EntityProjectiles
         RaycastHit hit;
 
         Vector3 direction = v3_currEndPos - v3_startPos;
-        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer(Go_owner.tag));
 
         if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit, ignoreEnemiesMask))
         {
             v3_currEndPos = hit.point;
 
-            if (hit.collider.gameObject.CompareTag("Player"))
+            if(!TagHelper.IsTagBanned(hit.collider.gameObject.tag))
             {
                 //Spawn Hitbox to damage player.
                 SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, transform.localScale, v3_currEndPos, transform.rotation, 0.1f);
