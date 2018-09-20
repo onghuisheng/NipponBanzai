@@ -140,6 +140,23 @@ ModelImporter:
     100268: Tailcoat_ctrl
     100270: torso_ctrl
     100272: torso_ctrl1
+    100274: hip1
+    100276: L_lcorner
+    100278: L_rcorner
+    100280: models
+    100282: polySurface20 1
+    100284: polySurface27 1
+    100286: R_lcorner
+    100288: R_rcorner
+    100290: wand1
+    100292: wand2
+    100294: wand_1
+    100296: wand_1 1
+    100298: wand_2
+    100300: wand_2 1
+    100302: Wand_inner_ring_ctrl 1
+    100304: Wand_main_ctrl
+    100306: Wand_main_ctrl 1
     400000: Anims
     400002: head_1
     400004: head_2
@@ -277,11 +294,29 @@ ModelImporter:
     400268: Tailcoat_ctrl
     400270: torso_ctrl
     400272: torso_ctrl1
+    400274: hip1
+    400276: L_lcorner
+    400278: L_rcorner
+    400280: models
+    400282: polySurface20 1
+    400284: polySurface27 1
+    400286: R_lcorner
+    400288: R_rcorner
+    400290: wand1
+    400292: wand2
+    400294: wand_1
+    400296: wand_1 1
+    400298: wand_2
+    400300: wand_2 1
+    400302: Wand_inner_ring_ctrl 1
+    400304: Wand_main_ctrl
+    400306: Wand_main_ctrl 1
     2000000: back
     2000002: bottom
     2000004: left
     2100000: lambert4
     2100002: lambert1
+    2100004: pasted__lambert4
     2300000: pasted__polySurface27
     2300002: polySurface20
     2300004: polySurface40
@@ -296,10 +331,16 @@ ModelImporter:
     4300006: polySurface17
     4300008: polySurface19
     4300010: polySurface27
+    4300012: polySurface27
+    4300014: polySurface20
     7400000: Running
     9500000: //RootNode
     13700000: polySurface17
     13700002: polySurface19
+    13700004: polySurface20
+    13700006: polySurface20 1
+    13700008: polySurface27
+    13700010: polySurface27 1
   externalObjects: {}
   materials:
     importMaterials: 1

@@ -105,7 +105,7 @@ public class EntityPlayer : EntityLivingBase
 
 
         //TEMPO PLS REMOVE
-        SkillBase _skill = new SkillSwordSummoning();
+        SkillBase _skill = new SkillFlash();
         _skill.SetUpSkill();
         GetInventory().AddSkill(_skill);
         ///
