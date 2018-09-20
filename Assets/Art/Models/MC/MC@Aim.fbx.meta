@@ -56,63 +56,56 @@ ModelImporter:
     100100: polySurface17
     100102: polySurface19
     100104: polySurface20
-    100106: polySurface20 1
-    100108: polySurface27
-    100110: polySurface27 1
-    100112: R_ankle
-    100114: R_elbow
-    100116: R_eye
-    100118: R_feet_1
-    100120: R_feet_2
-    100122: R_feet_3
-    100124: R_forth_finger_1
-    100126: R_forth_finger_2
-    100128: R_forth_finger_3
-    100130: R_forth_finger_4
-    100132: R_hip
-    100134: R_index_1
-    100136: R_index_2
-    100138: R_index_3
-    100140: R_index_4
-    100142: R_knee
-    100144: R_lcorner
-    100146: R_lip_corner
-    100148: R_lower_eyelid
-    100150: R_middle_finger_1
-    100152: R_middle_finger_2
-    100154: R_middle_finger_3
-    100156: R_middle_finger_4
-    100158: R_palm
-    100160: R_pinky_1
-    100162: R_pinky_2
-    100164: R_pinky_3
-    100166: R_pinky_4
-    100168: R_rcorner
-    100170: R_shoulder
-    100172: R_tailcoat_1
-    100174: R_tailcoat_2
-    100176: R_tailcoat_3
-    100178: R_tailcoat_4
-    100180: R_thumb_1
-    100182: R_thumb_2
-    100184: R_thumb_3
-    100186: R_upper_eyelid
-    100188: R_wrist
-    100190: tongue
-    100192: torso_1
-    100194: torso_2
-    100196: Upper_lip
-    100198: Upper_teeth
-    100200: wand1
-    100202: wand2
-    100204: wand_1
-    100206: wand_1 1
-    100208: wand_2
-    100210: wand_2 1
-    100212: Wand_inner_ring_ctrl
-    100214: Wand_inner_ring_ctrl 1
-    100216: Wand_main_ctrl
-    100218: Wand_main_ctrl 1
+    100106: polySurface27
+    100108: R_ankle
+    100110: R_elbow
+    100112: R_eye
+    100114: R_feet_1
+    100116: R_feet_2
+    100118: R_feet_3
+    100120: R_forth_finger_1
+    100122: R_forth_finger_2
+    100124: R_forth_finger_3
+    100126: R_forth_finger_4
+    100128: R_hip
+    100130: R_index_1
+    100132: R_index_2
+    100134: R_index_3
+    100136: R_index_4
+    100138: R_knee
+    100140: R_lcorner
+    100142: R_lip_corner
+    100144: R_lower_eyelid
+    100146: R_middle_finger_1
+    100148: R_middle_finger_2
+    100150: R_middle_finger_3
+    100152: R_middle_finger_4
+    100154: R_palm
+    100156: R_pinky_1
+    100158: R_pinky_2
+    100160: R_pinky_3
+    100162: R_pinky_4
+    100164: R_rcorner
+    100166: R_shoulder
+    100168: R_tailcoat_1
+    100170: R_tailcoat_2
+    100172: R_tailcoat_3
+    100174: R_tailcoat_4
+    100176: R_thumb_1
+    100178: R_thumb_2
+    100180: R_thumb_3
+    100182: R_upper_eyelid
+    100184: R_wrist
+    100186: tongue
+    100188: torso_1
+    100190: torso_2
+    100192: Upper_lip
+    100194: Upper_teeth
+    100196: wand1
+    100198: wand_1
+    100200: wand_2
+    100202: Wand_inner_ring_ctrl
+    100204: Wand_main_ctrl
     400000: head_1
     400002: head_2
     400004: hip1
@@ -166,79 +159,68 @@ ModelImporter:
     400100: polySurface17
     400102: polySurface19
     400104: polySurface20
-    400106: polySurface20 1
-    400108: polySurface27
-    400110: polySurface27 1
-    400112: R_ankle
-    400114: R_elbow
-    400116: R_eye
-    400118: R_feet_1
-    400120: R_feet_2
-    400122: R_feet_3
-    400124: R_forth_finger_1
-    400126: R_forth_finger_2
-    400128: R_forth_finger_3
-    400130: R_forth_finger_4
-    400132: R_hip
-    400134: R_index_1
-    400136: R_index_2
-    400138: R_index_3
-    400140: R_index_4
-    400142: R_knee
-    400144: R_lcorner
-    400146: R_lip_corner
-    400148: R_lower_eyelid
-    400150: R_middle_finger_1
-    400152: R_middle_finger_2
-    400154: R_middle_finger_3
-    400156: R_middle_finger_4
-    400158: R_palm
-    400160: R_pinky_1
-    400162: R_pinky_2
-    400164: R_pinky_3
-    400166: R_pinky_4
-    400168: R_rcorner
-    400170: R_shoulder
-    400172: R_tailcoat_1
-    400174: R_tailcoat_2
-    400176: R_tailcoat_3
-    400178: R_tailcoat_4
-    400180: R_thumb_1
-    400182: R_thumb_2
-    400184: R_thumb_3
-    400186: R_upper_eyelid
-    400188: R_wrist
-    400190: tongue
-    400192: torso_1
-    400194: torso_2
-    400196: Upper_lip
-    400198: Upper_teeth
-    400200: wand1
-    400202: wand2
-    400204: wand_1
-    400206: wand_1 1
-    400208: wand_2
-    400210: wand_2 1
-    400212: Wand_inner_ring_ctrl
-    400214: Wand_inner_ring_ctrl 1
-    400216: Wand_main_ctrl
-    400218: Wand_main_ctrl 1
+    400106: polySurface27
+    400108: R_ankle
+    400110: R_elbow
+    400112: R_eye
+    400114: R_feet_1
+    400116: R_feet_2
+    400118: R_feet_3
+    400120: R_forth_finger_1
+    400122: R_forth_finger_2
+    400124: R_forth_finger_3
+    400126: R_forth_finger_4
+    400128: R_hip
+    400130: R_index_1
+    400132: R_index_2
+    400134: R_index_3
+    400136: R_index_4
+    400138: R_knee
+    400140: R_lcorner
+    400142: R_lip_corner
+    400144: R_lower_eyelid
+    400146: R_middle_finger_1
+    400148: R_middle_finger_2
+    400150: R_middle_finger_3
+    400152: R_middle_finger_4
+    400154: R_palm
+    400156: R_pinky_1
+    400158: R_pinky_2
+    400160: R_pinky_3
+    400162: R_pinky_4
+    400164: R_rcorner
+    400166: R_shoulder
+    400168: R_tailcoat_1
+    400170: R_tailcoat_2
+    400172: R_tailcoat_3
+    400174: R_tailcoat_4
+    400176: R_thumb_1
+    400178: R_thumb_2
+    400180: R_thumb_3
+    400182: R_upper_eyelid
+    400184: R_wrist
+    400186: tongue
+    400188: torso_1
+    400190: torso_2
+    400192: Upper_lip
+    400194: Upper_teeth
+    400196: wand1
+    400198: wand_1
+    400200: wand_2
+    400202: Wand_inner_ring_ctrl
+    400204: Wand_main_ctrl
     2100000: lambert1
     2100002: pasted__lambert4
     4300000: polySurface17
     4300002: polySurface19
     4300004: polySurface27
     4300006: polySurface20
-    4300008: polySurface27
-    4300010: polySurface20
     7400000: Aim
     9500000: //RootNode
     13700000: polySurface17
     13700002: polySurface19
     13700004: polySurface20
-    13700006: polySurface20 1
-    13700008: polySurface27
-    13700010: polySurface27 1
+    13700006: polySurface27
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -269,9 +251,9 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Aim
-      takeName: Strafeaim(L)
-      firstFrame: 90
-      lastFrame: 130
+      takeName: aim
+      firstFrame: 642
+      lastFrame: 643
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -290,7 +272,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: EndAttackAnimation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

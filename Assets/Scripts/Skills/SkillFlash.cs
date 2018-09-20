@@ -31,7 +31,7 @@ public class SkillFlash : SkillBase
     {
         f_timer += Time.deltaTime;
 
-        if (f_timer > 10)
+        if (f_timer > 1.5f)
             go_caster.An_animator.SetBool("IsSummoning", false);
     }
 

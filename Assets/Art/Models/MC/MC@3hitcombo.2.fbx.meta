@@ -371,8 +371,8 @@ ModelImporter:
     - serializedVersion: 16
       name: 3hitcombo.2
       takeName: 3hitcombo.2
-      firstFrame: 214
-      lastFrame: 224
+      firstFrame: 189
+      lastFrame: 198
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

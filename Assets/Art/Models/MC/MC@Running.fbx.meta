@@ -372,8 +372,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Running
       takeName: Running
-      firstFrame: 51
-      lastFrame: 90
+      firstFrame: 7
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

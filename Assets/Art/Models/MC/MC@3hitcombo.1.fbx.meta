@@ -371,8 +371,8 @@ ModelImporter:
     - serializedVersion: 16
       name: 3hitcombo.1
       takeName: 3hitcombo.1
-      firstFrame: 200
-      lastFrame: 213
+      firstFrame: 179
+      lastFrame: 189
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -392,15 +392,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
-        functionName: EndAttackAnimation
+      - time: 0.44949847
+        functionName: OnAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.92788464
-        functionName: OnAttack
+      - time: 1
+        functionName: EndAttackAnimation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -409,7 +409,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 179
     isReadable: 1
   meshes:
     lODScreenPercentages: []

@@ -7,4 +7,238 @@ AvatarMask:
   m_PrefabInternal: {fileID: 0}
   m_Name: MCMask
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: hip1
+    m_Weight: 1
+  - m_Path: hip1/L_hip
+    m_Weight: 0
+  - m_Path: hip1/L_hip/L_knee
+    m_Weight: 0
+  - m_Path: hip1/L_hip/L_knee/L_ankle
+    m_Weight: 0
+  - m_Path: hip1/L_hip/L_knee/L_ankle/L_feet_1
+    m_Weight: 0
+  - m_Path: hip1/L_hip/L_knee/L_ankle/L_feet_1/L_feet_2
+    m_Weight: 0
+  - m_Path: hip1/L_hip/L_knee/L_ankle/L_feet_1/L_feet_2/L_feet_3
+    m_Weight: 0
+  - m_Path: hip1/L_tailcoat_1
+    m_Weight: 0
+  - m_Path: hip1/L_tailcoat_1/L_tailcoat_2
+    m_Weight: 0
+  - m_Path: hip1/L_tailcoat_1/L_tailcoat_2/L_tailcoat_3
+    m_Weight: 0
+  - m_Path: hip1/L_tailcoat_1/L_tailcoat_2/L_tailcoat_3/L_tailcoat_4
+    m_Weight: 0
+  - m_Path: hip1/R_hip
+    m_Weight: 0
+  - m_Path: hip1/R_hip/R_knee
+    m_Weight: 0
+  - m_Path: hip1/R_hip/R_knee/R_ankle
+    m_Weight: 0
+  - m_Path: hip1/R_hip/R_knee/R_ankle/R_feet_1
+    m_Weight: 0
+  - m_Path: hip1/R_hip/R_knee/R_ankle/R_feet_1/R_feet_2
+    m_Weight: 0
+  - m_Path: hip1/R_hip/R_knee/R_ankle/R_feet_1/R_feet_2/R_feet_3
+    m_Weight: 0
+  - m_Path: hip1/R_tailcoat_1
+    m_Weight: 0
+  - m_Path: hip1/R_tailcoat_1/R_tailcoat_2
+    m_Weight: 0
+  - m_Path: hip1/R_tailcoat_1/R_tailcoat_2/R_tailcoat_3
+    m_Weight: 0
+  - m_Path: hip1/R_tailcoat_1/R_tailcoat_2/R_tailcoat_3/R_tailcoat_4
+    m_Weight: 0
+  - m_Path: hip1/torso_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_forth_finger_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_forth_finger_4/L_forth_finger_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_forth_finger_4/L_forth_finger_3/L_forth_finger_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_forth_finger_4/L_forth_finger_3/L_forth_finger_2/L_forth_finger_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_index_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_index_4/L_index_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_index_4/L_index_3/L_index_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_index_4/L_index_3/L_index_2/L_index_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_middle_finger_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_middle_finger_4/L_middle_finger_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_middle_finger_4/L_middle_finger_3/L_middle_finger_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_middle_finger_4/L_middle_finger_3/L_middle_finger_2/L_middle_finger_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_pinky_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_pinky_4/L_pinky_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_pinky_4/L_pinky_3/L_pinky_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_pinky_4/L_pinky_3/L_pinky_2/L_pinky_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_thumb_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_thumb_3/L_thumb_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/L_shoulder/L_elbow/L_wrist/L_palm/L_thumb_3/L_thumb_2/L_thumb_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/head_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/jaw2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/jaw2/Jaw1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_eye
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_lcorner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_lip_corner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_lower_eyelid
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_rcorner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/L_upper_eyelid
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/Lower_lip
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/Lower_teeth
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_eye
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_lcorner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_lip_corner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_lower_eyelid
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_rcorner
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/R_upper_eyelid
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/tongue
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/Upper_lip
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/neck_2/neck_1/head_2/Upper_teeth
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_forth_finger_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_forth_finger_4/R_forth_finger_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_forth_finger_4/R_forth_finger_3/R_forth_finger_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_forth_finger_4/R_forth_finger_3/R_forth_finger_2/R_forth_finger_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_index_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_index_4/R_index_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_index_4/R_index_3/R_index_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_index_4/R_index_3/R_index_2/R_index_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_middle_finger_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_middle_finger_4/R_middle_finger_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_middle_finger_4/R_middle_finger_3/R_middle_finger_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_middle_finger_4/R_middle_finger_3/R_middle_finger_2/R_middle_finger_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_pinky_4
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_pinky_4/R_pinky_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_pinky_4/R_pinky_3/R_pinky_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_pinky_4/R_pinky_3/R_pinky_2/R_pinky_1
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_thumb_3
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_thumb_3/R_thumb_2
+    m_Weight: 1
+  - m_Path: hip1/torso_2/torso_1/R_shoulder/R_elbow/R_wrist/R_palm/R_thumb_3/R_thumb_2/R_thumb_1
+    m_Weight: 1
+  - m_Path: main_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/Tailcoat_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/head_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/head_ctrl/Face_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/L_shoulder_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/L_shoulder_ctrl/L_wrist_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/L_shoulder_ctrl/L_wrist_ctrl/L_hand_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/R_shoulder_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/R_shoulder_ctrl/R_wrist_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/neck_ctrl/R_shoulder_ctrl/R_wrist_ctrl/R_hand_ctrl
+    m_Weight: 1
+  - m_Path: main_ctrl/Hip_ctrl/torso_ctrl/torso_ctrl1
+    m_Weight: 1
+  - m_Path: models
+    m_Weight: 1
+  - m_Path: models/polySurface17
+    m_Weight: 1
+  - m_Path: models/polySurface19
+    m_Weight: 1
+  - m_Path: models/wand1
+    m_Weight: 1
+  - m_Path: models/wand1/polySurface20
+    m_Weight: 1
+  - m_Path: models/wand1/polySurface27
+    m_Weight: 1
+  - m_Path: models/wand1/Wand_main_ctrl
+    m_Weight: 1
+  - m_Path: models/wand1/Wand_main_ctrl/wand_1
+    m_Weight: 1
+  - m_Path: models/wand1/Wand_main_ctrl/wand_1/wand_2
+    m_Weight: 1
+  - m_Path: models/wand1/Wand_main_ctrl/Wand_inner_ring_ctrl
+    m_Weight: 1
