@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4247531136569472}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Halo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4857229331445194}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4536601373002698}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Skirt_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4775737543178854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4040720146440696}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4172531392297802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibEnd_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4786649237954892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingC_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4379163634282922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneC_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4224694554466128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4134435765005472}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingB_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4908541339620062}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4264551074618984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Skirt_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4244903549523780}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4489470485222414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4953632575790956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingA_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4605514931412416}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4761179022973922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_HeadCloth_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4626479297160886}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4190109728181892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibSide_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4289603185454996}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneD_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4280225158931822}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_HeadCloth_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4670623193237708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4116433799548632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneC_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 195317968917039348}
   - component: {fileID: 114235144530606798}
   - component: {fileID: 65202765136052404}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Perstilence
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4345126033596802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibSide_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4354697227273212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibMid_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4839988156585176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingB_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4451550427514492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4539171702265978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WholeBody_Ctl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4355307919458204}
   - component: {fileID: 137816697156634874}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss_Bod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4599802048829318}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibEnd_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4587686711706870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4087625114179076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibEnd_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4603719519323754}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4593615459579310}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4923586048166654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingC_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4027608355682650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SkirtBoneBack_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4648712674779668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneB_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4205935367456044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Skirt_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4344867644073042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneA_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4969490231097460}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Skirt_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4227560890091772}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4286346868965242}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4095300573575708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4649289633231586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneD_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4922974992519978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Skirt_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4135914227196282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4397435474612404}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +745,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4132808350800886}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Skirt_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +760,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4772833429713346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingA_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4173340201513964}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingA_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +790,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4674320826121458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingB_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +805,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4881782742276994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_HeadCloth_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4118000181926490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibMid_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4902164255794478}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hip_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4387964597586034}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -865,7 +865,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4198235279106606}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneC_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +880,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4185195404980602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_BladeRingC_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -895,7 +895,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4659400422341594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +910,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4264282114493252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,7 +925,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4736524965318884}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,7 +940,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4316465771764014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4392150197131440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4126337314967446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneC_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +985,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4614120667811906}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingC_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1000,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4875618779508096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4559398018910258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1030,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4019768983882566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingA_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4609481103082174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneD_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4354967822650514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,7 +1075,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4554766529636412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4178628751074198}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneA_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4122630556770102}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneD_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4407637101886004}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_HeadCloth_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1135,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4949354545848904}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,7 +1150,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4099513915605942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneB_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1165,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4901985340027820}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Skirt_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1180,7 +1180,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4914756245159178}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,7 +1195,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4360651116586718}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibSide_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1210,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4521982398957950}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1225,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4865897693540162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibSide_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1240,7 +1240,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4910205708611802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4937355488523742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4397784584264490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneB_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1285,7 +1285,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4397644481480612}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibEnd_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1300,7 +1300,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4379644106719852}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_SkirtBoneA_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,7 +1315,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4995748233644410}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Chain_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1330,7 +1330,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4089354301380796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Skirt_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1345,7 +1345,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4852297063809962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_Chain_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1360,7 +1360,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4276060994517082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Move_Ctl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1375,7 +1375,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4509143300076764}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SkirtBoneBack_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1390,7 +1390,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4447064176933448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1405,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4381617469335784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HeartBall_Jt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1420,7 +1420,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4549003264334400}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_Skirt_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1435,7 +1435,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4680745914972812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1450,7 +1450,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4095770488176116}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneA_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1465,7 +1465,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4968157205487018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_BladeRingB_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1480,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4227805890929518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_HeadCloth_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1495,7 +1495,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4725860730859404}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R_RibEnd_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1510,7 +1510,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4492499007767456}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_SkirtBoneB_Btm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1525,7 +1525,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4557667514364504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1540,7 +1540,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4423350410320230}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: L_RibEnd_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3030,7 +3030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0674df0adbdf3649b0d3b1c6e34a1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossMat: {fileID: 0}
 --- !u!137 &137816697156634874
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
