@@ -1,0 +1,350 @@
+fileFormatVersion: 2
+guid: f340eab173b50d3409dcf983581813e3
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: head_1
+    100002: head_2
+    100004: hip1
+    100006: Jaw1
+    100008: jaw2
+    100010: L_ankle
+    100012: L_elbow
+    100014: L_eye
+    100016: L_feet_1
+    100018: L_feet_2
+    100020: L_feet_3
+    100022: L_forth_finger_1
+    100024: L_forth_finger_2
+    100026: L_forth_finger_3
+    100028: L_forth_finger_4
+    100030: L_hip
+    100032: L_index_1
+    100034: L_index_2
+    100036: L_index_3
+    100038: L_index_4
+    100040: L_knee
+    100042: L_lcorner
+    100044: L_lip_corner
+    100046: L_lower_eyelid
+    100048: L_middle_finger_1
+    100050: L_middle_finger_2
+    100052: L_middle_finger_3
+    100054: L_middle_finger_4
+    100056: L_palm
+    100058: L_pinky_1
+    100060: L_pinky_2
+    100062: L_pinky_3
+    100064: L_pinky_4
+    100066: L_rcorner
+    100068: L_shoulder
+    100070: L_tailcoat_1
+    100072: L_tailcoat_2
+    100074: L_tailcoat_3
+    100076: L_tailcoat_4
+    100078: L_thumb_1
+    100080: L_thumb_2
+    100082: L_thumb_3
+    100084: L_upper_eyelid
+    100086: L_wrist
+    100088: Lower_lip
+    100090: Lower_teeth
+    100092: //RootNode
+    100094: models
+    100096: neck_1
+    100098: neck_2
+    100100: polySurface17
+    100102: polySurface19
+    100104: polySurface20
+    100106: polySurface20 1
+    100108: polySurface27
+    100110: polySurface27 1
+    100112: R_ankle
+    100114: R_elbow
+    100116: R_eye
+    100118: R_feet_1
+    100120: R_feet_2
+    100122: R_feet_3
+    100124: R_forth_finger_1
+    100126: R_forth_finger_2
+    100128: R_forth_finger_3
+    100130: R_forth_finger_4
+    100132: R_hip
+    100134: R_index_1
+    100136: R_index_2
+    100138: R_index_3
+    100140: R_index_4
+    100142: R_knee
+    100144: R_lcorner
+    100146: R_lip_corner
+    100148: R_lower_eyelid
+    100150: R_middle_finger_1
+    100152: R_middle_finger_2
+    100154: R_middle_finger_3
+    100156: R_middle_finger_4
+    100158: R_palm
+    100160: R_pinky_1
+    100162: R_pinky_2
+    100164: R_pinky_3
+    100166: R_pinky_4
+    100168: R_rcorner
+    100170: R_shoulder
+    100172: R_tailcoat_1
+    100174: R_tailcoat_2
+    100176: R_tailcoat_3
+    100178: R_tailcoat_4
+    100180: R_thumb_1
+    100182: R_thumb_2
+    100184: R_thumb_3
+    100186: R_upper_eyelid
+    100188: R_wrist
+    100190: tongue
+    100192: torso_1
+    100194: torso_2
+    100196: Upper_lip
+    100198: Upper_teeth
+    100200: wand1
+    100202: wand2
+    100204: wand_1
+    100206: wand_1 1
+    100208: wand_2
+    100210: wand_2 1
+    100212: Wand_inner_ring_ctrl
+    100214: Wand_inner_ring_ctrl 1
+    100216: Wand_main_ctrl
+    100218: Wand_main_ctrl 1
+    400000: head_1
+    400002: head_2
+    400004: hip1
+    400006: Jaw1
+    400008: jaw2
+    400010: L_ankle
+    400012: L_elbow
+    400014: L_eye
+    400016: L_feet_1
+    400018: L_feet_2
+    400020: L_feet_3
+    400022: L_forth_finger_1
+    400024: L_forth_finger_2
+    400026: L_forth_finger_3
+    400028: L_forth_finger_4
+    400030: L_hip
+    400032: L_index_1
+    400034: L_index_2
+    400036: L_index_3
+    400038: L_index_4
+    400040: L_knee
+    400042: L_lcorner
+    400044: L_lip_corner
+    400046: L_lower_eyelid
+    400048: L_middle_finger_1
+    400050: L_middle_finger_2
+    400052: L_middle_finger_3
+    400054: L_middle_finger_4
+    400056: L_palm
+    400058: L_pinky_1
+    400060: L_pinky_2
+    400062: L_pinky_3
+    400064: L_pinky_4
+    400066: L_rcorner
+    400068: L_shoulder
+    400070: L_tailcoat_1
+    400072: L_tailcoat_2
+    400074: L_tailcoat_3
+    400076: L_tailcoat_4
+    400078: L_thumb_1
+    400080: L_thumb_2
+    400082: L_thumb_3
+    400084: L_upper_eyelid
+    400086: L_wrist
+    400088: Lower_lip
+    400090: Lower_teeth
+    400092: //RootNode
+    400094: models
+    400096: neck_1
+    400098: neck_2
+    400100: polySurface17
+    400102: polySurface19
+    400104: polySurface20
+    400106: polySurface20 1
+    400108: polySurface27
+    400110: polySurface27 1
+    400112: R_ankle
+    400114: R_elbow
+    400116: R_eye
+    400118: R_feet_1
+    400120: R_feet_2
+    400122: R_feet_3
+    400124: R_forth_finger_1
+    400126: R_forth_finger_2
+    400128: R_forth_finger_3
+    400130: R_forth_finger_4
+    400132: R_hip
+    400134: R_index_1
+    400136: R_index_2
+    400138: R_index_3
+    400140: R_index_4
+    400142: R_knee
+    400144: R_lcorner
+    400146: R_lip_corner
+    400148: R_lower_eyelid
+    400150: R_middle_finger_1
+    400152: R_middle_finger_2
+    400154: R_middle_finger_3
+    400156: R_middle_finger_4
+    400158: R_palm
+    400160: R_pinky_1
+    400162: R_pinky_2
+    400164: R_pinky_3
+    400166: R_pinky_4
+    400168: R_rcorner
+    400170: R_shoulder
+    400172: R_tailcoat_1
+    400174: R_tailcoat_2
+    400176: R_tailcoat_3
+    400178: R_tailcoat_4
+    400180: R_thumb_1
+    400182: R_thumb_2
+    400184: R_thumb_3
+    400186: R_upper_eyelid
+    400188: R_wrist
+    400190: tongue
+    400192: torso_1
+    400194: torso_2
+    400196: Upper_lip
+    400198: Upper_teeth
+    400200: wand1
+    400202: wand2
+    400204: wand_1
+    400206: wand_1 1
+    400208: wand_2
+    400210: wand_2 1
+    400212: Wand_inner_ring_ctrl
+    400214: Wand_inner_ring_ctrl 1
+    400216: Wand_main_ctrl
+    400218: Wand_main_ctrl 1
+    2100000: lambert1
+    2100002: pasted__lambert4
+    4300000: polySurface17
+    4300002: polySurface19
+    4300004: polySurface27
+    4300006: polySurface20
+    4300008: polySurface27
+    4300010: polySurface20
+    7400000: Aim
+    9500000: //RootNode
+    13700000: polySurface17
+    13700002: polySurface19
+    13700004: polySurface20
+    13700006: polySurface20 1
+    13700008: polySurface27
+    13700010: polySurface27 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Aim
+      takeName: Strafeaim(L)
+      firstFrame: 90
+      lastFrame: 130
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

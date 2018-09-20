@@ -5,28 +5,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[assembly: InternalsVisibleTo("EntityLivingBase")]
 public class StatusContainer
 {
 
-    Status.StatusType m_CurrentStatusBit = Status.StatusType.None;
+    StatusBase.StatusType m_CurrentStatusBit = StatusBase.StatusType.None;
 
-    List<Status> m_StatusList = new List<Status>();
+    List<StatusBase> m_StatusList = new List<StatusBase>();
 
     #region Getters
-    public bool isStunned { get { return (m_CurrentStatusBit & Status.StatusType.Stunned) == Status.StatusType.Stunned; } }
-    public bool isPanicking { get { return (m_CurrentStatusBit & Status.StatusType.Panic) == Status.StatusType.Panic; } }
-    public bool isPoisoned { get { return (m_CurrentStatusBit & Status.StatusType.Poison) == Status.StatusType.Poison; } }
+    public bool isStunned { get { return (m_CurrentStatusBit & StatusBase.StatusType.Stunned) == StatusBase.StatusType.Stunned; } }
+    public bool isPanicking { get { return (m_CurrentStatusBit & StatusBase.StatusType.Panic) == StatusBase.StatusType.Panic; } }
+    public bool isPoisoned { get { return (m_CurrentStatusBit & StatusBase.StatusType.Poison) == StatusBase.StatusType.Poison; } }
     #endregion
 
-    public void ApplyStatus(Status status)
+    public void ApplyStatus(StatusBase status)
     {
         m_CurrentStatusBit |= status.statusType;
         status.OnStatusBegin();
         m_StatusList.Add(status);
     }
 
-    internal void UpdateStatuses(EntityLivingBase entity)
+    public void UpdateStatuses(EntityLivingBase entity)
     {
         for (int i = m_StatusList.Count - 1; i >= 0; i--) // Reverse iterate so we can remove elements while iterating
         {
@@ -38,7 +37,21 @@ public class StatusContainer
             {
                 status.OnStatusEnd();
                 m_StatusList.RemoveAt(i);
-                continue;
+
+                bool hasExistingStatus = false;
+
+                // Clear the status bits if this is the last status in the list
+                foreach (StatusBase remaining in m_StatusList)
+                {
+                    if (remaining.statusType == status.statusType)
+                    {
+                        hasExistingStatus = true;
+                        break;
+                    }
+                }
+
+                if (hasExistingStatus == false)
+                    m_CurrentStatusBit &= status.statusType;
             }
             else
             {
@@ -46,5 +59,12 @@ public class StatusContainer
             }
         }
     }
+
+}
+
+public class Status
+{
+
+
 
 }

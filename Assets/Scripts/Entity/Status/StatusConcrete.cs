@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class StatusPoison : Status
+public class StatusPoison : StatusBase
 {
 
     float m_TickDamage, m_TickRate, m_NextTickTime;
@@ -29,7 +29,7 @@ public class StatusPoison : Status
             m_NextTickTime = Time.time + m_TickRate;
 
             var dmgSrc = new DamageSource();
-            dmgSrc.SetUpDamageSource("Poison", "God", "", m_TickDamage);
+            dmgSrc.SetUpDamageSource("Poison", "God", "", m_TickDamage, false);
 
             entity.OnAttacked(dmgSrc, 0);
         }
@@ -42,27 +42,44 @@ public class StatusPoison : Status
 
 }
 
-public class StatusPanic : Status
+public class StatusPanic : StatusBase
 {
 
     public StatusPanic(float duration) : base(StatusType.Panic, duration)
     {
-
     }
 
     internal override void OnStatusBegin()
     {
-        throw new NotImplementedException();
     }
 
     internal override void OnStatusEnd()
     {
-        throw new NotImplementedException();
     }
 
     internal override void OnStatusUpdate(EntityLivingBase entity)
     {
-        throw new NotImplementedException();
+    }
+
+}
+
+public class StatusStunned : StatusBase
+{
+
+    public StatusStunned(float duration) : base(StatusType.Stunned, duration)
+    {
+    }
+
+    internal override void OnStatusBegin()
+    {
+    }
+
+    internal override void OnStatusEnd()
+    {
+    }
+
+    internal override void OnStatusUpdate(EntityLivingBase entity)
+    {
     }
 
 }

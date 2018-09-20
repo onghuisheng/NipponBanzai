@@ -12,6 +12,9 @@ public class SkillFlash : SkillBase
         type_style = TYPE.DEFENCE;
         f_mana_amount = 10;
         i_id = 0;
+
+        f_cooldown = 0;
+        f_timer = 0;
     }
 
     public override void StartSkill(EntityLivingBase _caster)
@@ -26,9 +29,15 @@ public class SkillFlash : SkillBase
 
     public override void RunSkill()
     {
+        f_timer += Time.deltaTime;
+
+        if (f_timer > 10)
+            go_caster.An_animator.SetBool("IsSummoning", false);
     }
 
     public override void EndSkill()
     {
+        f_cooldown = 10;
+        f_timer = 0;
     }
 }
