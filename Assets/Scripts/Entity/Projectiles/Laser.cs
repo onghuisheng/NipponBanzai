@@ -59,7 +59,7 @@ public class Laser : EntityProjectiles
         v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
-        b_isRotatable = true;
+        b_isRotatable = _isRotatable;
         b_isDirect = false;
 
         f_distance = Vector3.Distance(v3_startPos, v3_endPos);
@@ -130,14 +130,12 @@ public class Laser : EntityProjectiles
             f_incrementor += F_speed * Time.deltaTime;
 
             float x = Mathf.Lerp(0, f_distance, f_incrementor);
-            v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
-            //v3_currEndPos.y -= f_incrementor * 10;
-            //v3_currEndPos.z += f_incrementor * 100;
+            Vector3 newEnd = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
 
             CheckForObjectsInPath();
 
-            lr_line.SetPosition(0, v3_startPos);
-            lr_line.SetPosition(1, v3_currEndPos);
+            //lr_line.SetPosition(0, v3_startPos);
+            lr_line.SetPosition(1, newEnd);
         }
     }
 

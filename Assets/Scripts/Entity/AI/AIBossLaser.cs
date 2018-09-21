@@ -90,14 +90,14 @@ public class AIBossLaser : AIBase {
         // Breaking point
         if (f_stateTimer > f_maxStateTimer)
         {
-            Debug.Log("break");
+            Debug.Log("break ___" + f_maxStateTimer);
             f_stateCooldownTimer = 0;
             b_has_attacked = false;
             return false;
         }
         else
         {
-            if (script_boss.Enum_currentChargeState >= EntityBoss.ChargeState.STAGE_2)
+            if (script_boss.Enum_currentAttState == EntityBoss.AttackState.LASER && script_boss.Enum_currentChargeState > EntityBoss.ChargeState.STAGE_2)
             {
                 f_stateTimer += Time.deltaTime;
             }
@@ -161,19 +161,21 @@ public class AIBossLaser : AIBase {
         {
             if (b_has_attacked == false && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)
             {
-                //OnTargetBeam();
-                for (int i = 0; i < i_numOfLasers; ++i)
-                {
-                    b_has_attacked = true;
-                    AOEBeam(i);
-                }
+                ////OnTargetBeam();
+                //for (int i = 0; i < i_numOfLasers; ++i)
+                //{
+                //    b_has_attacked = true;
+                //    AOEBeam(i);
+                //}
 
+                OnTargetBeam();
+                script_boss.NextChargeState(EntityBoss.ChargeState.END);
             }
 
             if (f_beamChargeTimer > f_maxStateTimer)
             {
-                script_boss.NextChargeState(EntityBoss.ChargeState.END);
-                f_beamChargeTimer = 0;
+                Debug.Log("ASDAFAE");
+
             }
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
@@ -213,7 +215,8 @@ public class AIBossLaser : AIBase {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
-        script_laser.SetUpProjectile(f_maxStateTimer - f_stateTimer, 2, 0.05f, 15f, corePosition, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, false);
+        float lazerLife = 11.0f;
+        script_laser.SetUpProjectile(lazerLife, 2, 0.05f, corePosition, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, ent_target.gameObject);
     }
 
     void Reset()
