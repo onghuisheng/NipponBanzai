@@ -51,7 +51,13 @@ public class CameraHandler : Singleton<CameraHandler>
             case SceneHandler.SceneType.Level1:
             case SceneHandler.SceneType.Level2:
             case SceneHandler.SceneType.JJPlayground:
-                ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
+                GameObject spawnPoint = GameObject.FindWithTag("Respawn");
+                GameObject player = ObjectPool.GetInstance().GetEntityPlayer();
+                player.SetActive(true);
+
+                if (spawnPoint != null)
+                    player.transform.position = spawnPoint.transform.position;
+
                 ChangeCamera(CameraType.ThirdPerson);
                 break;
             default:
@@ -64,7 +70,7 @@ public class CameraHandler : Singleton<CameraHandler>
     {
         base.Update();
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.P))
         {
             CinematicPathing.GetPathWithName("MyFirstPath").DoCinematicPath(() =>
             {

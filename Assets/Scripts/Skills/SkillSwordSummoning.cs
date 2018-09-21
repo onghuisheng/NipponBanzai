@@ -37,7 +37,7 @@ public class SkillSwordSummoning : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = 30;
+        f_cooldown = 1;
         f_timer = 0;
     }
 }

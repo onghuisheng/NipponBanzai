@@ -150,7 +150,7 @@ public class Laser : EntityProjectiles
         {
             v3_currEndPos = hit.point;
 
-            if(!TagHelper.IsTagBanned(hit.collider.gameObject.tag))
+            if (!TagHelper.IsTagBanned(hit.collider.gameObject.tag))
             {
                 //Spawn Hitbox to damage player.
                 SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, transform.localScale, v3_currEndPos, transform.rotation, 0.1f);
