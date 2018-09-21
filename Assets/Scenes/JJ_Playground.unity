@@ -512,7 +512,7 @@ MonoBehaviour:
   hitbox: {fileID: 1253757125116546, guid: a8703823e42953c459851755b9710ca9, type: 2}
   item_pickup: {fileID: 1792999001062160, guid: 48f0de838d82f2648b65fd55a516a385,
     type: 2}
-  go_player: {fileID: 1942714327810386, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+  go_player: {fileID: 1839088705319460, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
 --- !u!4 &428570928
 Transform:
   m_ObjectHideFlags: 0

@@ -126,6 +126,7 @@ public class EntityPlayer : EntityLivingBase
              || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
         {
             player_state = State.DASHING;
+            An_animator.SetBool("IsDashing", true);
 
             return;
         }
@@ -168,6 +169,7 @@ public class EntityPlayer : EntityLivingBase
             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
         {
             player_state = State.DASHING;
+            An_animator.SetBool("IsDashing", true);
 
             return;
         }
@@ -199,8 +201,8 @@ public class EntityPlayer : EntityLivingBase
         if (player_target_state != TARGET_STATE.AIMING)
             St_stats.F_speed = St_stats.F_maxspeed * 2;
 
-
-        player_state = State.MOVING;
+        if (!An_animator.GetBool("IsDashing"))
+            player_state = State.MOVING;
     }
 
     private void AttackCheckFunction()
@@ -565,7 +567,7 @@ public class EntityPlayer : EntityLivingBase
         {
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
-            //An_animator.SetTrigger("IsHit");
+            An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
         else if (player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
@@ -588,22 +590,12 @@ public class EntityPlayer : EntityLivingBase
 
     public void EndSummoningAnimation()
     {
-        An_animator.SetBool("IsAttacking", false);
-        An_animator.SetBool("IsMelee", false);
-        ++i_combo;
-
-        if (i_combo > 3)
-            i_combo = 1;
+        An_animator.SetBool("IsSummoning", false);
     }
 
     public void EndDashingAnimation()
     {
-        An_animator.SetBool("IsAttacking", false);
-        An_animator.SetBool("IsMelee", false);
-        ++i_combo;
-
-        if (i_combo > 3)
-            i_combo = 1;
+        An_animator.SetBool("IsDashing", false);
     }
 
     public void EndShootAnimation()
