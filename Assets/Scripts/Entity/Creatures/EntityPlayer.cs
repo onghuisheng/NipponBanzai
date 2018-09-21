@@ -596,6 +596,16 @@ public class EntityPlayer : EntityLivingBase
             i_combo = 1;
     }
 
+    public void EndDashingAnimation()
+    {
+        An_animator.SetBool("IsAttacking", false);
+        An_animator.SetBool("IsMelee", false);
+        ++i_combo;
+
+        if (i_combo > 3)
+            i_combo = 1;
+    }
+
     public void EndShootAnimation()
     {
         An_animator.SetBool("IsAttacking", false);
