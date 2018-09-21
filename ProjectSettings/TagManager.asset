@@ -23,7 +23,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - Enemy
+  - Enemies
   - Living Entities
   - Environment
   - Player
