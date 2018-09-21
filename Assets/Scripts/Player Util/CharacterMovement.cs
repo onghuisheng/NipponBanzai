@@ -164,35 +164,36 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Component_Player.GetPlayerState() == EntityPlayer.State.DASHING)
         {
-            float f_speed_multiplier = 2000;
+            float f_speed_multiplier = 1000;
 
             switch (DoubleTapCheck.GetInstance().GetDoubleTapKey())
             {
-
                 case KeyCode.W:
-                    v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    Component_Player.Rb_rigidbody.AddForce(new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    Dash(new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized, f_speed_multiplier);
                     break;
 
                 case KeyCode.A:
-                    v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
-                    Component_Player.Rb_rigidbody.AddForce(-new Vector3(go_camera.transform.right.x, Component_Player.transform.right.y, go_camera.transform.right.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    Dash(-new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized, f_speed_multiplier);
                     break;
 
                 case KeyCode.S:
-                    v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
-                    Component_Player.Rb_rigidbody.AddForce(-new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    Dash(-new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized, f_speed_multiplier);
                     break;
 
                 case KeyCode.D:
-                    v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
-                    Component_Player.Rb_rigidbody.AddForce(new Vector3(go_camera.transform.right.x, Component_Player.transform.right.y, go_camera.transform.right.z).normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    Dash(new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized, f_speed_multiplier);
                     break;
 
                 default:
-                    Component_Player.Rb_rigidbody.AddForce(go_camera.transform.forward.normalized * f_speed_multiplier, ForceMode.Acceleration);
+                    Dash(new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized, f_speed_multiplier);
                     break;
             }
         }
+    }
+
+    public void Dash(Vector3 _dir, float _speed)
+    {
+        v3_player_new_dir = _dir;
+        Component_Player.Rb_rigidbody.AddForce(_dir * _speed, ForceMode.Acceleration);
     }
 }

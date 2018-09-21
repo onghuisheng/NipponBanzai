@@ -28,7 +28,7 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
         f_interval = 0.3f;
 
         kc_current_entered_mouse = KeyCode.None;
-        b_is_double_tap_mouse = false;
+        b_is_double_tap_mouse = false;  
         f_interval_mouse = 0.3f;
     }
 

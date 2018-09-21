@@ -33,6 +33,7 @@ public class TimeHandler : Singleton<TimeHandler>
             if (Time.timeScale < 1)
             {
                 Time.timeScale = 1;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
         }
         else if (f_difference > 0)
@@ -40,12 +41,14 @@ public class TimeHandler : Singleton<TimeHandler>
             if (Time.timeScale > 1)
             {
                 Time.timeScale = 1;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
         }
 
         if (Time.timeScale != 1)
         {
             Time.timeScale += (((float)i_percentage_recovery_speed / 100.0f) * f_difference) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }       
     }
 

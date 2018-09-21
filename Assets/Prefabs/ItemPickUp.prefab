@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list_mesh:
-  - {fileID: 4300000, guid: c5c2b48ddc07fe648a9b89aa1a2905f2, type: 3}
-  - {fileID: 4300000, guid: 497cf0182a794154b875ff0fe2c777b4, type: 3}
+  - {fileID: 4300004, guid: c28b036667e94ca4cb74454aba87779b, type: 3}
+  - {fileID: 4300014, guid: 931cdd0f22e2fb24a8325a34f473f66b, type: 3}
   list_texture:
   - {fileID: 2800000, guid: be0d53f315a07a44e867524978a1fab9, type: 3}
   - {fileID: 2800000, guid: be0d53f315a07a44e867524978a1fab9, type: 3}

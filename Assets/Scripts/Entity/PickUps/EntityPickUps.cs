@@ -124,13 +124,13 @@ public class EntityPickUps : Entity
             go_particle = ParticleHandler.GetInstance().SpawnParticle(_type, gameObject.transform, _pos, _scale, _rotation, 0);
     }
 
-    public void DoSucking(float _radius)
+    public void DoSucking(float _radius, float _speed)
     {
         if (Vector3.Distance(GetPosition(), ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()) < _radius)
         {
-            Vector3 _dir = (GetPosition() - ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition().normalized);
+            Vector3 _dir = (GetPosition() - ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()).normalized;
 
-            SetPosition(GetPosition() - (_dir * 0.5f));
+            SetPosition(GetPosition() - (_dir * _speed));
         }
     }
 

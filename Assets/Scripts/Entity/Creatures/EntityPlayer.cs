@@ -56,7 +56,11 @@ public class EntityPlayer : EntityLivingBase
         list_joints;
 
     private GameObject
-        go_charging_particle;
+        go_charging_particle, 
+        go_target;
+
+    private CharacterMovement
+        cm_player_movement;
 
     //private List<Transform>
     //    list_last_joint_transform;
@@ -94,6 +98,12 @@ public class EntityPlayer : EntityLivingBase
         f_charged_increase_amount = 1.0f;
         b_is_charging_shot = false;
         i_combo = 1;
+
+        if (GetComponent<CharacterMovement>() != null)
+        {
+            cm_player_movement = GetComponent<CharacterMovement>();
+            go_target = null;
+        }
 
         go_charging_particle = null;
 
@@ -209,6 +219,18 @@ public class EntityPlayer : EntityLivingBase
     {
         St_stats.F_speed = St_stats.F_maxspeed;
 
+        if (DoubleTapCheck.GetInstance().IsDoubleTapTriggered() &&
+             (DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.W
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.A
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.S
+             || DoubleTapCheck.GetInstance().GetDoubleTapKey() == KeyCode.D))
+        {
+            player_state = State.DASHING;
+            An_animator.SetBool("IsDashing", true);
+
+            return;
+        }
+
         if (An_animator.GetBool("IsAttacking"))
         {
             if (player_target_state == TARGET_STATE.AIMING && !An_animator.GetBool("IsMelee"))
@@ -288,6 +310,47 @@ public class EntityPlayer : EntityLivingBase
                     f_charged_amount = 1;
 
                 An_animator.SetBool("IsMelee", true);
+
+                if(cm_player_movement != null)
+                {
+                    float 
+                        _distance_near = 2,
+                        _distance_away = 10,
+                        _angle = 25;
+
+                    if(go_target != null)
+                    {
+                        if (!go_target.activeSelf || Vector3.Angle(transform.forward, (go_target.transform.position - GetPosition()).normalized) > _angle)
+                            go_target = null;
+                    }
+
+                    if(go_target == null)
+                    {
+                        foreach(GameObject go in ObjectPool.GetInstance().GetActiveEntityObjects())
+                        {
+                            if (Vector3.Angle(transform.forward, (go.transform.position - GetPosition()).normalized) < _angle)
+                            {
+                                if (go.CompareTag("Enemy") && go_target == null && Vector3.Distance(go.transform.position, GetPosition()) > _distance_near && Vector3.Distance(go.transform.position, GetPosition()) < _distance_away)
+                                {
+                                    go_target = go;
+                                }
+                                else if (go_target != null && go.CompareTag("Enemy") && Vector3.Distance(go_target.transform.position, GetPosition()) > Vector3.Distance(go.transform.position, GetPosition()))
+                                {
+                                    if (Vector3.Distance(go.transform.position, GetPosition()) > _distance_near && Vector3.Distance(go.transform.position, GetPosition()) < _distance_away)
+                                        go_target = go;
+                                }
+                            }
+                        }
+                    }
+
+                    if(go_target != null)
+                    {
+                        if(Vector3.Distance(go_target.transform.position, GetPosition()) > _distance_near)
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 1500);
+                        else
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 1);
+                    }
+                }
             }
         }
 
@@ -573,7 +636,7 @@ public class EntityPlayer : EntityLivingBase
         else if (player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
         {
             ResetOnHit(_timer);
-            TimeHandler.GetInstance().AffectTime(0.1f, 10);
+            TimeHandler.GetInstance().AffectTime(0.1f, 50);
             //Debug.Log("Slowing down");
         }
     }
