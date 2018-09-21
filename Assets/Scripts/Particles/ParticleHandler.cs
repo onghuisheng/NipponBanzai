@@ -11,7 +11,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
         PoisonMouthDrip,
         SummoningPortal,
         Charging,
-        Heart_Burst
+        Heart_Burst,
+        Charging_Beam
     }
 
     [SerializeField]
