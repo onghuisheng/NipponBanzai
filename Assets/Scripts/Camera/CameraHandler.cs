@@ -64,7 +64,7 @@ public class CameraHandler : Singleton<CameraHandler>
     {
         base.Update();
 
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.P))
         {
             CinematicPathing.GetPathWithName("MyFirstPath").DoCinematicPath(() =>
             {
