@@ -118,6 +118,10 @@ public class EntityPlayer : EntityLivingBase
         SkillBase _skill = new SkillFlash();
         _skill.SetUpSkill();
         GetInventory().AddSkill(_skill);
+
+        _skill = new SkillSwordSummoning();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
         ///
     }
 
@@ -445,6 +449,15 @@ public class EntityPlayer : EntityLivingBase
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.MANA_POTION);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GetInventory().GetNextSkill(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                GetInventory().GetNextSkill(true);
             }
 
             if (Input.GetKey(KeyCode.Mouse1))

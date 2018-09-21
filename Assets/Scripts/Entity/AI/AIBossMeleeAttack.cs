@@ -55,7 +55,6 @@ public class AIBossMeleeAttack : AIBase
 
         script_boss.NextAttackState((EntityBoss.AttackState)Random.Range((int)EntityBoss.AttackState.H_MEELE, (int)EntityBoss.AttackState.V_MEELE + 1));
         script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
-
         return true;
     }
 
@@ -69,20 +68,15 @@ public class AIBossMeleeAttack : AIBase
 
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        //if (animatorState.IsTag("Attack"))
-        //{
-        //    //ent_main.B_isAttacking = true;
-        //    return true;
-        //}
-
         if (ep_player == null)
         {
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
-        //if ((ep_player.transform.position - ent_main.transform.position).magnitude <= f_attack_range && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.END)
-        if (script_boss.Enum_currentChargeState > EntityBoss.ChargeState.END && animatorState.normalizedTime >= 0.95f)
+        //End Of The State.
+        if (script_boss.B_stateIsDone)
         {
+            script_boss.SetStateDone(false);
             return false;
         }
 
@@ -94,20 +88,11 @@ public class AIBossMeleeAttack : AIBase
     {
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
 
-        //if (animatorState.IsTag("Attack"))
-        //{
-        //    b_has_attacked = false;
-        //}
-
-        //if (!animatorState.IsTag("Attack") && !b_has_attacked)
         if (!b_has_attacked)
         {
             // Look at the player and then attack, tweak the duration to adjust the rate of turning
             tween_look_at_player = ent_main.transform.DOLookAt(ep_player.transform.position, 0.1f, AxisConstraint.Y).OnComplete(() =>
             {
-                //if (ent_main.An_animator.HasParameterOfType("AttackType", AnimatorControllerParameterType.Int))
-                //    ent_main.An_animator.SetInteger("AttackType", Random.Range(1, 4));
-
                 ent_main.An_animator.SetTrigger("Attack");
             });
             b_has_attacked = true;
@@ -119,12 +104,16 @@ public class AIBossMeleeAttack : AIBase
 
     public override bool EndAI()
     {
-        //ent_main.B_isAttacking = false;
         Debug.Log("end");
+        //script_boss.ResetAnimation();
         Reset();
         f_stateCooldownTimer = 0;
-        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
-        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
+
+
+
+        //if (tween_look_at_player != null)
+          //  tween_look_at_player.Kill();
+
         return true;
     }
 

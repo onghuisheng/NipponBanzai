@@ -57,6 +57,7 @@ public class AIArtyState : AIBase
 
     public override bool StartAI()
     {
+        Debug.Log("ARTY");
         ent_main.B_isVulnerable = true;
         script_boss.NextAttackState(EntityBoss.AttackState.ARTY);
         script_boss.NextChargeState(EntityBoss.ChargeState.STAGE_1);
@@ -71,11 +72,6 @@ public class AIArtyState : AIBase
         ent_main.B_isVulnerable = false;
         f_stateCooldownTimer = 0;
         Reset();
-
-        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
-        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
-        //ent_main.GetAnimator().SetBool("PunchTrigger", false);
-        //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
         return true;
     }
 
@@ -84,6 +80,7 @@ public class AIArtyState : AIBase
     {
         if (f_stateCooldownTimer < f_cooldown)
         {
+            //Debug.Log("artystatetimecd: " + f_stateCooldownTimer);
             f_stateCooldownTimer += Time.deltaTime;
             return false;
         }
@@ -93,7 +90,6 @@ public class AIArtyState : AIBase
         {
             if (ent_main.An_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
-                Debug.Log("Brek");
                 i_shotToFire = Mathf.RoundToInt(f_maxStateTimer / f_shotInterval);
                 f_stateCooldownTimer = 0;
                 b_has_attacked = false;
@@ -170,11 +166,7 @@ public class AIArtyState : AIBase
             {
                 ent_main.An_animator.SetInteger("ChargeState", (int)script_boss.Enum_currentChargeState);
             }
-            //if (ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= (ent_main.F_totalAnimationLength * 0.9f) && ent_main.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !b_has_attacked)
-            //{
-            //    b_has_attacked = true;
-            //    ent_main.OnAttack();
-            //}
+
             if (i_shotToFire > 0)
             {
                 AimTarget();
@@ -183,8 +175,6 @@ public class AIArtyState : AIBase
             {
                 script_boss.Enum_currentChargeState = EntityBoss.ChargeState.END;
             }
-
-            //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }
 
         return true;

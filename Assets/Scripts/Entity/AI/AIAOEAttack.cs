@@ -66,9 +66,6 @@ public class AIAOEAttack : AIBase {
     {
         Reset();
         f_stateCooldownTimer = 0;
-        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
-        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
-
         return true;
     }
 

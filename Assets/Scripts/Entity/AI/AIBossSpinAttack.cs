@@ -6,8 +6,6 @@ public class AIBossSpinAttack : AIBase {
 
     private float
         f_range,
-        f_stateTimer,
-        f_maxStateTimer,
         f_cooldown,
         f_spinRange,
         f_stateCooldownTimer;
@@ -23,7 +21,7 @@ public class AIBossSpinAttack : AIBase {
         script_boss;
 
 
-    public AIBossSpinAttack(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _stateTime, float _cooldown)
+    public AIBossSpinAttack(int _priority, EntityLivingBase _entity, System.Type _type, float _range, float _cooldown)
     {
         i_priority = _priority;
         ent_main = _entity;
@@ -33,9 +31,6 @@ public class AIBossSpinAttack : AIBase {
         f_range = _range;
         type_target = _type;
         f_cooldown = _cooldown;
-        f_maxStateTimer = _stateTime;
-
-        //f_stateCooldownTimer = f_cooldown;
         f_spinRange = 0;
 
         b_has_attacked = false;
@@ -59,12 +54,6 @@ public class AIBossSpinAttack : AIBase {
         f_stateCooldownTimer = 0;
 
         Reset();
-        script_boss.NextAttackState(EntityBoss.AttackState.NONE);
-        script_boss.NextChargeState(EntityBoss.ChargeState.NONE);
-
-        //ent_main.GetAnimator().SetBool("PunchTrigger", false);
-        //ent_main.GetAnimator().speed = ent_main.F_defaultAnimationSpeed;
-
         return true;
     }
 
@@ -78,16 +67,13 @@ public class AIBossSpinAttack : AIBase {
         }
 
         AnimatorStateInfo animatorState = ent_main.An_animator.GetCurrentAnimatorStateInfo(0);
-
-        // Breaking point
-        if (f_stateTimer > f_maxStateTimer)
+        
+        //End Of The State.
+        if (script_boss.B_stateIsDone)
         {
-            Debug.Log("ASHFHAKFESLKFELKASJFLJFJFLJAEFK");
-            b_has_attacked = false;
+            script_boss.SetStateDone(false);
             return false;
         }
-
-        f_stateTimer += Time.deltaTime;
 
         if (ent_target == null)
         {
@@ -130,18 +116,12 @@ public class AIBossSpinAttack : AIBase {
             return false;
         }
 
-        //ent_main.GetAnimator().SetBool("PunchTrigger", true);
-        //ent_main.GetAnimator().speed = ent_main.F_attack_speed;
-
-        //ent_main.B_isAttacking = true;
-
         return true;
     }
 
 
     public override bool RunAI()
     {
-        Debug.Log("RUNNING");
         if (ent_target != null)
         {
             b_has_attacked = true;
@@ -153,8 +133,6 @@ public class AIBossSpinAttack : AIBase {
                 ent_main.OnAOEAttack(f_spinSize);
 
             }
-
-            //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
         }
 
         return true;
@@ -162,7 +140,6 @@ public class AIBossSpinAttack : AIBase {
 
     void Reset()
     {
-        f_stateTimer = 0;
         f_spinRange = 0;
         ent_target = null;
     }
