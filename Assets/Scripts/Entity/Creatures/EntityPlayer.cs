@@ -83,7 +83,7 @@ public class EntityPlayer : EntityLivingBase
 
         St_stats = new Stats();
         St_stats.F_maxspeed = St_stats.F_speed = 5;
-        St_stats.F_max_health = St_stats.F_health = Mathf.Infinity;
+        St_stats.F_max_health = St_stats.F_health = 1000;
         St_stats.F_max_mana = St_stats.F_mana = 100;
         St_stats.F_damage = 20;
         St_stats.F_mass = 1;
