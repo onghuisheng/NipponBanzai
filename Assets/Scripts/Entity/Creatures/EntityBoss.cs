@@ -35,10 +35,13 @@ public class EntityBoss : EntityEnemy {
     ChargeState enum_currentChargeState;
 
     float
-        dissolveRate;
+        f_dissolveRate;
 
     Material
-        bossMat;
+        m_bossMat;
+
+    bool
+        b_stateIsDone;
 
     #region Getter/Setter
     public AttackState Enum_currentAttState
@@ -66,10 +69,23 @@ public class EntityBoss : EntityEnemy {
             enum_currentChargeState = value;
         }
     }
+
+    public bool B_stateIsDone
+    {
+        get
+        {
+            return b_stateIsDone;
+        }
+
+        set
+        {
+            b_stateIsDone = value;
+        }
+    }
     #endregion
 
     protected override void Start()
-    {
+    { 
         base.Start();
     }
 
@@ -81,8 +97,8 @@ public class EntityBoss : EntityEnemy {
         {
             F_death_timer += Time.deltaTime;
             An_animator.SetBool("Dead", true);
-            dissolveRate += Time.deltaTime * 0.25f;
-            bossMat.SetFloat("_DissolveAmount", dissolveRate);
+            f_dissolveRate += Time.deltaTime * 0.25f;
+            m_bossMat.SetFloat("_DissolveAmount", f_dissolveRate);
 
             if (F_death_timer > 5.0f)
             {
@@ -183,26 +199,28 @@ public class EntityBoss : EntityEnemy {
         B_isDodging = false;
         B_isHit = false;
 
-        dissolveRate = 0f;
+        b_stateIsDone = false;
+
+        f_dissolveRate = 0f;
 
         var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MINIBOSS };
 
-        bossMat = gameObject.GetComponentInChildren<Renderer>().material;
+        m_bossMat = gameObject.GetComponentInChildren<Renderer>().material;
 
         //TODO: Set Animation Values
 
 
         //TODO: Register AI Task
-        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 30, 10));
-        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 15, 3));
-        RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 16, 20));
-        RegisterAITask(new AIAOEAttack(4, this, typeof(EntityPlayer), 20, 15, 30));
+        //RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 10));
+        //RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 15, 3));
+        RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 16, 5));
+        //RegisterAITask(new AIAOEAttack(4, this, typeof(EntityPlayer), 20, 15, 30));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
-        RegisterAITask(new AIChase(6, this, typeof(EntityPlayer), 50.0f, 9999));
-        RegisterAITask(new AIBossMeleeAttack(5, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
+        //RegisterAITask(new AIChase(6, this, typeof(EntityPlayer), 20.0f, 30));
+        //RegisterAITask(new AIBossMeleeAttack(5, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
     }
 
-        public void NextChargeState()
+    public void NextChargeState()
     {
         Enum_currentChargeState += 1;
         An_animator.SetInteger("ChargeState", (int)Enum_currentChargeState);
@@ -218,5 +236,16 @@ public class EntityBoss : EntityEnemy {
     {
         Enum_currentAttState = _attackState;
         An_animator.SetInteger("AttackState", (int)Enum_currentAttState);
+    }
+
+    public void ResetAnimation()
+    {
+        NextAttackState(EntityBoss.AttackState.NONE);
+        NextChargeState(EntityBoss.ChargeState.NONE);
+    }
+
+    public void SetStateDone(bool _state)
+    {
+        b_stateIsDone = _state;
     }
 }

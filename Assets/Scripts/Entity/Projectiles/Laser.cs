@@ -49,13 +49,13 @@ public class Laser : EntityProjectiles
     }
 
     //Set up projectile with no end point in mind only direction.
-    public void SetUpProjectile(float _lifetime, float _damage, float _speed, Vector3 _start, Vector3 _direction, Vector3 _size, GameObject _source, bool _isRotatable = false)
+    public void SetUpProjectile(float _lifetime, float _damage, float _speed, float _range, Vector3 _start, Vector3 _direction, Vector3 _size, GameObject _source, bool _isRotatable = false)
     {
         base.SetUpProjectile(_source, _lifetime, _damage, _speed, _size, _direction);
 
         SetPosition(_start);
         v3_startPos = _start;
-        v3_endPos = _direction * 30.0f; //30.0f is the range for now.
+        v3_endPos = _direction * _range; //30.0f is the range for now.
         v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
