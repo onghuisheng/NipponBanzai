@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class StatusContainer
 {
+    EntityLivingBase m_Victim;
 
     StatusBase.StatusType m_CurrentStatusBit = StatusBase.StatusType.None;
 
@@ -18,14 +19,28 @@ public class StatusContainer
     public bool isPoisoned { get { return (m_CurrentStatusBit & StatusBase.StatusType.Poison) == StatusBase.StatusType.Poison; } }
     #endregion
 
+    public StatusContainer(EntityLivingBase victim) { m_Victim = victim; }
+
     public void ApplyStatus(StatusBase status)
     {
         m_CurrentStatusBit |= status.statusType;
-        status.OnStatusBegin();
+
+        bool hasExistingStatus = false;
+
+        foreach (StatusBase remaining in m_StatusList)
+        {
+            if (remaining.statusType == status.statusType)
+            {
+                hasExistingStatus = true;
+                break;
+            }
+        }
+
+        status.OnStatusBegin(m_Victim, !hasExistingStatus);
         m_StatusList.Add(status);
     }
 
-    public void UpdateStatuses(EntityLivingBase entity)
+    public void UpdateStatuses()
     {
         for (int i = m_StatusList.Count - 1; i >= 0; i--) // Reverse iterate so we can remove elements while iterating
         {
@@ -35,7 +50,6 @@ public class StatusContainer
 
             if (status.timeLeft <= 0)
             {
-                status.OnStatusEnd();
                 m_StatusList.RemoveAt(i);
 
                 bool hasExistingStatus = false;
@@ -51,11 +65,13 @@ public class StatusContainer
                 }
 
                 if (hasExistingStatus == false)
-                    m_CurrentStatusBit &= status.statusType;
+                    m_CurrentStatusBit &= ~status.statusType;
+
+                status.OnStatusEnd(m_Victim, !hasExistingStatus);
             }
             else
             {
-                status.OnStatusUpdate(entity);
+                status.OnStatusUpdate(m_Victim);
             }
         }
     }

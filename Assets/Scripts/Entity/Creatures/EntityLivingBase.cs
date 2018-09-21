@@ -139,7 +139,7 @@ public abstract class EntityLivingBase : Entity
         st_stats = new Stats();
 
     private StatusContainer
-        stc_statusContainer = new StatusContainer();
+        stc_statusContainer;
 
     private Inventory
         inven_inventory;
@@ -351,7 +351,7 @@ public abstract class EntityLivingBase : Entity
     {
         base.Update();
 
-        stc_statusContainer.UpdateStatuses(this);
+        stc_statusContainer.UpdateStatuses();
 
         F_AI_task_change_timer += Time.deltaTime;
         F_regen_timer += Time.deltaTime;
@@ -595,7 +595,7 @@ public abstract class EntityLivingBase : Entity
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
         rch_raycast = new RaycastHit();
-        stc_statusContainer = new StatusContainer();
+        stc_statusContainer = new StatusContainer(this);
 
         inven_inventory = new Inventory();
         inven_inventory.SetUpInventory();

@@ -65,7 +65,8 @@ public class EnemySpawnTrigger : EntityTrigger
 #if UNITY_EDITOR
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            foreach (var enemy in lst_enemy_collection)
+            var gglist = FindObjectsOfType<EntityEnemy>();
+            foreach (var enemy in gglist)
             {
                 DamageSource dmgSrc = new DamageSource();
                 dmgSrc.SetUpDamageSource("God", "God", "God", 10);
@@ -76,14 +77,13 @@ public class EnemySpawnTrigger : EntityTrigger
 
         if (Input.GetKeyUp(KeyCode.G))
         {
-
-            foreach (var enemy in lst_enemy_collection)
+            var gglist = FindObjectsOfType<EntityEnemy>();
+            foreach (var enemy in gglist)
             {
-                var gg = new StatusPoison(5, 1, 0.25f);
+                var gg = new StatusPanic(5);
+                var gg2 = new StatusPoison(6,1,1);
                 enemy.Stc_Status.ApplyStatus(gg);
-                Debug.Log("Panic:" + enemy.Stc_Status.isPanicking);
-                Debug.Log("Poison:" + enemy.Stc_Status.isPoisoned);
-                Debug.Log("Stunned:" + enemy.Stc_Status.isStunned);
+                // enemy.Stc_Status.ApplyStatus(gg2);
             }
             
         }

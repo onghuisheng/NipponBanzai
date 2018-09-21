@@ -36,7 +36,8 @@ public abstract class StatusBase
     /// <summary>
     /// Called only once when this Status is added
     /// </summary>
-    internal abstract void OnStatusBegin();
+    /// <param name="isFirst">Is this the only status of this type in the container?</param>
+    internal abstract void OnStatusBegin(EntityLivingBase entity, bool isFirst);
 
     /// <summary>
     /// Called once per Update()
@@ -46,6 +47,7 @@ public abstract class StatusBase
     /// <summary>
     /// Called when duration has ended and this is to get deleted (Note: There might still be other instances of this Status that are still active)
     /// </summary>
-    internal abstract void OnStatusEnd();
+    /// <param name="isLast">Are there any remaining same type status in the container?</param>
+    internal abstract void OnStatusEnd(EntityLivingBase entity, bool isLast);
 
 }

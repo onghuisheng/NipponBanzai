@@ -26,7 +26,7 @@ public class AISpawnMobs : AIBase
         ent_main = _entity;
         s_ID = "Combat";
         s_display_name = "Spawn Mobs";
-        b_is_interruptable = false;
+        b_is_interruptable = true;
         f_spawnRadius = _spawnRadius;
         b_IsSummoning = false;
         type_target = _type;

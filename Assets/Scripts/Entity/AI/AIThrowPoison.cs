@@ -32,7 +32,7 @@ public class AIThrowPoison : AIBase
         ent_main = _entity;
         s_ID = "Combat";
         s_display_name = "Poison Attack";
-        b_is_interruptable = false;
+        b_is_interruptable = true;
         f_attack_range = _attackrange;
         type_target = _type;
         f_turn_Rate = 0.5f;

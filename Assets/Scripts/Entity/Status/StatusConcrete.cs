@@ -17,9 +17,23 @@ public class StatusPoison : StatusBase
         m_TickRate = tickRate;
     }
 
-    internal override void OnStatusBegin()
+    internal override void OnStatusBegin(EntityLivingBase entity, bool isFirst)
     {
-        Debug.Log("OnPoisonStart");
+        if (isFirst)
+        {
+            GameObject particle = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.PoisonMouthDrip, entity.transform, new Vector3(0, entity.GetComponent<Collider>().bounds.size.y, 0), Vector3.one, Vector3.zero, 0);
+            particle.name = "PoisonBoi";
+            var particleSystem = particle.GetComponent<ParticleSystem>().main;
+            particleSystem.loop = true;
+        }
+    }
+
+    internal override void OnStatusEnd(EntityLivingBase entity, bool isLast)
+    {
+        if (isLast)
+        {
+            GameObject.Destroy(entity.transform.Find("PoisonBoi").gameObject);
+        }
     }
 
     internal override void OnStatusUpdate(EntityLivingBase entity)
@@ -35,26 +49,36 @@ public class StatusPoison : StatusBase
         }
     }
 
-    internal override void OnStatusEnd()
-    {
-        Debug.Log("OnPoisonEnd");
-    }
-
 }
 
 public class StatusPanic : StatusBase
 {
 
+    GameObject m_PanicParticle;
+
     public StatusPanic(float duration) : base(StatusType.Panic, duration)
     {
     }
 
-    internal override void OnStatusBegin()
+    internal override void OnStatusBegin(EntityLivingBase entity, bool isFirst)
     {
+        if (isFirst)
+        {
+            GameObject particle = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, entity.transform, new Vector3(0, entity.GetComponent<Collider>().bounds.size.y, 0), Vector3.one, Vector3.zero, 0);
+            particle.name = "HeartyBoi";
+            var particleSystem = particle.GetComponent<ParticleSystem>().main;
+            particleSystem.loop = true;
+        }
     }
 
-    internal override void OnStatusEnd()
+    internal override void OnStatusEnd(EntityLivingBase entity, bool isLast)
     {
+        if (isLast)
+        {
+            GameObject.Destroy(entity.transform.Find("HeartyBoi").gameObject);
+            Debug.Log("Poison: " +entity.Stc_Status.isPoisoned);
+            Debug.Log("Panic: " + entity.Stc_Status.isPanicking);
+        }
     }
 
     internal override void OnStatusUpdate(EntityLivingBase entity)
@@ -70,11 +94,11 @@ public class StatusStunned : StatusBase
     {
     }
 
-    internal override void OnStatusBegin()
+    internal override void OnStatusBegin(EntityLivingBase entity, bool isFirst)
     {
     }
 
-    internal override void OnStatusEnd()
+    internal override void OnStatusEnd(EntityLivingBase entity, bool isLast)
     {
     }
 

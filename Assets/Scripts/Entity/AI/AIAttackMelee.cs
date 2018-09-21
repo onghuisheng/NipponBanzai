@@ -28,7 +28,7 @@ public class AIAttackMelee : AIBase
         ent_main = _entity;
         s_ID = "Combat";
         s_display_name = "Melee Attack";
-        b_is_interruptable = false;
+        b_is_interruptable = true;
         f_attack_range = _attackrange;
         type_target = _type;
 
