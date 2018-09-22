@@ -40,6 +40,19 @@ public class EntityMiniBoss : EntityEnemy
 
                 // GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
                 // go.GetComponent<EntityPickUps>().SetPosition(GetPosition());
+
+                foreach (var type in GetInventory().GetInventoryContainer())
+                {
+                    for (int i = 0; i < type.Value; ++i)
+                    {
+                        ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + 0.5f, GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(type.Key));
+                    }
+                }
+
+                for (int i = 0; i < GetInventory().GetSouls(); ++i)
+                {
+                    ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + Random.Range(0.5f, 1.0f), GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(Item.ITEM_TYPE.SOULS));
+                }
             }
         }
     }
@@ -105,6 +118,10 @@ public class EntityMiniBoss : EntityEnemy
         RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
 
         GetComponent<Collider>().isTrigger = false;
+
+        SetDrops(Item.ITEM_TYPE.HEALTH_POTION, Random.Range(1, 2), 70);
+        SetDrops(Item.ITEM_TYPE.MANA_POTION, Random.Range(1, 2), 70);
+        GetInventory().AdjustSoulsAmount(Random.Range(0, 20));
 
         St_stats.S_name = "MiniBossBro";
 
