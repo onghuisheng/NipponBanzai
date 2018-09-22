@@ -17,9 +17,10 @@ public class SkillFlash : SkillBase
         f_timer = 0;
     }
 
-    public override void StartSkill(EntityLivingBase _caster)
+    public override void StartSkill(EntityLivingBase _caster, float _manaused)
     {
         go_caster = _caster;
+        f_mana_amount_used = _manaused;
     }
 
     public override void UpdateSkill()
@@ -32,7 +33,16 @@ public class SkillFlash : SkillBase
         f_timer += Time.deltaTime;
 
         if (f_timer > 1.5f)
+        {
             go_caster.An_animator.SetBool("IsSummoning", false);
+
+            StatusBase _effect = new StatusPanic(30);
+
+            foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(go_caster.GetPosition(), 15 * (((f_mana_amount_used / f_mana_amount) * 100) / 100), typeof(EntityEnemy)))
+            {
+                go.GetComponent<EntityEnemy>().Stc_Status.ApplyStatus(_effect);
+            }
+        }
     }
 
     public override void EndSkill()

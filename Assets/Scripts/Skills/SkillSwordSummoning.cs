@@ -17,9 +17,10 @@ public class SkillSwordSummoning : SkillBase
         f_timer = 0;
     }
 
-    public override void StartSkill(EntityLivingBase _caster)
+    public override void StartSkill(EntityLivingBase _caster, float _manaused)
     {
         go_caster = _caster;
+        f_mana_amount_used = _manaused;
     }
 
     public override void UpdateSkill()

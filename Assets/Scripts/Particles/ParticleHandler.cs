@@ -12,7 +12,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
         SummoningPortal,
         Charging,
         Heart_Burst,
-        Charging_Beam
+        Charging_Beam, 
+        Souls
     }
 
     [SerializeField]

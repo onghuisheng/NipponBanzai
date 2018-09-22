@@ -43,6 +43,7 @@ public class HitboxTrigger : EntityTrigger
                 if (_ent != null)
                 {
                     dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
+                    dmgs_damageObj.SetPosition(GetPosition());
                     _ent.OnAttacked(dmgs_damageObj);
                 }
                 else
@@ -52,6 +53,7 @@ public class HitboxTrigger : EntityTrigger
                     if (_ent != null)
                     {
                         dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
+                        dmgs_damageObj.SetPosition(GetPosition());
                         _ent.OnAttacked(dmgs_damageObj, f_iframe_timer);
                     }
                 }

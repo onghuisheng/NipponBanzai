@@ -2,39 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManaPotion : Item
+public class ItemSouls : Item
 {
-    private static float
-        f_heal_amount;
-
     public override void SetUpItem()
     {
         inf_info = new Info();
 
-        f_heal_amount = 20;
-
-        inf_info.It_type = ITEM_TYPE.MANA_POTION;
-        inf_info.S_name = "Mana Potion";
-        inf_info.S_desc = "Recovers a portion of the user's mana";
+        inf_info.It_type = ITEM_TYPE.SOULS;
+        inf_info.S_name = "Souls";
+        inf_info.S_desc = "Souls of the enemy you killed";
     }
 
     public override bool OnUse(EntityLivingBase _ent)
     {
-        if (_ent.St_stats.F_mana >= _ent.St_stats.F_max_mana)
-            return false;
-
-        _ent.F_mana_regen_amount += f_heal_amount;
+       
         return true;
     }
 
     public override void OnGround(EntityPickUps _go)
     {
         _go.DoFloating();
+        _go.DoSucking(5, 1f);
+        _go.DoSpawnParticle(ParticleHandler.ParticleType.Souls, Vector3.zero, Vector3.one, new Vector3(-90, 0, 0));
     }
 
     public override void OnTaken(EntityPickUps _go, EntityLivingBase _taker)
     {
-        _taker.GetInventory().AddItemToInventory(_go.CurrentItem().GetInfo().It_type, 1);
+        _taker.GetInventory().AdjustSoulsAmount(1);
     }
 
     public override void OnExpire(EntityPickUps _go)
@@ -42,3 +36,4 @@ public class ItemManaPotion : Item
 
     }
 }
+

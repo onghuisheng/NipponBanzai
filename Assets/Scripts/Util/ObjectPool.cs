@@ -230,6 +230,28 @@ public class ObjectPool : Singleton<ObjectPool>
         return full_list;
     }
 
+    public List<GameObject> GetAllActiveInSurrounding(Vector3 _pos, float _range, System.Type _type)
+    {
+        List<GameObject> _list = new List<GameObject>();
+
+        foreach(var list in GetAllEntity())
+        {
+            foreach(GameObject go in list)
+            {
+                Entity _entity = go.GetComponent<Entity>();
+                if (_entity != null && (_entity.GetType().Equals(_type) || _entity.GetType().IsSubclassOf(_type)))
+                {
+                    if(Vector3.Distance(_pos, _entity.GetPosition()) < _range)
+                        _list.Add(go);
+                }
+                else
+                    break;
+            }
+        }
+
+        return _list;
+    }
+
     public GameObject GetEntityPlayer()
     {
         if (!go_player_instance.activeSelf)

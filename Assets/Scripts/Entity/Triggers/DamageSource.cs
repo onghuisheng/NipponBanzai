@@ -16,6 +16,9 @@ public struct DamageSource {
     private bool
         b_isFlinching;
 
+    private Vector3
+        v3_position;
+
     public void SetUpDamageSource(string _name, string _tag, string _id, float _damage, bool _flinch = true)
     {
         s_name = _name;
@@ -23,6 +26,13 @@ public struct DamageSource {
         f_damage = _damage;
         s_tag = _tag;
         b_isFlinching = _flinch;
+
+        v3_position = Vector3.zero;
+    }
+
+    public void SetPosition(Vector3 _pos)
+    {
+        v3_position = _pos;
     }
 
     public string GetName()
@@ -54,6 +64,11 @@ public struct DamageSource {
     {
         return f_damage;
     }   
+
+    public Vector3 GetPosition()
+    {
+        return v3_position;
+    }
 
     public bool IsFlinching()
     {

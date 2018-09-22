@@ -18,6 +18,10 @@ public class ItemHandler
                     return new ItemManaPotion();
                 }
 
+            case Item.ITEM_TYPE.SOULS:
+                {
+                    return new ItemSouls();
+                }
             default:
                 return new ItemHealthPotion();
         }

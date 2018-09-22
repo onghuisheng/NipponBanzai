@@ -149,7 +149,18 @@ public class EntityPlayer : EntityLivingBase
         {
             if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
             {
-                GetInventory().GetCurrSkill().StartSkill(this);
+                float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
+                if (_manaused >= 0)
+                {
+                    St_stats.F_mana = _manaused;
+                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
+                }
+                else
+                {
+                    St_stats.F_mana = 0;
+                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
+                }
+
                 An_animator.SetBool("IsSummoning", true);
                 An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
                 player_state = State.SUMMONING;
@@ -192,7 +203,18 @@ public class EntityPlayer : EntityLivingBase
         {
             if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
             {
-                GetInventory().GetCurrSkill().StartSkill(this);
+                float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
+                if (_manaused >= 0)
+                {
+                    St_stats.F_mana = _manaused;
+                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
+                }
+                else
+                {
+                    St_stats.F_mana = 0;
+                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
+                }
+
                 An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
                 An_animator.SetBool("IsSummoning", true);
                 player_state = State.SUMMONING;
@@ -231,6 +253,7 @@ public class EntityPlayer : EntityLivingBase
         {
             player_state = State.DASHING;
             An_animator.SetBool("IsDashing", true);
+            EndAttackAnimation();
 
             return;
         }
@@ -439,7 +462,7 @@ public class EntityPlayer : EntityLivingBase
         if (!IsDead())
         {
             //Debug.Log("Health: " + St_stats.F_health + " / " + St_stats.F_max_health);
-            //Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
+            Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

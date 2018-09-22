@@ -7,7 +7,8 @@ public abstract class Item
     public enum ITEM_TYPE
     {
         HEALTH_POTION = 0,
-        MANA_POTION, 
+        MANA_POTION,
+        SOULS,
 
         TOTAL
     }

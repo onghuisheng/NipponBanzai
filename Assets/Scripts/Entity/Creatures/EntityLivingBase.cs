@@ -617,4 +617,12 @@ public abstract class EntityLivingBase : Entity
     public virtual void OnAttack() { }
     public virtual void OnAOEAttack(float _size) { }
     public virtual void OnAttacked(DamageSource _dmgsrc, float _timer = 0.3f) { }
+
+    public virtual void KnockBack(DamageSource _dmgsrc)
+    {
+        if(Rb_rigidbody != null)
+        {
+            Rb_rigidbody.AddForceAtPosition(Vector3.one * _dmgsrc.GetDamage() * 1000f, _dmgsrc.GetPosition(), ForceMode.Acceleration);
+        }
+    }
 }

@@ -130,7 +130,7 @@ public class EntityPickUps : Entity
         {
             Vector3 _dir = (GetPosition() - ObjectPool.GetInstance().GetEntityPlayer().GetComponent<EntityPlayer>().GetPosition()).normalized;
 
-            SetPosition(GetPosition() - (_dir * _speed));
+            SetPosition(GetPosition() - (_dir * _speed * Time.deltaTime));
         }
     }
 
