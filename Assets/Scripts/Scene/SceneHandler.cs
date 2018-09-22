@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : Singleton<SceneHandler>
 {
-
+       
     public enum SceneType : int
     {
         None,
@@ -15,8 +15,8 @@ public class SceneHandler : Singleton<SceneHandler>
         Level2,
         JJPlayground
     }
-
-    private SceneType currentSceneType;
+    
+    private SceneType m_CurrentSceneType;
 
     public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete)
     {
@@ -35,6 +35,9 @@ public class SceneHandler : Singleton<SceneHandler>
             case SceneType.Level2:
                 sceneName = "Level2";
                 break;
+            case SceneType.JJPlayground:
+                sceneName = "JJ_Playground";
+                break;
         }
 
         StartCoroutine(StartLoading(sceneName, onComplete));
@@ -43,7 +46,7 @@ public class SceneHandler : Singleton<SceneHandler>
     private IEnumerator StartLoading(string sceneName, System.Action onComplete)
     {
         var operation = SceneManager.LoadSceneAsync(sceneName);
-        
+
         while (!operation.isDone)
             yield return null;
 

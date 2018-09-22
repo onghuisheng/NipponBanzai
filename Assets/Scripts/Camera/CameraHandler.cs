@@ -44,9 +44,9 @@ public class CameraHandler : Singleton<CameraHandler>
         {
             case SceneHandler.SceneType.MainMenu:
                 // TODO: change this back to main menu camera when not testing
-                // ChangeCamera(CameraType.MainMenu);
-                ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
-                ChangeCamera(CameraType.ThirdPerson);
+                ChangeCamera(CameraType.MainMenu);
+                //ObjectPool.GetInstance().GetEntityPlayer().SetActive(true);
+                //ChangeCamera(CameraType.ThirdPerson);
                 break;
             case SceneHandler.SceneType.Level1:
             case SceneHandler.SceneType.Level2:

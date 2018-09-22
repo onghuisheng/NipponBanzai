@@ -124,13 +124,13 @@ MonoBehaviour:
         temperature: 0
         tint: 0
         hueShift: 0
-        saturation: 0.992
-        contrast: 1
+        saturation: 1
+        contrast: 1.005
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 0
+        currentEditingChannel: 2
       colorWheels:
         mode: 1
         log:
@@ -323,8 +323,8 @@ MonoBehaviour:
       color: {r: 0.06314526, g: 0.4056604, b: 0.40208563, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.1
-      smoothness: 0.672
-      roundness: 1
+      smoothness: 0.5
+      roundness: 0.368
       mask: {fileID: 0}
       opacity: 1
       rounded: 1
