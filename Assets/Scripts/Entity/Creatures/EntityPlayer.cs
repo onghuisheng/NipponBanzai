@@ -397,7 +397,7 @@ public class EntityPlayer : EntityLivingBase
                         }
                         else
                         {
-                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 1);
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 0.1f);
                             i_combo = 1;
                         }
                     }
