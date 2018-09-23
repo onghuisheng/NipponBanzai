@@ -529,6 +529,8 @@ public abstract class EntityLivingBase : Entity
         }
 
         dic_AI_list.Clear();
+
+        stc_statusContainer.ClearStatus();
     }
 
     public void ClearAITask()
@@ -599,6 +601,7 @@ public abstract class EntityLivingBase : Entity
 
         inven_inventory = new Inventory();
         inven_inventory.SetUpInventory();
+
     }
 
     public virtual Inventory GetInventory()

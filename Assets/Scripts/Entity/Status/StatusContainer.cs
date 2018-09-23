@@ -76,11 +76,35 @@ public class StatusContainer
         }
     }
 
-}
+    public void ClearStatus()
+    {
 
-public class Status
-{
+        for (int i = m_StatusList.Count - 1; i >= 0; i--) // Reverse iterate so we can remove elements while iterating
+        {
+            bool hasExistingStatus = false;
 
+            var status = m_StatusList[i];
 
+            m_StatusList.RemoveAt(i);
+
+            if (Contains(status.statusType))
+            {
+                hasExistingStatus = true;
+            }
+
+            status.OnStatusEnd(m_Victim, !hasExistingStatus);
+        }
+
+    }
+
+    private bool Contains(StatusBase.StatusType statusType)
+    {
+        foreach (StatusBase status in m_StatusList)
+        {
+            if (status.statusType == statusType)
+                return true;
+        }
+        return false;
+    }
 
 }
