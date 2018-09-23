@@ -56,7 +56,7 @@ public class CharacterMovement : MonoBehaviour
                 b_moving = false;
                 b_opposite = false;
             }
-            else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING || Component_Player.GetPlayerState() == EntityPlayer.State.ATTACK && Component_Player.GetPlayerTargetState() == EntityPlayer.TARGET_STATE.AIMING)
+            else if (Component_Player.GetPlayerState() == EntityPlayer.State.MOVING || Component_Player.GetPlayerState() == EntityPlayer.State.ATTACK)
             {
                 v3_player_last_position = transform.position;   //Saving the Player's last position into a Vector3 variable                             
 
