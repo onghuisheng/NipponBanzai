@@ -462,7 +462,7 @@ public class EntityPlayer : EntityLivingBase
         if (!IsDead())
         {
             //Debug.Log("Health: " + St_stats.F_health + " / " + St_stats.F_max_health);
-            Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
+            //Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

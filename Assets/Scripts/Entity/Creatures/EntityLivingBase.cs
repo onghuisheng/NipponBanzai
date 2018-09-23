@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using DG.Tweening;
 
 public abstract class EntityLivingBase : Entity
@@ -168,7 +169,10 @@ public abstract class EntityLivingBase : Entity
 
     private Animator
         an_animator;
-    
+
+    private NavMeshAgent
+        nma_navmesh;
+
     private string
         s_last_hit;
 
@@ -455,7 +459,7 @@ public abstract class EntityLivingBase : Entity
                 }
 
                 F_regen_timer = 0.0f;
-            }
+            }           
         }
 
         if (B_isHit)
@@ -597,6 +601,7 @@ public abstract class EntityLivingBase : Entity
 
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
+        nma_navmesh = GetComponent<NavMeshAgent>();
         rch_raycast = new RaycastHit();
         stc_statusContainer = new StatusContainer(this);
 
@@ -626,7 +631,10 @@ public abstract class EntityLivingBase : Entity
     {
         if (Rb_rigidbody != null)
         {
-            Rb_rigidbody.AddForceAtPosition(Vector3.one * _dmgsrc.GetDamage() * 1000f, _dmgsrc.GetPosition(), ForceMode.Acceleration);
+            Rb_rigidbody.AddForceAtPosition(Vector3.one * _dmgsrc.GetDamage() * 1000f, GetPosition(), ForceMode.Acceleration);
+
+            if (nma_navmesh != null)
+                nma_navmesh.velocity = Rb_rigidbody.velocity;
         }
     }
 }

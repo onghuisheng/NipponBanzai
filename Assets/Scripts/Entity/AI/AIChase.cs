@@ -47,6 +47,9 @@ public class AIChase : AIBase
     public override bool ShouldContinueAI()
     {
 
+        if (nma_agent != null && !nma_agent.enabled)
+            return false;
+
         if (ep_player == null)
         {
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
@@ -104,8 +107,8 @@ public class AIChase : AIBase
     {
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "MoveSpeed", AnimatorControllerParameterType.Float))
             ent_main.An_animator.SetFloat("MoveSpeed", ent_main.St_stats.F_speed);
-
-        nma_agent.destination = ep_player.transform.position;
+        if (nma_agent != null && nma_agent.enabled)
+            nma_agent.destination = ep_player.transform.position;
 
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "Moving", AnimatorControllerParameterType.Bool))
             ent_main.An_animator.SetBool("Moving", true);
@@ -115,7 +118,8 @@ public class AIChase : AIBase
 
     public override bool EndAI()
     {
-        nma_agent.SetDestination(nma_agent.transform.position);
+        if(nma_agent != null && nma_agent.enabled)
+            nma_agent.SetDestination(nma_agent.transform.position);
         if (AnimatorExtensions.HasParameterOfType(ent_main.An_animator, "Moving", AnimatorControllerParameterType.Bool))
             ent_main.An_animator.SetBool("Moving", false);
 

@@ -92,6 +92,7 @@ public class EntityMelee : EntityEnemy
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
             ResetOnHit(_timer);
+            KnockBack(_dmgsrc);
 
             if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && _dmgsrc.IsFlinching())
                 An_animator.SetTrigger("Injured");
