@@ -79,7 +79,6 @@ public class Laser : EntityProjectiles
     // Update is called once per frame
     protected override void Update()
     {
-
         f_lifeElapse += Time.deltaTime;
 
         if (f_lifeElapse > F_lifetime)
@@ -125,18 +124,19 @@ public class Laser : EntityProjectiles
 
     public void UpdatePosition()
     {
-        if (f_incrementor < f_distance)
-        {
+        //if (f_incrementor < f_distance)
+        //{
+            Debug.Log("MOVE");
             f_incrementor += F_speed * Time.deltaTime;
 
-            float x = Mathf.Lerp(0, f_distance, f_incrementor);
-            Vector3 newEnd = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
+            Vector3 newEnd = Vector3.Lerp(v3_currEndPos, v3_endPos, f_incrementor);
+            //v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
 
             CheckForObjectsInPath();
 
             //lr_line.SetPosition(0, v3_startPos);
             lr_line.SetPosition(1, newEnd);
-        }
+        //}
     }
 
     void CheckForObjectsInPath()
@@ -148,6 +148,7 @@ public class Laser : EntityProjectiles
 
         if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit, ignoreEnemiesMask))
         {
+            Debug.Log("Hit" + hit);
             v3_currEndPos = hit.point;
 
             if (!TagHelper.IsTagBanned(hit.collider.gameObject.tag))

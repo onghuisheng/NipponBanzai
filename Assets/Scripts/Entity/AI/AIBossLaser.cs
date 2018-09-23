@@ -167,15 +167,14 @@ public class AIBossLaser : AIBase {
                 //    b_has_attacked = true;
                 //    AOEBeam(i);
                 //}
-
+                b_has_attacked = true;
                 OnTargetBeam();
-                script_boss.NextChargeState(EntityBoss.ChargeState.END);
+
             }
 
             if (f_beamChargeTimer > f_maxStateTimer)
             {
-                Debug.Log("ASDAFAE");
-
+                script_boss.NextChargeState(EntityBoss.ChargeState.END);
             }
 
             //ent_main.RotateTowardsTargetPosition(ent_target.GetPosition());
@@ -183,6 +182,12 @@ public class AIBossLaser : AIBase {
 
         f_beamChargeTimer += Time.deltaTime;
 
+        if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_1)
+        {
+            Vector3 corePosition = ent_main.transform.position;
+            corePosition.y += 7.5f;
+            ParticleSystem ps = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.BossCharging, null, corePosition, Vector3.one, Quaternion.identity.eulerAngles, 15.0f).GetComponent<ParticleSystem>();
+        }
 
         return true;
     }
@@ -216,7 +221,7 @@ public class AIBossLaser : AIBase {
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
         float lazerLife = 11.0f;
-        script_laser.SetUpProjectile(lazerLife, 2, 0.05f, corePosition, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, ent_target.gameObject);
+        script_laser.SetUpProjectile(lazerLife, 2, 0.5f, corePosition, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, ent_target.gameObject);
     }
 
     void Reset()

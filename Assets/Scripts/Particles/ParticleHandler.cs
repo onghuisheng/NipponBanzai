@@ -13,7 +13,8 @@ public class ParticleHandler : Singleton<ParticleHandler>
         Charging,
         Heart_Burst,
         Charging_Beam, 
-        Souls
+        Souls,
+        BossCharging
     }
 
     [SerializeField]

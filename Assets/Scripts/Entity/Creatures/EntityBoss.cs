@@ -33,6 +33,7 @@ public class EntityBoss : EntityEnemy {
 
     AttackState enum_currentAttState;
     ChargeState enum_currentChargeState;
+    BossState enum_currentBossState;
 
     float
         f_dissolveRate;
@@ -178,6 +179,12 @@ public class EntityBoss : EntityEnemy {
             Debug.Log("BOSS HP = " + St_stats.F_health);
 
             ResetOnHit(_timer);
+
+            if (St_stats.F_health < St_stats.F_max_health * 0.5)
+            {
+                enum_currentBossState = BossState.HALFHEALTH;
+                SetBossState();
+            }
         }
     }
 
@@ -247,5 +254,10 @@ public class EntityBoss : EntityEnemy {
     public void SetStateDone(bool _state)
     {
         b_stateIsDone = _state;
+    }
+
+    public void SetBossState()
+    {
+
     }
 }
