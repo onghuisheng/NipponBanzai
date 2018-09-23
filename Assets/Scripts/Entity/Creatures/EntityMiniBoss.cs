@@ -123,7 +123,7 @@ public class EntityMiniBoss : EntityEnemy
         SetDrops(Item.ITEM_TYPE.MANA_POTION, Random.Range(1, 2), 70);
         GetInventory().AdjustSoulsAmount(Random.Range(0, 20));
 
-        St_stats.S_name = "MiniBossBro";
+        St_stats.S_name = "MiniBoss";
 
         DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }

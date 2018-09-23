@@ -84,10 +84,10 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.ATTACK, AttackCheckFunction);
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
-
+        
         St_stats = new Stats();
         St_stats.F_maxspeed = St_stats.F_speed = 5;
-        St_stats.F_max_health = St_stats.F_health = 1000;
+        St_stats.F_max_health = St_stats.F_health = 100;
         St_stats.F_max_mana = St_stats.F_mana = 100;
         St_stats.F_damage = 20;
         St_stats.F_mass = 1;

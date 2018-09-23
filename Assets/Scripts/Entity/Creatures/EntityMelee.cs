@@ -80,7 +80,7 @@ public class EntityMelee : EntityEnemy
         SetDrops(Item.ITEM_TYPE.MANA_POTION, 1, 70);
         GetInventory().AdjustSoulsAmount(Random.Range(0, 10));
 
-        St_stats.S_name = "MeleeDude";
+        St_stats.S_name = "Minion1";
 
         DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }

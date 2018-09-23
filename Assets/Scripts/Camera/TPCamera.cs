@@ -55,6 +55,8 @@ public class TPCamera : MonoBehaviour
     private bool
         b_is_zoomed;
 
+    public static float f_CurrentAngle = 0;
+
     private void Start()
     {
         go_target = ObjectPool.GetInstance().GetEntityPlayer();
@@ -355,6 +357,10 @@ public class TPCamera : MonoBehaviour
                 v3_target_position = new_target_pos; //Moving the target as well as to ensure proper rotation
             }
         }
+
+        Vector3 dir = script_entityplayer.transform.position - transform.position;
+        f_CurrentAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
     }
     /*----------------------------------------------------------------------------------------------------------------------*/
 }

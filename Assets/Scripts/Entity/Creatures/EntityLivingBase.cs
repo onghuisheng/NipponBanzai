@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public abstract class EntityLivingBase : Entity
 {
@@ -167,7 +168,7 @@ public abstract class EntityLivingBase : Entity
 
     private Animator
         an_animator;
-
+    
     private string
         s_last_hit;
 
@@ -593,7 +594,7 @@ public abstract class EntityLivingBase : Entity
         f_y_velocity = 0;
         B_isGrounded = true;
         B_isAIEnabled = true;
-        
+
         An_animator = GetComponent<Animator>();
         Rb_rigidbody = GetComponent<Rigidbody>();
         rch_raycast = new RaycastHit();
@@ -623,7 +624,7 @@ public abstract class EntityLivingBase : Entity
 
     public virtual void KnockBack(DamageSource _dmgsrc)
     {
-        if(Rb_rigidbody != null)
+        if (Rb_rigidbody != null)
         {
             Rb_rigidbody.AddForceAtPosition(Vector3.one * _dmgsrc.GetDamage() * 1000f, _dmgsrc.GetPosition(), ForceMode.Acceleration);
         }

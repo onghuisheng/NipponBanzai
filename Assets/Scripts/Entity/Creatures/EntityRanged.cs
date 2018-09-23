@@ -88,7 +88,7 @@ public class EntityRanged : EntityEnemy
         SetDrops(Item.ITEM_TYPE.MANA_POTION, 1, 70);
         GetInventory().AdjustSoulsAmount(Random.Range(0, 10));
 
-        St_stats.S_name = "RangedDude";
+        St_stats.S_name = "Minion2";
 
         DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }

@@ -1,15 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public abstract class Entity : MonoBehaviour
 {
     private Rigidbody
         rb_rigidbody;
 
-	protected virtual void Start ()
+    [SerializeField]
+    private Sprite
+        img_minimap_icon;
+
+    protected virtual void Start()
     {
         HardReset();
+
+        if (img_minimap_icon != null)
+        {
+            // Set up minimap icon
+            GameObject go = Instantiate(new GameObject("MinimapIcon"));
+            go.transform.localScale = Vector3.one * 20;
+            go.transform.SetParent(transform);
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localRotation = Quaternion.Euler(90, 0, 0);
+            go.name = "MinimapIcon";
+            go.layer = LayerMask.NameToLayer("MinimapIcon");
+            var spriteRenderer = go.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = img_minimap_icon;
+            Tweener rotateTowardsCamera = go.transform.DORotate(new Vector3(90, 0, 0), 0).SetLoops(-1);
+            rotateTowardsCamera.OnUpdate(() => {
+                rotateTowardsCamera.ChangeEndValue(new Vector3(90, TPCamera.f_CurrentAngle, 0));
+            });
+        }
     }
 
     protected virtual void Update()
@@ -90,15 +113,12 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public Rigidbody Rb_rigidbody
-    {
-        get
-        {
+    public Rigidbody Rb_rigidbody {
+        get {
             return rb_rigidbody;
         }
 
-        set
-        {
+        set {
             rb_rigidbody = value;
         }
     }

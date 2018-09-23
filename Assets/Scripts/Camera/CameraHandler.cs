@@ -68,16 +68,7 @@ public class CameraHandler : Singleton<CameraHandler>
 
     protected override void Update()
     {
-        base.Update();
-
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            CinematicPathing.GetPathWithName("MyFirstPath").DoCinematicPath(() =>
-            {
-                ChangeCamera(CameraType.ThirdPerson);
-            });
-        }
-        
+        base.Update();        
     }
 
     public void ChangeCamera(CameraType _type)

@@ -163,7 +163,7 @@ public class ObjectPool : Singleton<ObjectPool>
         full_list.Add(list);
 
         //ENVIRONMENT
-        list = new List<GameObject>();       
+        list = new List<GameObject>();
         foreach (GameObject i in enviroment_pool_list)
         {
             if (i.activeSelf)
@@ -234,14 +234,14 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         List<GameObject> _list = new List<GameObject>();
 
-        foreach(var list in GetAllEntity())
+        foreach (var list in GetAllEntity())
         {
-            foreach(GameObject go in list)
+            foreach (GameObject go in list)
             {
                 Entity _entity = go.GetComponent<Entity>();
                 if (_entity != null && (_entity.GetType().Equals(_type) || _entity.GetType().IsSubclassOf(_type)))
                 {
-                    if(Vector3.Distance(_pos, _entity.GetPosition()) < _range)
+                    if (Vector3.Distance(_pos, _entity.GetPosition()) < _range)
                         _list.Add(go);
                 }
                 else
@@ -257,8 +257,8 @@ public class ObjectPool : Singleton<ObjectPool>
         if (!go_player_instance.activeSelf)
         {
             go_player_instance.SetActive(true);
-
-            go_player_instance.GetComponent<EntityPlayer>().SetPosition(new Vector3(0, 1, 0));
+            var player = go_player_instance.GetComponent<EntityPlayer>();
+            player.SetPosition(new Vector3(0, 1, 0));
         }
         return go_player_instance;
     }
@@ -285,7 +285,7 @@ public class ObjectPool : Singleton<ObjectPool>
         foreach (GameObject i in entity_pool_list)
         {
             if (i.activeSelf)
-            {          
+            {
                 list.Add(i);
             }
         }
@@ -370,7 +370,8 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (!entity_obj.activeSelf && entity_obj.name.Equals(entity_list[(int)_type].name + "(Clone)"))
             {
-                entity_obj.GetComponent<Entity>().HardReset();
+                var livingBase = entity_obj.GetComponent<EntityLivingBase>();
+                livingBase.HardReset();
                 entity_obj.SetActive(true);
                 return entity_obj;
             }

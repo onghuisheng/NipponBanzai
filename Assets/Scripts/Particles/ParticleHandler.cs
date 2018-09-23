@@ -18,29 +18,7 @@ public class ParticleHandler : Singleton<ParticleHandler>
 
     [SerializeField]
     List<GameObject> m_ParticlePrefabs;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="parent"></param>
-    /// <param name="localPos"></param>
-    /// <param name="localScale"></param>
-    /// <param name="localRotation"></param>
-    /// <param name="duration">0 for infinite duration</param>
-    /// <param name="onParticleUpdate"></param>
-    /// <param name="onParticleDestroy"></param>
-    /// <returns></returns>
+    
     public GameObject SpawnParticle(ParticleType type, Transform parent, Vector3 localPos, Vector3 localScale, Vector3 localRotation, float duration, System.Action<float> onParticleUpdate = null, System.Action onParticleDestroy = null)
     {
         if (m_ParticlePrefabs[(int)type].name != type.ToString())
