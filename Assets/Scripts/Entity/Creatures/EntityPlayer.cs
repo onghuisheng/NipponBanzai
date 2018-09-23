@@ -528,13 +528,16 @@ public class EntityPlayer : EntityLivingBase
                 GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.MANA_POTION);
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (player_state != State.SUMMONING)
             {
-                GetInventory().GetNextSkill(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.E))
-            {
-                GetInventory().GetNextSkill(true);
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    GetInventory().GetNextSkill(false);
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    GetInventory().GetNextSkill(true);
+                }
             }
 
             if (Input.GetKey(KeyCode.Mouse1))
