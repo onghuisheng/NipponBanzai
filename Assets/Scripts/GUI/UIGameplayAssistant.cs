@@ -12,6 +12,13 @@ public class UIGameplayAssistant : MonoBehaviour
     public Image m_PlayerHealthTexture;
     public Image m_PlayerManaTexture;
 
+    public Text m_HealthPotionAmount;
+    public Text m_ManaPotionAmount;
+
+    public GameObject m_SkillButtonPrefab;
+    public GameObject m_SkillHolder;
+    public List<Sprite> m_SkillIcons;
+
     public GameObject m_Minimap;
     public GameObject m_MinimapCamera;
 
@@ -19,6 +26,9 @@ public class UIGameplayAssistant : MonoBehaviour
 
     float m_PrevPlayerHP;
     float m_PrevPlayerMP;
+
+    bool m_SkillsPopulated = false;
+    float m_SkillsIconGap; // Length of the gap between the skill icons
 
     // Use this for initialization
     void Start()
@@ -31,14 +41,41 @@ public class UIGameplayAssistant : MonoBehaviour
         m_Player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         m_PrevPlayerHP = m_Player.St_stats.F_health;
         m_PrevPlayerMP = m_Player.St_stats.F_mana;
+
+    }
+
+    void PopulateSkillIcons()
+    {
+        foreach (SkillBase skill in m_Player.GetInventory().GetAllSkills())
+        {
+            // skill.S_Name
+            GameObject go = Instantiate(m_SkillButtonPrefab, m_SkillHolder.transform);
+            go.transform.Find("Icon").GetComponent<Image>().sprite = FindSpriteWithName(skill.S_Name);
+            go.name = skill.S_Name;
+        }
+
+        var hLayout = m_SkillHolder.GetComponent<HorizontalLayoutGroup>();
+        m_SkillsIconGap = hLayout.padding.left + hLayout.spacing + m_SkillButtonPrefab.GetComponent<RectTransform>().rect.width / 2;
+
+    }
+
+    Sprite FindSpriteWithName(string name)
+    {
+        foreach (Sprite sprite in m_SkillIcons)
+        {
+            if (sprite.name == name)
+                return sprite;
+        }
+        return null;
     }
 
     private void LateUpdate()
     {
+        // Subtle tweening of health/mana bar when its values are changed
         if (m_Player.St_stats.F_health != m_PrevPlayerHP)
         {
             float healthPercent = (m_Player.St_stats.F_health / m_Player.St_stats.F_max_health);
-            m_PlayerHealthTexture.DOFillAmount(healthPercent, 0.2f).SetEase(Ease.OutExpo); // Subtle tweening of health bar when taking damage
+            m_PlayerHealthTexture.DOFillAmount(healthPercent, 0.2f).SetEase(Ease.OutExpo);
             m_PrevPlayerHP = m_Player.St_stats.F_health;
         }
 
@@ -49,16 +86,42 @@ public class UIGameplayAssistant : MonoBehaviour
             m_PrevPlayerMP = m_Player.St_stats.F_mana;
         }
 
+        // Assign potion amount text
+        var playerInventory = m_Player.GetInventory().GetInventoryContainer();
+        int hpPots = 0, manaPots = 0;
+
+        foreach (var item in playerInventory)
+        {
+            if (item.Key == Item.ITEM_TYPE.HEALTH_POTION)
+                hpPots = item.Value;
+            if (item.Key == Item.ITEM_TYPE.MANA_POTION)
+                manaPots = item.Value;
+        }
+
+        m_HealthPotionAmount.text = hpPots.ToString();
+        m_ManaPotionAmount.text = manaPots.ToString();
+
         // Minimap Camera
         Vector3 newCamPos = m_MinimapCamera.transform.position;
         newCamPos.x = m_Player.transform.position.x;
         newCamPos.z = m_Player.transform.position.z;
         m_MinimapCamera.transform.position = newCamPos; // follow player's x and z position
 
-        // Rotate the minimap depending on the current camera angle;
-        Vector3 dir = m_Player.transform.position - Camera.main.transform.position;
-        float cameraAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        m_Minimap.transform.rotation = Quaternion.Euler(0, 0, cameraAngle);
+        // Rotate the minimap depending on the current camera angle;        
+        m_Minimap.transform.rotation = Quaternion.Euler(0, 0, TPCamera.f_CurrentAngle);
+
+        // Skill icons movement
+        if (!m_SkillsPopulated)
+        {
+            PopulateSkillIcons();
+            m_SkillsPopulated = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))
+        {
+            RectTransform holderTransform = m_SkillHolder.GetComponent<RectTransform>();
+            holderTransform.DOAnchorPosX(m_Player.GetInventory().GetCurrSkillIndex() * -m_SkillsIconGap, 0.5f).SetEase(Ease.OutBack);
+        }
 
     }
 

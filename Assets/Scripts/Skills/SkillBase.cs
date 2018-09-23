@@ -37,6 +37,12 @@ public abstract class SkillBase
         }
     }
 
+    public string S_Name {
+        get {
+            return s_name;
+        }
+    }
+
     public abstract void SetUpSkill();
 
     public abstract void StartSkill(EntityLivingBase _caster, float _manaused);

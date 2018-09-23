@@ -100,6 +100,11 @@ public class Inventory {
         return list_skills_inventory[f_curr_skill];
     }
 
+    public int GetCurrSkillIndex()
+    {
+        return f_curr_skill;
+    }
+
     public List<SkillBase> GetAllSkills()
     {
         return list_skills_inventory;

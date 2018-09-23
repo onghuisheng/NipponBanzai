@@ -124,6 +124,10 @@ public class EntityPlayer : EntityLivingBase
         _skill = new SkillSwordSummoning();
         _skill.SetUpSkill();
         GetInventory().AddSkill(_skill);
+
+        _skill = new SkillBeam();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
         ///
     }
 

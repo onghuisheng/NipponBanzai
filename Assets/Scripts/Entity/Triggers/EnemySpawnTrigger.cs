@@ -63,7 +63,7 @@ public class EnemySpawnTrigger : EntityTrigger
         }
 
 #if UNITY_EDITOR
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.LeftBracket))
         {
             var gglist = FindObjectsOfType<EntityEnemy>();
             foreach (var enemy in gglist)
@@ -75,7 +75,7 @@ public class EnemySpawnTrigger : EntityTrigger
         }
 
 
-        if (Input.GetKeyUp(KeyCode.G))
+        if (Input.GetKeyUp(KeyCode.RightBracket))
         {
             var gglist = FindObjectsOfType<EntityEnemy>();
             foreach (var enemy in gglist)
