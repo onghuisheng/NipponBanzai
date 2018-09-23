@@ -392,7 +392,7 @@ public class EntityPlayer : EntityLivingBase
                     {
                         if (Vector3.Distance(go_target.transform.position, GetPosition()) > _distance_near)
                         {
-                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 1500);
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, Vector3.Distance(go_target.transform.position, GetPosition()) * 70);
                             i_combo = 2;
                         }
                         else
