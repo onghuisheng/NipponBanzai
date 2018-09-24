@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EntityPlayer : EntityLivingBase
 {
@@ -12,7 +13,8 @@ public class EntityPlayer : EntityLivingBase
         ATTACK,
         HEAVY_ATTACK,
         SUMMONING,
-        DEAD
+        DEAD,
+        RECALL
     }
 
     public enum TARGET_STATE
@@ -57,7 +59,7 @@ public class EntityPlayer : EntityLivingBase
         list_joints;
 
     private GameObject
-        go_charging_particle, 
+        go_charging_particle,
         go_target;
 
     private CharacterMovement
@@ -86,7 +88,8 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.HEAVY_ATTACK, HeavyAttackCheckFunction);
         m_checkfuntions.Add(State.SUMMONING, SummoningCheckFunction);
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
-        
+        m_checkfuntions.Add(State.RECALL, RecallCheckFunction);
+
         St_stats = new Stats();
         St_stats.F_maxspeed = St_stats.F_speed = 5;
         St_stats.F_max_health = St_stats.F_health = 100;
@@ -175,7 +178,7 @@ public class EntityPlayer : EntityLivingBase
         }
         else
         {
-            if(Input.GetKey(KeyCode.Mouse2))
+            if (Input.GetKey(KeyCode.Mouse2))
             {
                 player_state = State.HEAVY_ATTACK;
                 return;
@@ -186,6 +189,12 @@ public class EntityPlayer : EntityLivingBase
         {
             player_state = State.ATTACK;
 
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            player_state = State.RECALL;
             return;
         }
 
@@ -278,7 +287,7 @@ public class EntityPlayer : EntityLivingBase
             EndAttackAnimation();
 
             return;
-        }      
+        }
 
         if (An_animator.GetBool("IsAttacking"))
         {
@@ -300,10 +309,10 @@ public class EntityPlayer : EntityLivingBase
                     }
                     else if (f_charged_amount >= f_charged_max_amount)
                     {
-                        if(go_charging_particle != null)
+                        if (go_charging_particle != null)
                         {
                             Destroy(go_charging_particle);
-                            go_charging_particle = null;                           
+                            go_charging_particle = null;
                         }
 
                         f_charged_amount = f_charged_max_amount;
@@ -360,22 +369,22 @@ public class EntityPlayer : EntityLivingBase
 
                 An_animator.SetBool("IsMelee", true);
 
-                if(cm_player_movement != null)
+                if (cm_player_movement != null)
                 {
-                    float 
+                    float
                         _distance_near = 1,
                         _distance_away = 10,
                         _angle = 25;
 
-                    if(go_target != null)
+                    if (go_target != null)
                     {
                         if (!go_target.activeSelf || Vector3.Angle(transform.forward, (go_target.transform.position - GetPosition()).normalized) > _angle)
                             go_target = null;
                     }
 
-                    if(go_target == null)
+                    if (go_target == null)
                     {
-                        foreach(GameObject go in ObjectPool.GetInstance().GetActiveEntityObjects())
+                        foreach (GameObject go in ObjectPool.GetInstance().GetActiveEntityObjects())
                         {
                             if (Vector3.Angle(transform.forward, (go.transform.position - GetPosition()).normalized) < _angle && !go.GetComponent<EntityLivingBase>().IsDead())
                             {
@@ -407,7 +416,7 @@ public class EntityPlayer : EntityLivingBase
                     }
                     else
                     {
-                        i_combo = 1;    
+                        i_combo = 1;
                     }
                 }
             }
@@ -415,13 +424,13 @@ public class EntityPlayer : EntityLivingBase
 
         if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
-                player_state = State.IDLE;
+            player_state = State.IDLE;
         }
     }
 
     private void HeavyAttackCheckFunction()
     {
-        St_stats.F_speed = St_stats.F_maxspeed;    
+        St_stats.F_speed = St_stats.F_maxspeed;
 
         if (An_animator.GetBool("IsAttacking"))
         {
@@ -433,7 +442,7 @@ public class EntityPlayer : EntityLivingBase
 
             i_combo = 3;
 
-            An_animator.SetBool("IsMelee", true);         
+            An_animator.SetBool("IsMelee", true);
         }
 
         if (!An_animator.GetBool("IsAttacking"))
@@ -459,6 +468,11 @@ public class EntityPlayer : EntityLivingBase
     {
         if (!IsDead())
             player_state = State.IDLE;
+    }
+
+    private void RecallCheckFunction()
+    {
+
     }
 
     public State GetPlayerState()
@@ -493,7 +507,7 @@ public class EntityPlayer : EntityLivingBase
         //    }
         //}
 
-        foreach(SkillBase sb in GetInventory().GetAllSkills())
+        foreach (SkillBase sb in GetInventory().GetAllSkills())
         {
             sb.UpdateSkill();
         }
@@ -649,7 +663,7 @@ public class EntityPlayer : EntityLivingBase
 
             case State.IDLE:
                 An_animator.SetBool("IsDead", false);
-                if(player_target_state == TARGET_STATE.NOT_AIMING)
+                if (player_target_state == TARGET_STATE.NOT_AIMING)
                     An_animator.SetBool("IsMoving", false);
                 break;
 
@@ -663,6 +677,18 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsDead", false);
                 break;
 
+            case State.RECALL:
+                if (An_animator.GetBool("Recall") == false)
+                {
+                    An_animator.SetBool("Recall", true);
+                    transform.DOMoveY(transform.position.y + 5, 4).OnComplete(() =>
+                    {
+                        SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
+                    });
+                }
+
+                break;
+
             default:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
@@ -673,16 +699,12 @@ public class EntityPlayer : EntityLivingBase
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
 
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            CinematicPathing.GetPathWithName("LookAroundBoss").DoCinematicPath();
-        }
-
     }
 
     protected override void LateUpdate()
     {
-        base.LateUpdate();
+        if (player_state != State.RECALL)
+            base.LateUpdate();
 
         // Debug.Log("Player Health: " + St_stats.F_health + "/" + St_stats.F_max_health);
         // Debug.Log(player_state);
@@ -767,6 +789,6 @@ public class EntityPlayer : EntityLivingBase
     public void EndShootAnimation()
     {
         An_animator.SetBool("IsAttacking", false);
-        An_animator.SetBool("IsMelee", false);      
+        An_animator.SetBool("IsMelee", false);
     }
 }

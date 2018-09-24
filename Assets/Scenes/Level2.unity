@@ -838,6 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c3ef2d6ee9ae342a62d89b9ce910d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dontBringOverOnLoad: 1
   m_destroyOnLoad: 0
   m_ParticlePrefabs:
   - {fileID: 1788333622054468, guid: 93833885a8fe50645942da9d9afafe57, type: 2}
@@ -3536,11 +3537,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd482a41cf95ff4b8348f531c6f52c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dontBringOverOnLoad: 1
   m_destroyOnLoad: 0
   list_cameras_prefab:
   - {fileID: 1244191372243692, guid: 3b27ac51f49dc2d43acafbf1a9accd62, type: 2}
   - {fileID: 1048287882315034, guid: d7430e8c2bfcb9d469d4f0c6d16d5494, type: 2}
   - {fileID: 1263882069892720, guid: eb99141b7db81d34289607b3f0ac6db1, type: 2}
+--- !u!1001 &1366350099
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882228456484886, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 876b75b76f317e24aa3f1bbf6799224f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1380105188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3813,6 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ad10dde878ca44f85d445bda9985b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dontBringOverOnLoad: 1
   m_destroyOnLoad: 0
   entity_list:
   - {fileID: 1259337521567822, guid: 39304b76443792c46b8b3db9c811985e, type: 2}

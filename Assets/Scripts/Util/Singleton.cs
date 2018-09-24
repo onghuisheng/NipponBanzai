@@ -78,6 +78,8 @@ public class Singleton<T> : SingletonInterface where T : MonoBehaviour
             DestroyImmediate(this);
     }
 
+    
+
     protected virtual void Update()
     {
         if (!m_destroyOnLoad)

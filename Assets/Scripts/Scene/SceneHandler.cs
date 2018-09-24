@@ -18,7 +18,7 @@ public class SceneHandler : Singleton<SceneHandler>
     
     private SceneType m_CurrentSceneType;
 
-    public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete)
+    public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete = null)
     {
         Debug.Log("Changing Scene");
 
@@ -27,6 +27,8 @@ public class SceneHandler : Singleton<SceneHandler>
         switch (sceneType)
         {
             case SceneType.MainMenu:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 sceneName = "MainMenu";
                 break;
             case SceneType.Level1:
