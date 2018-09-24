@@ -45,6 +45,8 @@ public class HitboxTrigger : EntityTrigger
                     dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
                     dmgs_damageObj.SetPosition(GetPosition());
                     _ent.OnAttacked(dmgs_damageObj);
+                    if (CameraHandler.GetInstance().GetCameraType() == CameraHandler.CameraType.ThirdPerson)
+                        CameraHandler.GetInstance().GetCurrentCamera().GetComponentInChildren<TPCamera>().ShakeCamera(dmgs_damageObj.GetDamage());
                 }
                 else
                 {
@@ -55,6 +57,8 @@ public class HitboxTrigger : EntityTrigger
                         dmgs_damageObj.SetAttackedTag(other.gameObject.tag);
                         dmgs_damageObj.SetPosition(GetPosition());
                         _ent.OnAttacked(dmgs_damageObj, f_iframe_timer);
+                        if (CameraHandler.GetInstance().GetCameraType() == CameraHandler.CameraType.ThirdPerson)
+                            CameraHandler.GetInstance().GetCurrentCamera().GetComponentInChildren<TPCamera>().ShakeCamera(dmgs_damageObj.GetDamage());
                     }
                 }
             }

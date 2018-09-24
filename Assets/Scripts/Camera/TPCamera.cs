@@ -34,6 +34,9 @@ public class TPCamera : MonoBehaviour
 
 
     private Vector3
+        v3_tremble_position,
+        v3_original_position,
+
         v3_target_position,        //Storing of Target's position as to not call the value from other script too many times
         v3_camera_last_position;   //Storing of camera's last moved position  
 
@@ -50,7 +53,10 @@ public class TPCamera : MonoBehaviour
     [SerializeField]
     private float
         f_Xrestrict,
-        f_Xrestrict_up;
+        f_Xrestrict_up,
+
+        f_tremble,
+        f_tremble_recover;
 
     private bool
         b_is_zoomed;
@@ -71,6 +77,8 @@ public class TPCamera : MonoBehaviour
               v3_target_position.x - (((go_target.transform.forward).normalized).x * 7),
               v3_target_position.y + 10,
               v3_target_position.z - (((go_target.transform.forward).normalized).z * 7));
+
+        v3_original_position = v3_tremble_position = Vector3.zero;
 
         f_Xrestrict = 115;
         f_Xrestrict_up = 50;
@@ -247,9 +255,9 @@ public class TPCamera : MonoBehaviour
                             if (cg_canvas.alpha > 0)
                             {
                                 cg_canvas.alpha -= 0.05f;
-                            }                        
+                            }
                         }
-                      
+
 
                         float distance = 20.0f;
 
@@ -258,10 +266,10 @@ public class TPCamera : MonoBehaviour
                         Vector3 camPos = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
 
                         if (Physics.Raycast(v3_target_position, (v3_target_position - camPos), out hit, distance))
-                        {                
+                        {
                             if (q_prev_rotation != transform.rotation || b_is_zoomed)
                             {
-                                if(f_zoomed > 0)
+                                if (f_zoomed > 0)
                                     f_zoomed -= (f_speed_of_zooming * Time.unscaledDeltaTime);
                                 transform.position += (transform.position - v3_target_position).normalized * (f_speed_of_zooming * Time.unscaledDeltaTime);  //Performing the Zooming in feature by relying on the Mouse scroll wheel input, speed of zooming is customizable                              
 
@@ -280,8 +288,8 @@ public class TPCamera : MonoBehaviour
                                 {
                                     float plusor = -f_zoomed;
                                     f_zoomed += plusor;
-                                }                                                             
-                            }                
+                                }
+                            }
                         }
                         else
                         {
@@ -304,7 +312,7 @@ public class TPCamera : MonoBehaviour
                         }
 
                         //transform.LookAt(v3_target_position);
-                        go_parent.transform.LookAt(v3_target_position); 
+                        go_parent.transform.LookAt(v3_target_position);
 
                         go_parent.transform.RotateAround(v3_target_position, go_parent.transform.up, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * Input.GetAxis("Mouse X")));   //Rotating the camera around the target's position, with customizable rotation speed
                         go_parent.transform.RotateAround(v3_target_position, go_parent.transform.right, 30 * Time.unscaledDeltaTime * (f_speed_of_rotation * -Input.GetAxis("Mouse Y")));   //Rotating the camera around the target's position, with customizable rotation speed
@@ -345,7 +353,7 @@ public class TPCamera : MonoBehaviour
             Vector3 angle = go_parent.transform.rotation.eulerAngles;
             angle.z = 0;
             go_parent.transform.rotation = Quaternion.Euler(angle);
-    
+
             v3_camera_last_position = transform.position;   //Saving the Camera's last position into a Vect or3 variable
 
             Vector3 new_target_pos = new Vector3(go_target.transform.position.x, go_target.transform.position.y + f_up_distance, go_target.transform.position.z);
@@ -361,6 +369,45 @@ public class TPCamera : MonoBehaviour
         Vector3 dir = script_entityplayer.transform.position - transform.position;
         f_CurrentAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
+        if (f_tremble > 0)
+        {
+            //f_tremble -= Time.deltaTime;
+
+            //f_tremble = Mathf.Clamp(f_tremble, 0, Mathf.Infinity);
+
+            //transform.DOShakePosition(f_tremble, f_tremble);
+
+        //    if (v3_original_position.Equals(Vector3.zero))
+        //    {
+        //        v3_tremble_position = transform.position;
+        //        v3_original_position = transform.position;
+        //    }
+
+            //    f_tremble -= Time.deltaTime;
+
+            //    if (f_tremble <= 0)
+            //        f_tremble = 0;
+
+            //    if(v3_tremble_position.Equals(transform.position))
+            //        v3_tremble_position = v3_original_position + new Vector3(Random.Range(-f_tremble, f_tremble), Random.Range(-f_tremble, f_tremble), Random.Range(-f_tremble, f_tremble));
+            //    else
+            //    {
+            //        transform.position = Vector3.Lerp(transform.position, v3_tremble_position, 0.5f);
+            //    }
+            //}
+            //else
+            //{
+
+            //}
+
+        }
     }
     /*----------------------------------------------------------------------------------------------------------------------*/
+
+    public void ShakeCamera(float _damage)
+    {
+        f_tremble += _damage * 0.1f;
+        //go_parent.transform.DOComplete();
+        //go_parent.transform.DOShakeRotation(f_tremble, f_tremble);
+    }
 }
