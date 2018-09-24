@@ -44,7 +44,8 @@ public class SkillBeam : SkillBase
             }
             else
             {
-                ent_laser.NewEndPoint(new Vector3(go_caster.transform.forward.x * 10, go_caster.GetPosition().y + 10, go_caster.transform.forward.z * 10), 100);
+                ent_laser.NewEndPoint(go_caster.transform.forward, 100);
+                
             }
         }
 

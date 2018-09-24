@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74788ae476e02cf49b289cad87b44695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_minimap_icon: {fileID: 0}
 --- !u!120 &120939583861932604
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -67,7 +68,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 57a694192801899468e91b9390ec3b55, type: 2}
+  - {fileID: 2100000, guid: 31063d6b0ded8d2469b3fcbea97f3374, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

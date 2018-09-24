@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIBossLaser : AIBase {
+public class AIBossLaser : AIBase
+{
 
     private float
         f_range,
@@ -17,6 +18,7 @@ public class AIBossLaser : AIBase {
         type_target;
 
     private bool
+        b_is_charged,
         b_has_attacked;
 
     private int
@@ -48,6 +50,7 @@ public class AIBossLaser : AIBase {
         f_maxBeamCharge = 4.5f;
 
         b_has_attacked = false;
+        b_is_charged = false;
 
         script_boss = ent_main.GetComponent<EntityBoss>();
     }
@@ -68,6 +71,7 @@ public class AIBossLaser : AIBase {
         Debug.Log("end");
         ent_main.B_isAttacking = false;
         ent_main.B_isVulnerable = false;
+        b_is_charged = false;
         f_stateCooldownTimer = 0;
 
         script_boss.NextAttackState(EntityBoss.AttackState.NONE);
@@ -90,7 +94,6 @@ public class AIBossLaser : AIBase {
         // Breaking point
         if (f_stateTimer > f_maxStateTimer)
         {
-            Debug.Log("break ___" + f_maxStateTimer);
             f_stateCooldownTimer = 0;
             b_has_attacked = false;
             return false;
@@ -162,18 +165,18 @@ public class AIBossLaser : AIBase {
             if (b_has_attacked == false && script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_2)
             {
                 ////OnTargetBeam();
-                //for (int i = 0; i < i_numOfLasers; ++i)
-                //{
-                //    b_has_attacked = true;
-                //    AOEBeam(i);
-                //}
+                for (int i = 0; i < i_numOfLasers; ++i)
+                {
+                    AOEBeam(i);
+                }
                 b_has_attacked = true;
-                OnTargetBeam();
+                //OnTargetBeam();
 
             }
 
             if (f_beamChargeTimer > f_maxStateTimer)
             {
+
                 script_boss.NextChargeState(EntityBoss.ChargeState.END);
             }
 
@@ -182,23 +185,27 @@ public class AIBossLaser : AIBase {
 
         f_beamChargeTimer += Time.deltaTime;
 
-        if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_1)
+        if (script_boss.Enum_currentChargeState == EntityBoss.ChargeState.STAGE_1 && !b_is_charged)
         {
+            b_is_charged = true;
             Vector3 corePosition = ent_main.transform.position;
             corePosition.y += 7.5f;
-            ParticleSystem ps = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.BossCharging, null, corePosition, Vector3.one, Quaternion.identity.eulerAngles, 15.0f).GetComponent<ParticleSystem>();
+            ParticleSystem ps = ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.BossCharging, null, corePosition, Vector3.one, Quaternion.identity.eulerAngles, 4.0f).GetComponent<ParticleSystem>();
         }
 
         return true;
     }
 
-    private Vector3 RandomCircle(Vector3 _center, float _radius, float _angle) 
-     { // create random angle between 0 to 360 degrees
+    private Vector3 RandomCircle(Vector3 _center, float _radius, float _angle)
+    { // create random angle between 0 to 360 degrees
         Vector3 pos;
-        pos.x = _center.x + _radius * Mathf.Sin(_angle * Mathf.Deg2Rad);
+        pos.x = _center.x + (_radius * Mathf.Cos(_angle));
         //pos.y = _center.y + _radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.y = _center.y - 10.0f;
-        pos.z = _center.z + _radius * Mathf.Cos(_angle * Mathf.Deg2Rad);
+        // pos.y = _center.y - 10.0f;
+        pos.y = _center.y;
+        pos.z = _center.z + (_radius * Mathf.Sin(_angle));
+        Debug.Log((_radius * Mathf.Cos(_angle)));
+        Debug.Log((_radius * Mathf.Sin(_angle)));
         return pos;
     }
 
@@ -206,7 +213,8 @@ public class AIBossLaser : AIBase {
     {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-        var pos = RandomCircle(ent_main.transform.position, 10, _index * 90);
+        var pos = RandomCircle(ent_main.transform.position, 100, _index * 90);
+        //var pos = ent_main.transform.position + Random.insideUnitSphere * 90;
         Vector3 direction = pos - ent_main.transform.position;
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
