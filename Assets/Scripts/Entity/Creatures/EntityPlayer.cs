@@ -190,7 +190,7 @@ public class EntityPlayer : EntityLivingBase
         }
 
         St_stats.F_speed = St_stats.F_maxspeed;
-        i_combo = 1;
+        i_combo = 0;
         player_dir = DIRECTION.FRONT;
     }
 
@@ -251,7 +251,7 @@ public class EntityPlayer : EntityLivingBase
             return;
         }
 
-        i_combo = 1;
+        i_combo = 0;
     }
 
     private void DashingCheckFunction()
@@ -363,7 +363,7 @@ public class EntityPlayer : EntityLivingBase
                 if(cm_player_movement != null)
                 {
                     float 
-                        _distance_near = 2,
+                        _distance_near = 1,
                         _distance_away = 10,
                         _angle = 25;
 
@@ -377,7 +377,7 @@ public class EntityPlayer : EntityLivingBase
                     {
                         foreach(GameObject go in ObjectPool.GetInstance().GetActiveEntityObjects())
                         {
-                            if (Vector3.Angle(transform.forward, (go.transform.position - GetPosition()).normalized) < _angle)
+                            if (Vector3.Angle(transform.forward, (go.transform.position - GetPosition()).normalized) < _angle && !go.GetComponent<EntityLivingBase>().IsDead())
                             {
                                 if (go.CompareTag("Enemy") && go_target == null && Vector3.Distance(go.transform.position, GetPosition()) > _distance_near && Vector3.Distance(go.transform.position, GetPosition()) < _distance_away)
                                 {
@@ -394,16 +394,20 @@ public class EntityPlayer : EntityLivingBase
 
                     if (go_target != null)
                     {
-                        if (Vector3.Distance(go_target.transform.position, GetPosition()) > _distance_near)
+                        if (Vector3.Distance(go_target.transform.position, GetPosition()) > _distance_near && i_combo != 1)
                         {
-                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, Vector3.Distance(go_target.transform.position, GetPosition()) * 70);
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, Vector3.Distance(go_target.transform.position, GetPosition()) * 8000 * Time.fixedUnscaledDeltaTime);
                             i_combo = 2;
                         }
                         else
                         {
-                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 0.1f);
+                            cm_player_movement.Dash((new Vector3(go_target.transform.position.x, GetPosition().y, go_target.transform.position.z) - GetPosition()).normalized, 0.1f * Time.fixedUnscaledDeltaTime);
                             i_combo = 1;
                         }
+                    }
+                    else
+                    {
+                        i_combo = 1;    
                     }
                 }
             }
@@ -411,12 +415,6 @@ public class EntityPlayer : EntityLivingBase
 
         if (!b_is_charging_shot && !An_animator.GetBool("IsAttacking"))
         {
-            if (i_combo == 3)
-            {
-                player_state = State.HEAVY_ATTACK;
-                An_animator.SetBool("IsAttacking", true);
-            }
-            else
                 player_state = State.IDLE;
         }
     }
@@ -645,6 +643,8 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", true);
                 An_animator.SetBool("IsAttacking", false);
+                An_animator.SetBool("IsMelee", false);
+                An_animator.SetBool("IsSummoning", false);
                 break;
 
             case State.IDLE:

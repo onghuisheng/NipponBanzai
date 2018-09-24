@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StraightBullet : EntityProjectiles
+public class Sword_Projectile : EntityProjectiles
 {
     private float f_lifeElapse;
 

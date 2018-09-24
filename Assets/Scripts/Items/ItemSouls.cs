@@ -22,7 +22,7 @@ public class ItemSouls : Item
     public override void OnGround(EntityPickUps _go)
     {
         _go.DoFloating();
-        _go.DoSucking(5, 1f);
+        _go.DoSucking(5, 5f);
         _go.DoSpawnParticle(ParticleHandler.ParticleType.Souls, Vector3.zero, Vector3.one, new Vector3(-90, 0, 0));
     }
 

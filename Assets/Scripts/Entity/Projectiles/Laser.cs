@@ -67,13 +67,8 @@ public class Laser : EntityProjectiles
         lr_line = GetComponent<LineRenderer>();
         lr_line.SetPosition(0, v3_startPos);
         lr_line.SetPosition(1, v3_currEndPos);
-        lr_line.startWidth = 0.2f;
-        lr_line.endWidth = 1f;
-    }
-
-    // Use this for initialization
-    protected override void Start()
-    {
+        lr_line.startWidth = _size.x;
+        lr_line.endWidth = _size.x;
     }
 
     // Update is called once per frame
@@ -134,7 +129,8 @@ public class Laser : EntityProjectiles
 
             CheckForObjectsInPath();
 
-            //lr_line.SetPosition(0, v3_startPos);
+        //lr_line.SetPosition(0, v3_startPos);     
+
             lr_line.SetPosition(1, newEnd);
         //}
     }
@@ -165,5 +161,10 @@ public class Laser : EntityProjectiles
         dir = Quaternion.Euler(angles) * dir; // rotate it
         point = dir + pivot; // calculate rotated point
         return point;
+    }
+
+    public void NewEndPoint(Vector3 _newdir, float _range)
+    {
+        v3_endPos = _newdir * _range; //30.0f is the range for now.
     }
 }

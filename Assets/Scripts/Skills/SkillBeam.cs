@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SkillBeam : SkillBase
 {
-
+    private Laser
+        ent_laser;
 
     public override void SetUpSkill()
     {
@@ -35,11 +36,24 @@ public class SkillBeam : SkillBase
         f_timer += Time.deltaTime;
 
         if (f_timer > 1.5f)
-            ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>()
-                .SetUpProjectile(0.5f, go_caster.St_stats.F_damage, 1.0f, 10.0f, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 2, go_caster.GetPosition().z), new Vector3(go_caster.transform.forward.x * 10, go_caster.GetPosition().y + 12, go_caster.transform.forward.z * 10), Vector3.one * 2, go_caster.gameObject);
+        {
+            if (ent_laser == null)
+            {
+                ent_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
+                ent_laser.SetUpProjectile(100000, go_caster.St_stats.F_damage, 10.0f, 100, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 2, go_caster.GetPosition().z), new Vector3(go_caster.transform.forward.x, go_caster.GetPosition().y, go_caster.transform.forward.z), Vector3.one, go_caster.gameObject);         
+            }
+            else
+            {
+                ent_laser.NewEndPoint(new Vector3(go_caster.transform.forward.x * 10, go_caster.GetPosition().y + 10, go_caster.transform.forward.z * 10), 100);
+            }
+        }
 
-        if(f_timer > 100)
+        if (f_timer > 20)
+        {
+            ent_laser.gameObject.SetActive(false);
+            ent_laser = null;
             go_caster.An_animator.SetBool("IsSummoning", false);
+        }
 
     }
 

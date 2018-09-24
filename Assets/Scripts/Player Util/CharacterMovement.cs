@@ -94,13 +94,18 @@ public class CharacterMovement : MonoBehaviour
 
                     case EntityPlayer.TARGET_STATE.NOT_AIMING:
                         {
+                            Vector3 _speed = Vector3.zero;
+                            Vector3 _max_speed = Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed;
+
                             if (Input.GetKey(KeyCode.A))
                             {
                                 v3_player_new_dir = -new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                                _speed = _max_speed;
                             }
                             else if (Input.GetKey(KeyCode.D))
                             {
                                 v3_player_new_dir = new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized;
+                                _speed = _max_speed;
                             }
 
                             if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
@@ -109,10 +114,13 @@ public class CharacterMovement : MonoBehaviour
                                 {
                                     //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
                                     v3_player_new_dir += new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                    _speed = _max_speed;
+
                                 }
                                 else if (Input.GetKey(KeyCode.S))
                                 {
                                     v3_player_new_dir += -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                    _speed = _max_speed;
                                 }
                             }
                             else
@@ -121,10 +129,12 @@ public class CharacterMovement : MonoBehaviour
                                 {
                                     //transform.position += Time.deltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed * 2;
                                     v3_player_new_dir = new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                    _speed = _max_speed;
                                 }
                                 else if (Input.GetKey(KeyCode.S))
                                 {
                                     v3_player_new_dir = -new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized;
+                                    _speed = _max_speed;
                                 }
                             }
 
@@ -140,7 +150,7 @@ public class CharacterMovement : MonoBehaviour
                             }
 
                             if (b_moving && !b_opposite)
-                                Component_Player.Rb_rigidbody.MovePosition(transform.position + Time.unscaledDeltaTime * (transform.forward).normalized * Component_Player.GetStats().F_speed);
+                                Component_Player.Rb_rigidbody.MovePosition(transform.position + _speed);
                         }
                         break;
 
@@ -183,9 +193,8 @@ public class CharacterMovement : MonoBehaviour
                 case KeyCode.D:
                     Dash(new Vector3(go_camera.transform.right.x, Component_Player.transform.forward.y, go_camera.transform.right.z).normalized, f_speed_multiplier);
                     break;
-
+                        
                 default:
-                    Dash(new Vector3(go_camera.transform.forward.x, Component_Player.transform.forward.y, go_camera.transform.forward.z).normalized, f_speed_multiplier);
                     break;
             }
         }
