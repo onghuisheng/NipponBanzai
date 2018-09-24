@@ -53,13 +53,14 @@ public class ObjectPool : Singleton<ObjectPool>
     private List<GameObject> enviroment_pool_list = new List<GameObject>();
     private List<GameObject> indicator_pool_list = new List<GameObject>();
     private GameObject go_player_instance;
+    private GameObject go_spawnpoint;
 
     //SETTING UP THE SPAWNER
     protected override void Awake()
     {
         base.Awake();
 
-        GameObject spawnPoint = GameObject.FindWithTag("Respawn");
+        go_spawnpoint = GameObject.FindWithTag("Respawn");
 
         for (int entity_list_count = 0; entity_list_count < entity_list.Length; ++entity_list_count)
         {
@@ -67,8 +68,8 @@ public class ObjectPool : Singleton<ObjectPool>
             {
                 GameObject obj = null;
 
-                if (spawnPoint != null)
-                    obj = Instantiate(entity_list[entity_list_count], spawnPoint.transform.position, Quaternion.identity);
+                if (go_spawnpoint != null)
+                    obj = Instantiate(entity_list[entity_list_count], go_spawnpoint.transform.position, Quaternion.identity);
                 else
                     obj = Instantiate(entity_list[entity_list_count]);
 
@@ -385,7 +386,13 @@ public class ObjectPool : Singleton<ObjectPool>
             }
         }
 
-        GameObject obj = Instantiate(entity_list[(int)_type]);
+        GameObject obj = null;
+        
+        if (go_spawnpoint != null)
+            obj = Instantiate(entity_list[(int)_type], go_spawnpoint.transform.position, Quaternion.identity);
+        else
+            obj = Instantiate(entity_list[(int)_type]);
+
         obj.SetActive(false);
         entity_pool_list.Add(obj);
         obj.transform.parent = gameObject.transform;
