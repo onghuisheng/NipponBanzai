@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23827223191760578}
   - component: {fileID: 136570555099049108}
   - component: {fileID: 54120293949905124}
-  - component: {fileID: 114539744722351374}
+  - component: {fileID: 114714467026421682}
   m_Layer: 0
   m_Name: SwordProjectile
   m_TagString: Projectile
@@ -37,13 +37,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407408479559994}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23827223191760578
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -101,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114539744722351374
+--- !u!114 &114714467026421682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1407408479559994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0427cf243c2f7a46abbd58ba0290c36, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ea6e2bd8f8ffff468db7d3bfc13464b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   img_minimap_icon: {fileID: 0}
