@@ -59,11 +59,19 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         base.Awake();
 
+        GameObject spawnPoint = GameObject.FindWithTag("Respawn");
+
         for (int entity_list_count = 0; entity_list_count < entity_list.Length; ++entity_list_count)
         {
             for (int i = 0; i < 10; ++i)
             {
-                GameObject obj = Instantiate(entity_list[entity_list_count]);
+                GameObject obj = null;
+
+                if (spawnPoint != null)
+                    obj = Instantiate(entity_list[entity_list_count], spawnPoint.transform.position, Quaternion.identity);
+                else
+                    obj = Instantiate(entity_list[entity_list_count]);
+
                 obj.SetActive(false);
                 entity_pool_list.Add(obj);
 

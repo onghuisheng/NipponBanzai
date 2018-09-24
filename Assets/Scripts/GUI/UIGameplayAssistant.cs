@@ -27,7 +27,7 @@ public class UIGameplayAssistant : MonoBehaviour
     float m_PrevPlayerHP;
     float m_PrevPlayerMP;
 
-    bool m_SkillsPopulated = false;
+    bool m_IsInitialized = false;
     float m_SkillsIconGap; // Length of the gap between the skill icons
 
     // Use this for initialization
@@ -37,11 +37,6 @@ public class UIGameplayAssistant : MonoBehaviour
             m_FadeTexture.transform.parent.gameObject.SetActive(true);
 
         m_FadeTexture.DOFade(0, 1.5f);
-
-        m_Player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
-        m_PrevPlayerHP = m_Player.St_stats.F_health;
-        m_PrevPlayerMP = m_Player.St_stats.F_mana;
-
     }
 
     void PopulateSkillIcons()
@@ -71,6 +66,16 @@ public class UIGameplayAssistant : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!m_IsInitialized)
+        {
+            m_Player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
+            m_PrevPlayerHP = m_Player.St_stats.F_health;
+            m_PrevPlayerMP = m_Player.St_stats.F_mana;
+
+            PopulateSkillIcons();
+            m_IsInitialized = true;
+        }
+
         // Subtle tweening of health/mana bar when its values are changed
         if (m_Player.St_stats.F_health != m_PrevPlayerHP)
         {
@@ -111,12 +116,6 @@ public class UIGameplayAssistant : MonoBehaviour
         m_Minimap.transform.rotation = Quaternion.Euler(0, 0, TPCamera.f_CurrentAngle);
 
         // Skill icons movement
-        if (!m_SkillsPopulated)
-        {
-            PopulateSkillIcons();
-            m_SkillsPopulated = true;
-        }
-
         if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))
         {
             RectTransform holderTransform = m_SkillHolder.GetComponent<RectTransform>();
