@@ -672,6 +672,12 @@ public class EntityPlayer : EntityLivingBase
 
         An_animator.SetFloat("MoveSpeed", GetStats().F_speed / GetStats().F_maxspeed);
         An_animator.SetInteger("Combo", i_combo);
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            CinematicPathing.GetPathWithName("LookAroundBoss").DoCinematicPath();
+        }
+
     }
 
     protected override void LateUpdate()

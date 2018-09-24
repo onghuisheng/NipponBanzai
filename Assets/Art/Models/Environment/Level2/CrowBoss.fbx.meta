@@ -1,0 +1,271 @@
+fileFormatVersion: 2
+guid: 03e4ebb93f50135498c9067ad3451615
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: EV2_Beak1
+    100004: EV2_Beak2
+    100006: EV2_Chest
+    100008: EV2_Head
+    100010: EV2_Jaw1
+    100012: EV2_Jaw2
+    100014: EV2_LAnkle
+    100016: EV2_LFoot
+    100018: EV2_LHind
+    100020: EV2_LKnee
+    100022: EV2_LLeg
+    100024: EV2_LShoulder
+    100026: EV2_LThigh
+    100028: EV2_LToe
+    100030: EV2_LWing1
+    100032: EV2_LWing2
+    100034: EV2_LWing3
+    100036: EV2_LWing4
+    100038: EV2_LWing5
+    100040: EV2_LWingbone1
+    100042: EV2_LWingbone10
+    100044: EV2_LWingbone11
+    100046: EV2_LWingbone12
+    100048: EV2_LWingbone13
+    100050: EV2_LWingbone14
+    100052: EV2_LWingbone2
+    100054: EV2_LWingbone3
+    100056: EV2_LWingbone4
+    100058: EV2_LWingbone5
+    100060: EV2_LWingbone6
+    100062: EV2_LWingbone7
+    100064: EV2_LWingbone8
+    100066: EV2_LWingbone9
+    100068: EV2_MOuth
+    100070: EV2_Neck
+    100072: EV2_Pelvis
+    100074: EV2_RAnkle
+    100076: EV2_RFoot
+    100078: EV2_RHind
+    100080: EV2_RKnee
+    100082: EV2_RLeg
+    100084: EV2_RShoulder
+    100086: EV2_RThigh
+    100088: EV2_RToe
+    100090: EV2_RWing1
+    100092: EV2_RWing2
+    100094: EV2_RWing3
+    100096: EV2_RWing4
+    100098: EV2_RWing5
+    100100: EV2_RWingbone1
+    100102: EV2_RWingbone10
+    100104: EV2_RWingbone11
+    100106: EV2_RWingbone12
+    100108: EV2_RWingbone2
+    100110: EV2_RWingbone3
+    100112: EV2_RWingbone4
+    100114: EV2_RWingbone5
+    100116: EV2_RWingbone6
+    100118: EV2_RWingbone7
+    100120: EV2_RWingbone8
+    100122: EV2_RWingbone9
+    100124: EV2_Tail
+    100126: EV2_TailBone
+    100128: EV2_TailLeft1
+    100130: EV2_TailLeft2
+    100132: EV2_TailLeft3
+    100134: EV2_TailLeft4
+    100136: EV2_TailLeft5
+    100138: EV2_TailLeft6
+    100140: EV2_TailRight1
+    100142: EV2_TailRight2
+    100144: EV2_TailRight3
+    100146: EV2_TailRight5
+    100148: joint64EV2_TailRight4
+    100150: pCube6
+    400000: //RootNode
+    400002: EV2_Beak1
+    400004: EV2_Beak2
+    400006: EV2_Chest
+    400008: EV2_Head
+    400010: EV2_Jaw1
+    400012: EV2_Jaw2
+    400014: EV2_LAnkle
+    400016: EV2_LFoot
+    400018: EV2_LHind
+    400020: EV2_LKnee
+    400022: EV2_LLeg
+    400024: EV2_LShoulder
+    400026: EV2_LThigh
+    400028: EV2_LToe
+    400030: EV2_LWing1
+    400032: EV2_LWing2
+    400034: EV2_LWing3
+    400036: EV2_LWing4
+    400038: EV2_LWing5
+    400040: EV2_LWingbone1
+    400042: EV2_LWingbone10
+    400044: EV2_LWingbone11
+    400046: EV2_LWingbone12
+    400048: EV2_LWingbone13
+    400050: EV2_LWingbone14
+    400052: EV2_LWingbone2
+    400054: EV2_LWingbone3
+    400056: EV2_LWingbone4
+    400058: EV2_LWingbone5
+    400060: EV2_LWingbone6
+    400062: EV2_LWingbone7
+    400064: EV2_LWingbone8
+    400066: EV2_LWingbone9
+    400068: EV2_MOuth
+    400070: EV2_Neck
+    400072: EV2_Pelvis
+    400074: EV2_RAnkle
+    400076: EV2_RFoot
+    400078: EV2_RHind
+    400080: EV2_RKnee
+    400082: EV2_RLeg
+    400084: EV2_RShoulder
+    400086: EV2_RThigh
+    400088: EV2_RToe
+    400090: EV2_RWing1
+    400092: EV2_RWing2
+    400094: EV2_RWing3
+    400096: EV2_RWing4
+    400098: EV2_RWing5
+    400100: EV2_RWingbone1
+    400102: EV2_RWingbone10
+    400104: EV2_RWingbone11
+    400106: EV2_RWingbone12
+    400108: EV2_RWingbone2
+    400110: EV2_RWingbone3
+    400112: EV2_RWingbone4
+    400114: EV2_RWingbone5
+    400116: EV2_RWingbone6
+    400118: EV2_RWingbone7
+    400120: EV2_RWingbone8
+    400122: EV2_RWingbone9
+    400124: EV2_Tail
+    400126: EV2_TailBone
+    400128: EV2_TailLeft1
+    400130: EV2_TailLeft2
+    400132: EV2_TailLeft3
+    400134: EV2_TailLeft4
+    400136: EV2_TailLeft5
+    400138: EV2_TailLeft6
+    400140: EV2_TailRight1
+    400142: EV2_TailRight2
+    400144: EV2_TailRight3
+    400146: EV2_TailRight5
+    400148: joint64EV2_TailRight4
+    400150: pCube6
+    2100000: lambert2
+    4300000: pCube6
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pCube6
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
