@@ -199,13 +199,12 @@ public class AIBossLaser : AIBase
     private Vector3 RandomCircle(Vector3 _center, float _radius, float _angle)
     { // create random angle between 0 to 360 degrees
         Vector3 pos;
-        pos.x = _center.x + (_radius * Mathf.Cos(_angle));
+        pos.x = _center.x + (_radius * Mathf.Cos(_angle * Mathf.Deg2Rad));
         //pos.y = _center.y + _radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         // pos.y = _center.y - 10.0f;
         pos.y = _center.y;
-        pos.z = _center.z + (_radius * Mathf.Sin(_angle));
-        Debug.Log((_radius * Mathf.Cos(_angle)));
-        Debug.Log((_radius * Mathf.Sin(_angle)));
+        pos.z = _center.z + (_radius * Mathf.Sin(_angle * Mathf.Deg2Rad));
+        // Debug.Log(_angle);
         return pos;
     }
 
@@ -213,7 +212,7 @@ public class AIBossLaser : AIBase
     {
         script_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
 
-        var pos = RandomCircle(ent_main.transform.position, 100, _index * 90);
+        var pos = RandomCircle(ent_main.transform.position, 10, _index * 90);
         //var pos = ent_main.transform.position + Random.insideUnitSphere * 90;
         Vector3 direction = pos - ent_main.transform.position;
         Vector3 corePosition = ent_main.transform.position;

@@ -55,7 +55,7 @@ public class Laser : EntityProjectiles
 
         SetPosition(_start);
         v3_startPos = _start;
-        v3_endPos = _direction.normalized * _range; //30.0f is the range for now.
+        v3_endPos = _start + (_direction * _range); //30.0f is the range for now.
         v3_currEndPos = _start;
         f_lifeElapse = 0;
         f_incrementor = 0;
