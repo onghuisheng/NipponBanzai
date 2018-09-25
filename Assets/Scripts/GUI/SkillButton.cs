@@ -49,7 +49,7 @@ public class SkillButton : MonoBehaviour
         color.a = 0;
         m_SkillCooldown.color = color;
 
-        m_SkillCooldown.DOFade(0.8f, 0.25f).OnComplete(() =>
+        m_SkillCooldown.DOFade(0.8f, 0.1f).OnComplete(() =>
         {
             m_SkillCooldown.DOFillAmount(0, m_AssignedSkill.F_MaxCooldown).SetEase(Ease.Linear);
         });
