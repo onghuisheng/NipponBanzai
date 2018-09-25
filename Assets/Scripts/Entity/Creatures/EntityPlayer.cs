@@ -681,7 +681,7 @@ public class EntityPlayer : EntityLivingBase
                 if (An_animator.GetBool("Recall") == false)
                 {
                     An_animator.SetBool("Recall", true);
-                    transform.DOMoveY(transform.position.y + 5, 4).OnComplete(() =>
+                    transform.DOMoveY(transform.position.y + 2, 4).OnComplete(() =>
                     {
                         SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
                     });
