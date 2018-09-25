@@ -156,24 +156,35 @@ public class EntityPlayer : EntityLivingBase
 
         if (GetPlayerTargetState() == TARGET_STATE.AIMING)
         {
-            if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
+            if (GetInventory().GetCurrSkill() != null)
             {
-                float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
-                if (_manaused >= 0)
-                {
-                    St_stats.F_mana = _manaused;
-                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
-                }
-                else
-                {
-                    St_stats.F_mana = 0;
-                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
-                }
+                if (Input.GetKeyDown(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillPressed();
+                if (Input.GetKeyUp(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillReleased();
 
-                An_animator.SetBool("IsSummoning", true);
-                An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
-                player_state = State.SUMMONING;
-                return;
+                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown())
+                {
+                    float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
+
+                    GetInventory().GetCurrSkill().OnSkillBegin();
+
+                    if (_manaused >= 0)
+                    {
+                        St_stats.F_mana = _manaused;
+                        GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
+                    }
+                    else
+                    {
+                        St_stats.F_mana = 0;
+                        GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
+                    }
+
+                    An_animator.SetBool("IsSummoning", true);
+                    An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
+                    player_state = State.SUMMONING;
+                    return;
+                }
             }
         }
         else
@@ -224,24 +235,35 @@ public class EntityPlayer : EntityLivingBase
 
         if (GetPlayerTargetState() == TARGET_STATE.AIMING)
         {
-            if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill() != null && GetInventory().GetCurrSkill().IsUnderCooldown())
+            if (GetInventory().GetCurrSkill() != null)
             {
-                float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
-                if (_manaused >= 0)
+                if (Input.GetKeyDown(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillPressed();
+                if (Input.GetKeyUp(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillReleased();
+                
+                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown())
                 {
-                    St_stats.F_mana = _manaused;
-                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
-                }
-                else
-                {
-                    St_stats.F_mana = 0;
-                    GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
-                }
+                    float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
 
-                An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
-                An_animator.SetBool("IsSummoning", true);
-                player_state = State.SUMMONING;
-                return;
+                    GetInventory().GetCurrSkill().OnSkillBegin();
+
+                    if (_manaused >= 0)
+                    {
+                        St_stats.F_mana = _manaused;
+                        GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount());
+                    }
+                    else
+                    {
+                        St_stats.F_mana = 0;
+                        GetInventory().GetCurrSkill().StartSkill(this, GetInventory().GetCurrSkill().GetManaAmount() + _manaused);
+                    }
+
+                    An_animator.SetInteger("SummoningID", GetInventory().GetCurrSkill().I_id);
+                    An_animator.SetBool("IsSummoning", true);
+                    player_state = State.SUMMONING;
+                    return;
+                }
             }
         }
         else
@@ -453,6 +475,11 @@ public class EntityPlayer : EntityLivingBase
 
     private void SummoningCheckFunction()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse2))
+            GetInventory().GetCurrSkill().OnSkillPressed();
+        if (Input.GetKeyUp(KeyCode.Mouse2))
+            GetInventory().GetCurrSkill().OnSkillReleased();
+
         if (!An_animator.GetBool("IsSummoning"))
         {
             GetInventory().GetCurrSkill().EndSkill();
@@ -681,9 +708,12 @@ public class EntityPlayer : EntityLivingBase
                 if (An_animator.GetBool("Recall") == false)
                 {
                     An_animator.SetBool("Recall", true);
-                    transform.DOMoveY(transform.position.y + 2, 4).OnComplete(() =>
+                    transform.DOMoveY(transform.position.y + 0.5f, 2).OnComplete(() =>
                     {
-                        SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
+                        FindObjectOfType<UIGameplayAssistant>().TransitOut(() =>
+                        {
+                            SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
+                        });
                     });
                 }
 

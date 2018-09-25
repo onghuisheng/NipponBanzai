@@ -14,6 +14,7 @@ public class SkillFlash : SkillBase
         i_id = 0;
 
         f_cooldown = 0;
+        f_maxcooldown = 10;
         f_timer = 0;
     }
 
@@ -47,7 +48,8 @@ public class SkillFlash : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = 1;
+        f_cooldown = f_maxcooldown;
         f_timer = 0;
+        OnSkillEnd();
     }
 }

@@ -17,6 +17,7 @@ public class SkillBeam : SkillBase
         i_id = 2;
 
         f_cooldown = 0;
+        f_maxcooldown = 10;
         f_timer = 0;
     }
 
@@ -60,7 +61,8 @@ public class SkillBeam : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = 10;
+        f_cooldown = f_maxcooldown;
         f_timer = 0;
+        OnSkillEnd();
     }
 }

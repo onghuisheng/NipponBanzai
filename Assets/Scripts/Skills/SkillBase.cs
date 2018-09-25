@@ -18,7 +18,8 @@ public abstract class SkillBase
         f_mana_amount,
         f_mana_amount_used,
         f_timer,
-        f_cooldown;
+        f_cooldown,
+        f_maxcooldown;
 
     protected int
         i_id;
@@ -29,11 +30,17 @@ public abstract class SkillBase
     protected TYPE
         type_style;
 
-    public int I_id
-    {
-        get
-        {
+    protected System.Action act_OnSkillPressed, act_OnSkillReleased, act_OnSkillBegin, act_OnSkillEnd;
+
+    public int I_id {
+        get {
             return i_id;
+        }
+    }
+
+    public float F_MaxCooldown {
+        get {
+            return f_maxcooldown;
         }
     }
 
@@ -42,6 +49,15 @@ public abstract class SkillBase
             return s_name;
         }
     }
+
+    public void RegisterOnSkillPressed(System.Action action) { act_OnSkillPressed += action; }
+    public void OnSkillPressed() { if (act_OnSkillPressed != null) act_OnSkillPressed.Invoke(); }
+    public void RegisterOnSkillReleased(System.Action action) { act_OnSkillReleased += action; }
+    public void OnSkillReleased() { if (act_OnSkillReleased != null) act_OnSkillReleased.Invoke(); }
+    public void RegisterOnSkillBegin(System.Action action) { act_OnSkillBegin += action; }
+    public void OnSkillBegin() { if (act_OnSkillBegin != null) act_OnSkillBegin.Invoke(); }
+    public void RegisterOnSkillEnd(System.Action action) { act_OnSkillEnd += action; }
+    public void OnSkillEnd() { if (act_OnSkillEnd != null) act_OnSkillEnd.Invoke(); }
 
     public abstract void SetUpSkill();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 
@@ -39,6 +40,11 @@ public class UIGameplayAssistant : MonoBehaviour
         m_FadeTexture.DOFade(0, 1.5f);
     }
 
+    public void TransitOut(System.Action onComplete = null)
+    {
+        m_FadeTexture.DOFade(1, 1.5f).OnComplete(() => { if (onComplete != null) onComplete(); });
+    }
+
     void PopulateSkillIcons()
     {
         foreach (SkillBase skill in m_Player.GetInventory().GetAllSkills())
@@ -47,6 +53,10 @@ public class UIGameplayAssistant : MonoBehaviour
             GameObject go = Instantiate(m_SkillButtonPrefab, m_SkillHolder.transform);
             go.transform.Find("Icon").GetComponent<Image>().sprite = FindSpriteWithName(skill.S_Name);
             go.name = skill.S_Name;
+            go.GetComponent<SkillButton>().RegisterSkill(skill);
+            skill.RegisterOnSkillPressed(()=> { go.GetComponent<SkillButton>().OnSkillPressed(); });
+            skill.RegisterOnSkillReleased(() => { go.GetComponent<SkillButton>().OnSkillReleased(); });
+            skill.RegisterOnSkillBegin(() => { go.GetComponent<SkillButton>().OnSkillBegin(); });
         }
 
         var hLayout = m_SkillHolder.GetComponent<HorizontalLayoutGroup>();

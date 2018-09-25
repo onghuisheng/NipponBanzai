@@ -30,6 +30,7 @@ public class SkillSwordSummoning : SkillBase
         i_id = 1;
 
         f_cooldown = 0;
+        f_maxcooldown = 1;
         f_timer = 0;
 
         list_swords = new List<GameObject>();
@@ -99,7 +100,8 @@ public class SkillSwordSummoning : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = 1;
+        f_cooldown = f_maxcooldown;
         f_timer = 0;
+        OnSkillEnd();
     }
 }
