@@ -5,6 +5,8 @@ using UnityEngine;
 public class Sword_Projectile : EntityProjectiles
 {
     private float f_lifeElapse;
+    private EntityLivingBase
+        go_target;
 
     public void SetUpProjectile(GameObject _firer, Vector3 _position, Vector3 _direction, float _lifetime, float _damage, float _speed, Vector3 _size)
     {
@@ -13,6 +15,8 @@ public class Sword_Projectile : EntityProjectiles
         f_lifeElapse = 0;
         transform.rotation = Quaternion.Euler(0, 0, -90); // Imagine a capsule lying on the floor
         transform.Rotate(Mathf.Atan2(V3_dir.z, V3_dir.x) * Mathf.Rad2Deg, 0, 0); // Face the capsule to the direction
+
+        go_target = null;
     }
 
     protected override void Start()
@@ -29,11 +33,32 @@ public class Sword_Projectile : EntityProjectiles
         if (Go_owner == null || f_lifeElapse >= F_lifetime)
         {
             gameObject.SetActive(false);
+            go_target = null;
             return;
         }
         else
         {
-            transform.position += (V3_dir * Time.deltaTime * F_speed);
+
+            if (go_target != null)
+            {                
+                transform.LookAt(go_target.gameObject.transform);
+                transform.position += (transform.forward * Time.deltaTime * F_speed);
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 90, transform.localEulerAngles.y, transform.localEulerAngles.z);
+
+                if (go_target.IsDead())
+                    go_target = null;
+            }
+            else
+            {
+                foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(Go_owner.transform.position, 10, typeof(EntityLivingBase)))
+                {
+                    if(!go.CompareTag(Go_owner.tag))
+                    {
+                        go_target = go.GetComponent<EntityLivingBase>();
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -43,7 +68,13 @@ public class Sword_Projectile : EntityProjectiles
         {
             SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, transform.localScale, transform.position, transform.rotation, 0.1f);
             gameObject.SetActive(false);
+            go_target = null;
         }
     }
 
+
+    public bool HasTarget()
+    {
+        return go_target != null;
+    }
 }
