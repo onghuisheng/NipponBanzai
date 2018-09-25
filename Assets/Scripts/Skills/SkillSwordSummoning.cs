@@ -10,14 +10,20 @@ public class SkillSwordSummoning : SkillBase
     private bool
         b_spawn_sword;
 
+    private EntityLivingBase
+        go_target;
+
+    private int
+        i_prev_list_count;
+
     private Vector3[]
         ar_postion = new Vector3[5] 
         {
-            new Vector3(0, 4, 0),
-            new Vector3(4, 4, 0),
-            new Vector3(0, 4, -4),
-            new Vector3(0, 4, 4),
-            new Vector3(-4, 4, 0)
+            new Vector3(0, 4, -3),
+            new Vector3(2, 3, -2),
+            new Vector3(4, 2, -1),
+            new Vector3(-2, 3, -2),
+            new Vector3(-4, 2, -1)
         };
 
     public override void SetUpSkill()
@@ -49,6 +55,8 @@ public class SkillSwordSummoning : SkillBase
 
             b_spawn_sword = false;
         }
+
+        go_target = null;
     }
 
     public override void UpdateSkill()
@@ -61,7 +69,7 @@ public class SkillSwordSummoning : SkillBase
             {
                 float _temp = (f_mana_amount_used * 0.1f);
                 GameObject _proj = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.SWORD_PROJECTILE);
-                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, 50, f_mana_amount_used, _temp, new Vector3((_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f), Vector3.one);
+                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f), Vector3.one);
                 _proj.transform.position = new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z);
                 list_swords.Add(_proj);
             }
@@ -81,10 +89,47 @@ public class SkillSwordSummoning : SkillBase
 
             if (!_temp.HasTarget())
             {
-                list_swords[i].transform.position = Vector3.Lerp(list_swords[i].transform.position, go_caster.GetPosition() + ar_postion[i], 0.1f);
+                Vector3 _newpos = go_caster.GetPosition();
+                //forward
+                _newpos += go_caster.Rb_rigidbody.transform.forward * ar_postion[i].z;
+                //right
+                _newpos += go_caster.Rb_rigidbody.transform.right * ar_postion[i].x;
+                //up
+                _newpos += go_caster.Rb_rigidbody.transform.up * ar_postion[i].y;
+
+
+                list_swords[i].transform.position = Vector3.Lerp(list_swords[i].transform.position, _newpos, 0.1f);
+
                 list_swords[i].transform.localEulerAngles = Vector3.Lerp(list_swords[i].transform.localEulerAngles, Vector3.zero, 0.1f);
             }
         }
+
+        if (go_target != null)
+        {
+            if (go_target.IsDead() || !go_target.gameObject.activeSelf || i_prev_list_count != list_swords.Count)
+                go_target = null;
+        }
+
+        if (go_target == null && go_caster != null)
+        {
+            if (list_swords.Count > 0)
+            {
+                foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(go_caster.transform.position, 10, typeof(EntityLivingBase)))
+                {
+                    if (!go.CompareTag(go_caster.tag))
+                    {
+                        go_target = go.GetComponent<EntityLivingBase>();
+                        if (go_target.B_isAIEnabled)
+                        {
+                            list_swords[Random.Range(0, list_swords.Count - 1)].GetComponent<Sword_Projectile>().SetTarget(go_target);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        i_prev_list_count = list_swords.Count;
     }
 
     public override void RunSkill()

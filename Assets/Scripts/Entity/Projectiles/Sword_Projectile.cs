@@ -38,7 +38,6 @@ public class Sword_Projectile : EntityProjectiles
         }
         else
         {
-
             if (go_target != null)
             {                
                 transform.LookAt(go_target.gameObject.transform);
@@ -47,17 +46,6 @@ public class Sword_Projectile : EntityProjectiles
 
                 if (go_target.IsDead())
                     go_target = null;
-            }
-            else
-            {
-                foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(Go_owner.transform.position, 10, typeof(EntityLivingBase)))
-                {
-                    if(!go.CompareTag(Go_owner.tag))
-                    {
-                        go_target = go.GetComponent<EntityLivingBase>();
-                        break;
-                    }
-                }
             }
         }
     }
@@ -72,6 +60,10 @@ public class Sword_Projectile : EntityProjectiles
         }
     }
 
+    public void SetTarget(EntityLivingBase _target)
+    {
+        go_target = _target;
+    }
 
     public bool HasTarget()
     {
