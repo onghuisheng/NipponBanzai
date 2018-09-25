@@ -344,7 +344,7 @@ public class EntityPlayer : EntityLivingBase
                     {
                         Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 35;
 
-                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.HEART_PROJECTILE).GetComponent<StraightBullet>();
                         sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
                         ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, new Vector3(0, 0.5f, 0), Vector3.one, Vector3.zero, 1.0f);
 
@@ -372,7 +372,7 @@ public class EntityPlayer : EntityLivingBase
                     {
                         Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 35;
 
-                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.STRAIGHT_PROJECTILE).GetComponent<StraightBullet>();
+                        StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.HEART_PROJECTILE).GetComponent<StraightBullet>();
                         sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                         ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, new Vector3(0, 0.5f, 0), Vector3.one, Vector3.zero, 1.0f);

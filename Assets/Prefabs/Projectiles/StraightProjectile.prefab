@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0427cf243c2f7a46abbd58ba0290c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_minimap_icon: {fileID: 0}
 --- !u!136 &136817916238256112
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -17,7 +17,8 @@ public class ObjectPool : Singleton<ObjectPool>
         ARCH_PROJECTILE = 0,
         STRAIGHT_PROJECTILE,
         LASER_PROJECTILE, 
-        SWORD_PROJECTILE
+        SWORD_PROJECTILE,
+        HEART_PROJECTILE
     }
 
     public enum ENVIRONMENT
@@ -88,7 +89,7 @@ public class ObjectPool : Singleton<ObjectPool>
                 GameObject obj = Instantiate(projectile_list[projectile_list_count]);
                 obj.SetActive(false);
                 projectile_pool_list.Add(obj);
-
+                
                 obj.transform.parent = gameObject.transform;
             }
         }
