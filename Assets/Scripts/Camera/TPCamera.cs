@@ -126,56 +126,56 @@ public class TPCamera : MonoBehaviour
                     {
                         if (!script_entityplayer.An_animator.GetBool("IsMelee"))
                         {
-                            if (cg_canvas != null)
-                            {
-                                if (cg_canvas.alpha < 1)
-                                    cg_canvas.alpha += 0.05f;
+                            //if (cg_canvas != null)
+                            //{
+                            //    if (cg_canvas.alpha < 1)
+                            //        cg_canvas.alpha += 0.05f;
 
-                                RaycastHit hit;
-                                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                                if (Physics.Raycast(ray, out hit))
-                                {
-                                    if (hit.collider != null && hit.collider.gameObject.GetComponent<EntityLivingBase>() != null)
-                                    {
-                                        if (go_cross_hair.transform.localScale.x > 0.5f)
-                                        {
-                                            float _speed = 5;
-                                            go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
-                                            float _temp = 0.5f / (45 / _speed);
-                                            go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
-                                            //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+                            //    RaycastHit hit;
+                            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            //    if (Physics.Raycast(ray, out hit))
+                            //    {
+                            //        if (hit.collider != null && hit.collider.gameObject.GetComponent<EntityLivingBase>() != null)
+                            //        {
+                            //            if (go_cross_hair.transform.localScale.x > 0.5f)
+                            //            {
+                            //                float _speed = 5;
+                            //                go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z + _speed);
+                            //                float _temp = 0.5f / (45 / _speed);
+                            //                go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x - _temp, go_cross_hair.transform.localScale.y - _temp, go_cross_hair.transform.localScale.z);
+                            //                //img_crosshair.color = new Color(img_crosshair.color.r + _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                            //Debug.Log("Sizing Down");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (go_cross_hair.transform.localScale.x < 1)
-                                        {
-                                            float _speed = 5;
-                                            go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
-                                            float _temp = 0.5f / (45 / _speed);
-                                            go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
-                                            // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+                            //                //Debug.Log("Sizing Down");
+                            //            }
+                            //        }
+                            //        else
+                            //        {
+                            //            if (go_cross_hair.transform.localScale.x < 1)
+                            //            {
+                            //                float _speed = 5;
+                            //                go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
+                            //                float _temp = 0.5f / (45 / _speed);
+                            //                go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
+                            //                // img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                            //Debug.Log("Sizing Up");
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (go_cross_hair.transform.localScale.x < 1)
-                                    {
-                                        float _speed = 3;
-                                        go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
-                                        float _temp = 0.5f / (45 / _speed);
-                                        go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
-                                        img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
+                            //                //Debug.Log("Sizing Up");
+                            //            }
+                            //        }
+                            //    }
+                            //    else
+                            //    {
+                            //        if (go_cross_hair.transform.localScale.x < 1)
+                            //        {
+                            //            float _speed = 3;
+                            //            go_cross_hair.transform.eulerAngles = new Vector3(go_cross_hair.transform.eulerAngles.x, go_cross_hair.transform.eulerAngles.y, go_cross_hair.transform.eulerAngles.z - _speed);
+                            //            float _temp = 0.5f / (45 / _speed);
+                            //            go_cross_hair.transform.localScale = new Vector3(go_cross_hair.transform.localScale.x + _temp, go_cross_hair.transform.localScale.y + _temp, go_cross_hair.transform.localScale.z);
+                            //            img_crosshair.color = new Color(img_crosshair.color.r - _temp, img_crosshair.color.g, img_crosshair.color.b, img_crosshair.color.a);
 
-                                        //Debug.Log("Sizing Up");
-                                    }
-                                }
-                            }
+                            //            //Debug.Log("Sizing Up");
+                            //        }
+                            //    }
+                            //}
 
                             if (f_zoomed < f_zoomed_dist)
                             {

@@ -163,7 +163,7 @@ public class EntityPlayer : EntityLivingBase
                 if (Input.GetKeyUp(KeyCode.Mouse2))
                     GetInventory().GetCurrSkill().OnSkillReleased();
 
-                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown())
+                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown() && St_stats.F_mana > 0)
                 {
                     float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
 
@@ -241,8 +241,8 @@ public class EntityPlayer : EntityLivingBase
                     GetInventory().GetCurrSkill().OnSkillPressed();
                 if (Input.GetKeyUp(KeyCode.Mouse2))
                     GetInventory().GetCurrSkill().OnSkillReleased();
-                
-                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown())
+
+                if (Input.GetKey(KeyCode.Mouse2) && GetInventory().GetCurrSkill().IsUnderCooldown() && St_stats.F_mana > 0)
                 {
                     float _manaused = St_stats.F_mana - GetInventory().GetCurrSkill().GetManaAmount();
 
@@ -789,7 +789,8 @@ public class EntityPlayer : EntityLivingBase
         {
             S_last_hit = _dmgsrc.GetName();
             St_stats.F_health -= _dmgsrc.GetDamage();
-            An_animator.SetTrigger("IsHit");
+            if (player_state != State.SUMMONING)
+                An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
         }
         else if (player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))

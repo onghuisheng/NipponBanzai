@@ -41,7 +41,7 @@ public class SkillBeam : SkillBase
             if (ent_laser == null)
             {
                 ent_laser = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.LASER_PROJECTILE).GetComponent<Laser>();
-                ent_laser.SetUpProjectile(100000, go_caster.St_stats.F_damage, 10.0f, 100, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 2, go_caster.GetPosition().z), new Vector3(go_caster.transform.forward.x, go_caster.GetPosition().y, go_caster.transform.forward.z), Vector3.one * (f_mana_amount_used * 0.2f), go_caster.gameObject);         
+                ent_laser.SetUpProjectile(100000, go_caster.St_stats.F_damage, 10.0f, 100, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 2, go_caster.GetPosition().z), new Vector3(go_caster.transform.forward.x, go_caster.GetPosition().y, go_caster.transform.forward.z), Vector3.one * (f_mana_amount_used * 0.1f), go_caster.gameObject);         
             }
             else
             {

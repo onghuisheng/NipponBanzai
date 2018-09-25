@@ -106,6 +106,8 @@ ModelImporter:
     100200: wand_2
     100202: Wand_inner_ring_ctrl
     100204: Wand_main_ctrl
+    100206: pSphere2
+    100208: pSphere3
     400000: head_1
     400002: head_2
     400004: hip1
@@ -209,18 +211,25 @@ ModelImporter:
     400200: wand_2
     400202: Wand_inner_ring_ctrl
     400204: Wand_main_ctrl
+    400206: pSphere2
+    400208: pSphere3
     2100000: lambert1
     2100002: pasted__lambert4
+    2100004: StingrayPBS1
     4300000: polySurface17
     4300002: polySurface19
     4300004: polySurface27
     4300006: polySurface20
+    4300008: pSphere2
+    4300010: pSphere3
     7400000: Dash
     9500000: //RootNode
     13700000: polySurface17
     13700002: polySurface19
     13700004: polySurface20
     13700006: polySurface27
+    13700008: pSphere2
+    13700010: pSphere3
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:

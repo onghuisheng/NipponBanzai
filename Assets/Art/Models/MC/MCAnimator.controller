@@ -137,7 +137,7 @@ AnimatorController:
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 0.56
+    m_DefaultWeight: 0.51
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -3040,7 +3040,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Idle
-  m_Speed: 0.1
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101777851755849986}
@@ -3879,7 +3879,7 @@ AnimatorStateMachine:
     m_Position: {x: 216, y: -24, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102822994717401076}
-    m_Position: {x: 672, y: -216, z: 0}
+    m_Position: {x: 612, y: -264, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102850479619399926}
     m_Position: {x: 732, y: 36, z: 0}

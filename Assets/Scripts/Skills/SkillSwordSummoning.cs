@@ -119,7 +119,7 @@ public class SkillSwordSummoning : SkillBase
                     if (!go.CompareTag(go_caster.tag))
                     {
                         go_target = go.GetComponent<EntityLivingBase>();
-                        if (go_target.B_isAIEnabled)
+                        if (go_target.B_isAIEnabled && !go_target.IsDead())
                         {
                             list_swords[Random.Range(0, list_swords.Count - 1)].GetComponent<Sword_Projectile>().SetTarget(go_target);
                             break;
