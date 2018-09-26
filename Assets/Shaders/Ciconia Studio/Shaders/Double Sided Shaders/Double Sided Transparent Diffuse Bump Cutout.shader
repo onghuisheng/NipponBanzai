@@ -1,3 +1,7 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Ciconia Studio/Double Sided/Transparent/Diffuse Bump Cutout" {
     Properties {
         _Color ("Diffuse Color", Color) = (1,1,1,1)
@@ -9,10 +13,18 @@ Shader "Ciconia Studio/Double Sided/Transparent/Diffuse Bump Cutout" {
         _SpecularIntensity ("Specular Intensity", Range(0, 2)) = 0.2
         _Glossiness ("Glossiness", Range(0, 1)) = 0.5
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
+
+		_DissolveTexture("DissolveTexture (RGB)", 2D) = "white" {}
+		_DissolveAmount("DissolveAmount", Range(0.0, 1.0)) = 0
+
+		_BurnRamp("Burn Ramp (RGB)", 2D) = "white" {}
+		_BurnSize("Burn Size", Range(0.0, 1.0)) = 0.15
+		_BurnColor("Burn Color", Color) = (1,1,1,1)
+		_EmissionAmount("Emission amount", float) = 2.0
     }
     SubShader {
         Tags {
-            "Queue"="AlphaTest"
+            "Queue"="Transparent"
             "RenderType"="TransparentCutout"
         }
         Pass {
@@ -203,6 +215,20 @@ Shader "Ciconia Studio/Double Sided/Transparent/Diffuse Bump Cutout" {
                 indirectDiffuse += gi.indirect.diffuse;
                 diffuseColor *= 1-specularMonochrome;
                 float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
+
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+			};
+		
+
 /// Final Color:
                 float3 finalColor = diffuse + specular;
                 fixed4 finalRGBA = fixed4(finalColor,1);
@@ -478,6 +504,46 @@ Shader "Ciconia Studio/Double Sided/Transparent/Diffuse Bump Cutout" {
             }
             ENDCG
         }
+		//Pass {
+		//	Tags { "RenderType" = "Transparent" }
+		//	LOD 200
+		//	Cull Off //Fast way to turn your material double-sided
+
+		//	CGPROGRAM
+		//	#pragma surface surf
+
+		//	//Dissolve properties
+		//	fixed4 _Color;
+		//	sampler2D _MainTex;
+		//	sampler2D _DissolveTexture;
+		//	sampler2D _BurnRamp;
+		//	fixed4 _BurnColor;
+		//	float _BurnSize;
+		//	float _DissolveAmount;
+		//	float _EmissionAmount;
+
+		//	struct Input {
+		//		float2 uv_MainTex;
+		//	};
+
+		//	void surf(Input IN, inout SurfaceOutput o)
+		//	{
+		//		// Handle Dissolve Effect Values
+		//		fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+		//		half test = tex2D(_DissolveTexture, IN.uv_MainTex).rgb - _DissolveAmount;
+		//		clip(test);
+
+		//		// Check Burn Rate
+		//		if (test < _BurnSize && _DissolveAmount > 0) {
+		//			o.Emission = tex2D(_BurnRamp, float2(test * (1 / _BurnSize), 0)) * _BurnColor * _EmissionAmount;
+		//		}
+
+		//		o.Albedo = c.rgb;
+		//		o.Alpha = c.a;
+		//	}
+		//	
+		//	ENDCG
+		//}
     }
     FallBack "Diffuse"
 }
