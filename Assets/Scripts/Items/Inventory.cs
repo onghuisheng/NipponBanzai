@@ -56,16 +56,21 @@ public class Inventory {
         }
     }
 
-    public void UseItemInInventory(EntityLivingBase _owner, Item.ITEM_TYPE _itemid)
+    public bool UseItemInInventory(EntityLivingBase _owner, Item.ITEM_TYPE _itemid)
     {
         if(dic_storage.ContainsKey(_itemid))
         {
             if (dic_storage[_itemid] > 0)
             {
                 if (ItemHandler.GetItem(_itemid).OnUse(_owner))
+                {
                     --dic_storage[_itemid];
+                    return true;
+                }
             }
         }
+
+        return false;
     }
 
     public SkillBase GetNextSkill(bool _getRight)

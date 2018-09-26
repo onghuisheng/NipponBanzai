@@ -14,7 +14,10 @@ public class ParticleHandler : Singleton<ParticleHandler>
         Heart_Burst,
         Charging_Beam, 
         Souls,
-        BossCharging
+        BossCharging, 
+        Blind, 
+        Mana,
+        Heal
     }
 
     [SerializeField]

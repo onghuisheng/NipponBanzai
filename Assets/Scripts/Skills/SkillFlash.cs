@@ -14,7 +14,7 @@ public class SkillFlash : SkillBase
         i_id = 0;
 
         f_cooldown = 0;
-        f_maxcooldown = 10;
+        f_maxcooldown = 5;
         f_timer = 0;
     }
 
@@ -37,11 +37,12 @@ public class SkillFlash : SkillBase
         {
             go_caster.An_animator.SetBool("IsSummoning", false);
 
-            StatusBase _effect = new StatusPanic(30);
+            StatusBase _effect = new StatusPanic(70 * (((f_mana_amount_used / f_mana_amount) * 100) / 100));
 
             foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(go_caster.GetPosition(), 15 * (((f_mana_amount_used / f_mana_amount) * 100) / 100), typeof(EntityEnemy)))
             {
                 go.GetComponent<EntityEnemy>().Stc_Status.ApplyStatus(_effect);
+                ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Blind, go.transform, new Vector3(0, 2, 0), Vector3.zero, Vector3.zero, 0.2f);
             }
         }
     }

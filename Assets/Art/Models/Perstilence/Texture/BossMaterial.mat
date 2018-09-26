@@ -23,7 +23,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BurnRamp:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 82f7820ce35a0cf409eec96f0d0f3b91, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -38,8 +38,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 2800000, guid: d4a451947153747458385733b23af48c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DissolveTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d4a451947153747458385733b23af48c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -52,6 +56,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: 5fb09320090d81843a9fa0dd92929703, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: d4a451947153747458385733b23af48c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -67,17 +75,20 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
     - _BumpScale: 1
     - _BurnSize: 0.15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DissolveAmount: 0
     - _DstBlend: 0
+    - _Edges: 0.388
     - _EmissionAmount: 2
     - _EmissiveIntensity: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.837
+    - _Glossiness: 0.688
     - _GlossyReflections: 1
+    - _Level: 1
     - _Metallic: 0
     - _Mode: 0
     - _NormalIntensity: 1
@@ -85,12 +96,15 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 0.251
+    - _SpecularIntensity: 0.18
     - _SrcBlend: 1
+    - _Threshold: 1.1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColour1: {r: 1, g: 1, b: 1, a: 0}
+    - _EdgeColour2: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
