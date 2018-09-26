@@ -18,9 +18,12 @@ public class AISpawnMobs : AIBase
     private System.Type
         type_target;
 
+    private System.Action
+        onSpawnStart = null;
+
     List<ObjectPool.ENEMY> list_enemiesToSpawn;
 
-    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _spawnRadius, float _cooldown, float _summonAnimationDelay, List<ObjectPool.ENEMY> _enemiesToSpawn, float _attackRange = 0)
+    public AISpawnMobs(int _priority, EntityLivingBase _entity, System.Type _type, float _spawnRadius, float _cooldown, float _summonAnimationDelay, List<ObjectPool.ENEMY> _enemiesToSpawn, float _attackRange = 0, System.Action _onSpawnStart = null)
     {
         i_priority = _priority;
         ent_main = _entity;
@@ -34,6 +37,7 @@ public class AISpawnMobs : AIBase
         f_summonAnimationDelay = _summonAnimationDelay;
         f_attack_range = _attackRange;
         list_enemiesToSpawn = _enemiesToSpawn;
+        onSpawnStart = _onSpawnStart;
     }
 
     public override bool StartAI()
@@ -91,6 +95,10 @@ public class AISpawnMobs : AIBase
 
         ent_main.An_animator.SetTrigger("Summoning");
 
+        if (onSpawnStart != null)
+            onSpawnStart.Invoke();
+
+        ent_main.StopCoroutine(SpawnEnemy());
         ent_main.StartCoroutine(SpawnEnemy());
 
         f_nextCooldownTime = Time.time + f_cooldown;

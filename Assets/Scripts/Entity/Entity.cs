@@ -12,6 +12,9 @@ public abstract class Entity : MonoBehaviour
     private Sprite
         img_minimap_icon;
 
+    protected AudioPlayer
+        ap_audioPlayer;
+
     protected virtual void Start()
     {
         HardReset();
@@ -29,7 +32,8 @@ public abstract class Entity : MonoBehaviour
             var spriteRenderer = go.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = img_minimap_icon;
             Tweener rotateTowardsCamera = go.transform.DORotate(new Vector3(90, 0, 0), 0).SetLoops(-1);
-            rotateTowardsCamera.OnUpdate(() => {
+            rotateTowardsCamera.OnUpdate(() =>
+            {
                 rotateTowardsCamera.ChangeEndValue(new Vector3(90, TPCamera.f_CurrentAngle, 0));
             });
         }
@@ -60,7 +64,7 @@ public abstract class Entity : MonoBehaviour
             _tag,
             _id,
             _damage);
-
+        
         obj_hitbox.SetHitbox(dmgsrc, _size, _timer, _iframe_timer);
 
         obj_hitbox.SetPosition(_pos);
@@ -126,5 +130,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void HardReset()
     {
         rb_rigidbody = gameObject.GetComponent<Rigidbody>();
+        ap_audioPlayer = new AudioPlayer(this);
     }
 }

@@ -70,7 +70,7 @@ public class EntityPlayer : EntityLivingBase
 
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
-    
+
     protected override void Start()
     {
         base.Start();
@@ -376,9 +376,11 @@ public class EntityPlayer : EntityLivingBase
                         Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Camera.main.transform.forward * 35;
 
                         StraightBullet sb = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.HEART_PROJECTILE).GetComponent<StraightBullet>();
-                        sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 40, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
+                        sb.SetUpProjectile(gameObject, list_joints[0].transform.position, target - gameObject.transform.position, 5, St_stats.F_damage * f_charged_amount, 10, new Vector3(f_charged_amount * 0.25f, f_charged_amount * 0.25f, f_charged_amount * 0.25f));
 
                         ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heart_Burst, list_joints[0].transform, new Vector3(0, 0.5f, 0), Vector3.one, Vector3.zero, 1.0f);
+
+                        ap_audioPlayer.PlayClip("PlayerFireBullet", Random.Range(0.6f, 1.0f));
 
                         f_shooting_interval = 0;
                     }
@@ -719,6 +721,7 @@ public class EntityPlayer : EntityLivingBase
                 if (An_animator.GetBool("Recall") == false)
                 {
                     An_animator.SetBool("Recall", true);
+                    ap_audioPlayer.PlayClip("PlayerRecall");
                     transform.DOMoveY(transform.position.y + 0.5f, 2).OnComplete(() =>
                     {
                         FindObjectOfType<UIGameplayAssistant>().TransitOut(() =>
@@ -772,15 +775,18 @@ public class EntityPlayer : EntityLivingBase
             case 1:
                 _multiplier = 1;
                 _attack_hitbox = new Vector3(3, 1, 2);
+                ap_audioPlayer.PlayClip("PlayerMeleeSmallSwing_" + Random.Range(1, 4));
                 break;
             case 2:
                 _multiplier = 1.5f;
                 _attack_hitbox = new Vector3(2, 1, 3);
+                ap_audioPlayer.PlayClip("PlayerMeleeMediumSwing_" + Random.Range(1, 4));
                 break;
 
             case 3:
                 _multiplier = 2;
                 _attack_hitbox = new Vector3(3, 1, 3);
+                ap_audioPlayer.PlayClip("PlayerMeleeBigSwing_1");
                 break;
 
             default:
@@ -789,7 +795,8 @@ public class EntityPlayer : EntityLivingBase
                 break;
         }
 
-        SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude * 1.5f), transform.rotation, 0.1f);
+        SetUpHitBox(gameObject.name, gameObject.tag, "Melee", St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude * 1.5f), transform.rotation, 0.1f);
+        
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)

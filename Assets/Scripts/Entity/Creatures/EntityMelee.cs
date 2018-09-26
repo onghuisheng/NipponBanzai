@@ -32,15 +32,15 @@ public class EntityMelee : EntityEnemy
             {
                 gameObject.SetActive(false);
 
-                foreach(var type in GetInventory().GetInventoryContainer())
+                foreach (var type in GetInventory().GetInventoryContainer())
                 {
-                    for(int i = 0; i < type.Value; ++i)
+                    for (int i = 0; i < type.Value; ++i)
                     {
                         ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + 0.5f, GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(type.Key));
                     }
                 }
 
-                for(int i = 0; i < GetInventory().GetSouls(); ++i)
+                for (int i = 0; i < GetInventory().GetSouls(); ++i)
                 {
                     ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + Random.Range(0.5f, 1.0f), GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(Item.ITEM_TYPE.SOULS));
                 }
@@ -51,6 +51,9 @@ public class EntityMelee : EntityEnemy
     public override void OnAttack()
     {
         SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
+
+        ap_audioPlayer.PlayClip("EnemyMeleeHit_" + Random.Range(1, 5));
+
     }
 
     public override void HardReset()
@@ -96,6 +99,9 @@ public class EntityMelee : EntityEnemy
 
             if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && _dmgsrc.IsFlinching())
                 An_animator.SetTrigger("Injured");
+
+            if (_dmgsrc.GetSourceID() == "Melee")
+                AudioHandler.GetInstance().PlayClip("EnemyImpact_" + Random.Range(1, 4));
         }
     }
 }

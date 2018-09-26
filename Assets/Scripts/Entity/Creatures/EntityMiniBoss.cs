@@ -81,11 +81,14 @@ public class EntityMiniBoss : EntityEnemy
             Destroy(bulletTrail);
             bullet.gameObject.SetActive(false);
         });
+
+        ap_audioPlayer.PlayClip("MiniBossPoison");
     }
 
     public override void OnAttack()
     {
         SetUpHitBox(gameObject.name, gameObject.tag, gameObject.GetInstanceID().ToString(), St_stats.F_damage, Vector3.one, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude), transform.rotation);
+        ap_audioPlayer.PlayClip("MiniBossMelee");
     }
 
     public override void HardReset()
@@ -127,7 +130,12 @@ public class EntityMiniBoss : EntityEnemy
 
         DoSpawnAnimation(ParticleHandler.ParticleType.SummoningPortal);
     }
-    
+
+    public void PlayCrowNoise()
+    {
+        ap_audioPlayer.PlayClip("MiniBossSpawnMobs");
+    }
+
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
     {
         if (!B_isHit)
@@ -138,6 +146,9 @@ public class EntityMiniBoss : EntityEnemy
 
             if (!An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !An_animator.GetCurrentAnimatorStateInfo(0).IsTag("Summon") && _dmgsrc.IsFlinching())
                 An_animator.SetTrigger("Injured");
+
+            if (_dmgsrc.GetSourceID() == "Melee")
+                AudioHandler.GetInstance().PlayClip("EnemyImpact_" + Random.Range(1, 4));
         }
     }
 

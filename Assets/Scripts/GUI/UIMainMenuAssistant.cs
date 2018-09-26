@@ -14,7 +14,6 @@ public class UIMainMenuAssistant : MonoBehaviour
     public Slider m_MusicSlider;
     public List<Image> m_GraphicsLevel; // order matters - index 0 should be low graphics
 
-
     private RectTransform m_ElementsTransform;
     private Canvas m_ElementCanvas;
 
