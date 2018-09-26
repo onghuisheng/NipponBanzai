@@ -63,6 +63,14 @@ public class SkillBeam : SkillBase
     {
         f_cooldown = f_maxcooldown;
         f_timer = 0;
+
+        if (ent_laser != null)
+        {
+            ent_laser.gameObject.SetActive(false);
+            ent_laser = null;
+        }
+        go_caster.An_animator.SetBool("IsSummoning", false);
+
         OnSkillEnd();
     }
 }

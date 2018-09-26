@@ -453,6 +453,8 @@ public abstract class EntityLivingBase : Entity
                 if (F_mana_regen_amount > 0)
                 {
                     F_mana_regen_amount -= 1;
+                    if (F_mana_regen_amount <= 0)
+                        F_mana_regen_amount = 1;
                     st_stats.F_mana += 1;
 
                     st_stats.F_mana = Mathf.Clamp(st_stats.F_mana, 0, st_stats.F_max_mana);

@@ -118,6 +118,7 @@ public class EntityPlayer : EntityLivingBase
                 list_joints.Add(_trans.gameObject);
         }
 
+        F_mana_regen_amount = 1;
 
         //TEMPO PLS REMOVE
         SkillBase _skill = new SkillFlash();
@@ -131,7 +132,7 @@ public class EntityPlayer : EntityLivingBase
         _skill = new SkillBeam();
         _skill.SetUpSkill();
         GetInventory().AddSkill(_skill);
-        ///
+        //
     }
 
     private void IdleCheckFunction()
@@ -476,7 +477,12 @@ public class EntityPlayer : EntityLivingBase
     private void SummoningCheckFunction()
     {
         if (Input.GetKeyDown(KeyCode.Mouse2))
+        {
             GetInventory().GetCurrSkill().OnSkillPressed();
+            EndSummoningAnimation();
+            GetInventory().GetCurrSkill().EndSkill();
+            player_state = State.IDLE;
+        }
         if (Input.GetKeyUp(KeyCode.Mouse2))
             GetInventory().GetCurrSkill().OnSkillReleased();
 
@@ -555,7 +561,7 @@ public class EntityPlayer : EntityLivingBase
         if (!IsDead())
         {
             //Debug.Log("Health: " + St_stats.F_health + " / " + St_stats.F_max_health);
-            //Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
+            Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
