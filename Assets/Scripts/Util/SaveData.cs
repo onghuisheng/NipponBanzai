@@ -37,13 +37,40 @@ public class SaveData
         {
             string fullFilePath = Path.Combine(GetSaveDirectory(), m_SettingsFileName);
             string jsonData = File.ReadAllText(fullFilePath);
-            Debug.LogFormat("Loaded {0} from {1}", m_SettingsFileName, fullFilePath);
+            Debug.LogFormat("Loaded Settings {0} from {1}", m_SettingsFileName, fullFilePath);
             return JsonUtility.FromJson<SaveDataSettings>(jsonData);
         }
         else
         {
             return new SaveDataSettings();
         }
+    }
+
+    public static void SaveInventory(Dictionary<Item.ITEM_TYPE, int> data)
+    {
+        string fullFilePath = Path.Combine(GetSaveDirectory(), m_InventoryFileName);
+        
+        SaveDataInventory settings = new SaveDataInventory();
+        settings.PopulateData(data);
+        
+        File.WriteAllText(fullFilePath, JsonUtility.ToJson(settings));
+        Debug.LogFormat("Saved {0} to {1}", m_InventoryFileName, fullFilePath);
+    }
+
+    public static SaveDataInventory LoadInventory()
+    {
+        if (SaveDataExists(m_InventoryFileName))
+        {
+            string fullFilePath = Path.Combine(GetSaveDirectory(), m_InventoryFileName);
+            string jsonData = File.ReadAllText(fullFilePath);
+            Debug.LogFormat("Loaded Inventory {0} from {1}", m_InventoryFileName, fullFilePath);
+            return JsonUtility.FromJson<SaveDataInventory>(jsonData);
+        }
+        else
+        {
+            return new SaveDataInventory();
+        }
+
     }
 
 }
@@ -57,7 +84,6 @@ public class SaveDataSettings
 }
 
 [Serializable]
-public class SaveDataInventory
+public class SaveDataInventory : SerializableDictionary<Item.ITEM_TYPE, int>
 {
-    public Dictionary<Item.ITEM_TYPE, int> m_Inventory;
 }

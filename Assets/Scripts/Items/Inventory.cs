@@ -16,6 +16,11 @@ public class Inventory {
     private int
         f_curr_skill;
 
+    public void ReplaceInventory(SaveDataInventory data)
+    {
+        dic_storage = data.ToDictionary();
+    }
+
 	public void SetUpInventory()
     {
         dic_storage = new Dictionary<Item.ITEM_TYPE, int>();

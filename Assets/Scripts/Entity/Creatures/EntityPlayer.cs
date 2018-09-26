@@ -70,10 +70,12 @@ public class EntityPlayer : EntityLivingBase
 
     delegate void m_checkfunction();
     Dictionary<State, m_checkfunction> m_checkfuntions = new Dictionary<State, m_checkfunction>();
-
+    
     protected override void Start()
     {
         base.Start();
+
+        GetInventory().ReplaceInventory(SaveData.LoadInventory());
 
         if (m_checkfuntions == null)
             m_checkfuntions = new Dictionary<State, m_checkfunction>();
@@ -721,6 +723,7 @@ public class EntityPlayer : EntityLivingBase
                     {
                         FindObjectOfType<UIGameplayAssistant>().TransitOut(() =>
                         {
+                            SaveData.SaveInventory(GetInventory().GetInventoryContainer());
                             SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
                         });
                     });
