@@ -244,6 +244,7 @@ ModelImporter:
     400236: pPlane9 8
     400238: pPlane9 9
     2100000: lambert1
+    2100002: StingrayPBS3
     2300000: pPlane10
     2300002: pPlane10 1
     2300004: pPlane10 10
@@ -547,7 +548,17 @@ ModelImporter:
     4300196: pPlane10
     4300198: pPlane11
     4300200: pPlane9
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS3
+    second: {fileID: 2100000, guid: 54bfb1899432b9c478f5bdc919825c82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 54bfb1899432b9c478f5bdc919825c82, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
