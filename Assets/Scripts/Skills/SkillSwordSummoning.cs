@@ -21,8 +21,8 @@ public class SkillSwordSummoning : SkillBase
         {
             new Vector3(0, 4, -3),
             new Vector3(2, 3, -2),
-            new Vector3(4, 2, -1),
             new Vector3(-2, 3, -2),
+            new Vector3(4, 2, -1),           
             new Vector3(-4, 2, -1)
         };
 
@@ -36,7 +36,7 @@ public class SkillSwordSummoning : SkillBase
         i_id = 1;
 
         f_cooldown = 0;
-        f_maxcooldown = 1;
+        f_maxcooldown = 10;
         f_timer = 0;
 
         list_swords = new List<GameObject>();
@@ -69,8 +69,7 @@ public class SkillSwordSummoning : SkillBase
             {
                 float _temp = (f_mana_amount_used * 0.1f);
                 GameObject _proj = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.SWORD_PROJECTILE);
-                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f), Vector3.one);
-                _proj.transform.position = new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z);
+                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z), Vector3.one, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f));
                 list_swords.Add(_proj);
             }
 

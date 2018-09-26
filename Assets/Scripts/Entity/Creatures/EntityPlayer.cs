@@ -561,16 +561,19 @@ public class EntityPlayer : EntityLivingBase
         if (!IsDead())
         {
             //Debug.Log("Health: " + St_stats.F_health + " / " + St_stats.F_max_health);
-            Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
+            //Debug.Log("Mana: " + St_stats.F_mana + " / " + St_stats.F_max_mana);
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1) && St_stats.F_health < St_stats.F_max_health)
             {
-                GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.HEALTH_POTION);
+                if (GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.HEALTH_POTION))
+                    ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Heal, transform, new Vector3(0, 2, 0), Vector3.zero, Vector3.zero, 1.8f);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2) && St_stats.F_mana < St_stats.F_max_mana)
             {
-                GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.MANA_POTION);
+                if (GetInventory().UseItemInInventory(this, Item.ITEM_TYPE.MANA_POTION))
+                    ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Mana, transform, new Vector3(0, 2, 0), Vector3.zero, Vector3.zero, 1.8f);
+
             }
 
             if (player_state != State.SUMMONING)
