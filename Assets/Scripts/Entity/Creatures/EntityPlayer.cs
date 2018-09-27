@@ -121,7 +121,7 @@ public class EntityPlayer : EntityLivingBase
         f_shooting_max_interval = f_shooting_interval = 0.1f;
         f_charged_amount = 1.0f;
         f_charged_max_amount = 2;
-        f_charged_increase_amount = 1.0f;
+        f_charged_increase_amount = 2.0f;
         b_is_charging_shot = false;
         i_combo = 1;
         F_mana_regen_amount = 1;

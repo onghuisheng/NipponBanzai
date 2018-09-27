@@ -145,9 +145,9 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             foreach (GameObject obj in i)
             {
-                if(!obj.CompareTag("Player") && !_get_player)
+                if(!obj.CompareTag("Player"))
                     obj.SetActive(false);
-                else
+                else if(obj.CompareTag("Player") && _get_player)
                     obj.SetActive(false);
             }
         }
