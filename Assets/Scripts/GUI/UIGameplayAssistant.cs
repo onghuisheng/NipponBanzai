@@ -50,11 +50,15 @@ public class UIGameplayAssistant : MonoBehaviour
     {
         if (transitType == TransitType.In)
         {
-            m_FadeTexture.fillAmount = 1;
+            var newColor = m_FadeTexture.color;
+            newColor.a = 1;
+            m_FadeTexture.color = newColor;
             m_FadeTexture.DOFade(0, duration).OnComplete(() => { if (onComplete != null) onComplete(); });
         } else
         {
-            m_FadeTexture.fillAmount = 0;
+            var newColor = m_FadeTexture.color;
+            newColor.a = 0;
+            m_FadeTexture.color = newColor;
             m_FadeTexture.DOFade(1, duration).OnComplete(() => { if (onComplete != null) onComplete(); });
         }
     }

@@ -63,7 +63,7 @@ public class UIMainMenuAssistant : MonoBehaviour
         m_FadeTexture.DOFade(1, 1.5f).OnComplete(() =>
         {
             // Check if contains save data
-            SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.Level1, null);
+            SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.Bedroom, null);
         });
     }
 
