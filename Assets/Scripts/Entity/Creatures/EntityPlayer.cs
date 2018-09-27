@@ -843,6 +843,7 @@ public class EntityPlayer : EntityLivingBase
                      uiAssistant.Transition(UIGameplayAssistant.TransitType.In, 1);
 
                      HardReset();
+                     ObjectPool.GetInstance().ResetSpawnerManager();
 
                      GameObject spawnPoint = GameObject.FindWithTag("Respawn");
 

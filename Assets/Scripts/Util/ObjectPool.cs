@@ -137,7 +137,7 @@ public class ObjectPool : Singleton<ObjectPool>
     }
 
     //RESETS ALL ENEMY
-    public void ResetSpawnerManager()
+    public void ResetSpawnerManager(bool _get_player = false)
     {
         List<List<GameObject>> list = GetAllEntity();
 
@@ -145,7 +145,10 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             foreach (GameObject obj in i)
             {
-                obj.SetActive(false);
+                if(!obj.CompareTag("Player") && !_get_player)
+                    obj.SetActive(false);
+                else
+                    obj.SetActive(false);
             }
         }
     }
@@ -187,7 +190,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
         //PROJECTILE
         list = new List<GameObject>();
-        foreach (GameObject i in enviroment_pool_list)
+        foreach (GameObject i in projectile_pool_list)
         {
             if (i.activeSelf)
             {
