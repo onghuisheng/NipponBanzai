@@ -110,6 +110,11 @@ public class Inventory {
         return list_skills_inventory[f_curr_skill];
     }
 
+    public void SetCurrSkill(int index)
+    {
+        f_curr_skill = index;
+    }
+
     public int GetCurrSkillIndex()
     {
         return f_curr_skill;

@@ -24,6 +24,21 @@ public class UIBedroomAssistant : MonoBehaviour
         Transition(TransitType.In, 0.5f);
 
         var playerInventory = SaveData.LoadInventory();
+
+        if (playerInventory.ContainsKey(Item.ITEM_TYPE.SOULS))
+            m_LblCurrency.text = "$" + playerInventory[Item.ITEM_TYPE.SOULS].ToString();
+        else
+            m_LblCurrency.text = "$0";
+
+        if (playerInventory.ContainsKey(Item.ITEM_TYPE.HEALTH_POTION))
+            m_LblRedPotion.text = "x " + playerInventory[Item.ITEM_TYPE.HEALTH_POTION].ToString();
+        else
+            m_LblRedPotion.text = "x 0";
+
+        if (playerInventory.ContainsKey(Item.ITEM_TYPE.MANA_POTION))
+            m_LblBluePotion.text = "x " + playerInventory[Item.ITEM_TYPE.MANA_POTION].ToString();
+        else
+            m_LblBluePotion.text = "x 0";
     }
 
     public void Transition(TransitType transitType, float duration, System.Action onComplete = null)

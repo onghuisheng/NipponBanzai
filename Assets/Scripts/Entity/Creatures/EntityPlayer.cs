@@ -842,8 +842,11 @@ public class EntityPlayer : EntityLivingBase
                  {
                      uiAssistant.Transition(UIGameplayAssistant.TransitType.In, 1);
 
+                     int index = GetInventory().GetCurrSkillIndex();
                      HardReset();
                      ObjectPool.GetInstance().ResetSpawnerManager();
+                     GetInventory().SetCurrSkill(index);
+                     FindObjectOfType<UIGameplayAssistant>().PopulateSkillIcons();
 
                      GameObject spawnPoint = GameObject.FindWithTag("Respawn");
 

@@ -54,7 +54,8 @@ public class UIGameplayAssistant : MonoBehaviour
             newColor.a = 1;
             m_FadeTexture.color = newColor;
             m_FadeTexture.DOFade(0, duration).OnComplete(() => { if (onComplete != null) onComplete(); });
-        } else
+        }
+        else
         {
             var newColor = m_FadeTexture.color;
             newColor.a = 0;
@@ -63,8 +64,13 @@ public class UIGameplayAssistant : MonoBehaviour
         }
     }
 
-    void PopulateSkillIcons()
+    public void PopulateSkillIcons()
     {
+        foreach (Transform child in m_SkillHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (SkillBase skill in m_Player.GetInventory().GetAllSkills())
         {
             // skill.S_Name
@@ -72,7 +78,7 @@ public class UIGameplayAssistant : MonoBehaviour
             go.transform.Find("Icon").GetComponent<Image>().sprite = FindSpriteWithName(skill.S_Name);
             go.name = skill.S_Name;
             go.GetComponent<SkillButton>().RegisterSkill(skill);
-            skill.RegisterOnSkillPressed(()=> { go.GetComponent<SkillButton>().OnSkillPressed(); });
+            skill.RegisterOnSkillPressed(() => { go.GetComponent<SkillButton>().OnSkillPressed(); });
             skill.RegisterOnSkillReleased(() => { go.GetComponent<SkillButton>().OnSkillReleased(); });
             skill.RegisterOnSkillBegin(() => { go.GetComponent<SkillButton>().OnSkillBegin(); });
         }
