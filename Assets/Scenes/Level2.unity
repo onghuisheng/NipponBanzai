@@ -4679,7 +4679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PathName: LookAroundBoss
   m_LookAtTarget: {fileID: 706447754}
-  m_MoveSpeed: 30
+  m_MoveSpeed: 50
   m_Easing: 1
   m_PathType: 1
   m_LoopBackToInitial: 1
