@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : Singleton<SceneHandler>
 {
-       
+
     public enum SceneType : int
     {
         None,
         MainMenu,
+        Bedroom,
         Level1,
         Level2,
         JJPlayground
     }
-    
+
     private SceneType m_CurrentSceneType;
 
     public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete = null)
@@ -30,6 +31,11 @@ public class SceneHandler : Singleton<SceneHandler>
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 sceneName = "MainMenu";
+                break;
+            case SceneType.Bedroom:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                sceneName = "Bedroom";
                 break;
             case SceneType.Level1:
                 sceneName = "Level1";
@@ -60,10 +66,17 @@ public class SceneHandler : Singleton<SceneHandler>
 
     public SceneType GetCurrentSceneType()
     {
-        switch (SceneManager.GetActiveScene().name)
+        return SceneNameToSceneType(SceneManager.GetActiveScene().name);
+    }
+
+    public SceneType SceneNameToSceneType(string sceneName)
+    {
+        switch (sceneName)
         {
             case "MainMenu":
                 return SceneType.MainMenu;
+            case "Bedroom":
+                return SceneType.Bedroom;
             case "Level1":
                 return SceneType.Level1;
             case "Level2":
