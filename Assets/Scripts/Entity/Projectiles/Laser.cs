@@ -134,7 +134,6 @@ public class Laser : EntityProjectiles
 
         Vector3 direction = v3_currEndPos - v3_startPos;
         int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer(Go_owner.tag));
-        Debug.Log("Ray");
         if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit, ignoreEnemiesMask))
         {
             Debug.Log("Hit" + hit);

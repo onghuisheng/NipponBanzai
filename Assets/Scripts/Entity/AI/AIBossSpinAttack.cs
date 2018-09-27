@@ -60,7 +60,6 @@ public class AIBossSpinAttack : AIBase {
 
     public override bool ShouldContinueAI()
     {
-        Debug.Log("SPINNING");
         if (f_stateCooldownTimer < f_cooldown)
         {
             f_stateCooldownTimer += Time.deltaTime;

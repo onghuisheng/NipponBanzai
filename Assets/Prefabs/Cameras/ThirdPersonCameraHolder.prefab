@@ -139,7 +139,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -175,6 +175,8 @@ MonoBehaviour:
   f_speed_of_rotation: 4
   f_Xrestrict: 100
   f_Xrestrict_up: 0
+  f_tremble: 0
+  f_tremble_recover: 0
 --- !u!114 &114611523307240314
 MonoBehaviour:
   m_ObjectHideFlags: 1

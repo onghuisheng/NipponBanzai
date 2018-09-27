@@ -541,6 +541,9 @@ public class EntityPlayer : EntityLivingBase
 
     protected override void Update()
     {
+        if (CameraHandler.GetInstance().GetCameraType() != CameraHandler.CameraType.ThirdPerson)
+            return;
+
         base.Update();
 
         //if (GetInventory().GetInventoryContainer().Count > 0)
@@ -761,6 +764,9 @@ public class EntityPlayer : EntityLivingBase
 
     protected override void LateUpdate()
     {
+        if (CameraHandler.GetInstance().GetCameraType() != CameraHandler.CameraType.ThirdPerson)
+            return;
+
         if (player_state != State.RECALL)
             base.LateUpdate();
 
