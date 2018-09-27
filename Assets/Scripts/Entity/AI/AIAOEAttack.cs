@@ -203,7 +203,7 @@ public class AIAOEAttack : AIBase {
     {
         RaycastHit hit;
 
-        Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
+        //Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
         c_targetCenter = ent_target.GetComponent<Collider>();
 
         int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
