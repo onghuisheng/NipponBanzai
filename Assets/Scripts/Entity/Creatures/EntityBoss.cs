@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EntityBoss : EntityEnemy {
+public class EntityBoss : EntityEnemy
+{
 
     public enum BossState
     {
@@ -86,29 +87,32 @@ public class EntityBoss : EntityEnemy {
     #endregion
 
     protected override void Start()
-    { 
+    {
         base.Start();
     }
 
     protected override void Update()
     {
-        if (!IsDead())
-            base.Update();
-        else
+        if (CameraHandler.GetInstance().GetCameraType() == CameraHandler.CameraType.ThirdPerson)
         {
-            F_death_timer += Time.deltaTime;
-            An_animator.SetBool("Dead", true);
-            f_dissolveRate += Time.deltaTime * 0.25f;
-            m_bossMat.SetFloat("_DissolveAmount", f_dissolveRate);
-
-            if (F_death_timer > 5.0f)
+            if (!IsDead())
+                base.Update();
+            else
             {
-                gameObject.SetActive(false);
+                F_death_timer += Time.deltaTime;
+                An_animator.SetBool("Dead", true);
+                f_dissolveRate += Time.deltaTime * 0.25f;
+                m_bossMat.SetFloat("_DissolveAmount", f_dissolveRate);
 
-                //GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
-                //go.GetComponent<EntityPickUp>().SetPosition(GetPosition());
+                if (F_death_timer > 5.0f)
+                {
+                    gameObject.SetActive(false);
 
-                //TODO: Spawn Soul For Player TO Collect
+                    //GameObject go = ObjectPool.GetInstance().GetItemObjectFromPool();
+                    //go.GetComponent<EntityPickUp>().SetPosition(GetPosition());
+
+                    //TODO: Spawn Soul For Player TO Collect
+                }
             }
         }
     }
@@ -157,7 +161,7 @@ public class EntityBoss : EntityEnemy {
             gameObject.GetInstanceID().ToString(),
             St_stats.F_damage);
 
-        obj_hitbox.SetHitbox(dmgsrc, new Vector3(_size,_size,_size));
+        obj_hitbox.SetHitbox(dmgsrc, new Vector3(_size, _size, _size));
 
         //obj_hitbox.transform.position = transform.position + (transform.forward * (obj_hitbox.transform.localScale * 0.8f).z);
         //obj_hitbox.transform.position = new Vector3(obj_hitbox.transform.position.x, obj_hitbox.transform.position.y + 1, obj_hitbox.transform.position.z);
@@ -180,10 +184,16 @@ public class EntityBoss : EntityEnemy {
 
             ResetOnHit(_timer);
 
-            if (St_stats.F_health < St_stats.F_max_health * 0.5)
+            if (enum_currentBossState != BossState.HALFHEALTH && St_stats.F_health < St_stats.F_max_health * 0.5)
             {
                 enum_currentBossState = BossState.HALFHEALTH;
                 SetBossState();
+                CinematicPathing.GetPathWithName("LookAroundBoss").DoCinematicPath(
+                    () =>
+                    {
+                        CameraHandler.GetInstance().ChangeCamera(CameraHandler.CameraType.ThirdPerson);
+                    }
+                );
             }
         }
     }
@@ -220,7 +230,7 @@ public class EntityBoss : EntityEnemy {
         ////TODO: Register AI Task
         RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 10));
         RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 15, 3));
-        RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 16, 20));
+        RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 13, 20));
         RegisterAITask(new AIAOEAttack(4, this, typeof(EntityPlayer), 20, 15, 25));
         //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
         RegisterAITask(new AIChase(6, this, typeof(EntityPlayer), 20.0f, 30));

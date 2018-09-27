@@ -227,8 +227,9 @@ public class AIArtyState : AIBase
 
                 //Spawn Crystal
                 Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-                spawnPos.y -= 2;
-                spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, spawnPos, new Vector3(0.5f, 0.5f, 0.5f), true);
+                Vector3 offset = new Vector3(0, 5, 0);
+                spawnPos -= offset;
+                spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, spawnPos, offset, Vector3.one, true);
                 ab_bullet.gameObject.SetActive(false);
             }
         }, () =>
@@ -249,8 +250,9 @@ public class AIArtyState : AIBase
             Vector3 spawnPos = ab_bullet.GetPosition();
             //Spawn Crystal
             Crystal spawnedCrystal = ObjectPool.GetInstance().GetEnviromentObjectFromPool(ObjectPool.ENVIRONMENT.CRYSTAL).GetComponent<Crystal>();
-            spawnPos.y -= 2;
-            spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, spawnPos, new Vector3(0.5f, 0.5f, 0.5f), true);
+            Vector3 offset = new Vector3(0, 5, 0); 
+            spawnPos -= offset;
+            spawnedCrystal.SetUpCrystal(ent_main.gameObject, 15, spawnPos, offset, Vector3.one, true);
             ab_bullet.gameObject.SetActive(false);
         });
 
