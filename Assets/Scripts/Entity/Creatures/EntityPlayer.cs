@@ -92,20 +92,6 @@ public class EntityPlayer : EntityLivingBase
         m_checkfuntions.Add(State.DEAD, DeadCheckFunction);
         m_checkfuntions.Add(State.RECALL, RecallCheckFunction);
 
-        St_stats = new Stats();
-        St_stats.F_maxspeed = St_stats.F_speed = 5;
-        St_stats.F_max_health = St_stats.F_health = 100;
-        St_stats.F_max_mana = St_stats.F_mana = 100;
-        St_stats.F_damage = 20;
-        St_stats.F_mass = 1;
-
-        f_shooting_max_interval = f_shooting_interval = 0.1f;
-        f_charged_amount = 1.0f;
-        f_charged_max_amount = 2;
-        f_charged_increase_amount = 1.0f;
-        b_is_charging_shot = false;
-        i_combo = 1;
-
         if (GetComponent<CharacterMovement>() != null)
         {
             cm_player_movement = GetComponent<CharacterMovement>();
@@ -120,7 +106,6 @@ public class EntityPlayer : EntityLivingBase
                 list_joints.Add(_trans.gameObject);
         }
 
-        F_mana_regen_amount = 1;
 
         //TEMPO PLS REMOVE
         SkillBase _skill = new SkillFlash();
@@ -135,6 +120,26 @@ public class EntityPlayer : EntityLivingBase
         _skill.SetUpSkill();
         GetInventory().AddSkill(_skill);
         //
+    }
+
+    public override void HardReset()
+    {
+        base.HardReset();
+
+        St_stats = new Stats();
+        St_stats.F_maxspeed = St_stats.F_speed = 5;
+        St_stats.F_max_health = St_stats.F_health = 100;
+        St_stats.F_max_mana = St_stats.F_mana = 100;
+        St_stats.F_damage = 20;
+        St_stats.F_mass = 1;
+
+        f_shooting_max_interval = f_shooting_interval = 0.1f;
+        f_charged_amount = 1.0f;
+        f_charged_max_amount = 2;
+        f_charged_increase_amount = 1.0f;
+        b_is_charging_shot = false;
+        i_combo = 1;
+        F_mana_regen_amount = 1;
     }
 
     private void IdleCheckFunction()
@@ -724,11 +729,11 @@ public class EntityPlayer : EntityLivingBase
                     ap_audioPlayer.PlayClip("PlayerRecall");
                     transform.DOMoveY(transform.position.y + 0.5f, 2).OnComplete(() =>
                     {
-                        FindObjectOfType<UIGameplayAssistant>().TransitOut(() =>
-                        {
-                            SaveData.SaveInventory(GetInventory().GetInventoryContainer());
-                            SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
-                        });
+                        FindObjectOfType<UIGameplayAssistant>().Transition(UIGameplayAssistant.TransitType.Out, 1.5f, () =>
+                       {
+                           SaveData.SaveInventory(GetInventory().GetInventoryContainer());
+                           SceneHandler.GetInstance().ChangeSceneAsync(SceneHandler.SceneType.MainMenu, null);
+                       });
                     });
                 }
 
@@ -763,6 +768,15 @@ public class EntityPlayer : EntityLivingBase
         //             go.transform.localRotation.z + 45);
         //    }
         //}
+
+        if (Input.GetKeyUp(KeyCode.V))
+        {
+            DamageSource src = new DamageSource();
+            src.SetUpDamageSource("God", "God", "God", 9999);
+
+            OnAttacked(src);
+        }
+
     }
 
     public override void OnAttack()
@@ -796,7 +810,7 @@ public class EntityPlayer : EntityLivingBase
         }
 
         SetUpHitBox(gameObject.name, gameObject.tag, "Melee", St_stats.F_damage * _multiplier, _attack_hitbox, transform.position + (transform.forward * GetComponent<Collider>().bounds.extents.magnitude * 1.5f), transform.rotation, 0.1f);
-        
+
     }
 
     public override void OnAttacked(DamageSource _dmgsrc, float _timer = 0.5f)
@@ -811,6 +825,25 @@ public class EntityPlayer : EntityLivingBase
             if (player_state != State.SUMMONING)
                 An_animator.SetTrigger("IsHit");
             ResetOnHit(_timer);
+
+            // If player died, respawn
+            if (IsDead())
+            {
+                var uiAssistant = FindObjectOfType<UIGameplayAssistant>();
+                uiAssistant.Transition(UIGameplayAssistant.TransitType.Out, 6, () =>
+                 {
+                     uiAssistant.Transition(UIGameplayAssistant.TransitType.In, 1);
+
+                     HardReset();
+
+                     GameObject spawnPoint = GameObject.FindWithTag("Respawn");
+
+                     if (spawnPoint == null)
+                         transform.position = Vector3.zero;
+                     else
+                         transform.position = spawnPoint.transform.position;
+                 });
+            }
         }
         else if (player_state == State.DASHING && !B_isHit && !TagHelper.IsTagBanned(_dmgsrc.GetSourceTag()))
         {

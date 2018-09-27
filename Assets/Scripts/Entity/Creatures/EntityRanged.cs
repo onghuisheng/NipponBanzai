@@ -74,15 +74,15 @@ public class EntityRanged : EntityEnemy
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_speed = 3;
         St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 2.0f;
+        St_stats.F_damage = 5;
         St_stats.F_mass = 2.0f;
 
         B_isHit = false;
 
         An_animator.Rebind();
         RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
-        RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 10));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
+        RegisterAITask(new AIAttackRanged(2, this, typeof(EntityPlayer), 15));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 50, 150));
 
         GetComponent<Collider>().isTrigger = false;
 

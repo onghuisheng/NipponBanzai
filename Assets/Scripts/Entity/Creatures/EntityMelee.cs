@@ -66,7 +66,7 @@ public class EntityMelee : EntityEnemy
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_speed = 3;
         St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 5.0f;
+        St_stats.F_damage = 15;
         St_stats.F_mass = 2.0f;
 
         B_isHit = false;
@@ -74,7 +74,7 @@ public class EntityMelee : EntityEnemy
         An_animator.Rebind();
         RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
         RegisterAITask(new AIAttackMelee(2, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance));
-        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 20, 90));
+        RegisterAITask(new AIChase(1, this, typeof(EntityPlayer), 50, 150));
         //RegisterAITask(new AIRoam(3, this, 5.0f));
 
         GetComponent<Collider>().isTrigger = false;

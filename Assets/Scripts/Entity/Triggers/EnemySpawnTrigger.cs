@@ -9,7 +9,8 @@ public class EnemySpawnTrigger : EntityTrigger
     {
         OnTriggerEnter,
         OnTriggerEnterEndless,
-        OnStart
+        OnStart,
+        OnStartEndless,
     }
 
     [SerializeField]
@@ -35,6 +36,8 @@ public class EnemySpawnTrigger : EntityTrigger
 
         if (m_spawning_type == SpawningType.OnStart)
             SpawnEnemies();
+        else if (m_spawning_type == SpawningType.OnStartEndless)
+            SpawnEnemies(true);
     }
 
     protected override void Update()
@@ -81,13 +84,13 @@ public class EnemySpawnTrigger : EntityTrigger
             foreach (var enemy in gglist)
             {
                 var gg = new StatusPanic(5);
-                var gg2 = new StatusPoison(6,1,1);
+                var gg2 = new StatusPoison(6, 1, 1);
                 enemy.Stc_Status.ApplyStatus(gg);
                 // enemy.Stc_Status.ApplyStatus(gg2);
             }
-            
+
         }
-        
+
 #endif
 
     }
@@ -109,26 +112,30 @@ public class EnemySpawnTrigger : EntityTrigger
         }
     }
 
-    public void SpawnEnemies()
+    public void SpawnEnemies(bool isEndless = false)
     {
         b_is_spawned = true;
-        StartCoroutine(StartSpawning());
+        StartCoroutine(StartSpawning(isEndless));
     }
 
-    IEnumerator StartSpawning()
+    IEnumerator StartSpawning(bool isEndless = false)
     {
-        for (int i = 0; i < i_melee_spawn_count; i++)
+        do
         {
-            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MELEE).GetComponent<EntityLivingBase>());
+            for (int i = 0; i < i_melee_spawn_count; i++)
+            {
+                yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MELEE).GetComponent<EntityLivingBase>());
+            }
+            for (int i = 0; i < i_ranged_spawn_count; i++)
+            {
+                yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>());
+            }
+            for (int i = 0; i < i_miniboss_spawn_count; i++)
+            {
+                yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>());
+            }
         }
-        for (int i = 0; i < i_ranged_spawn_count; i++)
-        {
-            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_RANGED).GetComponent<EntityLivingBase>());
-        }
-        for (int i = 0; i < i_miniboss_spawn_count; i++)
-        {
-            yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>());
-        }
+        while (isEndless);
     }
 
     // Helper function for StartSpawning coroutine

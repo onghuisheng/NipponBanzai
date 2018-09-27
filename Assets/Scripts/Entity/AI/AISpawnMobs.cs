@@ -93,12 +93,9 @@ public class AISpawnMobs : AIBase
         b_IsSummoning = true;
         ent_main.B_isAttacking = true;
 
-        ent_main.An_animator.SetTrigger("Summoning");
-
         if (onSpawnStart != null)
             onSpawnStart.Invoke();
 
-        ent_main.StopCoroutine(SpawnEnemy());
         ent_main.StartCoroutine(SpawnEnemy());
 
         f_nextCooldownTime = Time.time + f_cooldown;
@@ -115,6 +112,8 @@ public class AISpawnMobs : AIBase
 
     IEnumerator SpawnEnemy()
     {
+        ent_main.An_animator.SetTrigger("Summoning");
+
         yield return new WaitForSeconds(f_summonAnimationDelay);
 
         foreach (var enemyType in list_enemiesToSpawn)

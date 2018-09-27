@@ -31,18 +31,32 @@ public class UIGameplayAssistant : MonoBehaviour
     bool m_IsInitialized = false;
     float m_SkillsIconGap; // Length of the gap between the skill icons
 
+    public enum TransitType
+    {
+        In,
+        Out
+    }
+
     // Use this for initialization
     void Start()
     {
         if (!m_FadeTexture.gameObject.activeInHierarchy && m_FadeTexture.transform.parent != null)
             m_FadeTexture.transform.parent.gameObject.SetActive(true);
 
-        m_FadeTexture.DOFade(0, 1.5f);
+        Transition(TransitType.In, 1.5f);
     }
 
-    public void TransitOut(System.Action onComplete = null)
+    public void Transition(TransitType transitType, float duration, System.Action onComplete = null)
     {
-        m_FadeTexture.DOFade(1, 1.5f).OnComplete(() => { if (onComplete != null) onComplete(); });
+        if (transitType == TransitType.In)
+        {
+            m_FadeTexture.fillAmount = 1;
+            m_FadeTexture.DOFade(0, duration).OnComplete(() => { if (onComplete != null) onComplete(); });
+        } else
+        {
+            m_FadeTexture.fillAmount = 0;
+            m_FadeTexture.DOFade(1, duration).OnComplete(() => { if (onComplete != null) onComplete(); });
+        }
     }
 
     void PopulateSkillIcons()
