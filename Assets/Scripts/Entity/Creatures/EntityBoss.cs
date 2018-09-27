@@ -218,13 +218,13 @@ public class EntityBoss : EntityEnemy {
 
 
         ////TODO: Register AI Task
-        //RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 10));
-        //RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 15, 3));
-       RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 16, 20));
-        //RegisterAITask(new AIAOEAttack(4, this, typeof(EntityPlayer), 20, 15, 25));
-        ////RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
-        //RegisterAITask(new AIChase(6, this, typeof(EntityPlayer), 20.0f, 30));
-        //RegisterAITask(new AIBossMeleeAttack(5, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
+        RegisterAITask(new AIBossSpinAttack(1, this, typeof(EntityPlayer), 20.0f, 10));
+        RegisterAITask(new AIArtyState(2, this, typeof(EntityPlayer), 20, 12, 15, 3));
+        RegisterAITask(new AIBossLaser(3, this, typeof(EntityPlayer), 20, 16, 20));
+        RegisterAITask(new AIAOEAttack(4, this, typeof(EntityPlayer), 20, 15, 25));
+        //RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 20, 3.0f, enemiesToSpawn));
+        RegisterAITask(new AIChase(6, this, typeof(EntityPlayer), 20.0f, 30));
+        RegisterAITask(new AIBossMeleeAttack(5, this, typeof(EntityPlayer), GetComponent<NavMeshAgent>().stoppingDistance, 8, 5));
     }
 
     public void NextChargeState()

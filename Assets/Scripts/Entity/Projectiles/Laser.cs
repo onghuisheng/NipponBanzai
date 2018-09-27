@@ -119,20 +119,13 @@ public class Laser : EntityProjectiles
 
     public void UpdatePosition()
     {
-        //if (f_incrementor < f_distance)
-        //{
             Debug.Log("MOVE");
             f_incrementor += F_speed * Time.deltaTime;
 
-            Vector3 newEnd = Vector3.Lerp(v3_currEndPos, v3_endPos, f_incrementor);
-            //v3_currEndPos = x * Vector3.Normalize(v3_endPos - v3_startPos) + v3_startPos;
-
+            v3_currEndPos = Vector3.Lerp(v3_currEndPos, v3_endPos, f_incrementor);
             CheckForObjectsInPath();
 
-        //lr_line.SetPosition(0, v3_startPos);     
-
-            lr_line.SetPosition(1, newEnd);
-        //}
+            lr_line.SetPosition(1, v3_currEndPos);
     }
 
     void CheckForObjectsInPath()
@@ -141,7 +134,7 @@ public class Laser : EntityProjectiles
 
         Vector3 direction = v3_currEndPos - v3_startPos;
         int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer(Go_owner.tag));
-
+        Debug.Log("Ray");
         if (Physics.Linecast(v3_startPos, v3_currEndPos, out hit, ignoreEnemiesMask))
         {
             Debug.Log("Hit" + hit);
