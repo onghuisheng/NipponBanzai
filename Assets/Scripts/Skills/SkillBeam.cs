@@ -13,7 +13,7 @@ public class SkillBeam : SkillBase
         s_description = "Shoots a concentrated beam of light in front of caster";
 
         type_style = TYPE.OFFENCE;
-        f_mana_amount = 50;
+        f_mana_amount = 100;
         i_id = 2;
 
         f_cooldown = 0;

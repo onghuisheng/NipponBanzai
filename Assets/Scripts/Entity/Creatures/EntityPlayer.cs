@@ -104,22 +104,7 @@ public class EntityPlayer : EntityLivingBase
         {
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))
                 list_joints.Add(_trans.gameObject);
-        }
-
-
-        //TEMPO PLS REMOVE
-        SkillBase _skill = new SkillFlash();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
-
-        _skill = new SkillSwordSummoning();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
-
-        _skill = new SkillBeam();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
-        //
+        }        
     }
 
     public override void HardReset()
@@ -140,6 +125,23 @@ public class EntityPlayer : EntityLivingBase
         b_is_charging_shot = false;
         i_combo = 1;
         F_mana_regen_amount = 1;
+
+        if (GetInventory().GetAllSkills().Count <= 0)
+        { 
+        //TEMPO PLS REMOVE
+        SkillBase _skill = new SkillFlash();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
+
+        _skill = new SkillSwordSummoning();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
+
+        _skill = new SkillBeam();
+        _skill.SetUpSkill();
+        GetInventory().AddSkill(_skill);
+        //
+        }
     }
 
     private void IdleCheckFunction()
@@ -563,6 +565,12 @@ public class EntityPlayer : EntityLivingBase
 
         if (IsDead())
         {
+            if(player_state == State.SUMMONING)
+            {
+                EndSummoningAnimation();
+                GetInventory().GetCurrSkill().EndSkill();
+            }
+
             player_state = State.DEAD;
             player_target_state = TARGET_STATE.NOT_AIMING;
         }
