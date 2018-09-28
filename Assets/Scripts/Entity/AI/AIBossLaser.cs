@@ -218,7 +218,7 @@ public class AIBossLaser : AIBase
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
         float lazerLife = 11.0f;
-        script_laser.SetUpProjectile(lazerLife, 50, 0.025f, 15.0f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
+        script_laser.SetUpProjectile(lazerLife, 50, 0.025f, 15.0f, corePosition, direction, new Vector3(5, 5, 5), ent_main.gameObject, true);
         //script_laser.SetUpProjectile(f_maxStateTimer, 2, 0.05f, corePosition, direction, new Vector3(2, 2, 2), ent_main.gameObject, true);
     }
 
@@ -228,7 +228,7 @@ public class AIBossLaser : AIBase
         Vector3 corePosition = ent_main.transform.position;
         corePosition.y += 7.5f;
         float lazerLife = 11.0f;
-        script_laser.SetUpProjectile(lazerLife, 2, 0.5f, corePosition, ent_target.transform.position, new Vector3(2, 2, 2), ent_main.gameObject, ent_target.gameObject);
+        script_laser.SetUpProjectile(lazerLife, 2, 0.5f, corePosition, ent_target.transform.position, new Vector3(5, 5, 5), ent_main.gameObject, ent_target.gameObject);
     }
 
     void Reset()
