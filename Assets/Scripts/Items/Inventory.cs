@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Inventory {
 
-    private int
-        i_souls;
-
     private Dictionary<Item.ITEM_TYPE, int>
         dic_storage;
 
@@ -25,7 +22,6 @@ public class Inventory {
     {
         dic_storage = new Dictionary<Item.ITEM_TYPE, int>();
         list_skills_inventory = new List<SkillBase>();
-        i_souls = 0;
         f_curr_skill = 0;
     }	
 
@@ -36,28 +32,17 @@ public class Inventory {
         return null;
     }
 
-    public int GetSouls()
-    {
-        return i_souls;
-    }
-
-    public void AdjustSoulsAmount(int _amount)      //parameter - _amount(int): to increase/decrease value of current souls
-    {
-        i_souls += _amount;
-        Mathf.Clamp(i_souls, 0, int.MaxValue);
-    }
-
     public void AddItemToInventory(Item.ITEM_TYPE _item_to_store, int _amount)
     {
         if(!dic_storage.ContainsKey(_item_to_store))
         {
             dic_storage.Add(_item_to_store, _amount);
-            Mathf.Clamp(dic_storage[_item_to_store], 0, int.MaxValue);
+            dic_storage[_item_to_store] = Mathf.Clamp(dic_storage[_item_to_store], 0, int.MaxValue);
         }
         else
         {
             dic_storage[_item_to_store] += _amount;
-            Mathf.Clamp(dic_storage[_item_to_store], 0, int.MaxValue);
+            dic_storage[_item_to_store] = Mathf.Clamp(dic_storage[_item_to_store], 0, int.MaxValue);
         }
     }
 

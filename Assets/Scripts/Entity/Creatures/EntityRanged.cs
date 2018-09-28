@@ -43,11 +43,6 @@ public class EntityRanged : EntityEnemy
                         ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + 0.5f, GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(type.Key));
                     }
                 }
-
-                for (int i = 0; i < GetInventory().GetSouls(); ++i)
-                {
-                    ObjectPool.GetInstance().GetItemObjectFromPool().GetComponent<EntityPickUps>().SetUpPickUp(new Vector3(GetPosition().x + Random.Range(-1.0f, 1.0f), GetPosition().y + Random.Range(0.5f, 1.0f), GetPosition().z + Random.Range(-1.0f, 1.0f)), 30, ItemHandler.GetItem(Item.ITEM_TYPE.SOULS));
-                }
             }
         }
     }
@@ -88,7 +83,7 @@ public class EntityRanged : EntityEnemy
 
         SetDrops(Item.ITEM_TYPE.HEALTH_POTION, 1, 70);
         SetDrops(Item.ITEM_TYPE.MANA_POTION, 1, 70);
-        GetInventory().AdjustSoulsAmount(Random.Range(0, 10));
+        SetDrops(Item.ITEM_TYPE.SOULS, Random.Range(0, 20), 70);
 
         St_stats.S_name = "Minion2";
 

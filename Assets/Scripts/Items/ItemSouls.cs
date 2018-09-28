@@ -28,7 +28,7 @@ public class ItemSouls : Item
 
     public override void OnTaken(EntityPickUps _go, EntityLivingBase _taker)
     {
-        _taker.GetInventory().AdjustSoulsAmount(1);
+        _taker.GetInventory().AddItemToInventory(ITEM_TYPE.SOULS, 1);
     }
 
     public override void OnExpire(EntityPickUps _go)
