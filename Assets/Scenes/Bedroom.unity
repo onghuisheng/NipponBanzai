@@ -324,8 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b004177383024e549a667b39ac476018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dontBringOverOnLoad: 0
-  m_destroyOnLoad: 0
+  m_dontBringOverOnLoad: 1
   m_GameAudioMixer: {fileID: 24100000, guid: 64f9c3e825bfa7c46ba7774af3f4f4a7, type: 2}
 --- !u!1 &305689555
 GameObject:
@@ -368,7 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontBringOverOnLoad: 1
-  m_destroyOnLoad: 0
 --- !u!1 &312881391
 GameObject:
   m_ObjectHideFlags: 0

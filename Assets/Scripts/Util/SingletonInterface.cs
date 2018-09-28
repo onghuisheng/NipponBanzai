@@ -21,9 +21,7 @@ public class SingletonInterface : MonoBehaviour
         {
             s_parentDontDestroyOnLoadObject = new GameObject();
             s_parentDontDestroyOnLoadObject.name = "DDOLSINGLETONHOLDER";
-
-            if (!m_dontBringOverOnLoad)
-                DontDestroyOnLoad(s_parentDontDestroyOnLoadObject);
+            DontDestroyOnLoad(s_parentDontDestroyOnLoadObject);
         }
     }
 

@@ -9,7 +9,8 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         ENEMY_MELEE = 0,
         ENEMY_RANGED,
-        ENEMY_MINIBOSS
+        ENEMY_MINIBOSS,
+        ENEMY_PESTILENCE
     }
 
     public enum PROJECTILE

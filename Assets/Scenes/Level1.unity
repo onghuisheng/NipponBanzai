@@ -796,7 +796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontBringOverOnLoad: 1
-  m_destroyOnLoad: 0
   m_ParticlePrefabs:
   - {fileID: 1788333622054468, guid: 93833885a8fe50645942da9d9afafe57, type: 2}
   - {fileID: 1459869139309956, guid: 2312a1a33f5259c43bf9c3d9b31b6563, type: 2}
@@ -1496,7 +1495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontBringOverOnLoad: 1
-  m_destroyOnLoad: 0
   list_cameras_prefab:
   - {fileID: 1244191372243692, guid: 3b27ac51f49dc2d43acafbf1a9accd62, type: 2}
   - {fileID: 1048287882315034, guid: d7430e8c2bfcb9d469d4f0c6d16d5494, type: 2}
@@ -1774,7 +1772,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontBringOverOnLoad: 1
-  m_destroyOnLoad: 0
   m_GameAudioMixer: {fileID: 24100000, guid: 64f9c3e825bfa7c46ba7774af3f4f4a7, type: 2}
 --- !u!82 &722252732
 AudioSource:
@@ -3848,7 +3845,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontBringOverOnLoad: 1
-  m_destroyOnLoad: 0
   entity_list:
   - {fileID: 1259337521567822, guid: 39304b76443792c46b8b3db9c811985e, type: 2}
   - {fileID: 1729856473455560, guid: 0f092cdf2cb634c4aa9a9576cc51d0ab, type: 2}

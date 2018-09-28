@@ -23,6 +23,8 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
 
     protected void Start()
     {
+        m_dontBringOverOnLoad = true;
+
         kc_current_entered_key = KeyCode.None;
         b_is_double_tap = false;
         f_interval = 0.3f;
@@ -34,6 +36,8 @@ public class DoubleTapCheck : Singleton<DoubleTapCheck>
 
     protected override void Update()
     {
+        base.Update();
+
         #region Keyboard
         if (Time.unscaledTime - f_timer_when_pressed > f_interval && b_is_double_tap)
             b_is_double_tap = false;

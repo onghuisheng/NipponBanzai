@@ -19,6 +19,12 @@ public class SceneHandler : Singleton<SceneHandler>
 
     private SceneType m_CurrentSceneType;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        m_dontBringOverOnLoad = true;
+    }
+
     public void ChangeSceneAsync(SceneType sceneType, System.Action onComplete = null)
     {
         Debug.Log("Changing Scene");
