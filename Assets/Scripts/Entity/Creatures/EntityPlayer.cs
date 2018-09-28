@@ -59,7 +59,8 @@ public class EntityPlayer : EntityLivingBase
         list_joints;
 
     private GameObject
-        go_charging_particle,
+        go_charging_particle, 
+        go_sword_particle,
         go_target;
 
     private CharacterMovement
@@ -104,7 +105,13 @@ public class EntityPlayer : EntityLivingBase
         {
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))
                 list_joints.Add(_trans.gameObject);
-        }        
+        }    
+        
+        if(list_joints.Count > 0)
+        {
+            if (list_joints[0].transform.childCount > 0)
+                go_sword_particle = list_joints[0].transform.GetChild(0).gameObject;
+        }
     }
 
     public override void HardReset()
@@ -698,15 +705,18 @@ public class EntityPlayer : EntityLivingBase
             case State.ATTACK:
                 An_animator.SetBool("IsDead", false);
                 An_animator.SetBool("IsAttacking", true);
+                go_sword_particle.SetActive(true);
                 break;
 
             case State.HEAVY_ATTACK:
                 An_animator.SetBool("IsDead", false);
                 An_animator.SetBool("IsAttacking", true);
+                go_sword_particle.SetActive(true);
                 break;
 
             case State.DASHING:
                 An_animator.SetBool("IsDead", false);
+                go_sword_particle.SetActive(false);
                 break;
 
             case State.DEAD:
@@ -715,22 +725,26 @@ public class EntityPlayer : EntityLivingBase
                 An_animator.SetBool("IsAttacking", false);
                 An_animator.SetBool("IsMelee", false);
                 An_animator.SetBool("IsSummoning", false);
+                go_sword_particle.SetActive(false);
                 break;
 
             case State.IDLE:
                 An_animator.SetBool("IsDead", false);
                 if (player_target_state == TARGET_STATE.NOT_AIMING)
                     An_animator.SetBool("IsMoving", false);
+                go_sword_particle.SetActive(false);
                 break;
 
             case State.MOVING:
                 if (player_target_state == TARGET_STATE.NOT_AIMING)
                     An_animator.SetBool("IsMoving", true);
                 An_animator.SetBool("IsDead", false);
+                go_sword_particle.SetActive(false);
                 break;
 
             case State.SUMMONING:
                 An_animator.SetBool("IsDead", false);
+                go_sword_particle.SetActive(false);
                 break;
 
             case State.RECALL:
@@ -747,13 +761,14 @@ public class EntityPlayer : EntityLivingBase
                        });
                     });
                 }
-
+                go_sword_particle.SetActive(false);
                 break;
 
             default:
                 An_animator.SetBool("IsMoving", false);
                 An_animator.SetBool("IsDead", false);
                 An_animator.SetBool("IsAttacking", false);
+                go_sword_particle.SetActive(false);
                 break;
         }
 

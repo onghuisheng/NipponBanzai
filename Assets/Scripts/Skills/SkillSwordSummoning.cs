@@ -16,6 +16,9 @@ public class SkillSwordSummoning : SkillBase
     private int
         i_prev_list_count;
 
+    private float
+        f_timer;
+
     private Vector3[]
         ar_postion = new Vector3[5] 
         {
@@ -69,10 +72,10 @@ public class SkillSwordSummoning : SkillBase
             {
                 float _temp = (f_mana_amount_used * 0.1f);
                 GameObject _proj = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.SWORD_PROJECTILE);
-                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z), Vector3.one, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f, (_temp * 0.5f) * 0.3f));
+                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z), Vector3.one, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f ));
                 list_swords.Add(_proj);
             }
-
+            f_timer = Time.time + 3.0f;
             b_spawn_sword = false;
         }
 
@@ -105,15 +108,18 @@ public class SkillSwordSummoning : SkillBase
 
         if (go_target != null)
         {
-            if (go_target.IsDead() || !go_target.gameObject.activeSelf || i_prev_list_count != list_swords.Count)
+            if (go_target.IsDead() || !go_target.gameObject.activeSelf || i_prev_list_count != list_swords.Count || Time.time > f_timer)
+            {
                 go_target = null;
+                f_timer = Time.time + 3.0f;
+            }
         }
 
         if (go_target == null && go_caster != null)
         {
             if (list_swords.Count > 0)
             {
-                foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(go_caster.transform.position, 10, typeof(EntityLivingBase)))
+                foreach (GameObject go in ObjectPool.GetInstance().GetAllActiveInSurrounding(go_caster.transform.position, 20, typeof(EntityLivingBase)))
                 {
                     if (!go.CompareTag(go_caster.tag))
                     {

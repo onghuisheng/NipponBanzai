@@ -24,8 +24,8 @@ public class EntityPickUps : Entity
         list_mesh;
 
     [SerializeField]
-    private List<Texture>
-       list_texture;
+    private List<Material>
+       list_material;
 
     private MeshFilter
         mf_meshfilter;
@@ -56,12 +56,12 @@ public class EntityPickUps : Entity
         v3_original_pos = _pos;
         SetPosition(v3_original_pos);
 
-        if (list_mesh.Capacity > (int)_id.GetInfo().It_type && list_texture.Capacity > (int)_id.GetInfo().It_type)
+        if (list_mesh.Capacity > (int)_id.GetInfo().It_type && list_material.Capacity > (int)_id.GetInfo().It_type)
         {
             if(mf_meshfilter != null && mr_meshrenderer != null)
             {
                 mf_meshfilter.mesh = list_mesh[(int)_id.GetInfo().It_type];
-                mr_meshrenderer.material.mainTexture = list_texture[(int)_id.GetInfo().It_type];
+                mr_meshrenderer.material = list_material[(int)_id.GetInfo().It_type];
             }
         }
     }
