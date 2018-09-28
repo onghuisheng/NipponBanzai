@@ -68,11 +68,14 @@ public class SkillSwordSummoning : SkillBase
 
         if (b_spawn_sword)
         {
+            if (list_swords.Count > 0)
+                list_swords.Clear();
+
             for (; list_swords.Count < (int)(f_mana_amount_used * 0.1f);)
             {
                 float _temp = (f_mana_amount_used * 0.1f);
                 GameObject _proj = ObjectPool.GetInstance().GetProjectileObjectFromPool(ObjectPool.PROJECTILE.SWORD_PROJECTILE);
-                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z), Vector3.one, 50, f_mana_amount_used, 50, new Vector3((_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f ));
+                _proj.GetComponent<Sword_Projectile>().SetUpProjectile(go_caster.gameObject, new Vector3(go_caster.GetPosition().x, go_caster.GetPosition().y + 5, go_caster.GetPosition().z), Vector3.one, 50, f_mana_amount_used, 30, new Vector3((_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f, (_temp * 0.5f) * 0.05f ));
                 list_swords.Add(_proj);
             }
             f_timer = Time.time + 3.0f;
@@ -83,7 +86,7 @@ public class SkillSwordSummoning : SkillBase
         {
             if(!list_swords[i].activeSelf)
             {
-                list_swords.Remove(list_swords[i]);
+                //list_swords.Remove(list_swords[i]);
                 continue;
             }
 
@@ -126,7 +129,18 @@ public class SkillSwordSummoning : SkillBase
                         go_target = go.GetComponent<EntityLivingBase>();
                         if (go_target.B_isAIEnabled && !go_target.IsDead())
                         {
-                            list_swords[Random.Range(0, list_swords.Count - 1)].GetComponent<Sword_Projectile>().SetTarget(go_target);
+                            GameObject _temp = _temp = list_swords[Random.Range(0, list_swords.Count - 1)];
+                            
+                            if(!_temp.activeSelf)
+                            {
+                                foreach(GameObject sword in list_swords)
+                                {
+                                    if (sword.activeSelf)
+                                        _temp = sword;
+                                }
+                            }
+
+                            _temp.GetComponent<Sword_Projectile>().SetTarget(go_target);
                             break;
                         }
                     }

@@ -39,8 +39,10 @@ public class Sword_Projectile : EntityProjectiles
         else
         {
             if (go_target != null)
-            {             
-                transform.LookAt(go_target.gameObject.transform);
+            {
+                Transform _temp = go_target.gameObject.transform;
+                _temp.position = new Vector3(_temp.position.x, _temp.position.y + 1, _temp.position.z);
+                transform.LookAt(_temp);
                 transform.position += (transform.forward * Time.deltaTime * F_speed);
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + 90, transform.localEulerAngles.y, transform.localEulerAngles.z);
 
@@ -52,11 +54,14 @@ public class Sword_Projectile : EntityProjectiles
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != gameObject.tag && Go_owner.tag != other.tag && !TagHelper.IsTagBanned(other.tag))
+        if (go_target != null)
         {
-            SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, Vector3.one, other.transform.position, transform.rotation, 0.1f);
-            gameObject.SetActive(false);
-            go_target = null;
+            if (other.tag != gameObject.tag && Go_owner.tag != other.tag && !TagHelper.IsTagBanned(other.tag))
+            {
+                SetUpHitBox(Go_owner.name, Go_owner.tag, Go_owner.GetInstanceID().ToString(), F_damage, Vector3.one, other.transform.position, transform.rotation, 0.1f);
+                gameObject.SetActive(false);
+                go_target = null;
+            }
         }
     }
 
