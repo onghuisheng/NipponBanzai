@@ -14,7 +14,7 @@ public class EnemySpawnTrigger : EntityTrigger
     }
 
     [SerializeField]
-    private int i_melee_spawn_count = 0, i_ranged_spawn_count = 0, i_miniboss_spawn_count = 0;
+    private int i_melee_spawn_count = 0, i_ranged_spawn_count = 0, i_miniboss_spawn_count = 0, i_boss_spawn_count = 0;
 
     [SerializeField]
     private SpawningType m_spawning_type = SpawningType.OnTriggerEnter;
@@ -133,6 +133,10 @@ public class EnemySpawnTrigger : EntityTrigger
             for (int i = 0; i < i_miniboss_spawn_count; i++)
             {
                 yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_MINIBOSS).GetComponent<EntityLivingBase>());
+            }
+            for (int i = 0; i < i_boss_spawn_count; i++)
+            {
+                yield return SpawnAndWait(ObjectPool.GetInstance().GetEntityObjectFromPool(ObjectPool.ENEMY.ENEMY_PESTILENCE).GetComponent<EntityLivingBase>());
             }
         }
         while (isEndless);

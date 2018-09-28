@@ -204,7 +204,7 @@ public class EntityBoss : EntityEnemy
         ClearAITask();
 
         St_stats.S_name = "Perstilence";
-        St_stats.F_max_health = 500.0f;
+        St_stats.F_max_health = 5000.0f;
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_damage = 15.0f;
         St_stats.F_defence = 15.0f;
