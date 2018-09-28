@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class ItemManaPotion : Item
 {
-    private static float
+    private float
         f_heal_amount;
+
+    public ItemManaPotion()
+    {
+        SetUpItem();
+    }
 
     public override void SetUpItem()
     {
         inf_info = new Info();
 
-        f_heal_amount = 20;
+        f_heal_amount = 50;
 
         inf_info.It_type = ITEM_TYPE.MANA_POTION;
         inf_info.S_name = "Mana Potion";
@@ -23,7 +28,7 @@ public class ItemManaPotion : Item
         if (_ent.St_stats.F_mana >= _ent.St_stats.F_max_mana)
             return false;
 
-        _ent.F_mana_regen_amount += f_heal_amount;
+        _ent.St_stats.F_mana += f_heal_amount;
         return true;
     }
 

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ItemHealthPotion : Item
 {
-    private static float
+    private float
         f_heal_amount;
+
+    public ItemHealthPotion()
+    {
+        SetUpItem();
+    }
 
     public override void SetUpItem()
     {
@@ -23,7 +28,9 @@ public class ItemHealthPotion : Item
         if (_ent.St_stats.F_health >= _ent.St_stats.F_max_health)
             return false;
 
-        _ent.F_regen_amount += f_heal_amount;
+        Debug.Log("Before: " + _ent.St_stats.F_health + " gg " + f_heal_amount);
+        _ent.St_stats.F_health += f_heal_amount;
+        Debug.Log("Afterr: " + _ent.St_stats.F_health);
         return true;
     }
 
