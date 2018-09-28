@@ -402,6 +402,8 @@ public class EntityPlayer : EntityLivingBase
             }
             else
             {
+
+                go_sword_particle.SetActive(true);
                 if (b_is_charging_shot)
                     b_is_charging_shot = false;
 
@@ -705,7 +707,6 @@ public class EntityPlayer : EntityLivingBase
             case State.ATTACK:
                 An_animator.SetBool("IsDead", false);
                 An_animator.SetBool("IsAttacking", true);
-                go_sword_particle.SetActive(true);
                 break;
 
             case State.HEAVY_ATTACK:
