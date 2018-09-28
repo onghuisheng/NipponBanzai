@@ -320,14 +320,14 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0.06314526, g: 0.4056604, b: 0.40208563, a: 1}
+      color: {r: 1, g: 0.5613208, b: 0.81765133, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.1
-      smoothness: 0.5
-      roundness: 0.368
+      intensity: 0
+      smoothness: 0.186
+      roundness: 1
       mask: {fileID: 0}
       opacity: 1
-      rounded: 1
+      rounded: 0
   dithering:
     m_Enabled: 0
   monitors:

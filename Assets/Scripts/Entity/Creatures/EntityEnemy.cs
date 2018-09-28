@@ -21,7 +21,7 @@ public class EntityEnemy : EntityLivingBase
             GameObject portal = ParticleHandler.GetInstance().SpawnParticle(_particleType, transform, new Vector3(0, 0.01f, 0), Vector3.zero, new Vector3(90, 0, 0), 0);
             portal.transform.DOScale(2, portalTweenDuration);
 
-            model.transform.Translate(0, modelYOffset, 0);
+            model.transform.localPosition = new Vector3(0, modelYOffset, 0);
             model.transform.DOLocalMoveY(0, modelTweenDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 B_isAIEnabled = true;

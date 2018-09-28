@@ -11,11 +11,11 @@ public class TPCamera : MonoBehaviour
     /*--------------------------------------------------- INITIALIZATION ---------------------------------------------------*/
     [SerializeField]
     private GameObject
-        go_cross_hair, 
-        go_canvas, 
-        
+        go_cross_hair,
+        go_canvas,
+
         go_parent;
-     
+
     private GameObject go_target;   //Current camera's target
     private EntityPlayer
         script_entityplayer;
@@ -103,14 +103,25 @@ public class TPCamera : MonoBehaviour
         {
             VignetteModel.Settings _setting = ppp_profile.vignette.settings;
             _setting.intensity = 1 - Time.timeScale;
-            _setting.intensity = Mathf.Clamp(_setting.intensity, 0.1f, 1.0f);
+            _setting.intensity = Mathf.Clamp(_setting.intensity, 0, 0.535f);
             ppp_profile.vignette.settings = _setting;
         }
 
         if (ppp_profile.colorGrading.enabled)
         {
             ColorGradingModel.Settings _setting = ppp_profile.colorGrading.settings;
-            _setting.basic.saturation = (script_entityplayer.St_stats.F_health / script_entityplayer.St_stats.F_max_health);
+
+            float healthPercent = (script_entityplayer.St_stats.F_health / script_entityplayer.St_stats.F_max_health);
+
+            if (healthPercent <= 0.3f)
+            {
+                _setting.basic.saturation = healthPercent;
+            }
+            else
+            {
+                _setting.basic.saturation = 1.0f;
+            }
+
             _setting.basic.saturation = Mathf.Clamp(_setting.basic.saturation, 0.1f, 1.0f);
             ppp_profile.colorGrading.settings = _setting;
         }
@@ -377,11 +388,11 @@ public class TPCamera : MonoBehaviour
 
             //transform.DOShakePosition(f_tremble, f_tremble);
 
-        //    if (v3_original_position.Equals(Vector3.zero))
-        //    {
-        //        v3_tremble_position = transform.position;
-        //        v3_original_position = transform.position;
-        //    }
+            //    if (v3_original_position.Equals(Vector3.zero))
+            //    {
+            //        v3_tremble_position = transform.position;
+            //        v3_original_position = transform.position;
+            //    }
 
             //    f_tremble -= Time.deltaTime;
 
