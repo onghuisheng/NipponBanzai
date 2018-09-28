@@ -6,6 +6,8 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
 
+    public string m_DialogueName;
+
     public Dialogue dialogue;
 
     public bool DestroyOnTrigger = true;
@@ -20,6 +22,21 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         dialogueHandler.StartDialogue(dialogue);
+    }
+
+    public static void DoDialogue(string dialogueName)
+    {
+        var dialogues = FindObjectsOfType<DialogueTrigger>();
+
+        foreach (var dialogue in dialogues)
+        {
+            if (dialogue.m_DialogueName == dialogueName)
+            {
+                dialogue.TriggerDialogue();
+                return;
+            }
+        }
+
     }
 
     public void OnTriggerEnter(Collider collision)

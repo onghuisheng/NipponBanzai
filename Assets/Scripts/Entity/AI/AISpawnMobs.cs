@@ -67,7 +67,7 @@ public class AISpawnMobs : AIBase
             if (f_attack_range <= 0)
                 return true;
 
-            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemy"));
 
             RaycastHit hitInfo;
 
@@ -157,7 +157,7 @@ public class AISpawnMobs : AIBase
     {
         Bounds bound = enemy.GetComponent<Collider>().bounds;
         enemy.GetComponent<Collider>().enabled = false;
-        bool blocked = Physics.CheckBox(pos + bound.center, bound.extents, enemy.transform.rotation, (1 << LayerMask.NameToLayer("Enemies")));
+        bool blocked = Physics.CheckBox(pos + bound.center, bound.extents, enemy.transform.rotation, (1 << LayerMask.NameToLayer("Enemy")));
         enemy.GetComponent<Collider>().enabled = true;
         return blocked;
     }

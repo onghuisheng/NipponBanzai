@@ -50,8 +50,9 @@ public class SkillSwordSummoning : SkillBase
     {
         go_caster = _caster;
         f_mana_amount_used = _manaused;
+        f_cooldown = f_maxcooldown;
 
-        if(list_swords.Count > 0)
+        if (list_swords.Count > 0)
         {
             foreach (GameObject go in list_swords)
                 go.SetActive(false);
@@ -164,7 +165,6 @@ public class SkillSwordSummoning : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = f_maxcooldown;
         f_timer = 0;
         OnSkillEnd();
     }

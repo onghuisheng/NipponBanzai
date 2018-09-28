@@ -46,41 +46,32 @@ public class EntityBoss : EntityEnemy
         b_stateIsDone;
 
     #region Getter/Setter
-    public AttackState Enum_currentAttState
-    {
-        get
-        {
+    public AttackState Enum_currentAttState {
+        get {
             return enum_currentAttState;
         }
 
-        set
-        {
+        set {
             enum_currentAttState = value;
         }
     }
 
-    public ChargeState Enum_currentChargeState
-    {
-        get
-        {
+    public ChargeState Enum_currentChargeState {
+        get {
             return enum_currentChargeState;
         }
 
-        set
-        {
+        set {
             enum_currentChargeState = value;
         }
     }
 
-    public bool B_stateIsDone
-    {
-        get
-        {
+    public bool B_stateIsDone {
+        get {
             return b_stateIsDone;
         }
 
-        set
-        {
+        set {
             b_stateIsDone = value;
         }
     }
@@ -175,6 +166,8 @@ public class EntityBoss : EntityEnemy
         {
             S_last_hit = _dmgsrc.GetName();
 
+            float prevHP = St_stats.F_health;
+
             if (TagHelper.IsTagCritSpot(_dmgsrc.GetAttackedTag()) && B_isVulnerable)
                 St_stats.F_health -= _dmgsrc.GetDamage() * 2; //YEET
             else
@@ -183,6 +176,11 @@ public class EntityBoss : EntityEnemy
             Debug.Log("BOSS HP = " + St_stats.F_health);
 
             ResetOnHit(_timer);
+
+            if (prevHP > 0 && St_stats.F_health <= 0)
+            {
+                DialogueTrigger.DoDialogue("BossDied");
+            }
 
             if (enum_currentBossState != BossState.HALFHEALTH && St_stats.F_health < St_stats.F_max_health * 0.5)
             {
@@ -204,11 +202,11 @@ public class EntityBoss : EntityEnemy
         ClearAITask();
 
         St_stats.S_name = "Perstilence";
-        St_stats.F_max_health = 5000.0f;
+        St_stats.F_max_health = 2000.0f;
         St_stats.F_health = St_stats.F_max_health;
-        St_stats.F_damage = 15.0f;
+        St_stats.F_damage = 25.0f;
         St_stats.F_defence = 15.0f;
-        St_stats.F_speed = 5.0f;
+        St_stats.F_speed = 8.0f;
         St_stats.F_mass = 5.0f;
         St_stats.F_knockback_resistance = 5.0f;
 

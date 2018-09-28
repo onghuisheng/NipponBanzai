@@ -10,6 +10,7 @@ public class CinematicPathNode : MonoBehaviour
 }
 
 
+#if UNITY_EDITOR
 // Overrides the inspector for CinematicPathing
 [CustomEditor(typeof(CinematicPathNode))]
 public class CinematicPathNodeEditor : Editor
@@ -49,3 +50,4 @@ public class CinematicPathNodeEditor : Editor
     }
 
 }
+#endif

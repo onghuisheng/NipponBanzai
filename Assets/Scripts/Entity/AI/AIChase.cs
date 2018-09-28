@@ -65,7 +65,7 @@ public class AIChase : AIBase
         {
             RaycastHit hitInfo;
 
-            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+            int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemy"));
 
             // Cast a ray towards the player, ignoring all objects in the Enemies layer
             Vector3 enemyCenter = ent_main.GetComponent<Collider>().bounds.center;

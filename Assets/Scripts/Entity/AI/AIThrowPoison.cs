@@ -69,7 +69,7 @@ public class AIThrowPoison : AIBase
             return true;
         }
 
-        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemy"));
 
         RaycastHit hitInfo;
 

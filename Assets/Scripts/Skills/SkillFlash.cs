@@ -22,6 +22,7 @@ public class SkillFlash : SkillBase
     {
         go_caster = _caster;
         f_mana_amount_used = _manaused;
+        f_cooldown = f_maxcooldown;
     }
 
     public override void UpdateSkill()
@@ -49,7 +50,6 @@ public class SkillFlash : SkillBase
 
     public override void EndSkill()
     {
-        f_cooldown = f_maxcooldown;
         f_timer = 0;
         OnSkillEnd();
     }

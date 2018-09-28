@@ -53,7 +53,7 @@ public class AIAttackRanged : AIBase
             ep_player = GameObject.FindWithTag("Player").GetComponent<EntityPlayer>();
         }
 
-        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemy"));
 
         RaycastHit hitInfo;
 

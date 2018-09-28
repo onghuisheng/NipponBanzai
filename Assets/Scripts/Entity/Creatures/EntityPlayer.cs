@@ -59,7 +59,7 @@ public class EntityPlayer : EntityLivingBase
         list_joints;
 
     private GameObject
-        go_charging_particle, 
+        go_charging_particle,
         go_sword_particle,
         go_target;
 
@@ -105,9 +105,9 @@ public class EntityPlayer : EntityLivingBase
         {
             if (TagHelper.IsTagJoint(_trans.gameObject.tag))
                 list_joints.Add(_trans.gameObject);
-        }    
-        
-        if(list_joints.Count > 0)
+        }
+
+        if (list_joints.Count > 0)
         {
             if (list_joints[0].transform.childCount > 0)
                 go_sword_particle = list_joints[0].transform.GetChild(0).gameObject;
@@ -134,20 +134,20 @@ public class EntityPlayer : EntityLivingBase
         F_mana_regen_amount = 1;
 
         if (GetInventory().GetAllSkills().Count <= 0)
-        { 
-        //TEMPO PLS REMOVE
-        SkillBase _skill = new SkillFlash();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
+        {
+            //TEMPO PLS REMOVE
+            SkillBase _skill = new SkillFlash();
+            _skill.SetUpSkill();
+            GetInventory().AddSkill(_skill);
 
-        _skill = new SkillSwordSummoning();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
+            _skill = new SkillSwordSummoning();
+            _skill.SetUpSkill();
+            GetInventory().AddSkill(_skill);
 
-        _skill = new SkillBeam();
-        _skill.SetUpSkill();
-        GetInventory().AddSkill(_skill);
-        //
+            _skill = new SkillBeam();
+            _skill.SetUpSkill();
+            GetInventory().AddSkill(_skill);
+            //
         }
     }
 
@@ -499,10 +499,15 @@ public class EntityPlayer : EntityLivingBase
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             GetInventory().GetCurrSkill().OnSkillPressed();
-            EndSummoningAnimation();
-            GetInventory().GetCurrSkill().EndSkill();
-            player_state = State.IDLE;
+
+            if (GetInventory().GetCurrSkill().S_Name == "Light Beam")
+            { // only cancel light beam lol
+                EndSummoningAnimation();
+                GetInventory().GetCurrSkill().EndSkill();
+                player_state = State.IDLE;
+            }
         }
+
         if (Input.GetKeyUp(KeyCode.Mouse2))
             GetInventory().GetCurrSkill().OnSkillReleased();
 
@@ -577,7 +582,7 @@ public class EntityPlayer : EntityLivingBase
 
         if (IsDead())
         {
-            if(player_state == State.SUMMONING)
+            if (player_state == State.SUMMONING)
             {
                 EndSummoningAnimation();
                 GetInventory().GetCurrSkill().EndSkill();
@@ -716,6 +721,12 @@ public class EntityPlayer : EntityLivingBase
                 break;
 
             case State.DASHING:
+
+                if (Input.GetKeyDown(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillPressed();
+                if (Input.GetKeyUp(KeyCode.Mouse2))
+                    GetInventory().GetCurrSkill().OnSkillReleased();
+
                 An_animator.SetBool("IsDead", false);
                 go_sword_particle.SetActive(false);
                 break;
@@ -753,6 +764,7 @@ public class EntityPlayer : EntityLivingBase
                 {
                     An_animator.SetBool("Recall", true);
                     ap_audioPlayer.PlayClip("PlayerRecall");
+                    ParticleHandler.GetInstance().SpawnParticle(ParticleHandler.ParticleType.Recall, transform, Vector3.zero, Vector3.one, Vector3.zero, 0);
                     transform.DOMoveY(transform.position.y + 0.5f, 2).OnComplete(() =>
                     {
                         FindObjectOfType<UIGameplayAssistant>().Transition(UIGameplayAssistant.TransitType.Out, 1.5f, () =>

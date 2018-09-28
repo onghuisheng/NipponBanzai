@@ -52,6 +52,7 @@ public class CinematicPathing : MonoBehaviour
     }
 
 
+#if UNITY_EDITOR
     [MenuItem("GameObject/Cinematic Camera/Camera Pathing", false, 10)]
     static void CreateCustomGameObject(MenuCommand menuCommand)
     {
@@ -63,6 +64,7 @@ public class CinematicPathing : MonoBehaviour
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
     }
+#endif
 
     public Transform GetFinalPath()
     {
@@ -114,6 +116,7 @@ public class CinematicPathing : MonoBehaviour
         CameraHandler.GetInstance().DoCinematicPath(this, onComplete, onWayPointChange, onUpdate);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Handles.color = Color.yellow;
@@ -135,10 +138,12 @@ public class CinematicPathing : MonoBehaviour
             Handles.DrawLine(child.position, transform.GetChild(i + 1).position);
         }
     }
+#endif
 
 }
 
 // Overrides the inspector for CinematicPathing
+#if UNITY_EDITOR
 [CustomEditor(typeof(CinematicPathing))]
 public class CinematicPathingEditor : Editor
 {
@@ -172,3 +177,4 @@ public class CinematicPathingEditor : Editor
     }
 
 }
+#endif

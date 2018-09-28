@@ -17,7 +17,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         ARCH_PROJECTILE = 0,
         STRAIGHT_PROJECTILE,
-        LASER_PROJECTILE, 
+        LASER_PROJECTILE,
         SWORD_PROJECTILE,
         HEART_PROJECTILE
     }
@@ -90,7 +90,7 @@ public class ObjectPool : Singleton<ObjectPool>
                 GameObject obj = Instantiate(projectile_list[projectile_list_count]);
                 obj.SetActive(false);
                 projectile_pool_list.Add(obj);
-                
+
                 obj.transform.parent = gameObject.transform;
             }
         }
@@ -146,10 +146,13 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             foreach (GameObject obj in i)
             {
-                if(!obj.CompareTag("Player"))
-                    obj.SetActive(false);
-                else if(obj.CompareTag("Player") && _get_player)
-                    obj.SetActive(false);
+                if (obj.GetComponent<EntityBoss>() == null)
+                {
+                    if (!obj.CompareTag("Player"))
+                        obj.SetActive(false);
+                    else if (obj.CompareTag("Player") && _get_player)
+                        obj.SetActive(false);
+                }
             }
         }
     }
@@ -393,7 +396,7 @@ public class ObjectPool : Singleton<ObjectPool>
         }
 
         GameObject obj = null;
-        
+
         if (go_spawnpoint != null)
             obj = Instantiate(entity_list[(int)_type], go_spawnpoint.transform.position, Quaternion.identity);
         else

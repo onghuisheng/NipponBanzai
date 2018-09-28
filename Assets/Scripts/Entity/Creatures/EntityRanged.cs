@@ -69,7 +69,7 @@ public class EntityRanged : EntityEnemy
         St_stats.F_health = St_stats.F_max_health;
         St_stats.F_speed = 3;
         St_stats.F_defence = 20.0f;
-        St_stats.F_damage = 5;
+        St_stats.F_damage = 8;
         St_stats.F_mass = 2.0f;
 
         B_isHit = false;

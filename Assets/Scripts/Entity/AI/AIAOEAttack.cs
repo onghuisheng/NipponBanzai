@@ -206,7 +206,7 @@ public class AIAOEAttack : AIBase {
         //Vector3 direction = ent_target.GetPosition() - ent_main.GetPosition();
         c_targetCenter = ent_target.GetComponent<Collider>();
 
-        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemies"));
+        int ignoreEnemiesMask = ~(1 << LayerMask.NameToLayer("Enemy"));
 
         if (Physics.Linecast(ent_main.GetPosition(), c_targetCenter.bounds.center, out hit, ignoreEnemiesMask))
         {

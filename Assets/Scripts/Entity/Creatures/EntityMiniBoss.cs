@@ -105,7 +105,7 @@ public class EntityMiniBoss : EntityEnemy
 
         An_animator.Rebind();
 
-        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_MELEE, };
+        var enemiesToSpawn = new List<ObjectPool.ENEMY> { ObjectPool.ENEMY.ENEMY_MELEE, ObjectPool.ENEMY.ENEMY_RANGED, };
 
         RegisterAITask(new AIPanic(-1, this, typeof(EntityPlayer)));
         RegisterAITask(new AISpawnMobs(0, this, typeof(EntityPlayer), 10, 10, 2.6f, enemiesToSpawn, 10));
